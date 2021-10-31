@@ -112,7 +112,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:backgroundTint="#FFD243"
+        android:background="@drawable/box_shadow"
         android:fontFamily="@font/poppins_bold"
         android:paddingLeft="100dp"
         android:paddingTop="12dp"
