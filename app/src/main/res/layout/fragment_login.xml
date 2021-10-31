@@ -7,10 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-<FrameLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -121,5 +117,5 @@ tools:context="">
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+
 </ScrollView>
