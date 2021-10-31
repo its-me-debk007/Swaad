@@ -13,14 +13,24 @@ class FragmentLogIn: Fragment(R.layout.fragment_login) {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_login, container, false)
-        val sign_up : TextView = v.findViewById(R.id.loginSignUpText)
-        sign_up.setOnClickListener {
+        val signUp : TextView = v.findViewById(R.id.loginSignUpText)
+        signUp.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container,reference_sign_up())
+            fragmentTransaction?.replace(R.id.fragment_container,ReferenceSignUp())
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
+
+        val forgotPassword : TextView = v.findViewById(R.id.loginForgotPasswordText)
+        forgotPassword.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,ForgotPassword1())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
+
         return v
     }
 }
