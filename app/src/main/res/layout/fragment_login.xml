@@ -110,6 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="202dp"
             android:layout_marginTop="32dp"
+            android:linksClickable="true"
             android:text="Sign up"
             android:textColor="#FFD243"
             app:layout_constraintStart_toStartOf="parent"

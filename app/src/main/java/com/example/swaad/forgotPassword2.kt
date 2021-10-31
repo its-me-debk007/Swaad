@@ -19,9 +19,9 @@ class forgotPassword2 : Fragment() {
         verify_button.setOnClickListener{
                 val fragmentManager = activity?.supportFragmentManager
                 val fragmentTransaction = fragmentManager?.beginTransaction()
-//                fragmentTransaction?.replace(R.id.fragment_container,SecondFragment())
-//                fragmentTransaction?.addToBackStack(null)
-//                fragmentTransaction?.commit()
+                fragmentTransaction?.replace(R.id.fragment_container,forgot_password_3())
+                fragmentTransaction?.addToBackStack(null)
+                fragmentTransaction?.commit()
         }
         return v
     }
