@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.FragmentTransaction
 
-class forgotPassword2 : Fragment() {
+class ForgotPassword2 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +26,3 @@ class forgotPassword2 : Fragment() {
         return v
     }
 }
-//val third_fragment=forgot_password_3()
-//val transaction = fragmentManager?.beginTransaction()
-//transaction?.replace(R.id.otp_verification,third_fragment)?.commit()

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 
 
 class ForgotPassword1 : Fragment() {
@@ -22,7 +21,7 @@ class ForgotPassword1 : Fragment() {
         next_button.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container,forgotPassword2())
+            fragmentTransaction?.replace(R.id.fragment_container,ForgotPassword2())
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
