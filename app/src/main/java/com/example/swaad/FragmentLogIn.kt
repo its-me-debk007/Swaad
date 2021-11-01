@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 
-class FragmentLogIn: Fragment(R.layout.fragment_login) {
+class FragmentLogIn: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_login, container, false)
+
         val signUp : TextView = v.findViewById(R.id.loginSignUpText)
         signUp.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
