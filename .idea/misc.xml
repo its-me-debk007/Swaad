@@ -3,23 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/border.xml" value="0.21296296296296297" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/box_shadow.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_forgot_password2.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_lock.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_msg.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_otp_line.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_undraw_mobile_login_re_9ntv_1.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/signup_button.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/font/poppins_bold.xml" value="0.16041666666666668" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_forgot_password_2.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_forgot_password_3.xml" value="0.24010416666666667" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_forgot_password_4.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_o_t_p_verification.xml" value="0.264" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_reference_sign_up.xml" value="0.1" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/reference_sign_up.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_reference_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/activity_main.xml" value="0.22604166666666667" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_1.xml" value="0.22604166666666667" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_2.xml" value="0.25" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_3.xml" value="0.22604166666666667" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_login.xml" value="0.3339787028073572" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_reference_sign_up.xml" value="0.4" />
       </map>
     </option>
   </component>
