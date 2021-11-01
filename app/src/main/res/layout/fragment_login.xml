@@ -33,6 +33,7 @@
             android:background="@drawable/border"
             android:fontFamily="@font/poppins_bold"
             android:hint="Email"
+
             android:drawablePadding="16dp"
             android:drawableLeft="@drawable/ic_msg"
             android:paddingLeft="26.4dp"
@@ -40,7 +41,9 @@
             android:paddingBottom="13.5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginImage" />
+            app:layout_constraintTop_toBottomOf="@+id/loginImage"
+            />
+
 
         <EditText
             android:id="@+id/loginPassword"
@@ -53,7 +56,7 @@
             android:fontFamily="@font/poppins_bold"
             android:hint="Password"
             android:drawablePadding="16dp"
-            android:drawableEnd="@drawable/ic_password"
+            android:drawableEnd="@drawable/ic_eyes"
             android:drawableStart="@drawable/ic_lock"
             android:paddingLeft="26.4dp"
             android:paddingRight="16.75dp"
