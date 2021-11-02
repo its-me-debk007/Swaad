@@ -13,11 +13,33 @@
     <TextView
         android:id="@+id/termsAndConditions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="a"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Terms and Conditions"
+        android:textColor="#000000"
+        android:textSize="23dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/termsAndConditions2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins"
+        android:text=""
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termsAndConditions" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

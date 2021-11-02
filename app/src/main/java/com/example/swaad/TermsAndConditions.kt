@@ -14,9 +14,8 @@ class TermsAndConditions: Fragment() {
     ): View? {
 
         val v = inflater.inflate(R.layout.terms_and_conditions, container, false)
-        val privacyPolicy: TextView = v.findViewById(R.id.termsAndConditions)
-        privacyPolicy.text = """Terms and Conditions
-Welcome to Swaad.in!
+        val termsConditions: TextView = v.findViewById(R.id.termsAndConditions2)
+        termsConditions.text = """Welcome to Swaad.in!
 
 These terms and conditions outline the rules and regulations for the use of Swaad's Website, located at https://swaad.in.
 
