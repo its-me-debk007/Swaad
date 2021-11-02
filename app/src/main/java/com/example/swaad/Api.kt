@@ -4,7 +4,9 @@ package com.example.swaad
 
 
 import android.util.JsonWriter
+import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 
 import retrofit2.http.Field
@@ -33,6 +35,6 @@ interface Api {
     @POST("/api/user/password/reset/")
     fun getOtp (
         @Body  jsonConverter: JsonConverter
-    ):Call<DataClassOtp>
+    ):Call<ResponseBody>
 
 }
