@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,31 +28,38 @@ class ForgotPassword1 : Fragment() {
         next_button.setOnClickListener {
             val email=v.findViewById<TextView>(R.id.forgotPasswordEmail).text.toString().trim()
             val jsonConverter=JsonConverter(email)
-            RetrofitClient.init().getOtp(jsonConverter).enqueue(object : Callback<DataClassOtp?> {
-                override fun onResponse(
-                    call: Call<DataClassOtp?>,
-                    response: Response<DataClassOtp?>
-                ) {
-                    try {
-                        val status = response.body()?.status.toString()
-                        Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
-                        val fragmentManager = activity?.supportFragmentManager
-                        val fragmentTransaction = fragmentManager?.beginTransaction()
-                        fragmentTransaction?.replace(R.id.fragment_container,forgotPassword2())
-                        fragmentTransaction?.addToBackStack(null)
-                        fragmentTransaction?.commit()
-                    }
-                    catch (e:Exception)
-                    {
-                        val e = e.toString()
-                        Toast.makeText(activity,e, Toast.LENGTH_LONG).show()
-                    }
+            if(email.isEmpty())
+            {
+                v.findViewById<TextView>(R.id.forgotPasswordEmail).error="Please Enter email!"
+                return@setOnClickListener
+            }
+            RetrofitClient.init().getOtp(jsonConverter).enqueue(object : Callback<ResponseBody?> {
 
+                override fun onResponse(
+                    call: Call<ResponseBody?>,
+                    response: Response<ResponseBody?>
+                ) {
+//                    try {
+                        var status = response.message()?.toString()
+                        Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
+                        if(status =="OK") {
+                            val fragmentManager = activity?.supportFragmentManager
+                            val fragmentTransaction = fragmentManager?.beginTransaction()
+                            fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
+                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.commit()
+                        }
+
+//                    }
+//                    catch (e:Exception)
+//                    {
+//                        val e = e.toString()
+//                        Toast.makeText(activity,e, Toast.LENGTH_LONG).show()
+//                    }
                 }
 
-                override fun onFailure(call: Call<DataClassOtp?>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                     Toast.makeText(activity,t.message, Toast.LENGTH_LONG).show()
-
                 }
             })
 

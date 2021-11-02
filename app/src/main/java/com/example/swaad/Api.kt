@@ -1,13 +1,29 @@
 package com.example.swaad
 
+
+
+
 import android.util.JsonWriter
+import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
+
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface Api {
+
+
+    @FormUrlEncoded
+    @POST("/api/user/login/")
+    fun logInUser
+                (
+        @Field("email")email: String,
+        @Field("password")password: String
+    ):Call<DataClass>
+
     @FormUrlEncoded
     @POST("/api/user/register/")
     fun createUser
@@ -19,5 +35,6 @@ interface Api {
     @POST("/api/user/password/reset/")
     fun getOtp (
         @Body  jsonConverter: JsonConverter
-    ):Call<DataClassOtp>
+    ):Call<ResponseBody>
+
 }
