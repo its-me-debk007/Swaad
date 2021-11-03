@@ -18,6 +18,7 @@ class FragmentLogIn: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val v = inflater.inflate(R.layout.fragment_login, container, false)
 
         val signUp : TextView = v.findViewById(R.id.loginSignUpText)

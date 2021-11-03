@@ -23,46 +23,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="22dp"
-            android:background="@drawable/border"
-            android:fontFamily="@font/poppins"
-            android:hint="Email"
-            android:drawablePadding="16dp"
-            android:drawableLeft="@drawable/ic_msg"
-            android:paddingLeft="26.4dp"
-            android:paddingTop="13.5dp"
-            android:paddingBottom="13.5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginImage" />
 
-        <EditText
-            android:id="@+id/loginPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="22dp"
-            android:background="@drawable/border"
-            android:fontFamily="@font/poppins"
-            android:hint="Password"
-            android:drawablePadding="16dp"
-            android:drawableEnd="@drawable/ic_bi_eye_fill"
-            android:drawableStart="@drawable/ic_lock"
-            android:paddingLeft="26.4dp"
-            android:paddingRight="16.75dp"
-            android:paddingTop="13.5dp"
-            android:paddingBottom="13.5dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/loginImage">
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:fontFamily="@font/poppins"
+                android:drawableStart="@drawable/ic_msg"
+                android:drawablePadding="16dp"
+                android:hint="Email"
+                android:layout_marginEnd="22dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="16dp"
+                android:paddingTop="13.5dp"
+                android:paddingBottom="13.5dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
         <TextView
             android:id="@+id/loginForgotPasswordText"
@@ -93,9 +83,10 @@
             app:layout_constraintTop_toBottomOf="@+id/loginForgotPasswordText" />
 
         <TextView
+            android:id="@+id/textView12"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
+            android:layout_height="wrap_content"
             android:layout_marginStart="132dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="123dp"
@@ -120,7 +111,78 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginSignInBtn" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/loginPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginEmail" >
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:background="@drawable/border"
+                android:fontFamily="@font/poppins"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="16dp"
+                android:hint="Password"
+                android:layout_marginEnd="22dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="16dp"
+                android:paddingTop="13.5dp"
+                android:paddingBottom="13.5dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
+
+<!--<EditText-->
+<!--android:id="@+id/loginPassword"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginStart="22dp"-->
+<!--android:layout_marginTop="16dp"-->
+<!--android:layout_marginEnd="22dp"-->
+<!--android:background="@drawable/border"-->
+<!--android:fontFamily="@font/poppins"-->
+<!--android:hint="Password"-->
+<!--android:drawablePadding="16dp"-->
+<!--android:drawableEnd="@drawable/ic_bi_eye_fill"-->
+<!--android:drawableStart="@drawable/ic_lock"-->
+<!--android:paddingLeft="26.4dp"-->
+<!--android:paddingRight="16.75dp"-->
+<!--android:paddingTop="13.5dp"-->
+<!--android:paddingBottom="13.5dp"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintHorizontal_bias="0.0"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/loginEmail" />-->
+
+
+<!--<EditText-->
+<!--android:id="@+id/loginEmail"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginStart="22dp"-->
+<!--android:layout_marginTop="19dp"-->
+<!--android:layout_marginEnd="22dp"-->
+<!--android:background="@drawable/border"-->
+<!--android:fontFamily="@font/poppins"-->
+<!--android:hint="Email"-->
+<!--android:drawablePadding="16dp"-->
+<!--android:drawableLeft="@drawable/ic_msg"-->
+<!--android:paddingLeft="26.4dp"-->
+<!--android:paddingTop="13.5dp"-->
+<!--android:paddingBottom="13.5dp"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/loginImage" />-->
