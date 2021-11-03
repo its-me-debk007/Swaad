@@ -28,24 +28,28 @@ class ForgotPassword2 : Fragment() {
         verifyBtn.setOnClickListener{
             Toast.makeText(activity,"Verifying OTP",Toast.LENGTH_LONG).show()
 
-//            val userEmail = v.findViewById<TextView>(R.id.loginEmail).text.toString().trim()
-            val userEmail = "11testee11@gmail.com"
+            val userEmail = ForgotPassword1().email
+//            var userEmail = "aSFFSSS"
+//            var userEmail = "11testee22@gmail.com"
             val userOtp = v.findViewById<EditText>(R.id.editTextTextPersonName4).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName5).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName7).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName6).text.toString().trim()
 
+//            v.findViewById<TextView>(R.id.textView2).text = userEmail
 
             RetrofitClient.init().verifyOtp(userEmail, userOtp).enqueue(object : Callback<DataVerifyOtpClass?> {
                 override fun onResponse(call: Call<DataVerifyOtpClass?>, response: Response<DataVerifyOtpClass?>) {
 
                     val responseBody = response.body()
                     try {
-                        responseBody!!.status
-                        Toast.makeText(activity,"OTP verified",Toast.LENGTH_LONG).show()
+                        if(responseBody!!.status == "OTP verified You can now change your password") {
+                            Toast.makeText(activity, "OTP verified", Toast.LENGTH_LONG).show()
 
-                        val fragmentManager = activity?.supportFragmentManager
-                        val fragmentTransaction = fragmentManager?.beginTransaction()
-                        fragmentTransaction?.replace(R.id.fragment_container,ForgotPassword3())
-                        fragmentTransaction?.addToBackStack(null)
-                        fragmentTransaction?.commit()
+
+                            val fragmentManager = activity?.supportFragmentManager
+                            val fragmentTransaction = fragmentManager?.beginTransaction()
+                            fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword3())
+                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.commit()
+                        }
                     }
                     catch(e: Exception){
                         Toast.makeText(activity,"Not",Toast.LENGTH_LONG).show()

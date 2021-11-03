@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.textfield.TextInputLayout
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,18 +17,18 @@ import retrofit2.Response
 
 
 class ForgotPassword1 : Fragment() {
-
+    var email: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_forgot_password_1, container, false)
         val next_button  = v.findViewById<Button>(R.id.NextBtn)
         next_button.setOnClickListener {
-            val email=v.findViewById<TextView>(R.id.forgotPasswordEmail).text.toString().trim()
+
+            val email = v.findViewById<EditText>(R.id.forgotPasswordEmail).text.toString().trim()
             val jsonConverter=JsonConverter(email)
             if(email.isEmpty())
             {
@@ -67,5 +69,6 @@ class ForgotPassword1 : Fragment() {
         }
         return v
     }
+
 
 }
