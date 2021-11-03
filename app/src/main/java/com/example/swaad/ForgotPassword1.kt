@@ -28,7 +28,8 @@ class ForgotPassword1 : Fragment() {
         val next_button  = v.findViewById<Button>(R.id.NextBtn)
         next_button.setOnClickListener {
 
-            val email = v.findViewById<EditText>(R.id.forgotPasswordEmail).text.toString().trim()
+//            val email = v.findViewById<EditText>(R.id.forgotPasswordEmail).text.toString().trim()
+            email = "11testee22@gmail.com"
             val jsonConverter=JsonConverter(email)
             if(email.isEmpty())
             {

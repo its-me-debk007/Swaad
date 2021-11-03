@@ -4,11 +4,8 @@ import android.util.JsonWriter
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
 import retrofit2.Converter
+import retrofit2.http.*
 
 interface Api {
 
@@ -29,6 +26,8 @@ interface Api {
         @Field("name")name:String,
         @Field("password")password:String
     ):Call<DataClassSignUp>
+
+
     @POST("/api/user/password/reset/")
     fun getOtp (
         @Body jsonConverter: JsonConverter
@@ -41,5 +40,13 @@ interface Api {
         @Field("email")email: String,
         @Field("otp")otp: String
     ):Call<DataVerifyOtpClass>
+
+
+    @FormUrlEncoded
+    @PATCH("/api/user/profile/")
+    fun setNewPassword(
+        @Field("password")password: String,
+        @Header("Authorization")tokenString: String
+    ):Call<DataSetNewPasswordClass>
 
 }
