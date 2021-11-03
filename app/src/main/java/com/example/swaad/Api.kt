@@ -17,9 +17,11 @@ interface Api {
         @Field("password")password: String
     ):Call<DataClass>
 
-    @POST("api/user/password/reset/verify/")
+    @FormUrlEncoded
+    @POST("/api/user/password/reset/verify/")
     fun verifyOtp(
-        @Body jsonConverter: OtpJsonConverter
+        @Field("email")email: String,
+        @Field("otp")password: String
     ):Call<DataVerifyOtpClass>
 
 }
