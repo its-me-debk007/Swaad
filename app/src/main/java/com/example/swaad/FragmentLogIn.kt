@@ -42,7 +42,6 @@ class FragmentLogIn: Fragment() {
         val signInBtn : Button = v.findViewById(R.id.loginSignInBtn)
         signInBtn.setOnClickListener {
 
-
             val userEmail = v.findViewById<TextView>(R.id.loginEmail).text.toString().trim()
             val userPassword = v.findViewById<TextView>(R.id.loginPassword).text.toString().trim()
 
