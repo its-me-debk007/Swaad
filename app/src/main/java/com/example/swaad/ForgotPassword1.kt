@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -17,7 +18,7 @@ import retrofit2.Response
 
 
 class ForgotPassword1 : Fragment() {
-    var email: String = ""
+//    var email: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,8 +29,7 @@ class ForgotPassword1 : Fragment() {
         val next_button  = v.findViewById<Button>(R.id.NextBtn)
         next_button.setOnClickListener {
 
-//            val email = v.findViewById<EditText>(R.id.forgotPasswordEmail).text.toString().trim()
-            email = "11testee22@gmail.com"
+            val email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
             val jsonConverter=JsonConverter(email)
             if(email.isEmpty())
             {
@@ -42,8 +42,8 @@ class ForgotPassword1 : Fragment() {
                     call: Call<ResponseBody?>,
                     response: Response<ResponseBody?>
                 ) {
-//                    try {
-                        var status = response.message()?.toString()
+                    try {
+                        val status = response.message().toString()
                         Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
                         if(status =="OK") {
                             val fragmentManager = activity?.supportFragmentManager
@@ -52,13 +52,12 @@ class ForgotPassword1 : Fragment() {
                             fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
-
-//                    }
-//                    catch (e:Exception)
-//                    {
-//                        val e = e.toString()
-//                        Toast.makeText(activity,e, Toast.LENGTH_LONG).show()
-//                    }
+                    }
+                    catch (e:Exception)
+                    {
+                        val e = e.toString()
+                        Toast.makeText(activity,e, Toast.LENGTH_LONG).show()
+                    }
                 }
 
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
