@@ -30,6 +30,7 @@ class ForgotPassword2 : Fragment() {
 
 //            val userEmail = ForgotPassword1().email
             var userEmail = "11testee22@gmail.com"
+
             val userOtp = v.findViewById<EditText>(R.id.editTextTextPersonName4).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName5).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName7).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName6).text.toString().trim()
 
 //            v.findViewById<TextView>(R.id.textView2).text = userEmail

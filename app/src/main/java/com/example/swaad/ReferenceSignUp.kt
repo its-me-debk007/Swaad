@@ -2,27 +2,21 @@ package com.example.swaad
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.view.MotionEvent
 
 import android.view.View.OnTouchListener
-import android.widget.EditText
-
-
-
-
-
-
+import android.widget.*
 
 
 class ReferenceSignUp : Fragment() {
@@ -40,6 +34,23 @@ class ReferenceSignUp : Fragment() {
             fragmentTransaction?.replace(R.id.fragment_container, TermsAndConditions())
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
+        }
+        val unsee=v.findViewById<ImageView>(R.id.unsee_password)
+        var flag =0
+        val password=v.findViewById<EditText>(R.id.editTextTextPersonName3)
+        unsee.setOnClickListener {
+            if(flag%2==0) {
+                password.transformationMethod =HideReturnsTransformationMethod.getInstance()
+                password.setSelection(password.getText().length);
+                flag++
+            }
+            else
+            {
+                password.transformationMethod = PasswordTransformationMethod.getInstance()
+                password.setSelection(password.getText().length);
+                flag++
+            }
+//            password.setTextCursorDrawable(password.getText().length)
         }
         val logIn: TextView = v.findViewById(R.id.textView7)
         logIn.setOnClickListener {
