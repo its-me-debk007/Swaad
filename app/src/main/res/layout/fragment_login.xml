@@ -26,6 +26,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginEmail"
 
+            app:helperText="*Required"
+            app:helperTextTextColor="#ff0000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeWidth="0dp"
@@ -36,12 +38,13 @@
             app:layout_constraintTop_toBottomOf="@+id/loginImage">
 
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/loginEmail2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:fontFamily="@font/poppins"
                 android:drawableStart="@drawable/ic_msg"
+
                 android:drawablePadding="16dp"
                 android:hint="Email"
                 android:layout_marginEnd="22dp"
@@ -50,9 +53,6 @@
                 android:paddingTop="13.5dp"
                 android:paddingBottom="13.5dp"/>
         </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
         <TextView
             android:id="@+id/loginForgotPasswordText"
@@ -118,13 +118,16 @@
             app:passwordToggleEnabled="true"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
+            app:helperText="*Required"
+            app:helperTextTextColor="#ff0000"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginEmail" >
 
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/loginPassword2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"

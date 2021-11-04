@@ -32,8 +32,6 @@ class ForgotPassword2 : Fragment() {
             var userEmail = "11testee22@gmail.com"
             val userOtp = v.findViewById<EditText>(R.id.editTextTextPersonName4).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName5).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName7).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName6).text.toString().trim()
 
-//            v.findViewById<TextView>(R.id.textView2).text = userEmail
-
             RetrofitClient.init().verifyOtp(userEmail, userOtp).enqueue(object : Callback<DataVerifyOtpClass?> {
                 override fun onResponse(call: Call<DataVerifyOtpClass?>, response: Response<DataVerifyOtpClass?>) {
 

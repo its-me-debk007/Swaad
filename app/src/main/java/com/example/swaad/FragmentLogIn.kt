@@ -11,6 +11,7 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
 import android.widget.Toast
+import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Retrofit
 
 class FragmentLogIn: Fragment() {
@@ -42,8 +43,8 @@ class FragmentLogIn: Fragment() {
         val signInBtn : Button = v.findViewById(R.id.loginSignInBtn)
         signInBtn.setOnClickListener {
 
-            val userEmail = v.findViewById<TextView>(R.id.loginEmail).text.toString().trim()
-            val userPassword = v.findViewById<TextView>(R.id.loginPassword).text.toString().trim()
+            val userEmail = v.findViewById<TextInputEditText>(R.id.loginEmail2).text.toString().trim()
+            val userPassword = v.findViewById<TextInputEditText>(R.id.loginPassword2).text.toString().trim()
 
             Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
 
