@@ -19,6 +19,9 @@ import android.view.View.OnTouchListener
 import android.widget.EditText
 
 class ReferenceSignUp : Fragment() {
+    companion object{
+        lateinit var nextPage: String
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,28 +68,7 @@ class ReferenceSignUp : Fragment() {
                 v.findViewById<TextView>(R.id.editTextTextPersonName3).error="Password can not be empty"
                 return@setOnClickListener
             }
-            //Entering valid email address
-//            var email_validation=v.findViewById<TextView>(R.id.editTextTextPersonName2)
-//            email_validation.addTextChangedListener(object : TextWatcher {
-//                override fun beforeTextChanged(
-//                    s: CharSequence?,
-//                    start: Int,
-//                    count: Int,
-//                    after: Int
-//                ) {
-//
-//                }
-//                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                    if(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
-//                    {
-//                        email_validation.setError("Invalid Email")
-//                    }
-//
-//                }
-//                override fun afterTextChanged(s: Editable?) {
-//
-//                }
-//            })
+
             RetrofitClient.init().createUser(email, name, password)
                 .enqueue(object : Callback<DataClassSignUp?>
                 {
@@ -96,10 +78,10 @@ class ReferenceSignUp : Fragment() {
                     ) {
                         val status = response.body()?.status.toString()
                         Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
-
+                        nextPage = "signUp"
                         val fragmentManager = activity?.supportFragmentManager
                         val fragmentTransaction = fragmentManager?.beginTransaction()
-                        fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
+                        fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
                         fragmentTransaction?.addToBackStack(null)
                         fragmentTransaction?.commit()
                     }

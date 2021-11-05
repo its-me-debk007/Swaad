@@ -33,6 +33,12 @@ interface Api {
         @Body jsonConverter: JsonConverter
     ):Call<ResponseBody>
 
+    @FormUrlEncoded
+    @POST("/api/user/password/reset/")
+    fun getSignUpOtp(
+        @Field("email")email: String,
+    ):Call<DataVerifyOtpClass>
+
 
     @FormUrlEncoded
     @POST("/api/user/password/reset/verify/")

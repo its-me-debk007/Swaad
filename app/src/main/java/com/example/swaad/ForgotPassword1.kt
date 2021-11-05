@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.swaad.ReferenceSignUp.Companion.nextPage
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import okhttp3.ResponseBody
@@ -22,7 +23,6 @@ class ForgotPassword1 : Fragment() {
     companion object{
         lateinit var email:String
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +52,7 @@ class ForgotPassword1 : Fragment() {
                         val status = response.message().toString()
                         Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
                         if(status =="OK") {
+                            nextPage = "forgotPassword"
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())

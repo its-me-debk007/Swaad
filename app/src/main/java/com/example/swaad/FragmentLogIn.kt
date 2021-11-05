@@ -52,13 +52,15 @@ class FragmentLogIn: Fragment() {
                 override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
 
                     val responseBody = response.body()
-                    try {
-                        responseBody!!.token
-                        Toast.makeText(activity,"You have been logged in",Toast.LENGTH_LONG).show()
-                    }
-                    catch(e: Exception){
+                        if(responseBody?.token.toString() != "null") {
+                            Toast.makeText(
+                                activity,
+                                "You've been logged in",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                        else
                         Toast.makeText(activity,"Wrong Credentials!!\n\nPlease check your email/password and try again!",Toast.LENGTH_LONG).show()
-                    }
                 }
                 override fun onFailure(call: Call<DataClass?>, t: Throwable) {
                     Toast.makeText(activity,"Wrong Credentials!!\n\nPlease check your email/password and try again!",Toast.LENGTH_LONG).show()

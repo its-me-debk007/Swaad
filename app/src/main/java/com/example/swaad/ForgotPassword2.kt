@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.example.swaad.ForgotPassword1.Companion.email
+import com.example.swaad.ReferenceSignUp.Companion.nextPage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,11 +48,27 @@ class ForgotPassword2 : Fragment() {
 
                             tokenValue = responseBody.token
 
-                            val fragmentManager = activity?.supportFragmentManager
-                            val fragmentTransaction = fragmentManager?.beginTransaction()
-                            fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword3())
-                            fragmentTransaction?.addToBackStack(null)
-                            fragmentTransaction?.commit()
+                            if(nextPage == "forgotPassword") {
+                                val fragmentManager = activity?.supportFragmentManager
+                                val fragmentTransaction = fragmentManager?.beginTransaction()
+                                fragmentTransaction?.replace(
+                                    R.id.fragment_container,
+                                    ForgotPassword3()
+                                )
+                                fragmentTransaction?.addToBackStack(null)
+                                fragmentTransaction?.commit()
+                            }
+
+                            else if(nextPage == "signUp") {
+                                val fragmentManager = activity?.supportFragmentManager
+                                val fragmentTransaction = fragmentManager?.beginTransaction()
+                                fragmentTransaction?.replace(
+                                    R.id.fragment_container,
+                                    FragmentLogIn()
+                                )
+                                fragmentTransaction?.addToBackStack(null)
+                                fragmentTransaction?.commit()
+                            }
                         }
                     }
                     catch(e: Exception){
