@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.swaad.ReferenceSignUp.Companion.nextPage
+import android.widget.*
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import okhttp3.ResponseBody
@@ -24,24 +25,28 @@ class ForgotPassword1 : Fragment() {
         lateinit var email:String
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         val v= inflater.inflate(R.layout.fragment_forgot_password_1, container, false)
+        val progressBar=v.findViewById<ProgressBar>(R.id.progressBar3)
         val next_button  = v.findViewById<Button>(R.id.NextBtn)
 
         next_button.setOnClickListener {
-
-            email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
+        progressBar.visibility=View.VISIBLE
+        email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
 
             val jsonConverter=JsonConverter(email)
             if(email.isEmpty())
             {
+                progressBar.visibility=View.INVISIBLE
                 v.findViewById<TextView>(R.id.forgotPasswordEmail).error="Please Enter email!"
                 return@setOnClickListener
             }
+            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
             RetrofitClient.init().getOtp(jsonConverter).enqueue(object : Callback<ResponseBody?> {
 
                 override fun onResponse(
@@ -53,11 +58,17 @@ class ForgotPassword1 : Fragment() {
                         Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
                         if(status =="OK") {
                             nextPage = "forgotPassword"
+                            progressBar.visibility=View.INVISIBLE
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
                             fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
+                        }
+                        else
+                        {
+                            progressBar.visibility=View.INVISIBLE
+                            Toast.makeText(activity,status,Toast.LENGTH_LONG).show()
                         }
                     }
                     catch (e:Exception)
@@ -68,6 +79,7 @@ class ForgotPassword1 : Fragment() {
                 }
 
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                    progressBar.visibility=View.INVISIBLE
                     Toast.makeText(activity,t.message, Toast.LENGTH_LONG).show()
                 }
             })

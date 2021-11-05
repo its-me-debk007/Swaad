@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.swaad.ForgotPassword2.Companion.tokenValue
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -24,10 +21,10 @@ class ForgotPassword3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_forgot_password_3, container, false)
-
+        val progressBar=v.findViewById<ProgressBar>(R.id.progressBar5)
         val resetButton : Button = v.findViewById(R.id.button3)
         resetButton.setOnClickListener{
-
+            progressBar.visibility=View.VISIBLE
             val newPassword: TextInputEditText = v.findViewById(R.id.editTextTextPersonName7v2)
             newPassword.text.toString().trim()
 
@@ -44,6 +41,7 @@ class ForgotPassword3 : Fragment() {
 
                     val responseBody = response.body()
                     try {
+                        progressBar.visibility=View.INVISIBLE
                         responseBody!!.name
                         Toast.makeText(activity,"New Password has been set", Toast.LENGTH_LONG).show()
 
@@ -54,6 +52,7 @@ class ForgotPassword3 : Fragment() {
                         fragmentTransaction?.commit()
                     }
                     catch(e: Exception){
+                        progressBar.visibility=View.INVISIBLE
                         Toast.makeText(activity,"New Password has not been set",
                             Toast.LENGTH_LONG).show()
                         newPassword.text?.clear()
@@ -61,6 +60,7 @@ class ForgotPassword3 : Fragment() {
                     }
                 }
                 override fun onFailure(call: Call<DataSetNewPasswordClass?>, t: Throwable) {
+                    progressBar.visibility=View.INVISIBLE
                     Toast.makeText(activity,"New Password has not been set",
                         Toast.LENGTH_LONG).show()
                     newPassword.text?.clear()

@@ -93,7 +93,6 @@
                 android:layout_marginEnd="22dp"
                 android:background="@drawable/border"
                 android:drawableStart="@drawable/ic_lock"
-                android:drawableEnd="@drawable/ic_bi_eye_fill"
                 android:drawablePadding="16dp"
                 android:ems="10"
                 android:fontFamily="@font/poppins"
@@ -111,7 +110,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="25dp"
                 android:backgroundTint="#FFD243"
                 android:fontFamily="@font/poppins_bold"
@@ -125,6 +124,7 @@
                 android:textColor="#000000"
                 app:cornerRadius="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
@@ -160,7 +160,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="95dp"
+                android:layout_marginStart="85dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="97dp"
                 android:text="Already have an account?"
@@ -183,6 +183,28 @@
                 android:textColor="#FFD243"
                 app:layout_constraintStart_toEndOf="@+id/textView6"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <ImageView
+                android:id="@+id/unsee_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-40dp"
+                android:layout_marginTop="13dp"
+                app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
+                app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName3"
+                app:srcCompat="@drawable/ic_bi_eye_fill" />
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="175dp"
+                android:layout_marginEnd="175dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sign_up_button" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
