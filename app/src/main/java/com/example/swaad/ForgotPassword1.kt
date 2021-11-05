@@ -18,7 +18,11 @@ import retrofit2.Response
 
 
 class ForgotPassword1 : Fragment() {
-//    var email: String = ""
+
+    companion object{
+        lateinit var email:String
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +31,11 @@ class ForgotPassword1 : Fragment() {
 
         val v= inflater.inflate(R.layout.fragment_forgot_password_1, container, false)
         val next_button  = v.findViewById<Button>(R.id.NextBtn)
+
         next_button.setOnClickListener {
 
-            val email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
+            email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
+
             val jsonConverter=JsonConverter(email)
             if(email.isEmpty())
             {
@@ -69,6 +75,5 @@ class ForgotPassword1 : Fragment() {
         }
         return v
     }
-
 
 }

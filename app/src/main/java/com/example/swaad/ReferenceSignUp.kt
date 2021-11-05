@@ -18,20 +18,13 @@ import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.widget.EditText
 
-
-
-
-
-
-
-
 class ReferenceSignUp : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val v = inflater.inflate(R.layout.fragment_reference_sign_up, container, false)
         val termsConditions: TextView = v.findViewById(R.id.textView5)
         termsConditions.setOnClickListener {
@@ -103,6 +96,12 @@ class ReferenceSignUp : Fragment() {
                     ) {
                         val status = response.body()?.status.toString()
                         Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
+
+                        val fragmentManager = activity?.supportFragmentManager
+                        val fragmentTransaction = fragmentManager?.beginTransaction()
+                        fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
+                        fragmentTransaction?.addToBackStack(null)
+                        fragmentTransaction?.commit()
                     }
 
                     override fun onFailure(call: Call<DataClassSignUp?>, t: Throwable) {
