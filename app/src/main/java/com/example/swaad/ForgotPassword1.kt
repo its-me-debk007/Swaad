@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import com.example.swaad.ReferenceSignUp.Companion.nextPage
 import android.widget.*
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -31,14 +36,14 @@ class ForgotPassword1 : Fragment() {
         val next_button  = v.findViewById<Button>(R.id.NextBtn)
 
         next_button.setOnClickListener {
-            progressBar.visibility=View.VISIBLE
-            email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
+        progressBar.visibility=View.VISIBLE
+        email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
 
             val jsonConverter=JsonConverter(email)
             if(email.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextView>(R.id.forgotPasswordEmail2).error="Please Enter email!"
+                v.findViewById<TextView>(R.id.forgotPasswordEmail).error="Please Enter email!"
                 return@setOnClickListener
             }
             Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
@@ -52,6 +57,7 @@ class ForgotPassword1 : Fragment() {
                         val status = response.message().toString()
                         Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
                         if(status =="OK") {
+                            nextPage = "forgotPassword"
                             progressBar.visibility=View.INVISIBLE
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -66,7 +72,7 @@ class ForgotPassword1 : Fragment() {
                         }
                     }
                     catch (e:Exception)
-                    {progressBar.visibility=View.INVISIBLE
+                    {
                         val e = e.toString()
                         Toast.makeText(activity,e, Toast.LENGTH_LONG).show()
                     }
@@ -77,7 +83,6 @@ class ForgotPassword1 : Fragment() {
                     Toast.makeText(activity,t.message, Toast.LENGTH_LONG).show()
                 }
             })
-
 
         }
         return v
