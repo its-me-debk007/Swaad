@@ -26,8 +26,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginEmail"
 
-            app:helperText="*Required"
-            app:helperTextTextColor="#ff0000"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeWidth="0dp"
