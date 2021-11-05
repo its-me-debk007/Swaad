@@ -10,11 +10,16 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
+import com.example.swaad.ForgotPassword1.Companion.email
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ForgotPassword2 : Fragment() {
+
+    companion object{
+        lateinit var tokenValue:String
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +32,9 @@ class ForgotPassword2 : Fragment() {
 
         verifyBtn.setOnClickListener{
             Toast.makeText(activity,"Verifying OTP",Toast.LENGTH_LONG).show()
+            val userEmail = email
+//            v.findViewById<TextView>(R.id.textView2).text = userEmail
 
-//            val userEmail = ForgotPassword1().email
-            var userEmail = "11testee22@gmail.com"
             val userOtp = v.findViewById<EditText>(R.id.editTextTextPersonName4).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName5).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName7).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName6).text.toString().trim()
 
             RetrofitClient.init().verifyOtp(userEmail, userOtp).enqueue(object : Callback<DataVerifyOtpClass?> {
@@ -40,7 +45,7 @@ class ForgotPassword2 : Fragment() {
                         if(responseBody!!.status == "OTP verified You can now change your password") {
                             Toast.makeText(activity, "OTP verified", Toast.LENGTH_LONG).show()
 
-                            var tokenValue = responseBody.token
+                            tokenValue = responseBody.token
 
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
