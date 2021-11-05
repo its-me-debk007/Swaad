@@ -26,7 +26,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginEmail"
 
-
+            app:hintEnabled="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeWidth="0dp"
@@ -40,17 +40,18 @@
                 android:id="@+id/loginEmail2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:fontFamily="@font/poppins"
-                android:drawableStart="@drawable/ic_msg"
-
-                android:drawablePadding="16dp"
-                android:hint="Email"
-                android:layout_marginEnd="22dp"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/border"
+
+                android:drawableStart="@drawable/ic_msg"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/poppins"
+                android:hint="Email"
                 android:paddingTop="13.5dp"
-                android:paddingBottom="13.5dp"/>
+                android:paddingBottom="13.5dp"
+                app:hintEnabled="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -59,22 +60,28 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/poppins"
             android:text="Forgot password?"
+            android:textColor="#000000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
         <Button
             android:id="@+id/loginSignInBtn"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="22dp"
             android:backgroundTint="#FFD243"
+            android:fontFamily="@font/poppins_bold"
+            android:paddingLeft="100dp"
+            android:paddingTop="12dp"
+            android:paddingRight="100dp"
+            android:paddingBottom="12dp"
             android:text="Sign in"
-            android:textColor="#000000"
             android:textAllCaps="false"
+            android:textColor="#000000"
             app:cornerRadius="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -89,7 +96,7 @@
             android:layout_marginStart="132dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="123dp"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/poppins"
             android:text="New here?"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -100,14 +107,15 @@
             android:id="@+id/loginSignUpText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="202dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="123dp"
+            android:fontFamily="@font/poppins"
             android:linksClickable="true"
             android:text="Sign up"
             android:textColor="#FFD243"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toBottomOf="@+id/loginSignInBtn" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -116,10 +124,8 @@
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
             app:boxStrokeWidth="0dp"
+            app:hintEnabled="false"
             app:boxStrokeWidthFocused="0dp"
-            app:helperText="*Required"
-            app:helperTextTextColor="#ff0000"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -129,17 +135,18 @@
                 android:id="@+id/loginPassword2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:background="@drawable/border"
-                android:fontFamily="@font/poppins"
-                android:drawableStart="@drawable/ic_lock"
-                android:drawablePadding="16dp"
-                android:hint="Password"
-                android:layout_marginEnd="22dp"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/border"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/poppins"
+                android:hint="Password"
+                android:inputType="textPassword"
                 android:paddingTop="13.5dp"
-                android:paddingBottom="13.5dp"/>
+                android:paddingBottom="13.5dp"
+                android:textColor="#000000" />
         </com.google.android.material.textfield.TextInputLayout>
 
 

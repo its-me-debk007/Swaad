@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import retrofit2.Call
@@ -23,13 +24,6 @@ class FragmentLogIn: Fragment() {
         val v = inflater.inflate(R.layout.fragment_login, container, false)
 
         val signUp : TextView = v.findViewById(R.id.loginSignUpText)
-        signUp.setOnClickListener {
-            val fragmentManager = activity?.supportFragmentManager
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container,ReferenceSignUp())
-            fragmentTransaction?.addToBackStack(null)
-            fragmentTransaction?.commit()
-        }
 
         val forgotPassword : TextView = v.findViewById(R.id.loginForgotPasswordText)
         forgotPassword.setOnClickListener {
@@ -44,8 +38,19 @@ class FragmentLogIn: Fragment() {
         signInBtn.setOnClickListener {
 
             val userEmail = v.findViewById<TextInputEditText>(R.id.loginEmail2).text.toString().trim()
+
             val userPassword = v.findViewById<TextInputEditText>(R.id.loginPassword2).text.toString().trim()
 
+            if(userEmail.isEmpty())
+            {
+                v.findViewById<EditText>(R.id.loginEmail2).error="Email can not be Emoty"
+                return@setOnClickListener
+            }
+            if(userPassword.isEmpty())
+            {
+                v.findViewById<EditText>(R.id.loginPassword2).error="Please enter the password"
+                return@setOnClickListener
+            }
             Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
 
             RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
@@ -66,6 +71,14 @@ class FragmentLogIn: Fragment() {
             })
 
         }
+        signUp.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,ReferenceSignUp())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
+
 
         return v
     }

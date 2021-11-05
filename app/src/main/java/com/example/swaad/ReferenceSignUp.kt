@@ -105,6 +105,7 @@ class ReferenceSignUp : Fragment() {
 //
 //                }
 //            })
+            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
             RetrofitClient.init().createUser(email, name, password)
                 .enqueue(object : Callback<DataClassSignUp?>
                 {

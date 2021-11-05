@@ -48,6 +48,7 @@ class ForgotPassword1 : Fragment() {
                     call: Call<ResponseBody?>,
                     response: Response<ResponseBody?>
                 ) {
+                    Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
                     try {
                         val status = response.message().toString()
                         Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
@@ -57,6 +58,10 @@ class ForgotPassword1 : Fragment() {
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
                             fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
+                        }
+                        else
+                        {
+                            Toast.makeText(activity,status,Toast.LENGTH_LONG).show()
                         }
                     }
                     catch (e:Exception)
