@@ -27,6 +27,7 @@ class ReferenceSignUp : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_reference_sign_up, container, false)
+        val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
         val termsConditions: TextView = v.findViewById(R.id.textView5)
         termsConditions.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
@@ -62,6 +63,7 @@ class ReferenceSignUp : Fragment() {
         }
         val sign_up = v.findViewById<Button>(R.id.sign_up_button)
         sign_up.setOnClickListener {
+            progressBar.visibility=View.VISIBLE
             val name = v.findViewById<TextView>(R.id.editTextTextPersonName).text.toString().trim()
             val email =
                 v.findViewById<TextView>(R.id.editTextTextPersonName2).text.toString().trim()
@@ -70,54 +72,36 @@ class ReferenceSignUp : Fragment() {
 
             if(name.isEmpty())
             {
+                progressBar.visibility=View.INVISIBLE
                 v.findViewById<TextView>(R.id.editTextTextPersonName).error="Username can not be empty"
                 return@setOnClickListener
             }
             else if(email.isEmpty())
             {
+                progressBar.visibility=View.INVISIBLE
                 v.findViewById<TextView>(R.id.editTextTextPersonName2).error="Email can not be empty"
                 return@setOnClickListener
             }
-            else  if(password.isEmpty())
+            else if(password.isEmpty())
             {
+                progressBar.visibility=View.INVISIBLE
                 v.findViewById<TextView>(R.id.editTextTextPersonName3).error="Password can not be empty"
                 return@setOnClickListener
             }
-            //Entering valid email address
-//            var email_validation=v.findViewById<TextView>(R.id.editTextTextPersonName2)
-//            email_validation.addTextChangedListener(object : TextWatcher {
-//                override fun beforeTextChanged(
-//                    s: CharSequence?,
-//                    start: Int,
-//                    count: Int,
-//                    after: Int
-//                ) {
-//
-//                }
-//                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                    if(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
-//                    {
-//                        email_validation.setError("Invalid Email")
-//                    }
-//
-//                }
-//                override fun afterTextChanged(s: Editable?) {
-//
-//                }
-//            })
+
             Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
-            RetrofitClient.init().createUser(email, name, password)
-                .enqueue(object : Callback<DataClassSignUp?>
-                {
+            RetrofitClient.init().createUser(email, name, password).enqueue(object : Callback<DataClassSignUp?>{
                     override fun onResponse(
                         call: Call<DataClassSignUp?>,
                         response: Response<DataClassSignUp?>
                     ) {
+                        progressBar.visibility=View.INVISIBLE
                         val status = response.body()?.status.toString()
                         Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
                     }
 
                     override fun onFailure(call: Call<DataClassSignUp?>, t: Throwable) {
+                        progressBar.visibility=View.INVISIBLE
                         Toast.makeText(
                             activity, t.message,
                             Toast.LENGTH_LONG

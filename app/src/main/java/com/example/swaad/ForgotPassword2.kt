@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.FragmentTransaction
 import com.example.swaad.ForgotPassword1.Companion.email
 import retrofit2.Call
@@ -27,10 +24,11 @@ class ForgotPassword2 : Fragment() {
     ): View? {
 
         val v= inflater.inflate(R.layout.fragment_forgot_password_2, container, false)
-
+        val progressBar=v.findViewById<ProgressBar>(R.id.progressBar4)
         val verifyBtn : Button = v.findViewById(R.id.verify_button)
 
         verifyBtn.setOnClickListener{
+            progressBar.visibility=View.VISIBLE
             Toast.makeText(activity,"Verifying OTP",Toast.LENGTH_LONG).show()
             val userEmail = email
 //            v.findViewById<TextView>(R.id.textView2).text = userEmail
@@ -42,7 +40,9 @@ class ForgotPassword2 : Fragment() {
 
                     val responseBody = response.body()
                     try {
+
                         if(responseBody!!.status == "OTP verified You can now change your password") {
+                            progressBar.visibility=View.INVISIBLE
                             Toast.makeText(activity, "OTP verified", Toast.LENGTH_LONG).show()
 
                             tokenValue = responseBody.token
@@ -55,10 +55,12 @@ class ForgotPassword2 : Fragment() {
                         }
                     }
                     catch(e: Exception){
+                        progressBar.visibility=View.INVISIBLE
                         Toast.makeText(activity,"Not",Toast.LENGTH_LONG).show()
                     }
                 }
                 override fun onFailure(call: Call<DataVerifyOtpClass?>, t: Throwable) {
+                    progressBar.visibility=View.INVISIBLE
                     Toast.makeText(activity,"Not",Toast.LENGTH_LONG).show()
                 }
             })
