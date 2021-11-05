@@ -19,6 +19,7 @@ import retrofit2.Response
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.widget.*
+import com.google.android.material.textfield.TextInputEditText
 
 class ReferenceSignUp : Fragment() {
     companion object{
@@ -40,23 +41,25 @@ class ReferenceSignUp : Fragment() {
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
-        val unsee=v.findViewById<ImageView>(R.id.unsee_password)
-        var flag =0
-        val password=v.findViewById<EditText>(R.id.editTextTextPersonName3)
-        unsee.setOnClickListener {
-            if(flag%2==0) {
-                password.transformationMethod =HideReturnsTransformationMethod.getInstance()
-                password.setSelection(password.getText().length);
-                flag++
-            }
-            else
-            {
-                password.transformationMethod = PasswordTransformationMethod.getInstance()
-                password.setSelection(password.getText().length);
-                flag++
-            }
-//            password.setTextCursorDrawable(password.getText().length)
-        }
+//        val unsee=v.findViewById<ImageView>(R.id.unsee_password)
+//        var flag =0
+
+//        val password=v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2)
+
+//        unsee.setOnClickListener {
+//            if(flag%2==0) {
+//                password.transformationMethod =HideReturnsTransformationMethod.getInstance()
+//                password.setSelection(password.getText().length);
+//                flag++
+//            }
+//            else
+//            {
+//                password.transformationMethod = PasswordTransformationMethod.getInstance()
+//                password.setSelection(password.getText().length);
+//                flag++
+//            }
+////            password.setTextCursorDrawable(password.getText().length)
+//        }
         val logIn: TextView = v.findViewById(R.id.textView7)
         logIn.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
@@ -68,28 +71,28 @@ class ReferenceSignUp : Fragment() {
         val sign_up = v.findViewById<Button>(R.id.sign_up_button)
         sign_up.setOnClickListener {
             progressBar.visibility=View.VISIBLE
-            val name = v.findViewById<TextView>(R.id.editTextTextPersonName).text.toString().trim()
+            val name = v.findViewById<EditText>(R.id.editTextTextPersonName).text.toString().trim()
             val email =
-                v.findViewById<TextView>(R.id.editTextTextPersonName2).text.toString().trim()
+                v.findViewById<EditText>(R.id.editTextTextPersonName2).text.toString().trim()
             val password =
-                v.findViewById<TextView>(R.id.editTextTextPersonName3).text.toString().trim()
+                v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).text.toString().trim()
 
             if(name.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextView>(R.id.editTextTextPersonName).error="Username can not be empty"
+                v.findViewById<EditText>(R.id.editTextTextPersonName).error="Username can not be empty"
                 return@setOnClickListener
             }
             else if(email.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextView>(R.id.editTextTextPersonName2).error="Email can not be empty"
+                v.findViewById<EditText>(R.id.editTextTextPersonName2).error="Email can not be empty"
                 return@setOnClickListener
             }
             else if(password.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextView>(R.id.editTextTextPersonName3).error="Password can not be empty"
+                v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).error="Password can not be empty"
                 return@setOnClickListener
             }
 

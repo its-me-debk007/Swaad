@@ -84,7 +84,6 @@ class ForgotPassword1 : Fragment() {
                 }
             })
 
-
         }
         return v
     }
