@@ -1,5 +1,6 @@
 package com.example.swaad
 
+import android.media.Rating
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,18 +12,30 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 
 class RecyclerAdapter : Adapter<RecyclerAdapter.ViewHolder>()
 {
-
+    private var images = intArrayOf(R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background)
+    private var arrayrestaurantname= arrayOf("ResraurantNames","ResraurantNames","ResraurantNames","ResraurantNames","ResraurantNames")
+    private var arrayRating  = arrayOf("ratings","ratings","ratings","ratings","ratings")
+    private var arrayTimeDuration= arrayOf("timeduration","timeduration","timeduration","timeduration","timeduration")
+    private var arrayPrices = arrayOf("$$$","$$$","$$$","$$$","$$$")
+    private var arrayAddress = arrayOf("Adress","Adress","Adress","Adress","Adress")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
        val v = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_view_home,parent,false)
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.itemImage.setImageResource(images[position])
+       holder.itemRestaurantName.text=arrayrestaurantname[position]
+        holder.Ratings.text=arrayRating[position]
+        holder.timeDuration.text=arrayTimeDuration[position]
+        holder.Prices.text=arrayPrices[position]
+        holder.RestaurantAdress.text=arrayAddress[position]
+
+
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return images.size
     }
     inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView)
     {

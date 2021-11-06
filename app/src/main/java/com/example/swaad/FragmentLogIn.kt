@@ -65,7 +65,11 @@ class FragmentLogIn: Fragment() {
                         responseBody!!.token
                         progressBar.visibility=View.INVISIBLE
                         Toast.makeText(activity,"You have been logged in",Toast.LENGTH_LONG).show()
-
+                        val fragmentManager = activity?.supportFragmentManager
+                        val fragmentTransaction = fragmentManager?.beginTransaction()
+                        fragmentTransaction?.replace(R.id.fragment_container,home_page())
+                        fragmentTransaction?.addToBackStack(null)
+                        fragmentTransaction?.commit()
                     }
                     catch(e: Exception){
                         progressBar.visibility=View.INVISIBLE

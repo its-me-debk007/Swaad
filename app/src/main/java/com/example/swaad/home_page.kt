@@ -17,6 +17,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.location.LocationManagerCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import java.util.jar.Manifest
@@ -28,13 +30,21 @@ class home_page : Fragment() {
 //    lateinit var locationRequest: LocationRequest
 ////  the permission id is just an int that must be unique so you can use any number
 //    val permission_id=100
-
+    private var layoutManager:RecyclerView.LayoutManager?=null
+    private var adapter:RecyclerView.Adapter<RecyclerAdapter.ViewHolder>?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_home_page, container, false)
+        layoutManager=LinearLayoutManager(container?.context)
+        val recyclerView = v.findViewById<RecyclerView>(R.id.RecyclerView)
+        recyclerView.layoutManager=layoutManager
+        adapter=RecyclerAdapter()
+        recyclerView.adapter=adapter
+
+
 //        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 //        //fun that will allow to get last location
 //        fun getLastLocation()
