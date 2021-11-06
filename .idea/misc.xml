@@ -6,22 +6,27 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/border.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_bi_eye_fill.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_favourates_home.xml" value="0.2101851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_forgot_password2.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_forgot_password_3.xml" value="0.23055555555555557" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_lock.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_menubutton.xml" value="0.21481481481481482" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_msg.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_otp_line.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_password.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_recipe_fast_delivery_4212566_1.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_star_3.xml" value="0.2101851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_undraw_forgot_password_1.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_undraw_mobile_login_re_9ntv_1.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_user.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/signup_button.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_card_view_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_forgot_password_1.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_forgot_password_2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_forgot_password_3.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_home_page.xml" value="0.264" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_reference_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/terms_and_conditions.xml" value="0.25416666666666665" />

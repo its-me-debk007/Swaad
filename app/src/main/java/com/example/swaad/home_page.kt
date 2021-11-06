@@ -1,0 +1,111 @@
+package com.example.swaad
+
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.location.LocationRequest
+import android.os.Bundle
+import android.view.ContextMenu
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.location.LocationManagerCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import java.util.jar.Manifest
+
+class home_page : Fragment() {
+
+//
+//    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+//    lateinit var locationRequest: LocationRequest
+////  the permission id is just an int that must be unique so you can use any number
+//    val permission_id=100
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val v = inflater.inflate(R.layout.fragment_home_page, container, false)
+//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+//        //fun that will allow to get last location
+//        fun getLastLocation()
+//        {
+//            //checking permission
+//            if(CheckPermission()){
+//                //now we check if the location is enabled
+//                if(isLocationEnabled())
+//                {
+//                    fusedLocationProviderClient.LastLocation.addOnCompleteListener { task ->
+//                        var location: Location? = task.result
+//                        if (location == null) {
+//
+//                        } else
+//                        {
+//                            val location_text=v.findViewById<TextView>(R.id.LocationText)
+//                            location_text.text=""
+//                        }
+//
+//                    }
+//                }
+//                else
+//                {
+//                    Toast.makeText(this,"Please enable your Location",Toast.LENGTH_SHORT).show()     }
+//            }
+//        }
+
+        return v
+    }}
+    //        var fusedLocationProviderClient : FusedLocationProviderClient
+//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient()
+
+
+//        fun to check the user permission
+//    fun CheckPermission():Boolean
+//    {
+//        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED ||
+//            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED)
+//        {
+//            return true
+//        }
+//        return false
+//    }
+//    //        Now we need to take create a function that will allow us to get user permission
+//    fun RequestPermission()
+//    {
+//        ActivityCompat.requestPermissions(
+//            this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),permission_id
+//        )
+//    }
+//    //      a function that check if the location service of the device  is enabled
+//    fun isLocationEnabled():Boolean
+//    {
+//        var locationManager:LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+//    }
+//
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        // it is a bulit in function that checks the permission result
+//        // you will use it just for debugging the code
+//        if(requestCode==permission_id)
+//        {
+//            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+//            {
+//              error("You have the permission")
+//            }
+//        }
+//    }
+//
+//}
