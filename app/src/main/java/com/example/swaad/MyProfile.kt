@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.swaad.LayoutPages.FragmentLogIn.Companion.NAME
+import com.example.swaad.LayoutPages.FragmentLogIn.Companion.userEmail
+import com.example.swaad.LayoutPages.TermsAndConditions
 
 class MyProfile: Fragment()  {
     override fun onCreateView(
@@ -15,8 +18,9 @@ class MyProfile: Fragment()  {
 
         val v = inflater.inflate(R.layout.profile_page, container, false)
 
-        val userName = v.findViewById<TextView>(R.id.textView15)
-        userName.text = "Hi Manish Yadav"
+        v.findViewById<TextView>(R.id.textView15).text = "Hi ${NAME}"
+        v.findViewById<TextView>(R.id.textView23).text = userEmail
+
         val termsConditions: TextView = v.findViewById(R.id.textView21)
         termsConditions.setOnClickListener{
             val fragmentManager = activity?.supportFragmentManager

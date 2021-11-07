@@ -1,4 +1,4 @@
-package com.example.swaad
+package com.example.swaad.LayoutPages
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.fragment.app.FragmentTransaction
-import com.example.swaad.ForgotPassword1.Companion.email
-import com.example.swaad.ReferenceSignUp.Companion.nextPage
+import com.example.swaad.ApiRequest.DataVerifyOtpClass
+import com.example.swaad.LayoutPages.ForgotPassword1.Companion.email
+import com.example.swaad.R
+import com.example.swaad.LayoutPages.ReferenceSignUp.Companion.nextPage
+import com.example.swaad.ApiRequest.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,9 +36,14 @@ class ForgotPassword2 : Fragment() {
             val userEmail = email
 //            v.findViewById<TextView>(R.id.textView2).text = userEmail
 
-            val userOtp = v.findViewById<EditText>(R.id.editTextTextPersonName4).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName5).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName7).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName6).text.toString().trim()
+            val userOtp = v.findViewById<EditText>(R.id.editTextTextPersonName4).text.toString().trim() + v.findViewById<EditText>(
+                R.id.editTextTextPersonName5
+            ).text.toString().trim() + v.findViewById<EditText>(R.id.editTextTextPersonName7).text.toString().trim() + v.findViewById<EditText>(
+                R.id.editTextTextPersonName6
+            ).text.toString().trim()
 
-            RetrofitClient.init().verifyOtp(userEmail, userOtp).enqueue(object : Callback<DataVerifyOtpClass?> {
+            RetrofitClient.init()
+                .verifyOtp(userEmail, userOtp).enqueue(object : Callback<DataVerifyOtpClass?> {
                 override fun onResponse(call: Call<DataVerifyOtpClass?>, response: Response<DataVerifyOtpClass?>) {
 
                     val responseBody = response.body()

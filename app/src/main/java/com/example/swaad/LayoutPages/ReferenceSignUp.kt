@@ -1,11 +1,6 @@
-package com.example.swaad
+package com.example.swaad.LayoutPages
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.InputType
-import android.text.TextWatcher
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +11,10 @@ import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.view.MotionEvent
-import android.view.View.OnTouchListener
 import android.widget.*
+import com.example.swaad.ApiRequest.DataClassSignUp
+import com.example.swaad.R
+import com.example.swaad.ApiRequest.RetrofitClient
 import com.google.android.material.textfield.TextInputEditText
 
 class ReferenceSignUp : Fragment() {
@@ -97,7 +93,8 @@ class ReferenceSignUp : Fragment() {
             }
 
             Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
-            RetrofitClient.init().createUser(email, name, password).enqueue(object : Callback<DataClassSignUp?>{
+            RetrofitClient.init()
+                .createUser(email, name, password).enqueue(object : Callback<DataClassSignUp?>{
                     override fun onResponse(
                         call: Call<DataClassSignUp?>,
                         response: Response<DataClassSignUp?>
@@ -106,11 +103,18 @@ class ReferenceSignUp : Fragment() {
                         val status = response.body()?.status.toString()
                         Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
 
-                        val fragmentManager = activity?.supportFragmentManager
-                        val fragmentTransaction = fragmentManager?.beginTransaction()
-                        fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-                        fragmentTransaction?.addToBackStack(null)
-                        fragmentTransaction?.commit()
+                        if(status == "User registered successfully") {
+                            val fragmentManager = activity?.supportFragmentManager
+                            val fragmentTransaction = fragmentManager?.beginTransaction()
+                            fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
+                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.commit()
+                        }
+                        else{
+                            v.findViewById<EditText>(R.id.editTextTextPersonName).text.clear()
+                            v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).text?.clear()
+                            v.findViewById<EditText>(R.id.editTextTextPersonName2).text.clear()
+                        }
                     }
 
                     override fun onFailure(call: Call<DataClassSignUp?>, t: Throwable) {

@@ -1,6 +1,5 @@
-package com.example.swaad
+package com.example.swaad.ApiRequest
 
-import android.util.Base64
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,7 +13,7 @@ object RetrofitClient {
         .client(client)
         .build()
 
-    fun init():Api{
+    fun init(): Api {
         return retrofit.create(Api::class.java)
     }
 }

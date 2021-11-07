@@ -1,10 +1,8 @@
-package com.example.swaad
+package com.example.swaad.ApiRequest
 
-import android.util.JsonWriter
+import com.example.swaad.*
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Converter
 import retrofit2.http.*
 
 interface Api {
