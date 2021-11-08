@@ -47,22 +47,6 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/border"
-                android:queryHint="Search for food"
-                app:circularflow_defaultRadius="12dp"
-                app:circularflow_radiusInDP="12dp"
-                app:layout_constraintCircleRadius="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LocationText" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -71,7 +55,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="150dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_bold"
                 android:text="Eat What Makes You Happy"
                 android:textColor="#000000"
                 android:textSize="16sp"
@@ -97,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_bold"
                 android:text="Recommended"
                 android:textColor="#000000"
                 android:textSize="18sp"
@@ -159,6 +143,33 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </HorizontalScrollView>
+
+            <EditText
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:fontFamily="@font/poppins"
+                android:hint="Search for food"
+                android:inputType="textPersonName"
+                android:paddingLeft="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LocationText" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="-40dp"
+                android:src="@drawable/ic_home_page_search"
+                app:layout_constraintEnd_toStartOf="@+id/searchView"
+                app:layout_constraintTop_toBottomOf="@+id/LocationText" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
