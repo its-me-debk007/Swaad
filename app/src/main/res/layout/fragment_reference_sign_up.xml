@@ -84,26 +84,38 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTextTextPersonName3"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                app:boxStrokeWidthFocused="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTextPersonName3v2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="22dp"
                 android:background="@drawable/border"
                 android:drawableStart="@drawable/ic_lock"
                 android:drawablePadding="16dp"
-                android:ems="10"
                 android:fontFamily="@font/poppins"
                 android:hint="Password"
-                android:inputType="textPersonName|textPassword"
+                android:inputType="textPassword"
                 android:paddingLeft="24dp"
                 android:paddingRight="23dp"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+                android:paddingTop="13.5dp"
+                android:paddingBottom="13.5dp"
+                 />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/sign_up_button"
@@ -184,15 +196,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textView6"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-            <ImageView
-                android:id="@+id/unsee_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="-40dp"
-                android:layout_marginTop="13dp"
-                app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
-                app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName3"
-                app:srcCompat="@drawable/ic_bi_eye_fill" />
+
 
             <ProgressBar
                 android:id="@+id/progressBar2"
@@ -208,3 +212,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
+
+<!--<ImageView-->
+<!--android:id="@+id/unsee_password"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginStart="-40dp"-->
+<!--android:layout_marginTop="13dp"-->
+<!--app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"-->
+<!--app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName3"-->
+<!--app:srcCompat="@drawable/ic_bi_eye_fill" />-->

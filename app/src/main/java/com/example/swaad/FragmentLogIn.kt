@@ -59,26 +59,30 @@ class FragmentLogIn: Fragment() {
 
             RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
                 override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
-
+                    progressBar.visibility = View.INVISIBLE
                     val responseBody = response.body()
-                    try {
-                        responseBody!!.token
-                        progressBar.visibility=View.INVISIBLE
-                        Toast.makeText(activity,"You have been logged in",Toast.LENGTH_LONG).show()
+                    if(responseBody?.token.toString() != "null") {
+                        Toast.makeText(activity, "You've been logged in", Toast.LENGTH_LONG).show()
                         val fragmentManager = activity?.supportFragmentManager
                         val fragmentTransaction = fragmentManager?.beginTransaction()
                         fragmentTransaction?.replace(R.id.fragment_container,home_page())
                         fragmentTransaction?.addToBackStack(null)
                         fragmentTransaction?.commit()
                     }
-                    catch(e: Exception){
-                        progressBar.visibility=View.INVISIBLE
-                        Toast.makeText(activity,"Wrong Credentials!!\n\nPlease check your email/password and try again!",Toast.LENGTH_LONG).show()
-                    }
+                    else {
+                        Toast.makeText(
+                            activity,
+                            "Wrong Credentials!!\n\nPlease check your email/password and try again!",
+                            Toast.LENGTH_LONG
+                        ).show()
                 }
                 override fun onFailure(call: Call<DataClass?>, t: Throwable) {
-                    progressBar.visibility=View.INVISIBLE
-                    Toast.makeText(activity,"Wrong Credentials!!\n\nPlease check your email/password and try again!",Toast.LENGTH_LONG).show()
+                    progressBar.visibility = View.INVISIBLE
+                    Toast.makeText(
+                        activity,
+                        "Wrong Credentials!!\n\nPlease check your email/password and try again!",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             })
 
