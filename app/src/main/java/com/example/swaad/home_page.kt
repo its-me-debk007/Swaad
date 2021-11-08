@@ -32,6 +32,7 @@ import android.R.attr.spacing
 
 import GridSpacingItemDecoration
 import android.R.attr
+import android.widget.EditText
 
 
 class home_page : Fragment() {
@@ -51,7 +52,14 @@ class home_page : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(com.example.swaad.R.layout.fragment_home_page, container, false)
-
+        val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
+        searchbox.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container, search_page())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
         //Runtimepermissions
 //        if (container != null) {
 //            if (ContextCompat.checkSelfPermission(
