@@ -77,4 +77,48 @@
         android:textSize="19sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="39dp"
+        android:layout_height="34dp"
+        app:srcCompat="@drawable/ic_bx_bxs_shopping_bag"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="156dp" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pizza"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="213dp" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="1"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="243dp"
+        tools:layout_editor_absoluteY="211dp" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="13dp"
+        android:layout_height="12dp"
+        app:srcCompat="@drawable/ic_plus"
+        tools:layout_editor_absoluteX="252dp"
+        tools:layout_editor_absoluteY="215dp" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="10dp"
+        android:layout_height="15dp"
+        app:srcCompat="@drawable/ic_minus"
+        tools:layout_editor_absoluteX="338dp"
+        tools:layout_editor_absoluteY="215dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

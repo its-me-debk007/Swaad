@@ -48,9 +48,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu"
-        android:background="#e91e63"
-        app:itemIconTint="#ffff"
-        app:itemTextColor="#ffff"/>
+        android:background="#ffff"
+        app:itemIconTint="#000000"
+        app:itemTextColor="#000000"
+        />
 
     <FrameLayout
         android:id="@+id/fragment_container"

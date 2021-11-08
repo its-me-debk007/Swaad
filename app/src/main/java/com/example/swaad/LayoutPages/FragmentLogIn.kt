@@ -86,7 +86,7 @@ class FragmentLogIn: Fragment() {
                             Toast.LENGTH_LONG
                         ).show()
 
-                        val intent = Intent(this@FragmentLogIn.requireContext(), NavBarActivity::class.java)
+                        val intent = Intent(activity, NavBarActivity::class.java)
                         startActivity(intent)
                     }
                     else {
