@@ -14,7 +14,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ForgotPassword2 : Fragment() {
-
     companion object{
         lateinit var tokenValue:String
     }
