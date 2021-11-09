@@ -30,8 +30,6 @@ class RecyclerAdapter : Adapter<RecyclerAdapter.ViewHolder>()
         holder.timeDuration.text=arrayTimeDuration[position]
         holder.Prices.text=arrayPrices[position]
         holder.RestaurantAdress.text=arrayAddress[position]
-
-
     }
 
     override fun getItemCount(): Int {
