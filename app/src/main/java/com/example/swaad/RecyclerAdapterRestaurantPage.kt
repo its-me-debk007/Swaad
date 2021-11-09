@@ -21,7 +21,9 @@ class RecyclerAdapterRestaurantPage:Adapter<RecyclerAdapterRestaurantPage.ViewHo
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+                holder.dishImage.setImageResource(arraydishImage[position])
+                holder.dishCost.text=arraydishCost[position]
+                holder.dishName.text=arraydishName[position]
     }
 
     override fun getItemCount(): Int {
