@@ -5,29 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="47dp"
-        android:fontFamily="@font/poppins"
-        android:text="Delivery at"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView24"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="44dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Ajay kumar garg engineering college,Ghaziabad"
+        android:layout_marginTop="47dp"
+        android:background="#F9F9F9"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="39dp"
+        android:text="Delivery at"
         android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/textView24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -42,35 +32,52 @@
 
     <TextView
         android:id="@+id/textView26"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="15dp"
+        android:background="#F9F9F9"
         android:fontFamily="@font/poppins"
+        android:paddingLeft="41dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="10.5"
         android:text="Delivery in"
         android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="32dp"
+        android:background="#F9F9F9"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Ajay kumar garg engineering college,Ghaziabad"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textView24"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_bold"
         android:text="25 Mins"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/textView26"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+        app:layout_constraintStart_toStartOf="@+id/textView26"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <TextView
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="27dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Your Cart"
         android:textColor="#000000"
@@ -82,43 +89,306 @@
         android:id="@+id/imageView9"
         android:layout_width="39dp"
         android:layout_height="34dp"
-        app:srcCompat="@drawable/ic_bx_bxs_shopping_bag"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="156dp" />
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/textView26"
+        app:srcCompat="@drawable/ic_bx_bxs_shopping_bag" />
 
     <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
+        android:id="@+id/itemName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:background="#FFFDF4"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="16dp"
+        android:paddingTop="15dp"
         android:text="Pizza"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="213dp" />
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28"
+        tools:paddingBottom="41dp" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/itemCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="32dp"
+        android:background="#FFFDF4"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="1"
+        android:textColor="#000000"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="243dp"
-        tools:layout_editor_absoluteY="211dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/itemName" />
 
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="13dp"
         android:layout_height="12dp"
         app:srcCompat="@drawable/ic_plus"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="215dp" />
+        tools:layout_editor_absoluteX="317dp"
+        tools:layout_editor_absoluteY="225dp" />
 
     <ImageView
         android:id="@+id/imageView11"
         android:layout_width="10dp"
         android:layout_height="15dp"
         app:srcCompat="@drawable/ic_minus"
-        tools:layout_editor_absoluteX="338dp"
-        tools:layout_editor_absoluteY="215dp" />
+        tools:layout_editor_absoluteX="344dp"
+        tools:layout_editor_absoluteY="222dp" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="#FFFDF4"
+        android:fontFamily="@font/poppins_bold"
+        android:paddingLeft="16dp"
+        android:text="Offers"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFDF4"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="40dp"
+        android:paddingTop="4dp"
+        android:text="40% OFF applied!"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView32"
+        app:srcCompat="@drawable/ic_timer" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="21dp"
+        android:background="#FFFDF4"
+        android:fontFamily="@font/poppins"
+        android:text="-₹72.00"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="@+id/textView33"
+        app:layout_constraintTop_toTopOf="@+id/textView33" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFDF4"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="40dp"
+        android:paddingTop="11dp"
+        android:text="Select a promocode"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView35"
+        app:srcCompat="@drawable/ic_timer" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="21dp"
+        android:background="#FFFDF4"
+        android:fontFamily="@font/poppins"
+        android:text="View Offers"
+        android:textColor="#FFD243"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="#F9F9F9"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="16dp"
+        android:paddingTop="11dp"
+        android:text="Item Total"
+        android:textColor="#888888"
+        app:layout_constraintTop_toBottomOf="@+id/textView35"
+        tools:layout_editor_absoluteX="62dp" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="#F9F9F9"
+        android:fontFamily="@font/poppins"
+        android:paddingTop="11dp"
+        android:text="₹169.00"
+        app:layout_constraintEnd_toEndOf="@+id/textView37"
+        app:layout_constraintTop_toTopOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F9F9F9"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="16dp"
+        android:paddingTop="11dp"
+        android:text="Delivery Charge"
+        android:textColor="#888888"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="#F9F9F9"
+        android:fontFamily="@font/poppins"
+        android:paddingTop="11dp"
+        android:text="₹72.00"
+        app:layout_constraintEnd_toEndOf="@+id/textView39"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F9F9F9"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="16dp"
+        android:paddingTop="11dp"
+        android:text="Grant Total"
+        android:textColor="#888888"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="#F9F9F9"
+        android:fontFamily="@font/poppins"
+        android:paddingTop="11dp"
+        android:text="₹241.00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView41" />
+
+    <TextView
+        android:id="@+id/textView43"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="21dp"
+        android:fontFamily="@font/poppins"
+        android:text="Orders once placed cannot be cancelled and are non- refundable."
+        android:textColor="#B18000"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="117dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView43"
+        app:srcCompat="@drawable/ic_delivery_scooter" />
+
+    <Button
+        android:id="@+id/payButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="22dp"
+        android:backgroundTint="#FFD243"
+        android:fontFamily="@font/poppins"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="Pay"
+        android:textAllCaps="false"
+        app:cornerRadius="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="31dp"
+        android:background="#FFFDF4"
+        android:fontFamily="@font/poppins"
+        android:text="₹169.00"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemCount" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="23dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        app:srcCompat="@drawable/ic_timer" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#F9F9F9"
+        android:paddingTop="9.5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView39"
+        app:srcCompat="@drawable/dotted" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,6 @@ import com.example.swaad.*
 import com.example.swaad.ApiRequest.DataClass
 import com.example.swaad.ApiRequest.RetrofitClient
 import com.google.android.material.textfield.TextInputEditText
-import androidx.appcompat.app.AppCompatActivity
 
 class FragmentLogIn: Fragment() {
     companion object{
@@ -28,7 +27,7 @@ class FragmentLogIn: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val v = inflater.inflate(R.layout.fragment_login, container, false)
+        val v = inflater.inflate(R.layout.merchant_login, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar)
         val signUp : TextView = v.findViewById(R.id.loginSignUpText)
         signUp.setOnClickListener {

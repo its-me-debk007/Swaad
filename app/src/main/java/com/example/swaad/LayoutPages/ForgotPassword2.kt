@@ -1,6 +1,7 @@
 package com.example.swaad.LayoutPages
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,8 @@ class ForgotPassword2 : Fragment() {
         val v= inflater.inflate(R.layout.fragment_forgot_password_2, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar4)
         val verifyBtn : Button = v.findViewById(R.id.verify_button)
+
+        startTimer()
 
         verifyBtn.setOnClickListener{
             progressBar.visibility=View.VISIBLE
@@ -91,5 +94,9 @@ class ForgotPassword2 : Fragment() {
 
         }
         return v
+    }
+
+    private fun startTimer() {
+        val countDownTimer = CountDownTimer(30000, 1000)
     }
 }

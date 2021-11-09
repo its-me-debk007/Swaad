@@ -7,6 +7,7 @@
         <entry key="..\:/zomato clone/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/border.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/box_shadow.xml" value="0.24635416666666668" />
+        <entry key="..\:/zomato clone/app/src/main/res/drawable/dotted.xml" value="0.19649122807017544" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_bi_eye_fill.xml" value="0.24157303370786518" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_forgot_password2.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_forgot_password_3.xml" value="0.24635416666666668" />
@@ -28,11 +29,13 @@
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_3.xml" value="0.264" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_login.xml" value="0.3339787028073572" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_reference_sign_up.xml" value="0.264" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/merchant_login.xml" value="0.21302083333333333" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/nav_bar.xml" value="0.4" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/nav_bar2.xml" value="0.21302083333333333" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/nav_bar22.xml" value="0.3125" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/profile_page.xml" value="0.4" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/terms_and_conditions.xml" value="0.23933649289099526" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/user_login.xml" value="0.21302083333333333" />
         <entry key="..\:/zomato clone/app/src/main/res/menu/bottom_menu.xml" value="0.264" />
         <entry key="..\:/zomato clone/app/src/main/res/menu/menu.xml" value="0.21302083333333333" />
       </map>
