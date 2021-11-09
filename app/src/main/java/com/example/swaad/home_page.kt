@@ -60,6 +60,14 @@ class home_page : Fragment() {
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
+//        val add = v.findViewById<RecyclerView>(com.example.swaad.R.id.Add)
+//        add.setOnClickListener {
+//            val fragmentManager =activity?.supportFragmentManager
+//            val fragmentTransaction = fragmentManager?.beginTransaction()
+//            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container,Restaurant_page())
+//            fragmentTransaction?.addToBackStack(null)
+//            fragmentTransaction?.commit()
+//        }
         //Runtimepermissions
 //        if (container != null) {
 //            if (ContextCompat.checkSelfPermission(

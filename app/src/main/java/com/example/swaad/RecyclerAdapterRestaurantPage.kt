@@ -27,7 +27,7 @@ class RecyclerAdapterRestaurantPage:Adapter<RecyclerAdapterRestaurantPage.ViewHo
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return arraydishImage.size
     }
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
