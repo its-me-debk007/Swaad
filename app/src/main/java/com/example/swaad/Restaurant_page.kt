@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,7 +39,8 @@ class Restaurant_page : Fragment() {
             fragmentTransaction?.commit()
         }
         val recyclerViewHomePage = v.findViewById<RecyclerView>(R.id.recyclerViewRestaurantPage)
-
+         var restaurant_name=v.findViewById<TextView>(R.id.restaurant_name)
+        restaurant_name.text=RecyclerAdapter.name
         RetrofitClient.init().getRestaurantDishes(RecyclerAdapter.id).enqueue(object : Callback<List<RestaurantDishesItem>?> {
             override fun onResponse(
                 call: Call<List<RestaurantDishesItem>?>,
