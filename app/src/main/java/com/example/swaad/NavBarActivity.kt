@@ -27,6 +27,7 @@ class NavBarActivity : AppCompatActivity() {
                 R.id.demoHome -> replaceFragment(home_page())
                 R.id.cart -> replaceFragment(MyCart())
                 R.id.myProfile -> replaceFragment(MyProfile())
+
             }
             true
         }
