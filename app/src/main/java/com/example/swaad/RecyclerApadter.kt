@@ -9,8 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.swaad.ForgotPassword2.Companion.tokenValue
 
-class RecyclerAdapter : Adapter<RecyclerAdapter.ViewHolder>()
+class RecyclerAdapter : Adapter<RecyclerAdapter.ViewHolder> ()
 {
     private var images = intArrayOf(R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background)
     private var arrayrestaurantname= arrayOf("ResraurantNames","ResraurantNames","ResraurantNames","ResraurantNames","ResraurantNames")
@@ -30,6 +35,12 @@ class RecyclerAdapter : Adapter<RecyclerAdapter.ViewHolder>()
         holder.timeDuration.text=arrayTimeDuration[position]
         holder.Prices.text=arrayPrices[position]
         holder.RestaurantAdress.text=arrayAddress[position]
+        holder.Add.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val activity=v!!.context as AppCompatActivity
+                activity.supportFragmentManager.beginTransaction().replace(R.id.fragment_container,Restaurant_page()).addToBackStack(null).commit()
+            }
+        })
     }
 
     override fun getItemCount(): Int {
@@ -52,6 +63,7 @@ class RecyclerAdapter : Adapter<RecyclerAdapter.ViewHolder>()
             Prices=itemView.findViewById(R.id.Prices)
             RestaurantAdress=itemView.findViewById(R.id.RestaurantAdress)
             Add=itemView.findViewById(R.id.Add)
+            }
         }
-    }
+
 }
