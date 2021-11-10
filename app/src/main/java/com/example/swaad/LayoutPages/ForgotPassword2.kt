@@ -31,7 +31,7 @@ class ForgotPassword2 : Fragment() {
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar4)
         val verifyBtn : Button = v.findViewById(R.id.verify_button)
 
-        startTimer()
+//        startTimer()
 
         verifyBtn.setOnClickListener{
             progressBar.visibility=View.VISIBLE
@@ -96,7 +96,7 @@ class ForgotPassword2 : Fragment() {
         return v
     }
 
-    private fun startTimer() {
-        val countDownTimer = CountDownTimer(30000, 1000)
-    }
+//    private fun startTimer() {
+//        val countDownTimer = CountDownTimer(30000, 1000)
+//    }
 }

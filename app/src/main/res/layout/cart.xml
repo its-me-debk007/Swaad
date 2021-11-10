@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -38,7 +45,7 @@
         android:fontFamily="@font/poppins"
         android:paddingLeft="41dp"
         android:paddingTop="25dp"
-        android:paddingBottom="10.5"
+        android:paddingBottom="10dp"
         android:text="Delivery in"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,34 +120,41 @@
 
     <TextView
         android:id="@+id/itemCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="98dp"
+        android:layout_height="0dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="32dp"
-        android:background="#FFFDF4"
-        android:paddingLeft="20dp"
+        android:background="@drawable/border2"
+        android:paddingLeft="23dp"
         android:paddingRight="20dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
         android:text="1"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/itemName" />
 
     <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="13dp"
-        android:layout_height="12dp"
-        app:srcCompat="@drawable/ic_plus"
-        tools:layout_editor_absoluteX="317dp"
-        tools:layout_editor_absoluteY="225dp" />
+        android:id="@+id/plus"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="110dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/itemName"
+        app:srcCompat="@drawable/ic_plus" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/minus"
         android:layout_width="10dp"
-        android:layout_height="15dp"
-        app:srcCompat="@drawable/ic_minus"
-        tools:layout_editor_absoluteX="344dp"
-        tools:layout_editor_absoluteY="222dp" />
+        android:layout_height="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/itemName"
+        app:srcCompat="@drawable/ic_minus" />
 
     <TextView
         android:id="@+id/textView32"
@@ -343,6 +357,7 @@
         android:layout_marginStart="22dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="22dp"
+        android:layout_marginBottom="24dp"
         android:backgroundTint="#FFD243"
         android:fontFamily="@font/poppins"
         android:paddingTop="12dp"
@@ -350,6 +365,7 @@
         android:text="Pay"
         android:textAllCaps="false"
         app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView14" />
@@ -392,3 +408,5 @@
         app:srcCompat="@drawable/dotted" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

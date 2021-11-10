@@ -27,7 +27,7 @@ class FragmentLogIn: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val v = inflater.inflate(R.layout.merchant_login, container, false)
+        val v = inflater.inflate(R.layout.user_login, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar)
         val signUp : TextView = v.findViewById(R.id.loginSignUpText)
         signUp.setOnClickListener {
