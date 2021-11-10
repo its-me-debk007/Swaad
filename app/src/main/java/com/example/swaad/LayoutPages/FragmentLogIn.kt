@@ -70,7 +70,7 @@ class FragmentLogIn: Fragment() {
                 return@setOnClickListener
 
             }
-            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
+//            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
 
             RetrofitClient.init()
                 .logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
@@ -94,6 +94,8 @@ class FragmentLogIn: Fragment() {
                             "Wrong Credentials!!\n\nPlease check your email/password and try again!",
                             Toast.LENGTH_LONG
                         ).show()
+                        v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
+                        v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
                     }
                     }
 
@@ -104,6 +106,8 @@ class FragmentLogIn: Fragment() {
                     "Wrong Credentials!!\n\nPlease check your email/password and try again!",
                     Toast.LENGTH_LONG
                 ).show()
+                    v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
+                    v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
             }
             })
 

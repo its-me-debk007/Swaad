@@ -1,10 +1,12 @@
 package com.example.swaad
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.swaad.LayoutPages.FragmentLogIn
 import com.example.swaad.LayoutPages.FragmentLogIn.Companion.NAME
@@ -33,11 +35,18 @@ class MyProfile: Fragment()  {
 
         val logOut: TextView = v.findViewById(R.id.textView22)
         logOut.setOnClickListener{
-            val fragmentManager = activity?.supportFragmentManager
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-            fragmentTransaction?.addToBackStack(null)
-            fragmentTransaction?.commit()
+//            val fragmentManager = activity?.supportFragmentManager
+//            val fragmentTransaction = fragmentManager?.beginTransaction()
+//            fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
+//            fragmentTransaction?.addToBackStack(null)
+//            fragmentTransaction?.commit()
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(
+                activity,
+                "You've been logged out successfully",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         return v
