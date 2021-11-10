@@ -1,4 +1,4 @@
-package com.example.swaad
+package com.example.swaad.LayoutPages
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.example.swaad.ForgotPassword2.Companion.tokenValue
+import com.example.swaad.ApiRequest.DataSetNewPasswordClass
+import com.example.swaad.LayoutPages.ForgotPassword2.Companion.tokenValue
+import com.example.swaad.R
+import com.example.swaad.ApiRequest.RetrofitClient
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,4 +1,4 @@
-package com.example.swaad
+package com.example.swaad.ApiRequest
 
 data class DataClass(
     val token: String,
