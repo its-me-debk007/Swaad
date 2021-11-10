@@ -1,4 +1,4 @@
-package com.example.swaad
+package com.example.swaad.ApiRequest
 
 data class DataVerifyOtpClass(
     val status: String,

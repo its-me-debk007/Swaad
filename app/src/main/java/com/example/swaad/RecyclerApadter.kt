@@ -13,7 +13,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.swaad.ForgotPassword2.Companion.tokenValue
+//import com.example.swaad.ForgotPassword2.Companion.tokenValue
 
 class RecyclerAdapter : Adapter<RecyclerAdapter.ViewHolder> ()
 {
