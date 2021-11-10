@@ -130,11 +130,7 @@ class FragmentLogIn: Fragment() {
                 }
                 override fun onFailure(call: Call<DataClass?>, t: Throwable) {
                     progressBar.visibility = View.INVISIBLE
-                    Toast.makeText(
-                        activity,
-                        "Wrong Credentials!!\n\nPlease check your email/password and try again!",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(activity, "Wrong Credentials!!\n\nPlease check your email/password and try again!", Toast.LENGTH_LONG).show()
                 }
             })
 
