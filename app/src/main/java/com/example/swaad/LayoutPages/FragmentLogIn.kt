@@ -42,6 +42,8 @@ class FragmentLogIn: Fragment() {
             val value = read("loggedIn")
             if(value==true)
             {
+                val intent = Intent(activity, NavBarActivity::class.java)
+                startActivity(intent)
                 val fragmentManager = activity?.supportFragmentManager
                 val fragmentTransaction = fragmentManager?.beginTransaction()
                 fragmentTransaction?.replace(R.id.fragment_container, home_page())

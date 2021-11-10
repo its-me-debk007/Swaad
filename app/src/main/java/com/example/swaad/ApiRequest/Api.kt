@@ -52,5 +52,9 @@ interface Api {
         @Field("password")password: String,
         @Header("Authorization")tokenString: String
     ):Call<DataSetNewPasswordClass>
+    @GET("/api/seller/customer/restaurants/")
+    fun getRestaurantDetails():Call<List<DataClassRestaurantsItem>>
 
+    @GET("/api/seller/customer/dish/{input}")
+    fun getRestaurantDishes(@Path("input")  input : Int): Call<List<RestaurantDishesItem>>
 }

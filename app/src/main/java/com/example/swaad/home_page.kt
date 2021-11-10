@@ -33,6 +33,11 @@ import android.R.attr.spacing
 import GridSpacingItemDecoration
 import android.R.attr
 import android.widget.EditText
+import com.example.swaad.ApiRequest.DataClassRestaurantsItem
+import com.example.swaad.ApiRequest.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class home_page : Fragment() {
@@ -84,15 +89,39 @@ class home_page : Fragment() {
 //            val location_text = v.findViewById<TextView>(R.id.LocationText)
 //            location_text.text = getlocation()
 //        }
-        layoutManager = GridLayoutManager(container?.context, 2)
-        val recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
-        var spanCount=2
-        var spacing = 30
-        var includeEdge=false
-        recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
-        recyclerView.layoutManager = layoutManager
-        adapter = RecyclerAdapter()
-        recyclerView.adapter = adapter
+        RetrofitClient.init().getRestaurantDetails().enqueue(object : Callback<List<DataClassRestaurantsItem>?> {
+            override fun onResponse(
+                call: Call<List<DataClassRestaurantsItem>?>,
+                response: Response<List<DataClassRestaurantsItem>?>
+            ) {
+                val responseBody=response.body()!!
+                if (container != null) {
+                    layoutManager = GridLayoutManager(container?.context, 2)
+                    val recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
+                    var spanCount=2
+                    var spacing = 30
+                    var includeEdge=false
+                    recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+                    recyclerView.layoutManager = layoutManager
+                    adapter=RecyclerAdapter(container.context,responseBody)
+                    (adapter as RecyclerAdapter).notifyDataSetChanged()
+                    recyclerView.adapter = adapter
+                }
+            }
+
+            override fun onFailure(call: Call<List<DataClassRestaurantsItem>?>, t: Throwable) {
+                Toast.makeText(activity,"RecyclerViewNotLoaded",Toast.LENGTH_LONG).show()
+            }
+        })
+//        layoutManager = GridLayoutManager(container?.context, 2)
+//        val recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
+//        var spanCount=2
+//        var spacing = 30
+//        var includeEdge=false
+//        recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+//        recyclerView.layoutManager = layoutManager
+//        adapter = RecyclerAdapter()
+
 
 //        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 //        //fun that will allow to get last location
