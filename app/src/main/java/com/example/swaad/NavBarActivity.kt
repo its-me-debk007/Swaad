@@ -19,12 +19,12 @@ class NavBarActivity : AppCompatActivity() {
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, DemoHome())
+        fragmentTransaction.replace(R.id.fragment_container, home_page())
         fragmentTransaction.commit()
 
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.demoHome -> replaceFragment(DemoHome())
+                R.id.demoHome -> replaceFragment(home_page())
                 R.id.cart -> replaceFragment(MyCart())
                 R.id.myProfile -> replaceFragment(MyProfile())
             }

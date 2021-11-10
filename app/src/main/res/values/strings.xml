@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Swaad</string>
     <string name="forgotPasswordTxt"><u>Forgot password?</u></string>
+    <string name="Recommended">Recommended</string>
 </resources>
