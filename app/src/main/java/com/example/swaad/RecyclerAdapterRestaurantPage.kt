@@ -10,11 +10,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import coil.load
 import com.example.swaad.ApiRequest.RestaurantDishesItem
-
+import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.get
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.MediaType.Companion.toMediaType
 class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<RestaurantDishesItem>):Adapter<RecyclerAdapterRestaurantPage.ViewHolder>(){
 
-    private var arraydishImage = intArrayOf(R.drawable.home_page_burger,R.drawable.home_page_burger,R.drawable.home_page_burger)
+//    private var arraydishImage = intArrayOf(R.drawable.home_page_burger,R.drawable.home_page_burger,R.drawable.home_page_burger)
 //    private var  arraydishName= arrayOf("Tandoori Chicken","Tandoori Chicken","Tandoori Chicken","Tandoori Chicken")
 //    private var arraydishCost= arrayOf("$100","$100","$100","$100")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,13 +27,14 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-                holder.dishImage.setImageResource(arraydishImage[position])
+                var Url=dishData[position].photo
+                holder.dishImage.load(Url)
              holder.dishCost.text=dishData[position].price.toString()
         holder.dishName.text=dishData[position].title
     }
 
     override fun getItemCount(): Int {
-        return arraydishImage.size
+        return dishData.size
     }
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
@@ -43,3 +48,4 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
         }
     }
 }
+

@@ -15,6 +15,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    kotlinOptions
+            {
+                jvmTarget=JavaVersion.VERSION_1_8.toString()
+            }
 
     buildTypes {
         release {
@@ -68,5 +72,10 @@ dependencies {
     // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    //coil image library
+    implementation("io.coil-kt:coil:1.4.0")
+//    implement ('io.nlopez.smartlocation:library:3.3.3') {
+//        transitive = false
+//    }
 
 }

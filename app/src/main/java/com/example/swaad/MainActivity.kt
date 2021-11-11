@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, FragmentLogIn())
+        fragmentTransaction.replace(R.id.fragment_container, splash_screen())
         fragmentTransaction.commit()
 
 
