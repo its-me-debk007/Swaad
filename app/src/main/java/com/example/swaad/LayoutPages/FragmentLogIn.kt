@@ -11,17 +11,63 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.createDataStore
+import androidx.lifecycle.lifecycleScope
 import com.example.swaad.*
 import com.example.swaad.ApiRequest.DataClass
 import com.example.swaad.ApiRequest.RetrofitClient
+import com.example.swaad.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class FragmentLogIn: Fragment() {
     companion object{
         lateinit var NAME: String
         lateinit var userEmail: String
+      var loggedIn:Boolean=false
     }
+    private var binding : ActivityMainBinding?=null
+    private lateinit var dataStore: DataStore<Preferences>
+    private var loggedIn:Boolean=false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        dataStore = context?.createDataStore(name = "Settings")!!
+        lifecycleScope.launch{
+            val value = read("loggedIn")
+            if(value==true)
+            {
+                val intent = Intent(activity, NavBarActivity::class.java)
+                startActivity(intent)
+                val fragmentManager = activity?.supportFragmentManager
+                val fragmentTransaction = fragmentManager?.beginTransaction()
+                fragmentTransaction?.replace(R.id.fragment_container, home_page())
+                fragmentTransaction?.addToBackStack(null)
+                fragmentTransaction?.commit()
+            }
+        }
+
+    }
+    private suspend fun save(key:String,value:Boolean)
+    {
+        val dataStoreKey= preferencesKey<Boolean>(key)
+        dataStore.edit {Settings->
+            Settings[dataStoreKey]=value
+        }
+
+    }
+    private suspend fun read(key:String):Boolean?
+    {
+        val dataStoreKey= preferencesKey<Boolean>(key)
+        val preferences = dataStore.data.first()
+        return preferences[dataStoreKey]
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,6 +125,7 @@ class FragmentLogIn: Fragment() {
                     val responseBody = response.body()
                     NAME = responseBody?.name.toString()
                     if(responseBody?.token.toString() != "null") {
+                        loggedIn=true
                         Toast.makeText(
                             activity,
                             "You've been logged in",
@@ -96,6 +143,9 @@ class FragmentLogIn: Fragment() {
                         ).show()
                         v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
                         v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
+                    }
+                    lifecycleScope.launch {
+                        save("loggedIn",loggedIn)
                     }
                     }
 
