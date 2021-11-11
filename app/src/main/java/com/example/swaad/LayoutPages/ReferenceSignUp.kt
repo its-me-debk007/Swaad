@@ -71,9 +71,7 @@ class ReferenceSignUp : Fragment() {
             val name = v.findViewById<EditText>(R.id.editTextTextPersonName).text.toString().trim()
             val email =
                 v.findViewById<EditText>(R.id.editTextTextPersonName2).text.toString().trim()
-            val password =
-                v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).text.toString().trim()
-
+            val password =v.findViewById<TextInputEditText>(R.id.Sign_up_password).text.toString().trim()
             if(name.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
@@ -89,7 +87,7 @@ class ReferenceSignUp : Fragment() {
             else if(password.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).error="Password can not be empty"
+                v.findViewById<TextInputEditText>(R.id.Sign_up_password).error="Password can not be empty"
                 return@setOnClickListener
             }
     val jsonConverterSignUp=JsonConverterSignUP(email,password,name)
@@ -103,6 +101,7 @@ class ReferenceSignUp : Fragment() {
                         val status = response.body()?.status.toString()
 //                        Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
                         if(status == "User registered successfully") {
+                            Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
@@ -112,7 +111,7 @@ class ReferenceSignUp : Fragment() {
                         else{
                             Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
                             v.findViewById<EditText>(R.id.editTextTextPersonName).text.clear()
-                            v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).text?.clear()
+                            v.findViewById<TextInputEditText>(R.id.Sign_up_password).text?.clear()
                             v.findViewById<EditText>(R.id.editTextTextPersonName2).text.clear()
                         }
                     }

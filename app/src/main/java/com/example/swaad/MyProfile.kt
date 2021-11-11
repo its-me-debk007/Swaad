@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.swaad.LayoutPages.FragmentLogIn
 import com.example.swaad.LayoutPages.FragmentLogIn.Companion.NAME
 import com.example.swaad.LayoutPages.FragmentLogIn.Companion.loggedIn
+import com.example.swaad.LayoutPages.FragmentLogIn.Companion.readInfo
 import com.example.swaad.LayoutPages.FragmentLogIn.Companion.userEmail
 import com.example.swaad.LayoutPages.TermsAndConditions
+import kotlinx.coroutines.launch
 
 class MyProfile: Fragment()  {
     override fun onCreateView(
@@ -21,9 +24,12 @@ class MyProfile: Fragment()  {
     ): View? {
 
         val v = inflater.inflate(R.layout.profile_page, container, false)
-
-        v.findViewById<TextView>(R.id.textView15).text = "Hi ${NAME}"
-        v.findViewById<TextView>(R.id.textView23).text = userEmail
+        lifecycleScope.launch {
+            val useremail = readInfo("email")
+            val name= readInfo("name")
+            v.findViewById<TextView>(R.id.textView15).text = "Hi ${name}"
+            v.findViewById<TextView>(R.id.textView23).text = useremail
+        }
 
         val termsConditions: TextView = v.findViewById(R.id.textView21)
         termsConditions.setOnClickListener{
@@ -51,6 +57,9 @@ class MyProfile: Fragment()  {
 //            fragmentTransaction?.addToBackStack(null)
 //            fragmentTransaction?.commit()
             loggedIn=false
+            lifecycleScope.launch {
+                FragmentLogIn.save("loggedIn", loggedIn)
+            }
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(
