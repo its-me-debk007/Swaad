@@ -35,6 +35,15 @@ class MyProfile: Fragment()  {
         }
 
         val logOut: TextView = v.findViewById(R.id.textView22)
+        val helpAndSupport=v.findViewById<TextView>(R.id.helpAndSupport)
+        helpAndSupport.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,help_support())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+
+        }
         logOut.setOnClickListener{
 //            val fragmentManager = activity?.supportFragmentManager
 //            val fragmentTransaction = fragmentManager?.beginTransaction()

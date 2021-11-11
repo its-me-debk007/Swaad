@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/helpAndSupport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F7F7F7"
@@ -85,7 +85,7 @@
         android:text="About Swaad"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintTop_toBottomOf="@+id/helpAndSupport" />
 
     <TextView
         android:id="@+id/textView20"
