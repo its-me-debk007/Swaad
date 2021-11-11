@@ -13,6 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.widget.*
 import com.example.swaad.ApiRequest.DataClassSignUp
+import com.example.swaad.ApiRequest.JsonConverterSignUP
 import com.example.swaad.R
 import com.example.swaad.ApiRequest.RetrofitClient
 import com.google.android.material.textfield.TextInputEditText
@@ -91,18 +92,16 @@ class ReferenceSignUp : Fragment() {
                 v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).error="Password can not be empty"
                 return@setOnClickListener
             }
-
+    val jsonConverterSignUp=JsonConverterSignUP(email,password,name)
             Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
-            RetrofitClient.init()
-                .createUser(email, name, password).enqueue(object : Callback<DataClassSignUp?>{
+            RetrofitClient.init().createUser(jsonConverterSignUp).enqueue(object : Callback<DataClassSignUp?>{
                     override fun onResponse(
                         call: Call<DataClassSignUp?>,
                         response: Response<DataClassSignUp?>
                     ) {
                         progressBar.visibility=View.INVISIBLE
                         val status = response.body()?.status.toString()
-                        Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
-
+//                        Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
                         if(status == "User registered successfully") {
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -111,6 +110,7 @@ class ReferenceSignUp : Fragment() {
                             fragmentTransaction?.commit()
                         }
                         else{
+                            Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
                             v.findViewById<EditText>(R.id.editTextTextPersonName).text.clear()
                             v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).text?.clear()
                             v.findViewById<EditText>(R.id.editTextTextPersonName2).text.clear()

@@ -29,6 +29,7 @@ class FragmentLogIn: Fragment() {
     companion object{
         lateinit var NAME: String
         lateinit var userEmail: String
+      var loggedIn:Boolean=false
     }
     private var binding : ActivityMainBinding?=null
     private lateinit var dataStore: DataStore<Preferences>

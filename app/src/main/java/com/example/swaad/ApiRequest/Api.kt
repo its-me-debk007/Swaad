@@ -15,15 +15,8 @@ interface Api {
         @Field("password")password: String
     ):Call<DataClass>
 
-
-    @FormUrlEncoded
     @POST("/api/user/register/")
-    fun createUser
-                (
-        @Field("email")email:String,
-        @Field("name")name:String,
-        @Field("password")password:String
-    ):Call<DataClassSignUp>
+    fun createUser(@Body jsonconvertersignup:JsonConverterSignUP):Call<DataClassSignUp>
 
 
     @POST("/api/user/password/reset/")
