@@ -29,6 +29,7 @@ class FragmentLogIn: Fragment() {
     companion object{
         lateinit var NAME: String
         lateinit var userEmail: String
+      var loggedIn:Boolean=false
     }
     private var binding : ActivityMainBinding?=null
     private lateinit var dataStore: DataStore<Preferences>
@@ -42,6 +43,8 @@ class FragmentLogIn: Fragment() {
             val value = read("loggedIn")
             if(value==true)
             {
+                val intent = Intent(activity, NavBarActivity::class.java)
+                startActivity(intent)
                 val fragmentManager = activity?.supportFragmentManager
                 val fragmentTransaction = fragmentManager?.beginTransaction()
                 fragmentTransaction?.replace(R.id.fragment_container, home_page())

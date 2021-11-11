@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.swaad.LayoutPages.FragmentLogIn
 import com.example.swaad.LayoutPages.FragmentLogIn.Companion.NAME
+import com.example.swaad.LayoutPages.FragmentLogIn.Companion.loggedIn
 import com.example.swaad.LayoutPages.FragmentLogIn.Companion.userEmail
 import com.example.swaad.LayoutPages.TermsAndConditions
 
@@ -40,6 +41,7 @@ class MyProfile: Fragment()  {
 //            fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
 //            fragmentTransaction?.addToBackStack(null)
 //            fragmentTransaction?.commit()
+            loggedIn=false
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(
@@ -47,6 +49,7 @@ class MyProfile: Fragment()  {
                 "You've been logged out successfully",
                 Toast.LENGTH_LONG
             ).show()
+
         }
 
         return v

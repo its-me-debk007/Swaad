@@ -15,15 +15,8 @@ interface Api {
         @Field("password")password: String
     ):Call<DataClass>
 
-
-    @FormUrlEncoded
     @POST("/api/user/register/")
-    fun createUser
-                (
-        @Field("email")email:String,
-        @Field("name")name:String,
-        @Field("password")password:String
-    ):Call<DataClassSignUp>
+    fun createUser(@Body jsonconvertersignup:JsonConverterSignUP):Call<DataClassSignUp>
 
 
     @POST("/api/user/password/reset/")
@@ -52,5 +45,9 @@ interface Api {
         @Field("password")password: String,
         @Header("Authorization")tokenString: String
     ):Call<DataSetNewPasswordClass>
+    @GET("/api/seller/customer/restaurants/")
+    fun getRestaurantDetails():Call<List<DataClassRestaurantsItem>>
 
+    @GET("/api/seller/customer/dish/{input}")
+    fun getRestaurantDishes(@Path("input")  input : Int): Call<List<RestaurantDishesItem>>
 }
