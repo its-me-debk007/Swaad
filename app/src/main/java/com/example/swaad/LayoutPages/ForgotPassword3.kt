@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequest.DataSetNewPasswordClass
 import com.example.swaad.LayoutPages.ForgotPassword2.Companion.tokenValue
 import com.example.swaad.R
@@ -27,11 +28,15 @@ class ForgotPassword3 : Fragment() {
         val resetButton : Button = v.findViewById(R.id.button3)
         resetButton.setOnClickListener{
             progressBar.visibility=View.VISIBLE
+            resetButton.isEnabled = false
+            resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
+
             val newPassword: TextInputEditText = v.findViewById(R.id.editTextTextPersonName7v2)
             newPassword.text.toString().trim()
 
             val newConfirmPassword: TextInputEditText = v.findViewById(R.id.editTextTextPersonName8v2)
             val newConfirmPasswordText =  newConfirmPassword.text.toString().trim()
+
 
             val tokenString = "Token " + tokenValue
 
@@ -55,8 +60,11 @@ class ForgotPassword3 : Fragment() {
                     }
                     catch(e: Exception){
                         progressBar.visibility=View.INVISIBLE
-                        Toast.makeText(activity,"New Password has not been set",
+                        Toast.makeText(activity,"New Password has not been set:(:(",
                             Toast.LENGTH_LONG).show()
+
+                        resetButton.isEnabled = true
+                        resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                         newPassword.text?.clear()
                         newConfirmPassword.text?.clear()
                     }
@@ -65,6 +73,9 @@ class ForgotPassword3 : Fragment() {
                     progressBar.visibility=View.INVISIBLE
                     Toast.makeText(activity,"New Password has not been set",
                         Toast.LENGTH_LONG).show()
+
+                    resetButton.isEnabled = true
+                    resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                     newPassword.text?.clear()
                     newConfirmPassword.text?.clear()
                 }

@@ -12,6 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.widget.*
+import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequest.DataClassSignUp
 import com.example.swaad.ApiRequest.JsonConverterSignUP
 import com.example.swaad.R
@@ -68,6 +69,9 @@ class ReferenceSignUp : Fragment() {
         val sign_up = v.findViewById<Button>(R.id.sign_up_button)
         sign_up.setOnClickListener {
             progressBar.visibility=View.VISIBLE
+            sign_up.isEnabled = false
+            sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
+
             val name = v.findViewById<EditText>(R.id.editTextTextPersonName).text.toString().trim()
             val email =
                 v.findViewById<EditText>(R.id.editTextTextPersonName2).text.toString().trim()
@@ -78,18 +82,24 @@ class ReferenceSignUp : Fragment() {
             {
                 progressBar.visibility=View.INVISIBLE
                 v.findViewById<EditText>(R.id.editTextTextPersonName).error="Username can not be empty"
+                sign_up.isEnabled = true
+                sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
             else if(email.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
                 v.findViewById<EditText>(R.id.editTextTextPersonName2).error="Email can not be empty"
+                sign_up.isEnabled = true
+                sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
             else if(password.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
                 v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).error="Password can not be empty"
+                sign_up.isEnabled = true
+                sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
     val jsonConverterSignUp=JsonConverterSignUP(email,password,name)
@@ -114,6 +124,9 @@ class ReferenceSignUp : Fragment() {
                             v.findViewById<EditText>(R.id.editTextTextPersonName).text.clear()
                             v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).text?.clear()
                             v.findViewById<EditText>(R.id.editTextTextPersonName2).text.clear()
+
+                            sign_up.isEnabled = true
+                            sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                         }
                     }
 
@@ -123,6 +136,8 @@ class ReferenceSignUp : Fragment() {
                             activity, t.message,
                             Toast.LENGTH_LONG
                         ).show()
+                        sign_up.isEnabled = true
+                        sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                     }
                 })
         }

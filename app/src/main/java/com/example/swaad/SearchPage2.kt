@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +25,11 @@ class SearchPage2: Fragment() {
         recyclerViewSearchPage2.layoutManager = layoutManager
         adapter = RecyclerAdapterSearchPage()
         recyclerViewSearchPage2.adapter = adapter
+
+        val clear = v.findViewById<ImageView>(R.id.clear)
+        clear.setOnClickListener{
+            v.findViewById<EditText>(R.id.searchBar).text.clear()
+            }
 
         return v
     }

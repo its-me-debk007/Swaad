@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.swaad.LayoutPages.FragmentLogIn
 import com.example.swaad.LayoutPages.FragmentLogIn.Companion.NAME
-import com.example.swaad.LayoutPages.FragmentLogIn.Companion.loggedIn
+import com.example.swaad.LayoutPages.FragmentLogIn.Companion.logInStatus
+//import com.example.swaad.LayoutPages.FragmentLogIn.Companion.logInStatus
 import com.example.swaad.LayoutPages.FragmentLogIn.Companion.userEmail
 import com.example.swaad.LayoutPages.TermsAndConditions
 
@@ -41,7 +41,7 @@ class MyProfile: Fragment()  {
 //            fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
 //            fragmentTransaction?.addToBackStack(null)
 //            fragmentTransaction?.commit()
-            loggedIn=false
+            logInStatus = false
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(

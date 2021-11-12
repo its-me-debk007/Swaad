@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequest.DataVerifyOtpClass
 import com.example.swaad.LayoutPages.ForgotPassword1.Companion.email
 import com.example.swaad.R
@@ -34,6 +35,8 @@ class ForgotPassword2 : Fragment() {
 
         verifyBtn.setOnClickListener{
             progressBar.visibility=View.VISIBLE
+            verifyBtn.isEnabled = false
+            verifyBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
             Toast.makeText(activity,"Verifying OTP",Toast.LENGTH_LONG).show()
             val userEmail = email
 //            v.findViewById<TextView>(R.id.textView2).text = userEmail
@@ -82,12 +85,28 @@ class ForgotPassword2 : Fragment() {
                     }
                     catch(e: Exception){
                         progressBar.visibility=View.INVISIBLE
-                        Toast.makeText(activity,"Not",Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity,"OTP Not Verified!\n\nPlease try again",Toast.LENGTH_LONG).show()
+                        v.findViewById<EditText>(R.id.editTextTextPersonName4).text.clear()
+                        v.findViewById<EditText>(R.id.editTextTextPersonName5).text.clear()
+                        v.findViewById<EditText>(R.id.editTextTextPersonName6).text.clear()
+                        v.findViewById<EditText>(R.id.editTextTextPersonName7).text.clear()
+
+                        verifyBtn.isEnabled = true
+                        verifyBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                     }
                 }
                 override fun onFailure(call: Call<DataVerifyOtpClass?>, t: Throwable) {
                     progressBar.visibility=View.INVISIBLE
-                    Toast.makeText(activity,"Not",Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity,"OTP Not Verified!\n" +
+                            "\n" +
+                            "Please try again",Toast.LENGTH_LONG).show()
+                    v.findViewById<EditText>(R.id.editTextTextPersonName4).text.clear()
+                    v.findViewById<EditText>(R.id.editTextTextPersonName5).text.clear()
+                    v.findViewById<EditText>(R.id.editTextTextPersonName6).text.clear()
+                    v.findViewById<EditText>(R.id.editTextTextPersonName7).text.clear()
+
+                    verifyBtn.isEnabled = true
+                    verifyBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 }
             })
 

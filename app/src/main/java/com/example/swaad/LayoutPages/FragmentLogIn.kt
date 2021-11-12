@@ -11,6 +11,7 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -29,31 +30,26 @@ class FragmentLogIn: Fragment() {
     companion object{
         lateinit var NAME: String
         lateinit var userEmail: String
-      var loggedIn:Boolean=false
+        var logInStatus:Boolean = false
     }
     private var binding : ActivityMainBinding?=null
     private lateinit var dataStore: DataStore<Preferences>
-    private var loggedIn:Boolean=false
+//    private var loggedIn:Boolean=false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        dataStore = context?.createDataStore(name = "Settings")!!
-        lifecycleScope.launch{
-            val value = read("loggedIn")
-            if(value==true)
-            {
-                val intent = Intent(activity, NavBarActivity::class.java)
-                startActivity(intent)
-                val fragmentManager = activity?.supportFragmentManager
-                val fragmentTransaction = fragmentManager?.beginTransaction()
-                fragmentTransaction?.replace(R.id.fragment_container, home_page())
-                fragmentTransaction?.addToBackStack(null)
-                fragmentTransaction?.commit()
-            }
-        }
-
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        dataStore = context?.createDataStore(name = "Settings")!!
+//        lifecycleScope.launch{
+//            val value = read("loggedIn")
+//            if(value==true)
+//            {
+//                val intent = Intent(activity, NavBarActivity::class.java)
+//                startActivity(intent)
+//            }
+//        }
+//
+//    }
     private suspend fun save(key:String,value:Boolean)
     {
         val dataStoreKey= preferencesKey<Boolean>(key)
@@ -72,6 +68,15 @@ class FragmentLogIn: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        dataStore = context?.createDataStore(name = "Settings")!!
+        lifecycleScope.launch {
+            val value = read("loggedIn")
+            if (value == true) {
+                val intent = Intent(activity, NavBarActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
         val v = inflater.inflate(R.layout.user_login, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar)
@@ -96,6 +101,9 @@ class FragmentLogIn: Fragment() {
         val signInBtn : Button = v.findViewById(R.id.loginSignInBtn)
         signInBtn.setOnClickListener {
             progressBar.visibility=View.VISIBLE
+            signInBtn.isEnabled = false
+            signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
+
             userEmail = v.findViewById<TextInputEditText>(R.id.loginEmail2).text.toString().trim()
 
             val userPassword = v.findViewById<TextInputEditText>(R.id.loginPassword2).text.toString().trim()
@@ -104,6 +112,8 @@ class FragmentLogIn: Fragment() {
             {
                 progressBar.visibility=View.INVISIBLE
                 v.findViewById<EditText>(R.id.loginEmail2).error="Email can not be Empty"
+                signInBtn.isEnabled = true
+                signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
 
             }
@@ -113,6 +123,8 @@ class FragmentLogIn: Fragment() {
                 progressBar.visibility=View.INVISIBLE
                 val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
                 v.findViewById<EditText>(R.id.loginPassword2).error="Please enter the password"
+                signInBtn.isEnabled = true
+                signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
 
             }
@@ -125,39 +137,49 @@ class FragmentLogIn: Fragment() {
                     val responseBody = response.body()
                     NAME = responseBody?.name.toString()
                     if(responseBody?.token.toString() != "null") {
-                        loggedIn=true
+                        logInStatus=true
                         Toast.makeText(
                             activity,
                             "You've been logged in",
                             Toast.LENGTH_LONG
                         ).show()
+                        lifecycleScope.launch {
+                            save("loggedIn", logInStatus)
+                        }
 
                         val intent = Intent(activity, NavBarActivity::class.java)
                         startActivity(intent)
                     }
                     else {
+//                        "Wrong Credentials!!\n\nPlease check your email/password and try again!"
                         Toast.makeText(
                             activity,
-                            "Wrong Credentials!!\n\nPlease check your email/password and try again!",
+                            responseBody?.status,
                             Toast.LENGTH_LONG
                         ).show()
                         v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
                         v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
+
+                        signInBtn.isEnabled = true
+                        signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                     }
-                    lifecycleScope.launch {
-                        save("loggedIn",loggedIn)
-                    }
+//                    lifecycleScope.launch {
+//                        save("loggedIn",logInStatus)
+//                    }
                     }
 
                 override fun onFailure(call: Call<DataClass?>, t: Throwable) {
                 progressBar.visibility = View.INVISIBLE
                 Toast.makeText(
                     activity,
-                    "Wrong Credentials!!\n\nPlease check your email/password and try again!",
+                    "Some error has been occurred!\n\nPlease try again",
                     Toast.LENGTH_LONG
                 ).show()
                     v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
                     v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
+
+                    signInBtn.isEnabled = true
+                    signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
             }
             })
 

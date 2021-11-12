@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.swaad.LayoutPages.ReferenceSignUp
 
 class MyCart: Fragment() {
     override fun onCreateView(
@@ -28,6 +29,14 @@ class MyCart: Fragment() {
             var amount = itemCount.text.toString().toInt()
             amount++
             itemCount.text = amount.toString()
+        }
+
+        v.findViewById<ImageView>(R.id.backBtn).setOnClickListener{
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container, home_page())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
         }
 
         return v
