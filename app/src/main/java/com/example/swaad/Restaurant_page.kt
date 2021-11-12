@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,7 +22,10 @@ import retrofit2.Response
 class Restaurant_page : Fragment() {
     private var layoutManager: RecyclerView.LayoutManager?=null
     private var adapter: RecyclerView.Adapter<RecyclerAdapterRestaurantPage.ViewHolder>? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +33,7 @@ class Restaurant_page : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_restaurant_page, container, false)
+         val progressBar=v.findViewById<ProgressBar>(R.id.progressBarRestaurantPage)
         layoutManager = LinearLayoutManager(container?.context)
         val back = v.findViewById<ImageView>(R.id.back)
         back.setOnClickListener {
@@ -48,6 +53,7 @@ class Restaurant_page : Fragment() {
             ) {
                 val responseBody=response.body()!!
                 if (container != null) {
+                    progressBar.visibility=View.INVISIBLE
                     recyclerViewHomePage.layoutManager = layoutManager
                     adapter = RecyclerAdapterRestaurantPage(container.context,responseBody)
                     (adapter as RecyclerAdapterRestaurantPage).notifyDataSetChanged()
@@ -55,11 +61,13 @@ class Restaurant_page : Fragment() {
                 }
                 else
                 {
+                    progressBar.visibility=View.INVISIBLE
                     Toast.makeText(activity,"Invalid Id",Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<List<RestaurantDishesItem>?>, t: Throwable) {
+                progressBar.visibility=View.INVISIBLE
               Toast.makeText(activity,"Invalid Id",Toast.LENGTH_LONG).show()
             }
         })

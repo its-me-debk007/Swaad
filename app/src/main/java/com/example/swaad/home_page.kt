@@ -33,6 +33,7 @@ import android.R.attr.spacing
 import GridSpacingItemDecoration
 import android.R.attr
 import android.widget.EditText
+import android.widget.ProgressBar
 import com.example.swaad.ApiRequest.DataClassRestaurantsItem
 import com.example.swaad.ApiRequest.RetrofitClient
 import retrofit2.Call
@@ -42,6 +43,9 @@ import retrofit2.Response
 
 class home_page : Fragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
     //
 //    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 //    lateinit var locationRequest: LocationRequest
@@ -58,6 +62,7 @@ class home_page : Fragment() {
         // Inflate the layout for this fragment
         val v= inflater.inflate(com.example.swaad.R.layout.fragment_home_page, container, false)
         val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
+        val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
         searchbox.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -96,6 +101,7 @@ class home_page : Fragment() {
             ) {
                 val responseBody=response.body()!!
                 if (container != null) {
+                    progressbar.visibility=View.INVISIBLE
                     layoutManager = GridLayoutManager(container?.context, 2)
                     val recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
                     var spanCount=2
@@ -110,6 +116,7 @@ class home_page : Fragment() {
             }
 
             override fun onFailure(call: Call<List<DataClassRestaurantsItem>?>, t: Throwable) {
+                progressbar.visibility=View.INVISIBLE
                 Toast.makeText(activity,"RecyclerViewNotLoaded",Toast.LENGTH_LONG).show()
             }
         })
