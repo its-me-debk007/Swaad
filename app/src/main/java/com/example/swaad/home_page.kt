@@ -43,6 +43,9 @@ import retrofit2.Response
 
 class home_page : Fragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
     //
 //    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 //    lateinit var locationRequest: LocationRequest
