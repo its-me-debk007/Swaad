@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -26,11 +27,11 @@ class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRes
         var name="Restaurnat_name"
         var flag=0
     }
-    private var images = intArrayOf(R.drawable.ic_launcher_background,R.drawable.ic_launcher_background)
+
 //    private var arrayrestaurantname= arrayOf("ResraurantNames","ResraurantNames","ResraurantNames","ResraurantNames","ResraurantNames")
 //    private var arrayRating  = arrayOf("ratings","ratings","ratings","ratings","ratings")
-    private var arrayTimeDuration= arrayOf("timeduration","timeduration")
-    private var arrayPrices = arrayOf("$$$","$$$")
+//    private var arrayTimeDuration= arrayOf("timeduration","timeduration")
+//    private var arrayPrices = arrayOf("$$$","$$$")
 //    private var arrayAddress = arrayOf("Adress","Adress","Adress","Adress","Adress")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
        val v = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_view_home,parent,false)
@@ -38,11 +39,12 @@ class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRes
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
-        holder.itemImage.setImageResource(images[position])
+        holder.itemImage
        holder.itemRestaurantName.text=restaurantData[position].rest_name
         holder.Ratings.text= restaurantData[position].avg_rating.toString()
-        holder.timeDuration.text=arrayTimeDuration[position]
-        holder.Prices.text=arrayPrices[position]
+        holder.timeDuration
+        holder.Prices
+
         holder.RestaurantAdress.text=restaurantData[position].address
         holder.Add.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
@@ -72,7 +74,7 @@ class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRes
     }
 
     override fun getItemCount(): Int {
-        return images.size
+        return restaurantData.size
     }
     inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView)
     {
@@ -93,6 +95,8 @@ class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRes
             RestaurantAdress=itemView.findViewById(R.id.RestaurantAdress)
             Add=itemView.findViewById(R.id.Add)
             favourites=itemView.findViewById(R.id.favourites)
+            itemRestaurantName.setSelected(true)
+            itemRestaurantName.setEllipsize(TextUtils.TruncateAt.MARQUEE)
             }
         }
 

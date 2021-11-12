@@ -29,6 +29,7 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
                 var Url=dishData[position].photo
                 holder.dishImage.load(Url)
+
              holder.dishCost.text=dishData[position].price.toString()
         holder.dishName.text=dishData[position].title
     }
