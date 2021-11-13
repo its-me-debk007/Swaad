@@ -1,18 +1,12 @@
 package com.example.swaad
-import android.content.Intent
 
 import android.widget.Toast
 
-import android.R
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.location.Address
-import android.location.GnssAntennaInfo
 import android.location.Location
 
 import android.os.Bundle
-
-import android.widget.TextView
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -20,8 +14,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import android.location.Geocoder
-import java.lang.Exception
-import java.lang.StringBuilder
+import com.example.swaad.SplashScreen.splash_screen
 import java.util.*
 import kotlin.collections.ArrayList
 

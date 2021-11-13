@@ -1,13 +1,12 @@
 package com.example.swaad
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.swaad.LayoutPages.FragmentLogIn
+import com.example.swaad.NavBarPages.MyCart
+import com.example.swaad.NavBarPages.MyProfile
+import com.example.swaad.NavBarPages.home_page
+import com.example.swaad.SearchPage2Files.SearchPage2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class NavBarActivity : AppCompatActivity() {
