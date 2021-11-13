@@ -1,5 +1,6 @@
 package com.example.swaad.LayoutPages
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,57 +28,80 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class FragmentLogIn: Fragment() {
+
+
     companion object{
         lateinit var NAME: String
         lateinit var userEmail: String
-        var logInStatus:Boolean = false
-    }
-//    private var binding : ActivityMainBinding?=null
-//    private lateinit var dataStore: DataStore<Preferences>
-//    private var loggedIn:Boolean=false
+        var loggedIn:Boolean=false
+        private var binding : ActivityMainBinding?=null
+        private lateinit var dataStore: DataStore<Preferences>
+        suspend fun save(key:String,value:Boolean)
+        {
+            val dataStoreKey= preferencesKey<Boolean>(key)
+            dataStore.edit {Settings->
+                Settings[dataStoreKey]=value
+            }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        dataStore = context?.createDataStore(name = "Settings")!!
-//        lifecycleScope.launch{
-//            val value = read("loggedIn")
-//            if(value==true)
+        }
+       suspend fun readInfo(key:String):String?
+        {
+            val dataStoreKey= preferencesKey<String>(key)
+            val preferences = dataStore.data.first()
+            return preferences[dataStoreKey]
+        }suspend fun saveInfo(key:String,value:String)
+        {
+            val dataStoreKey= preferencesKey<String>(key)
+            dataStore.edit {Settings->
+                Settings[dataStoreKey]=value
+            }
+
+        }
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        dataStore = context?.createDataStore(name = "Settings")!!
+        lifecycleScope.launch{
+            val value:Boolean? = read("loggedIn")
+            if(value==true)
+            {
+                val fragmentManager = activity?.supportFragmentManager
+                val fragmentTransaction = fragmentManager?.beginTransaction()
+                fragmentTransaction?.replace(R.id.fragment_container, home_page())
+                fragmentTransaction?.addToBackStack(null)
+                fragmentTransaction?.commit()
+                val intent = Intent(activity, NavBarActivity::class.java)
+                startActivity(intent)
+            }
+//            else
 //            {
 //                val intent = Intent(activity, NavBarActivity::class.java)
 //                startActivity(intent)
+//                val fragmentManager = activity?.supportFragmentManager
+//                val fragmentTransaction = fragmentManager?.beginTransaction()
+//                fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
+//                fragmentTransaction?.addToBackStack(null)
+//                fragmentTransaction?.commit()
+//
 //            }
-//        }
-//
-//    }
+        }
 
-//    private suspend fun save(key:String,value:Boolean)
-//    {
-//        val dataStoreKey= preferencesKey<Boolean>(key)
-//        dataStore.edit {Settings->
-//            Settings[dataStoreKey]=value
-//        }
-//
-//    }
-//    private suspend fun read(key:String):Boolean?
-//    {
-//        val dataStoreKey= preferencesKey<Boolean>(key)
-//        val preferences = dataStore.data.first()
-//        return preferences[dataStoreKey]
-//    }
+    }
+
+    private suspend fun read(key:String):Boolean?
+    {
+        val dataStoreKey= preferencesKey<Boolean>(key)
+        val preferences = dataStore.data.first()
+        return preferences[dataStoreKey]
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-//        dataStore = context?.createDataStore(name = "Settings")!!
-//        lifecycleScope.launch {
-//            val value = read("loggedIn")
-//            if (value == true) {
-//                val intent = Intent(activity, NavBarActivity::class.java)
-//                startActivity(intent)
-//            }
-//        }
 
         val v = inflater.inflate(R.layout.user_login, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar)
@@ -131,28 +155,28 @@ class FragmentLogIn: Fragment() {
             }
 //            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
 
-            RetrofitClient.init()
-                .logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
+            RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
                 override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
                     progressBar.visibility = View.INVISIBLE
                     val responseBody = response.body()
                     NAME = responseBody?.name.toString()
-                    if(responseBody?.token.toString() != "null") {
-                        logInStatus=true
+                    if (responseBody?.token.toString() != "null") {
+                        loggedIn = true
                         Toast.makeText(
                             activity,
                             "You've been logged in",
                             Toast.LENGTH_LONG
                         ).show()
-//                        lifecycleScope.launch {
-//                            save("loggedIn", logInStatus)
-//                        }
+                        lifecycleScope.launch {
+                            save("loggedIn", loggedIn)
+                            saveInfo("email", userEmail)
+                            saveInfo("name", NAME)
+                        }
 
                         val intent = Intent(activity, NavBarActivity::class.java)
                         startActivity(intent)
-                    }
-                    else {
-//                        "Wrong Credentials!!\n\nPlease check your email/password and try again!"
+
+                    } else {
                         Toast.makeText(
                             activity,
                             responseBody?.status,
@@ -164,10 +188,7 @@ class FragmentLogIn: Fragment() {
                         signInBtn.isEnabled = true
                         signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                     }
-//                    lifecycleScope.launch {
-//                        save("loggedIn",logInStatus)
-//                    }
-                    }
+                }
 
                 override fun onFailure(call: Call<DataClass?>, t: Throwable) {
                 progressBar.visibility = View.INVISIBLE
