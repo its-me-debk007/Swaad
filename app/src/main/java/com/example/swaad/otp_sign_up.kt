@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.swaad.ApiRequests.*
 import com.example.swaad.AuthPages.FragmentLogIn
 import com.example.swaad.AuthPages.ReferenceSignUp
@@ -33,6 +30,7 @@ class otp_sign_up : Fragment() {
         val otp2=v.findViewById<TextView>(R.id.OtpSignUp2)
         val otp3=v.findViewById<TextView>(R.id.OtpSignUp3)
         val otp4=v.findViewById<TextView>(R.id.OtpSignUp4)
+        val progressBar=v.findViewById<ProgressBar>(R.id.progressBarOtpSignup)
         otp1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -77,6 +75,7 @@ class otp_sign_up : Fragment() {
             }
         })
         verify.setOnClickListener {
+            progressBar.visibility=View.VISIBLE
             val userOtp = v.findViewById<EditText>(R.id.OtpSignUp1).text.toString()
                 .trim() + v.findViewById<EditText>(R.id.OtpSignUp2).text.toString().trim() + v.findViewById<EditText>(R.id.OtpSignUp3).text.toString()
                 .trim() + v.findViewById<EditText>(R.id.OtpSignUp4).text.toString().trim()
@@ -94,6 +93,7 @@ class otp_sign_up : Fragment() {
                     response: Response<ResponseBody?>
                 ) {
                     if(response.isSuccessful){
+                        progressBar.visibility=View.INVISIBLE
                         val fragmentManager = activity?.supportFragmentManager
                         val fragmentTransaction = fragmentManager?.beginTransaction()
                         fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
@@ -101,14 +101,17 @@ class otp_sign_up : Fragment() {
                         fragmentTransaction?.commit()
                     }
                     else if (response.code() == 400) {
+                        progressBar.visibility=View.INVISIBLE
                         Toast.makeText(activity, "OTP incorrect", Toast.LENGTH_LONG).show()
                     } else {
+                        progressBar.visibility=View.INVISIBLE
                         Toast.makeText(activity, "OTP expired", Toast.LENGTH_LONG).show()
                     }
 
                 }
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                    Toast.makeText(activity, "Crashed", Toast.LENGTH_LONG).show()
+                    progressBar.visibility=View.INVISIBLE
+                    Toast.makeText(activity, "Crashed  Api", Toast.LENGTH_LONG).show()
                 }
             })
 //                        val response = response.body()?.status.toString()
@@ -130,6 +133,7 @@ class otp_sign_up : Fragment() {
 //                })
         }
         resend_now.setOnClickListener {
+            progressBar.visibility=View.VISIBLE
             val jsonConverterOtp=JsonConverter(ReferenceSignUp.emailSignUp)
             RetrofitClient.init().resendOtpSignUp(jsonConverterOtp).enqueue(object : Callback<ResponseBody?> {
                 override fun onResponse(
@@ -137,6 +141,7 @@ class otp_sign_up : Fragment() {
                     response: Response<ResponseBody?>
                 ) {
                     if(response.isSuccessful) {
+                        progressBar.visibility=View.INVISIBLE
                         Toast.makeText(
                             activity,
                             "Otp has been resent successfully",
@@ -145,7 +150,8 @@ class otp_sign_up : Fragment() {
                     }
                     }
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                    Toast.makeText(activity,t.message, Toast.LENGTH_LONG).show()
+                    progressBar.visibility=View.INVISIBLE
+                    Toast.makeText(activity,"Crashed Api", Toast.LENGTH_LONG).show()
                 }
             })
         }
