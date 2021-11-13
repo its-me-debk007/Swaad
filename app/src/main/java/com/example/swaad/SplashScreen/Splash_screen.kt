@@ -32,8 +32,7 @@ class splash_screen : Fragment() {
                 fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
                 fragmentTransaction?.addToBackStack(null)
                 fragmentTransaction?.commit()
-            },3000
-        )
+            },3000)
         return v
     }
 

@@ -23,11 +23,11 @@ interface Api {
         @Body jsonConverter: JsonConverter
     ):Call<ResponseBody>
 
-    @FormUrlEncoded
-    @POST("/api/user/login/otp")
-    fun getSignInOtp (
-        @Field("email")email: String
-    ):Call<DataSignInOtp>
+//    @FormUrlEncoded
+//    @POST("/api/user/login/otp")
+//    fun getSignInOtp (
+//        @Field("email")email: String
+//    ):Call<DataSignInOtp>
 
     @FormUrlEncoded
     @POST("/api/user/login/verify")
@@ -36,12 +36,11 @@ interface Api {
         @Field("otp")otp: String
     ):Call<DataVerifySignInOtp>
 
-    @FormUrlEncoded
-    @POST("/api/user/password/reset/")
-    fun getSignUpOtp(
-        @Field("email")email: String,
-    ):Call<DataVerifyOtpClass>
 
+    @POST("api/user/signup/verify/")
+    fun getSignUpOtp(
+        @Body jsonConverterSignUpOtp: JsonConverterSignUpOtp
+    ):Call<ResponseBody>
 
     @FormUrlEncoded
     @POST("/api/user/password/reset/verify/")
@@ -62,4 +61,9 @@ interface Api {
 
     @GET("/api/seller/customer/dish/{input}")
     fun getRestaurantDishes(@Path("input")  input : Int): Call<List<RestaurantDishesItem>>
+
+
+  @POST("api/user/ signup/sendotp/")
+  fun resendOtpSignUp(@Body jsonConverterResendOtp:JsonConverter):Call<List<ResponseBody>>
+
 }

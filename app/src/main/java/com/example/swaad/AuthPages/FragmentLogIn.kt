@@ -128,11 +128,8 @@ class FragmentLogIn: Fragment() {
             progressBar.visibility=View.VISIBLE
             signInBtn.isEnabled = false
             signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
-
             userEmail = v.findViewById<TextInputEditText>(R.id.loginEmail2).text.toString().trim()
-
             val userPassword = v.findViewById<TextInputEditText>(R.id.loginPassword2).text.toString().trim()
-
             if(userEmail.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
@@ -154,7 +151,6 @@ class FragmentLogIn: Fragment() {
 
             }
 //            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
-
             RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
                 override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
                     progressBar.visibility = View.INVISIBLE
@@ -184,7 +180,6 @@ class FragmentLogIn: Fragment() {
                         ).show()
                         v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
                         v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
-
                         signInBtn.isEnabled = true
                         signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                     }

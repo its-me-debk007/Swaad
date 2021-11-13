@@ -3,16 +3,56 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/border.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_bi_eye_fill.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_favourates_home.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_forgot_password2.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_forgot_password_3.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_home_page_favourates.xml" value="0.2564814814814815" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_home_page_search.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_lock.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_menubutton.xml" value="0.21481481481481482" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_msg.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_otp_line.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_password.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_recipe_fast_delivery_4212566_1.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_restaurant_page_back.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_restaurant_page_delievery.xml" value="0.26481481481481484" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_restaurant_page_timer.xml" value="0.26481481481481484" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_star_3.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_undraw_forgot_password_1.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_undraw_mobile_login_re_9ntv_1.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_user.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/restaurant_page_border.xml" value="0.26481481481481484" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/search_border.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/signup_button.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/cart.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_card_view_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_card_view_restaurant_page.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_forgot_password_1.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_forgot_password_2.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_forgot_password_3.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_help_support.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_home_page.xml" value="0.264" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_otp_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_reference_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_restaurant_page.xml" value="0.25025641025641027" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_search_page.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_splash_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/merchant_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/nav_bar.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/profile_page.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/terms_and_conditions.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/user_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/menu/menu.xml" value="0.25416666666666665" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/border.xml" value="0.24635416666666668" />
-        <entry key="..\:/zomato clone/app/src/main/res/drawable/border2.xml" value="0.19649122807017544" />
-        <entry key="..\:/zomato clone/app/src/main/res/drawable/border_new.xml" value="0.19649122807017544" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/box_shadow.xml" value="0.24635416666666668" />
-        <entry key="..\:/zomato clone/app/src/main/res/drawable/dotted.xml" value="0.176" />
-        <entry key="..\:/zomato clone/app/src/main/res/drawable/dotted2.xml" value="0.19649122807017544" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_bi_eye_fill.xml" value="0.24157303370786518" />
-        <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_delivery_scooter.xml" value="0.19649122807017544" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_forgot_password2.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_forgot_password_3.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_home.xml" value="0.23333333333333334" />
@@ -25,33 +65,16 @@
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_undraw_forgot_password_1.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_undraw_mobile_login_re_9ntv_1.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_user.xml" value="0.24635416666666668" />
-        <entry key="..\:/zomato clone/app/src/main/res/drawable/new_border.xml" value="0.19649122807017544" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/activity_main.xml" value="0.22604166666666667" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/cart.xml" value="0.3287781350482315" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/cart_card_view.xml" value="0.4" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/demo_home.xml" value="0.21302083333333333" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_card_view_home.xml" value="0.4" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_card_view_restaurant_page.xml" value="0.4" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_1.xml" value="0.264" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/cart.xml" value="0.1" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_1.xml" value="0.22604166666666667" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_2.xml" value="0.264" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_3.xml" value="0.264" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_home_page.xml" value="0.1793859649122807" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_login.xml" value="0.3339787028073572" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_reference_sign_up.xml" value="0.264" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_restaurant_page.xml" value="0.1793859649122807" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_search_page.xml" value="0.1793859649122807" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/merchant_login.xml" value="0.4" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/my_cart.xml" value="0.4" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/nav_bar.xml" value="0.4" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/nav_bar2.xml" value="0.21302083333333333" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/nav_bar22.xml" value="0.3125" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/profile_page.xml" value="0.4" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/search_page2_card_view.xml" value="0.47818791946308725" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/search_page_2.xml" value="0.264" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/profile_page.xml" value="0.536" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/terms_and_conditions.xml" value="0.23933649289099526" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/user_login.xml" value="0.4" />
-        <entry key="..\:/zomato clone/app/src/main/res/menu/bottom_menu.xml" value="0.264" />
-        <entry key="..\:/zomato clone/app/src/main/res/menu/menu.xml" value="0.21302083333333333" />
       </map>
     </option>
   </component>

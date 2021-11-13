@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequests.DataVerifyOtpClass
-import com.example.swaad.ApiRequests.DataVerifySignInOtp
 import com.example.swaad.AuthPages.ForgotPassword1.Companion.email
 import com.example.swaad.R
 import com.example.swaad.AuthPages.ReferenceSignUp.Companion.nextPage
@@ -33,9 +32,9 @@ class ForgotPassword2 : Fragment() {
         val progressBar = v.findViewById<ProgressBar>(R.id.progressBar4)
         val verifyBtn: Button = v.findViewById(R.id.verify_button)
         val otp1 = v.findViewById<EditText>(R.id.otp1)
-        val otp2 = v.findViewById<EditText>(R.id.otp2)
-        val otp3 = v.findViewById<EditText>(R.id.otp3)
-        val otp4 = v.findViewById<EditText>(R.id.otp4)
+        val otp2 = v.findViewById<EditText>(R.id.Otp2)
+        val otp3 = v.findViewById<EditText>(R.id.Otp3)
+        val otp4 = v.findViewById<EditText>(R.id.Otp4)
 
         Toast.makeText(activity, nextPage, Toast.LENGTH_LONG).show()
 
@@ -95,8 +94,8 @@ class ForgotPassword2 : Fragment() {
 
             val userEmail = email
             val userOtp = v.findViewById<EditText>(R.id.otp1).text.toString()
-                .trim() + v.findViewById<EditText>(R.id.otp2).text.toString().trim() + v.findViewById<EditText>(R.id.otp3).text.toString()
-                .trim() + v.findViewById<EditText>(R.id.otp4).text.toString().trim()
+                .trim() + v.findViewById<EditText>(R.id.Otp2).text.toString().trim() + v.findViewById<EditText>(R.id.Otp3).text.toString()
+                .trim() + v.findViewById<EditText>(R.id.Otp4).text.toString().trim()
 
                 RetrofitClient.init().verifyOtp(userEmail, userOtp)
                     .enqueue(object : Callback<DataVerifyOtpClass?> {
@@ -131,9 +130,9 @@ class ForgotPassword2 : Fragment() {
                                     Toast.LENGTH_LONG
                                 ).show()
                                 v.findViewById<EditText>(R.id.otp1).text.clear()
-                                v.findViewById<EditText>(R.id.otp2).text.clear()
-                                v.findViewById<EditText>(R.id.otp3).text.clear()
-                                v.findViewById<EditText>(R.id.otp4).text.clear()
+                                v.findViewById<EditText>(R.id.Otp2).text.clear()
+                                v.findViewById<EditText>(R.id.Otp3).text.clear()
+                                v.findViewById<EditText>(R.id.Otp4).text.clear()
 
                                 verifyBtn.isEnabled = true
                                 verifyBtn.setBackgroundColor(
@@ -153,9 +152,9 @@ class ForgotPassword2 : Fragment() {
                                         "Please try again", Toast.LENGTH_LONG
                             ).show()
                             v.findViewById<EditText>(R.id.otp1).text.clear()
-                            v.findViewById<EditText>(R.id.otp2).text.clear()
-                            v.findViewById<EditText>(R.id.otp3).text.clear()
-                            v.findViewById<EditText>(R.id.otp4).text.clear()
+                            v.findViewById<EditText>(R.id.Otp2).text.clear()
+                            v.findViewById<EditText>(R.id.Otp3).text.clear()
+                            v.findViewById<EditText>(R.id.Otp4).text.clear()
 
                             verifyBtn.isEnabled = true
                             verifyBtn.setBackgroundColor(
