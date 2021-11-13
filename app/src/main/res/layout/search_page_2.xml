@@ -101,8 +101,6 @@
         app:layout_constraintTop_toTopOf="@+id/searchBar"
         app:srcCompat="@drawable/ic_left_arrow" />
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSearchPage2"
         android:layout_width="match_parent"

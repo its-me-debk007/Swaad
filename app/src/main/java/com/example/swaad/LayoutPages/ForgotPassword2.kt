@@ -37,8 +37,10 @@ class ForgotPassword2 : Fragment() {
             progressBar.visibility=View.VISIBLE
             verifyBtn.isEnabled = false
             verifyBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
-            Toast.makeText(activity,"Verifying OTP",Toast.LENGTH_LONG).show()
+//            Toast.makeText(activity,"Verifying OTP",Toast.LENGTH_LONG).show()
+
             val userEmail = email
+
 //            v.findViewById<TextView>(R.id.textView2).text = userEmail
 
             val userOtp = v.findViewById<EditText>(R.id.editTextTextPersonName4).text.toString().trim() + v.findViewById<EditText>(

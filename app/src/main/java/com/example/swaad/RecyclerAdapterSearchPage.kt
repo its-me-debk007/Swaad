@@ -16,6 +16,7 @@ class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.
     val prices = arrayOf("₹300.00", "₹300.00", "₹300.00", "₹300.00", "₹300.00")
     val bestsellers = arrayOf("Bestseller", "Bestseller", "Bestseller", "Bestseller", "Bestseller")
     val dishPics = intArrayOf(R.drawable.ic_cart, R.drawable.ic_cart, R.drawable.ic_cart, R.drawable.ic_cart, R.drawable.ic_cart)
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

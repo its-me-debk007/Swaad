@@ -16,8 +16,6 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.ApiRequest.DataClassRestaurantsItem
 
-//import com.example.swaad.ForgotPassword2.Companion.tokenValue
-
 class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRestaurantsItem> ) : Adapter<RecyclerAdapter.ViewHolder> ()
 {
     companion object
@@ -39,7 +37,7 @@ class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRes
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
         holder.itemImage.setImageResource(images[position])
-       holder.itemRestaurantName.text=restaurantData[position].rest_name
+        holder.itemRestaurantName.text=restaurantData[position].rest_name
         holder.Ratings.text= restaurantData[position].avg_rating.toString()
         holder.timeDuration.text=arrayTimeDuration[position]
         holder.Prices.text=arrayPrices[position]

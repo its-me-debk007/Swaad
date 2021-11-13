@@ -53,7 +53,7 @@ class ForgotPassword1 : Fragment() {
                 next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
                 return@setOnClickListener
             }
-            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
+//            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
 
             val jsonConverter= JsonConverter(email)
             RetrofitClient.init().getOtp(jsonConverter).enqueue(object : Callback<ResponseBody?> {
@@ -64,7 +64,7 @@ class ForgotPassword1 : Fragment() {
                 ) {
                     try {
                         val status = response.message().toString()
-                        Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
+//                        Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
                         if(status =="OK") {
                             nextPage = "forgotPassword"
                             progressBar.visibility=View.INVISIBLE

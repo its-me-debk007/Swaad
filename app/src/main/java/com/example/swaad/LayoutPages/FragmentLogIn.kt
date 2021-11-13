@@ -32,8 +32,8 @@ class FragmentLogIn: Fragment() {
         lateinit var userEmail: String
         var logInStatus:Boolean = false
     }
-    private var binding : ActivityMainBinding?=null
-    private lateinit var dataStore: DataStore<Preferences>
+//    private var binding : ActivityMainBinding?=null
+//    private lateinit var dataStore: DataStore<Preferences>
 //    private var loggedIn:Boolean=false
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,33 +50,34 @@ class FragmentLogIn: Fragment() {
 //        }
 //
 //    }
-    private suspend fun save(key:String,value:Boolean)
-    {
-        val dataStoreKey= preferencesKey<Boolean>(key)
-        dataStore.edit {Settings->
-            Settings[dataStoreKey]=value
-        }
 
-    }
-    private suspend fun read(key:String):Boolean?
-    {
-        val dataStoreKey= preferencesKey<Boolean>(key)
-        val preferences = dataStore.data.first()
-        return preferences[dataStoreKey]
-    }
+//    private suspend fun save(key:String,value:Boolean)
+//    {
+//        val dataStoreKey= preferencesKey<Boolean>(key)
+//        dataStore.edit {Settings->
+//            Settings[dataStoreKey]=value
+//        }
+//
+//    }
+//    private suspend fun read(key:String):Boolean?
+//    {
+//        val dataStoreKey= preferencesKey<Boolean>(key)
+//        val preferences = dataStore.data.first()
+//        return preferences[dataStoreKey]
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        dataStore = context?.createDataStore(name = "Settings")!!
-        lifecycleScope.launch {
-            val value = read("loggedIn")
-            if (value == true) {
-                val intent = Intent(activity, NavBarActivity::class.java)
-                startActivity(intent)
-            }
-        }
+//        dataStore = context?.createDataStore(name = "Settings")!!
+//        lifecycleScope.launch {
+//            val value = read("loggedIn")
+//            if (value == true) {
+//                val intent = Intent(activity, NavBarActivity::class.java)
+//                startActivity(intent)
+//            }
+//        }
 
         val v = inflater.inflate(R.layout.user_login, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar)
@@ -143,9 +144,9 @@ class FragmentLogIn: Fragment() {
                             "You've been logged in",
                             Toast.LENGTH_LONG
                         ).show()
-                        lifecycleScope.launch {
-                            save("loggedIn", logInStatus)
-                        }
+//                        lifecycleScope.launch {
+//                            save("loggedIn", logInStatus)
+//                        }
 
                         val intent = Intent(activity, NavBarActivity::class.java)
                         startActivity(intent)

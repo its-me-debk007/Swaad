@@ -113,65 +113,12 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         app:srcCompat="@drawable/ic_bx_bxs_shopping_bag" />
 
-    <TextView
-        android:id="@+id/itemName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:background="#FFFDF4"
-        android:fontFamily="@font/poppins"
-        android:paddingLeft="16dp"
-        android:paddingTop="15dp"
-        android:text="Pizza"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28"
-        android:paddingBottom="41dp" />
-
-    <TextView
-        android:id="@+id/itemCount"
-        android:layout_width="98dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/border2"
-        android:paddingLeft="23dp"
-        android:paddingTop="3dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="3dp"
-        android:text="1"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/itemName" />
-
-    <ImageView
-        android:id="@+id/plus"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="110dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/itemName"
-        app:srcCompat="@drawable/ic_plus" />
-
-    <ImageView
-        android:id="@+id/minus"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/itemName"
-        app:srcCompat="@drawable/ic_minus" />
 
     <TextView
         android:id="@+id/textView32"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="244dp"
         android:background="#FFFDF4"
         android:fontFamily="@font/poppins_bold"
         android:paddingLeft="16dp"
@@ -179,7 +126,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+        app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
     <TextView
         android:id="@+id/textView33"
@@ -385,19 +332,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="36dp"
-        android:background="#FFFDF4"
-        android:fontFamily="@font/poppins"
-        android:text="₹169.00"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemCount" />
-
     <ImageView
         android:id="@+id/imageView15"
         android:layout_width="23dp"
@@ -449,3 +383,80 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
+
+<!--<TextView-->
+<!--android:id="@+id/itemName"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginTop="27dp"-->
+<!--android:background="#FFFDF4"-->
+<!--android:fontFamily="@font/poppins"-->
+<!--android:paddingLeft="16dp"-->
+<!--android:paddingTop="15dp"-->
+<!--android:text="Pizza"-->
+<!--android:textColor="#000000"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/textView28"-->
+<!--android:paddingBottom="41dp" />-->
+
+<!--<TextView-->
+<!--android:id="@+id/itemCount"-->
+<!--android:layout_width="98dp"-->
+<!--android:layout_height="0dp"-->
+<!--android:layout_marginTop="12dp"-->
+<!--android:layout_marginEnd="32dp"-->
+<!--android:background="@drawable/border2"-->
+<!--android:paddingLeft="23dp"-->
+<!--android:paddingTop="3dp"-->
+<!--android:paddingRight="20dp"-->
+<!--android:paddingBottom="3dp"-->
+<!--android:text="1"-->
+<!--android:textAlignment="center"-->
+<!--android:textColor="#000000"-->
+<!--android:textSize="16sp"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintTop_toTopOf="@+id/itemName" />-->
+
+<!--<ImageView-->
+<!--android:id="@+id/plus"-->
+<!--android:layout_width="12dp"-->
+<!--android:layout_height="12dp"-->
+<!--android:layout_marginTop="20dp"-->
+<!--android:layout_marginEnd="110dp"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintTop_toTopOf="@+id/itemName"-->
+<!--app:srcCompat="@drawable/ic_plus" />-->
+
+<!--<ImageView-->
+<!--android:id="@+id/minus"-->
+<!--android:layout_width="12dp"-->
+<!--android:layout_height="12dp"-->
+<!--android:layout_marginTop="20dp"-->
+<!--android:layout_marginEnd="40dp"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintTop_toTopOf="@+id/itemName"-->
+<!--app:srcCompat="@drawable/ic_minus" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView30"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        android:layout_marginEnd="36dp"-->
+    <!--        android:background="#FFFDF4"-->
+    <!--        android:fontFamily="@font/poppins"-->
+    <!--        android:text="₹169.00"-->
+    <!--        android:textColor="#000000"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/itemCount" />-->
+
+
+<!--<androidx.recyclerview.widget.RecyclerView-->
+<!--android:id="@+id/recyclerViewCart"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginTop="27dp"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/textView28" />-->
