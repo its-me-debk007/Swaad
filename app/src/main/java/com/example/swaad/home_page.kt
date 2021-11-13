@@ -32,29 +32,25 @@ import android.R.attr.spacing
 
 import GridSpacingItemDecoration
 import android.R.attr
+import android.app.Activity
 import android.widget.EditText
 import android.widget.ProgressBar
 import com.example.swaad.ApiRequest.DataClassRestaurantsItem
 import com.example.swaad.ApiRequest.RetrofitClient
+import com.google.android.gms.tasks.Task
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class home_page : Fragment() {
-
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
-    //
-//    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-//    lateinit var locationRequest: LocationRequest
-////  the permission id is just an int that must be unique so you can use any number
-//    val permission_id=100
     private var layoutManager:RecyclerView.LayoutManager?=null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
-
-    //    private lateinit var locationManager:LocationManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,6 +59,29 @@ class home_page : Fragment() {
         val v= inflater.inflate(com.example.swaad.R.layout.fragment_home_page, container, false)
         val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
         val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
+        val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
+        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
+//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(container?.context)
+//        fun fetchLocation()
+//        {
+//            val task: Task<Location> = fusedLocationProviderClient.lastLocation
+//            if (container != null) {
+//                if(ActivityCompat.checkSelfPermission(container.context,android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+//                    &&ActivityCompat.checkSelfPermission(container.context,android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED)
+//                {
+//                    ActivityCompat.requestPermissions(Activity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),101)
+//                }
+//
+//            }
+//            task.addOnSuccessListener {
+//                if(it!=null)
+//                {
+//                    Toast.makeText(activity,"${it.latitude} ${it.longitude}",Toast.LENGTH_SHORT).show()
+//
+//                }
+//            }
+//        }
+//        fetchLocation()
         searchbox.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -77,6 +96,8 @@ class home_page : Fragment() {
 //            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container,Restaurant_page())
 //            fragmentTransaction?.addToBackStack(null)
 //            fragmentTransaction?.commit()
+
+//
 //        }
         //Runtimepermissions
 //        if (container != null) {
@@ -160,6 +181,9 @@ class home_page : Fragment() {
         return v
     }
 }
+
+
+
 //LocationManager class provides the facility to get latitude and longitude
 //    private fun getlocation(): CharSequence? {
 //        try {
