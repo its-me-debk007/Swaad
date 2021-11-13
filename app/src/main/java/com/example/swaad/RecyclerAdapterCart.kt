@@ -6,9 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.swaad.RecyclerAdapterRestaurantPage.Companion.dishCostList
-import com.example.swaad.RecyclerAdapterRestaurantPage.Companion.dishNameList
-import com.example.swaad.RecyclerAdapterRestaurantPage.Companion.totalDishes
 
 class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>()  {
     val dishesNameList = arrayOf("Jalebi", "Imarti", "Rasmalai")
@@ -30,6 +27,22 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
         holder.plus.setImageResource(pluses[position])
         holder.minus.setImageResource(minuses[position])
         holder.itemCount.text = "1"
+
+        holder.plus.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                var amount = holder.itemCount.text.toString().toInt()
+                amount++
+                holder.itemCount.text = amount.toString()
+            }
+        })
+        holder.minus.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                var amount = holder.itemCount.text.toString().toInt()
+                if(amount != 1)
+                    amount--
+                holder.itemCount.text = amount.toString()
+            }
+        })
     }
 
     override fun getItemCount(): Int {
@@ -52,3 +65,4 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
         }
     }
 }
+
