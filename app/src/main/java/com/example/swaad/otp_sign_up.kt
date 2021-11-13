@@ -1,6 +1,8 @@
 package com.example.swaad
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +29,53 @@ class otp_sign_up : Fragment() {
         val v= inflater.inflate(R.layout.fragment_otp_sign_up, container, false)
         var resend_now=v.findViewById<TextView>(R.id.resendSignupOtp)
         val verify = v.findViewById<Button>(R.id.verify_button_sign_up)
+        val otp1=v.findViewById<TextView>(R.id.OtpSignUp1)
+        val otp2=v.findViewById<TextView>(R.id.OtpSignUp2)
+        val otp3=v.findViewById<TextView>(R.id.OtpSignUp3)
+        val otp4=v.findViewById<TextView>(R.id.OtpSignUp4)
+        otp1.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (otp1.text.toString().length == 1) {
+                    otp2.requestFocus()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+        otp2.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (otp2.text.toString().length == 1) {
+                    otp3.requestFocus()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+        otp3.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (otp3.text.toString().length == 1) {
+                    otp4.requestFocus()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
         verify.setOnClickListener {
             val userOtp = v.findViewById<EditText>(R.id.OtpSignUp1).text.toString()
                 .trim() + v.findViewById<EditText>(R.id.OtpSignUp2).text.toString().trim() + v.findViewById<EditText>(R.id.OtpSignUp3).text.toString()
@@ -81,80 +130,22 @@ class otp_sign_up : Fragment() {
 //                })
         }
         resend_now.setOnClickListener {
-            val jsonConverter=JsonConverter(ReferenceSignUp.emailSignUp)
-            RetrofitClient.init().resendOtpSignUp(jsonConverter).enqueue(object : Callback<List<ResponseBody>?> {
+            val jsonConverterOtp=JsonConverter(ReferenceSignUp.emailSignUp)
+            RetrofitClient.init().resendOtpSignUp(jsonConverterOtp).enqueue(object : Callback<ResponseBody?> {
                 override fun onResponse(
-                    call: Call<List<ResponseBody>?>,
-                    response: Response<List<ResponseBody>?>
+                    call: Call<ResponseBody?>,
+                    response: Response<ResponseBody?>
                 ) {
                     if(response.isSuccessful) {
-                        verify.setOnClickListener {
-                            val userOtp = v.findViewById<EditText>(R.id.OtpSignUp1).text.toString()
-                                .trim() + v.findViewById<EditText>(R.id.OtpSignUp2).text.toString()
-                                .trim() + v.findViewById<EditText>(R.id.OtpSignUp3).text.toString()
-                                .trim() + v.findViewById<EditText>(R.id.OtpSignUp4).text.toString()
-                                .trim()
-                            val JsonConverterSignUpOtp =
-                                JsonConverterSignUpOtp(ReferenceSignUp.emailSignUp, userOtp)
-//            RetrofitClient.init().getSignUpOtp(JsonConverterSignUpOtp)
-//                .enqueue(object : Callback<ResponseBody?> {
-//                    override fun onResponse(
-//                        call: Call<ResponseBody?>,
-//                        response: Response<ResponseBody?>
-//                    )
-////                    {
-                            RetrofitClient.init().getSignUpOtp(JsonConverterSignUpOtp)
-                                .enqueue(object : Callback<ResponseBody?> {
-                                    override fun onResponse(
-                                        call: Call<ResponseBody?>,
-                                        response: Response<ResponseBody?>
-                                    ) {
-                                        if (response.isSuccessful) {
-                                            val fragmentManager = activity?.supportFragmentManager
-                                            val fragmentTransaction =
-                                                fragmentManager?.beginTransaction()
-                                            fragmentTransaction?.replace(
-                                                R.id.fragment_container,
-                                                FragmentLogIn()
-                                            )
-                                            fragmentTransaction?.addToBackStack(null)
-                                            fragmentTransaction?.commit()
-                                        } else if (response.code() == 400) {
-                                            Toast.makeText(
-                                                activity,
-                                                "OTP incorrect",
-                                                Toast.LENGTH_LONG
-                                            ).show()
-                                        } else {
-                                            Toast.makeText(
-                                                activity,
-                                                "OTP expired",
-                                                Toast.LENGTH_LONG
-                                            ).show()
-                                        }
-
-                                    }
-
-                                    override fun onFailure(
-                                        call: Call<ResponseBody?>,
-                                        t: Throwable
-                                    ) {
-                                        Toast.makeText(activity, "Crashed", Toast.LENGTH_LONG)
-                                            .show()
-                                    }
-                                })
-
-                        }
+                        Toast.makeText(
+                            activity,
+                            "Otp has been resent successfully",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                    else if (response.code() == 400) {
-                        Toast.makeText(activity, "OTP incorrect", Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(activity, "OTP expired", Toast.LENGTH_LONG).show()
                     }
-                }
-
-                override fun onFailure(call: Call<List<ResponseBody>?>, t: Throwable) {
-                    Toast.makeText(activity, "Crashed", Toast.LENGTH_LONG).show()
+                override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                    Toast.makeText(activity,t.message, Toast.LENGTH_LONG).show()
                 }
             })
         }

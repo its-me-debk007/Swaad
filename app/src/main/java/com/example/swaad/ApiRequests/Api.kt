@@ -62,8 +62,7 @@ interface Api {
     @GET("/api/seller/customer/dish/{input}")
     fun getRestaurantDishes(@Path("input")  input : Int): Call<List<RestaurantDishesItem>>
 
-
-  @POST("api/user/ signup/sendotp/")
-  fun resendOtpSignUp(@Body jsonConverterResendOtp:JsonConverter):Call<List<ResponseBody>>
+  @POST("api/user/signup/sendotp/")
+  fun resendOtpSignUp(@Body jsonConverterResendOtp:JsonConverter):Call<ResponseBody >
 
 }
