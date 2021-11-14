@@ -41,9 +41,7 @@ class ForgotPassword1 : Fragment() {
             progressBar.visibility=View.VISIBLE
             next_button.isEnabled = false
             next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
-
             email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
-
             if(email.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
@@ -70,7 +68,7 @@ class ForgotPassword1 : Fragment() {
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
-                            fragmentTransaction?.addToBackStack(null)
+//                            fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
                         else

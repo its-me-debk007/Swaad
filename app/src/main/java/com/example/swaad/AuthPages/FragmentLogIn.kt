@@ -148,7 +148,6 @@ class FragmentLogIn: Fragment() {
                 signInBtn.isEnabled = true
                 signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
-
             }
 //            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
 //            RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
@@ -204,4 +203,5 @@ class FragmentLogIn: Fragment() {
             startActivity(intent)}
         return v
     }
+
 }

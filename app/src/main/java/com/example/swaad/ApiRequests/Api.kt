@@ -51,11 +51,10 @@ interface Api {
 
 
     @FormUrlEncoded
-    @PATCH("/api/user/profile/")
+    @POST("/api/user/profile/")
     fun setNewPassword(
-        @Field("password")password: String,
-        @Header("Authorization")tokenString: String
-    ):Call<DataSetNewPasswordClass>
+        @Body jsonConverterConfirmPassword: JsonConverterConfirmPassword
+    ):Call<ResponseBody>
     @GET("/api/seller/customer/restaurants/")
     fun getRestaurantDetails():Call<List<DataClassRestaurantsItem>>
 

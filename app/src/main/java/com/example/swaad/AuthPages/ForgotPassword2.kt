@@ -35,7 +35,6 @@ class ForgotPassword2 : Fragment() {
         val otp2 = v.findViewById<EditText>(R.id.Otp2)
         val otp3 = v.findViewById<EditText>(R.id.Otp3)
         val otp4 = v.findViewById<EditText>(R.id.Otp4)
-
         Toast.makeText(activity, nextPage, Toast.LENGTH_LONG).show()
 
         otp1.addTextChangedListener(object : TextWatcher {
@@ -118,7 +117,7 @@ class ForgotPassword2 : Fragment() {
                                         R.id.fragment_container,
                                         ForgotPassword3()
                                     )
-                                    fragmentTransaction?.addToBackStack(null)
+//                                    fragmentTransaction?.addToBackStack(null)
                                     fragmentTransaction?.commit()
 
                                 }

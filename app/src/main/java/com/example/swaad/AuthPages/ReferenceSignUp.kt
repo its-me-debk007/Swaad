@@ -64,7 +64,7 @@ class ReferenceSignUp : Fragment() {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-            fragmentTransaction?.addToBackStack(null)
+//            fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
         val sign_up = v.findViewById<Button>(R.id.sign_up_button)
@@ -117,7 +117,7 @@ class ReferenceSignUp : Fragment() {
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, otp_sign_up())
-                            fragmentTransaction?.addToBackStack(null)
+//                            fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
                         else{
