@@ -151,57 +151,57 @@ class FragmentLogIn: Fragment() {
 
             }
 //            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
-            RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
-                override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
-                    progressBar.visibility = View.INVISIBLE
-                    val responseBody = response.body()
-                    NAME = responseBody?.name.toString()
-                    if (responseBody?.token.toString() != "null") {
-                        loggedIn = true
-                        Toast.makeText(
-                            activity,
-                            "You've been logged in",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        lifecycleScope.launch {
-                            save("loggedIn", loggedIn)
-                            saveInfo("email", userEmail)
-                            saveInfo("name", NAME)
-                        }
+//            RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
+//                override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
+//                    progressBar.visibility = View.INVISIBLE
+//                    val responseBody = response.body()
+//                    NAME = responseBody?.name.toString()
+//                    if (responseBody?.token.toString() != "null") {
+//                        loggedIn = true
+//                        Toast.makeText(
+//                            activity,
+//                            "You've been logged in",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                        lifecycleScope.launch {
+//                            save("loggedIn", loggedIn)
+//                            saveInfo("email", userEmail)
+//                            saveInfo("name", NAME)
+//                        }
+//
+//                        val intent = Intent(activity, NavBarActivity::class.java)
+//                        startActivity(intent)
+//
+//                    } else {
+//                        Toast.makeText(
+//                            activity,
+//                            responseBody?.status,
+//                            Toast.LENGTH_LONG).show()
+//                        v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
+//                        v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
+//                        signInBtn.isEnabled = true
+//                        signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<DataClass?>, t: Throwable) {
+//                progressBar.visibility = View.INVISIBLE
+//                Toast.makeText(
+//                    activity,
+//                    "Some error has been occurred!\n\nPlease try again",
+//                    Toast.LENGTH_LONG
+//                ).show()
+//                    v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
+//                    v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
+//
+//                    signInBtn.isEnabled = true
+//                    signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+//            }
+//            })
+//
 
-                        val intent = Intent(activity, NavBarActivity::class.java)
-                        startActivity(intent)
-
-                    } else {
-                        Toast.makeText(
-                            activity,
-                            responseBody?.status,
-                            Toast.LENGTH_LONG
-                        ).show()
-                        v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
-                        v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
-                        signInBtn.isEnabled = true
-                        signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
-                    }
-                }
-
-                override fun onFailure(call: Call<DataClass?>, t: Throwable) {
-                progressBar.visibility = View.INVISIBLE
-                Toast.makeText(
-                    activity,
-                    "Some error has been occurred!\n\nPlease try again",
-                    Toast.LENGTH_LONG
-                ).show()
-                    v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
-                    v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
-
-                    signInBtn.isEnabled = true
-                    signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
-            }
-            })
-
-    }
-
+            val intent = Intent(activity, NavBarActivity::class.java)
+            startActivity(intent)}
         return v
     }
 }

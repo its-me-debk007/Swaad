@@ -12,22 +12,34 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 
 import GridSpacingItemDecoration
+import android.app.ActionBar
+import android.app.Activity
+import android.view.MenuItem
 import android.widget.ProgressBar
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.swaad.ApiRequests.DataClassRestaurantsItem
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.AuthPages.help_support
 import com.example.swaad.MainActivity
+import com.example.swaad.R
 import com.example.swaad.RecyclerAdapter
 import com.example.swaad.search_page
+import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.appcompat.app.AppCompatActivity
+
+
+
 
 
 class home_page : Fragment() {
+
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
     private var layoutManager:RecyclerView.LayoutManager?=null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
@@ -121,48 +133,9 @@ class home_page : Fragment() {
                 Toast.makeText(activity,"RecyclerViewNotLoaded",Toast.LENGTH_LONG).show()
             }
         })
-//        layoutManager = GridLayoutManager(container?.context, 2)
-//        val recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
-//        var spanCount=2
-//        var spacing = 30
-//        var includeEdge=false
-//        recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
-//        recyclerView.layoutManager = layoutManager
-//        adapter = RecyclerAdapter()
-
-
-//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-//        //fun that will allow to get last location
-//        fun getLastLocation()
-//        {
-//            //checking permission
-//            if(CheckPermission()){
-//                //now we check if the location is enabled
-//                if(isLocationEnabled())
-//                {
-//                    fusedLocationProviderClient.LastLocation.addOnCompleteListener { task ->
-//                        var location: Location? = task.result
-//                        if (location == null) {
-//
-//                        } else
-//                        {
-//                            val location_text=v.findViewById<TextView>(R.id.LocationText)
-//                            location_text.text=""
-//                        }
-//
-//                    }
-//                }
-//                else
-//                {
-//                    Toast.makeText(this,"Please enable your Location",Toast.LENGTH_SHORT).show()     }
-//            }
-//        }
-
         return v
     }
 }
-
-
 
 //LocationManager class provides the facility to get latitude and longitude
 //    private fun getlocation(): CharSequence? {

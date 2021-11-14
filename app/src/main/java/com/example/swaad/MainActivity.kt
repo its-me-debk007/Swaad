@@ -1,5 +1,6 @@
 package com.example.swaad
 
+import android.app.Activity
 import android.widget.Toast
 
 import android.content.pm.PackageManager
@@ -14,7 +15,11 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import android.location.Geocoder
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.swaad.SplashScreen.splash_screen
+import com.google.android.material.navigation.NavigationView
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -24,12 +29,12 @@ class MainActivity : AppCompatActivity() {
         var latitude: Double = 2.3434.toDouble()
         var longitude: Double = 0.toDouble()
         lateinit var adress: String
-
     }
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(com.example.swaad.R.layout.activity_main)
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -71,5 +76,7 @@ class MainActivity : AppCompatActivity() {
         var realAdress=adressList.get(0).getAddressLine(0)
         return realAdress
     }
+
 }
+
 

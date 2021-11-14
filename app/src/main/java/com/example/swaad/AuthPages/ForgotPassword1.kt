@@ -62,7 +62,7 @@ class ForgotPassword1 : Fragment() {
                     response: Response<ResponseBody?>
                 ) {
                     try {
-                        val status = response.message().toString()
+                        val status = response.toString()
                         Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
                         if(status =="OK") {
                             nextPage = "forgotPassword"
