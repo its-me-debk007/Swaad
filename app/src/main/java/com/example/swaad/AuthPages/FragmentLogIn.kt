@@ -143,6 +143,7 @@ class FragmentLogIn: Fragment() {
                 signInBtn.isEnabled = true
                 signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
+
             }
             if(userPassword.isEmpty())
             {
@@ -163,71 +164,33 @@ class FragmentLogIn: Fragment() {
                     progressBar.visibility = View.INVISIBLE
                     val responseBody = response.body()
                     NAME = responseBody?.name.toString()
-
-                        if (response.code() == 200) {
-                            loggedIn = true
-                            Toast.makeText(
-                                activity,
-                                "You've been logged in",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            lifecycleScope.launch {
-                                save("loggedIn", loggedIn)
-                                saveInfo("email", userEmail)
-                                saveInfo("name", NAME)
-                            }
+                    if (responseBody?.token.toString() != "null") {
+                        loggedIn = true
+                        Toast.makeText(
+                            activity,
+                            "You've been logged in",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        lifecycleScope.launch {
+                            save("loggedIn", loggedIn)
+                            saveInfo("email", userEmail)
+                            saveInfo("name", NAME)
+                        }
 
                             val intent = Intent(activity, NavBarActivity::class.java)
                             startActivity(intent)
 
-                        }
-
-                    else{
-                        try {
-                            val status = responseBody?.status.toString()
-                            if (status[0] != 'U') {
-                                Toast.makeText(
-                                    activity,
-                                    responseBody?.status,
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
-
-                                signInBtn.isEnabled = true
-                                signInBtn.setBackgroundColor(
-                                    ContextCompat.getColor(
-                                        requireContext(),
-                                        R.color.button_background
-                                    )
-                                )
-                            }
-                            else{
-                                Toast.makeText(
-                                    activity,
-                                    responseBody?.status,
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                val fragmentManager = activity?.supportFragmentManager
-                                val fragmentTransaction = fragmentManager?.beginTransaction()
-                                fragmentTransaction?.replace(R.id.fragment_container, LoginForgotPassword2())
-                                fragmentTransaction?.addToBackStack(null)
-                                fragmentTransaction?.commit()
-                            }
-                        }
-                        catch (e: Exception){
-                            Toast.makeText(
-                                activity,
-                                responseBody?.status,
-                                Toast.LENGTH_LONG
-                            ).show()
-                            val fragmentManager = activity?.supportFragmentManager
-                            val fragmentTransaction = fragmentManager?.beginTransaction()
-                            fragmentTransaction?.replace(R.id.fragment_container, LoginForgotPassword2())
-                            fragmentTransaction?.addToBackStack(null)
-                            fragmentTransaction?.commit()
-
-
-                        }                        }
+                    } else {
+                        Toast.makeText(
+                            activity,
+                            responseBody?.status,
+                            Toast.LENGTH_LONG
+                        ).show()
+                        v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
+                        v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
+                        signInBtn.isEnabled = true
+                        signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+                    }
                 }
 
                 override fun onFailure(call: Call<DataClass?>, t: Throwable) {

@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequests.DataVerifyOtpClass
-import com.example.swaad.ApiRequests.DataVerifySignInOtp
 import com.example.swaad.AuthPages.ForgotPassword1.Companion.email
 import com.example.swaad.R
 import com.example.swaad.AuthPages.ReferenceSignUp.Companion.nextPage
@@ -51,14 +50,17 @@ class ForgotPassword2 : Fragment() {
             }
 
         }.start()
-        
+
 
 
 
         val otp1 = v.findViewById<EditText>(R.id.otp1)
-        val otp2 = v.findViewById<EditText>(R.id.otp2)
-        val otp3 = v.findViewById<EditText>(R.id.otp3)
-        val otp4 = v.findViewById<EditText>(R.id.otp4)
+        val otp2 = v.findViewById<EditText>(R.id.Otp2)
+        val otp3 = v.findViewById<EditText>(R.id.Otp3)
+        val otp4 = v.findViewById<EditText>(R.id.Otp4)
+
+        Toast.makeText(activity, nextPage, Toast.LENGTH_LONG).show()
+
         otp1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -112,9 +114,11 @@ class ForgotPassword2 : Fragment() {
                     R.color.button_background2
                 )
             )
-//            Toast.makeText(activity,"Verifying OTP",Toast.LENGTH_LONG).show()
 
             val userEmail = email
+            val userOtp = v.findViewById<EditText>(R.id.otp1).text.toString()
+                .trim() + v.findViewById<EditText>(R.id.Otp2).text.toString().trim() + v.findViewById<EditText>(R.id.Otp3).text.toString()
+                .trim() + v.findViewById<EditText>(R.id.Otp4).text.toString().trim()
 
 //            v.findViewById<TextView>(R.id.textView2).text = userEmail
             if(v.findViewById<EditText>(R.id.otp1).text.toString().trim().isEmpty() || v.findViewById<EditText>(R.id.otp2).text.toString().trim().isEmpty() || v.findViewById<EditText>(R.id.otp3).text.toString().trim().isEmpty() || v.findViewById<EditText>(R.id.otp4).text.toString().trim().isEmpty()){
@@ -151,18 +155,18 @@ class ForgotPassword2 : Fragment() {
                                 fragmentTransaction?.addToBackStack(null)
                                 fragmentTransaction?.commit()
 
-                            }
-                        } catch (e: Exception) {
-                            progressBar.visibility = View.INVISIBLE
-                            Toast.makeText(
-                                activity,
-                                "OTP Not Verified!\n\nPlease try again",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            v.findViewById<EditText>(R.id.otp1).text.clear()
-                            v.findViewById<EditText>(R.id.otp2).text.clear()
-                            v.findViewById<EditText>(R.id.otp3).text.clear()
-                            v.findViewById<EditText>(R.id.otp4).text.clear()
+                                }
+                            } catch (e: Exception) {
+                                progressBar.visibility = View.INVISIBLE
+                                Toast.makeText(
+                                    activity,
+                                    "OTP Not Verified!\n\nPlease try again",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                v.findViewById<EditText>(R.id.otp1).text.clear()
+                                v.findViewById<EditText>(R.id.Otp2).text.clear()
+                                v.findViewById<EditText>(R.id.Otp3).text.clear()
+                                v.findViewById<EditText>(R.id.Otp4).text.clear()
 
                             verifyBtn.isEnabled = true
                             verifyBtn.setBackgroundColor(
@@ -174,17 +178,17 @@ class ForgotPassword2 : Fragment() {
                         }
                     }
 
-                    override fun onFailure(call: Call<DataVerifyOtpClass?>, t: Throwable) {
-                        progressBar.visibility = View.INVISIBLE
-                        Toast.makeText(
-                            activity, "OTP Not Verified!\n" +
-                                    "\n" +
-                                    "Please try again", Toast.LENGTH_LONG
-                        ).show()
-                        v.findViewById<EditText>(R.id.otp1).text.clear()
-                        v.findViewById<EditText>(R.id.otp2).text.clear()
-                        v.findViewById<EditText>(R.id.otp3).text.clear()
-                        v.findViewById<EditText>(R.id.otp4).text.clear()
+                        override fun onFailure(call: Call<DataVerifyOtpClass?>, t: Throwable) {
+                            progressBar.visibility = View.INVISIBLE
+                            Toast.makeText(
+                                activity, "OTP Not Verified!\n" +
+                                        "\n" +
+                                        "Please try again", Toast.LENGTH_LONG
+                            ).show()
+                            v.findViewById<EditText>(R.id.otp1).text.clear()
+                            v.findViewById<EditText>(R.id.Otp2).text.clear()
+                            v.findViewById<EditText>(R.id.Otp3).text.clear()
+                            v.findViewById<EditText>(R.id.Otp4).text.clear()
 
                         verifyBtn.isEnabled = true
                         verifyBtn.setBackgroundColor(

@@ -63,7 +63,7 @@ class ForgotPassword1 : Fragment() {
                 ) {
                     try {
                         val status = response.message().toString()
-//                        Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
                         if(status =="OK") {
                             nextPage = "forgotPassword"
                             progressBar.visibility=View.INVISIBLE

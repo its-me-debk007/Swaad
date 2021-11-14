@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequests.*
 import com.example.swaad.R
 import com.example.swaad.ProfilePages.TermsAndConditions
+import com.example.swaad.otp_sign_up
 import com.google.android.material.textfield.TextInputEditText
 
 class ReferenceSignUp : Fragment() {
@@ -25,6 +26,7 @@ class ReferenceSignUp : Fragment() {
     }
     companion object{
         lateinit var nextPage: String
+        lateinit var emailSignUp:String
     }
 
     override fun onCreateView(
@@ -76,7 +78,7 @@ class ReferenceSignUp : Fragment() {
             sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
 
             val name = v.findViewById<EditText>(R.id.editTextTextPersonName).text.toString().trim()
-            val email =
+           emailSignUp =
                 v.findViewById<EditText>(R.id.signUpEmail).text.toString().trim()
             val password =v.findViewById<TextInputEditText>(R.id.Sign_up_password).text.toString().trim()
             if(name.isEmpty())
@@ -87,7 +89,7 @@ class ReferenceSignUp : Fragment() {
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
-            if(!isValidEmail(email)){
+            if(!isValidEmail(emailSignUpl)){
                 progressBar.visibility=View.INVISIBLE
                 val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
                 v.findViewById<EditText>(R.id.signUpEmail).error="Please enter a valid email "
@@ -103,7 +105,7 @@ class ReferenceSignUp : Fragment() {
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
-    val jsonConverterSignUp=JsonConverterSignUP(email,password,name)
+    val jsonConverterSignUp=JsonConverterSignUP(emailSignUp,password,name)
             Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
             RetrofitClient.init().createUser(jsonConverterSignUp).enqueue(object : Callback<DataClassSignUp?>{
                     override fun onResponse(
@@ -113,12 +115,11 @@ class ReferenceSignUp : Fragment() {
                         progressBar.visibility=View.INVISIBLE
                         val status = response.body()?.status.toString()
 //                        Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
-                        if(status == "User registered successfully") {
-
-                            Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
+                        if(status == "User registered successfully and an OTP has been sent to your email.") {
+//                            Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
-                            fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
+                            fragmentTransaction?.replace(R.id.fragment_container, otp_sign_up())
                             fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
