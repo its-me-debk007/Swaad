@@ -26,10 +26,13 @@ import com.example.swaad.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class FragmentLogIn: Fragment() {
 
-
+    private fun isValidEmail(str: String): Boolean{
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches()
+    }
     companion object{
         lateinit var NAME: String
         lateinit var userEmail: String
@@ -133,26 +136,26 @@ class FragmentLogIn: Fragment() {
 
             val userPassword = v.findViewById<TextInputEditText>(R.id.loginPassword2).text.toString().trim()
 
-            if(userEmail.isEmpty())
-            {
+            if(!isValidEmail(userEmail)){
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<EditText>(R.id.loginEmail2).error="Email can not be Empty"
+//                val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
+                v.findViewById<EditText>(R.id.loginEmail2).error="Please enter a valid email "
                 signInBtn.isEnabled = true
                 signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
-
             }
             if(userPassword.isEmpty())
             {
 
                 progressBar.visibility=View.INVISIBLE
-                val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
+//                val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
                 v.findViewById<EditText>(R.id.loginPassword2).error="Please enter the password"
                 signInBtn.isEnabled = true
                 signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
 
             }
+
 //            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
 
             RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
@@ -160,34 +163,71 @@ class FragmentLogIn: Fragment() {
                     progressBar.visibility = View.INVISIBLE
                     val responseBody = response.body()
                     NAME = responseBody?.name.toString()
-                    if (responseBody?.token.toString() != "null") {
-                        loggedIn = true
-                        Toast.makeText(
-                            activity,
-                            "You've been logged in",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        lifecycleScope.launch {
-                            save("loggedIn", loggedIn)
-                            saveInfo("email", userEmail)
-                            saveInfo("name", NAME)
+
+                        if (response.code() == 200) {
+                            loggedIn = true
+                            Toast.makeText(
+                                activity,
+                                "You've been logged in",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            lifecycleScope.launch {
+                                save("loggedIn", loggedIn)
+                                saveInfo("email", userEmail)
+                                saveInfo("name", NAME)
+                            }
+
+                            val intent = Intent(activity, NavBarActivity::class.java)
+                            startActivity(intent)
+
                         }
 
-                        val intent = Intent(activity, NavBarActivity::class.java)
-                        startActivity(intent)
+                    else{
+                        try {
+                            val status = responseBody?.status.toString()
+                            if (status[0] != 'U') {
+                                Toast.makeText(
+                                    activity,
+                                    responseBody?.status,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
 
-                    } else {
-                        Toast.makeText(
-                            activity,
-                            responseBody?.status,
-                            Toast.LENGTH_LONG
-                        ).show()
-                        v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
-                        v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
+                                signInBtn.isEnabled = true
+                                signInBtn.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        requireContext(),
+                                        R.color.button_background
+                                    )
+                                )
+                            }
+                            else{
+                                Toast.makeText(
+                                    activity,
+                                    responseBody?.status,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                val fragmentManager = activity?.supportFragmentManager
+                                val fragmentTransaction = fragmentManager?.beginTransaction()
+                                fragmentTransaction?.replace(R.id.fragment_container, LoginForgotPassword2())
+                                fragmentTransaction?.addToBackStack(null)
+                                fragmentTransaction?.commit()
+                            }
+                        }
+                        catch (e: Exception){
+                            Toast.makeText(
+                                activity,
+                                responseBody?.status,
+                                Toast.LENGTH_LONG
+                            ).show()
+                            val fragmentManager = activity?.supportFragmentManager
+                            val fragmentTransaction = fragmentManager?.beginTransaction()
+                            fragmentTransaction?.replace(R.id.fragment_container, LoginForgotPassword2())
+                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.commit()
 
-                        signInBtn.isEnabled = true
-                        signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
-                    }
+
+                        }                        }
                 }
 
                 override fun onFailure(call: Call<DataClass?>, t: Throwable) {
@@ -197,7 +237,6 @@ class FragmentLogIn: Fragment() {
                     "Some error has been occurred!\n\nPlease try again",
                     Toast.LENGTH_LONG
                 ).show()
-                    v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
                     v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
 
                     signInBtn.isEnabled = true

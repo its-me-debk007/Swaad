@@ -26,17 +26,41 @@ class ForgotPassword3 : Fragment() {
         val v = inflater.inflate(R.layout.fragment_forgot_password_3, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar5)
         val resetButton : Button = v.findViewById(R.id.button3)
+
         resetButton.setOnClickListener{
             progressBar.visibility=View.VISIBLE
             resetButton.isEnabled = false
             resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
 
             val newPassword: TextInputEditText = v.findViewById(R.id.editTextTextPersonName7v2)
-            newPassword.text.toString().trim()
+            val newPasswordText = newPassword.text.toString().trim()
 
             val newConfirmPassword: TextInputEditText = v.findViewById(R.id.editTextTextPersonName8v2)
             val newConfirmPasswordText =  newConfirmPassword.text.toString().trim()
 
+            if(newPasswordText.isEmpty())
+            {
+                progressBar.visibility=View.INVISIBLE
+                newPassword.error="This section cannot be empty"
+                resetButton.isEnabled = true
+                resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+                return@setOnClickListener
+            }
+            if(newConfirmPasswordText.isEmpty())
+            {
+                progressBar.visibility=View.INVISIBLE
+                newConfirmPassword.error="This section cannot be empty"
+                resetButton.isEnabled = true
+                resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+                return@setOnClickListener
+            }
+            if(newPasswordText != newConfirmPasswordText){
+                progressBar.visibility=View.INVISIBLE
+                newConfirmPassword.error="The passwords do not match"
+                resetButton.isEnabled = true
+                resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+                return@setOnClickListener
+            }
 
             val tokenString = "Token " + tokenValue
 

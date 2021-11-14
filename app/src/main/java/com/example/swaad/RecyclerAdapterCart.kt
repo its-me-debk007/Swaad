@@ -6,10 +6,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.swaad.AuthPages.FragmentLogIn
+import com.example.swaad.NavBarPages.MyCart
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishNameList
 
 class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>()  {
-    val dishesNameList = arrayOf("Jalebi", "Imarti", "Rasmalai")
-    val dishesCostList = arrayOf("Rs332", "Rs535", "Rs211")
+
+    companion object{
+        var itemRemoved: Boolean = false
+        var pos: Int = 0
+    }
+    val dishesNameList = dishNameList
+    val dishesCostList = dishCostList
     val pluses = intArrayOf(R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus)
     val minuses = intArrayOf(R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus)
 
@@ -38,9 +47,23 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
         holder.minus.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 var amount = holder.itemCount.text.toString().toInt()
-                if(amount != 1)
+                if (amount != 1){
                     amount--
                 holder.itemCount.text = amount.toString()
+            }
+                else{
+                    dishNameList.remove(holder.itemName.text)
+                    dishCostList.remove(holder.dishPrice.text)
+                    itemRemoved = true
+
+
+//                    val fragmentManager = activity?.supportFragmentManager
+//                    val fragmentTransaction = fragmentManager?.beginTransaction()
+//                    fragmentTransaction?.replace(R.id.fragment_container, MyCart())
+//                    fragmentTransaction?.addToBackStack(null)
+//                    fragmentTransaction?.commit()
+                }
+
             }
         })
     }
@@ -62,6 +85,7 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
             itemCount = itemView.findViewById(R.id.itemCount)
             plus = itemView.findViewById(R.id.plus)
             minus = itemView.findViewById(R.id.minus)
+
         }
     }
 }

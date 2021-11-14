@@ -19,6 +19,10 @@ import com.example.swaad.ProfilePages.TermsAndConditions
 import com.google.android.material.textfield.TextInputEditText
 
 class ReferenceSignUp : Fragment() {
+
+    private fun isValidEmail(str: String): Boolean{
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches()
+    }
     companion object{
         lateinit var nextPage: String
     }
@@ -83,19 +87,18 @@ class ReferenceSignUp : Fragment() {
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
-            else if(email.isEmpty())
-            {
+            if(!isValidEmail(email)){
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<EditText>(R.id.signUpEmail).error="Email can not be empty"
+                val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
+                v.findViewById<EditText>(R.id.signUpEmail).error="Please enter a valid email "
                 sign_up.isEnabled = true
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
-            else if(password.isEmpty())
+            else if(password.length < 5)
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextInputEditText>(R.id.Sign_up_password).error="Password can not be empty"
-//                v.findViewById<TextInputEditText>(R.id.editTextTextPersonName3v2).error="Password can not be empty"
+                v.findViewById<TextInputEditText>(R.id.Sign_up_password).error="Minimum length of password should be 5 characters"
                 sign_up.isEnabled = true
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
@@ -113,7 +116,7 @@ class ReferenceSignUp : Fragment() {
                         if(status == "User registered successfully") {
 
                             Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
-                                val fragmentManager = activity?.supportFragmentManager
+                            val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
                             fragmentTransaction?.addToBackStack(null)
@@ -121,9 +124,7 @@ class ReferenceSignUp : Fragment() {
                         }
                         else{
                             Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
-                            v.findViewById<EditText>(R.id.editTextTextPersonName).text.clear()
                             v.findViewById<TextInputEditText>(R.id.Sign_up_password).text?.clear()
-                            v.findViewById<EditText>(R.id.signUpEmail).text.clear()
 
                             sign_up.isEnabled = true
                             sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
@@ -136,6 +137,7 @@ class ReferenceSignUp : Fragment() {
                             activity, t.message,
                             Toast.LENGTH_LONG
                         ).show()
+                        v.findViewById<TextInputEditText>(R.id.Sign_up_password).text?.clear()
                         sign_up.isEnabled = true
                         sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                     }
