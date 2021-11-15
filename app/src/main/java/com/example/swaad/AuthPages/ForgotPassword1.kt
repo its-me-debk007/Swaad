@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.R
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.otp_sign_up
+import com.example.swaad.otp_sign_up2
 import com.google.android.material.textfield.TextInputEditText
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -23,10 +25,13 @@ import retrofit2.Response
 
 class ForgotPassword1 : Fragment() {
 
+    private fun isValidEmail(str: String): Boolean{
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches()
+    }
+
     companion object{
         lateinit var email:String
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,13 +46,15 @@ class ForgotPassword1 : Fragment() {
             progressBar.visibility=View.VISIBLE
             next_button.isEnabled = false
             next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
+
             email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
-            if(email.isEmpty())
+
+            if(!isValidEmail(email))
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextView>(R.id.forgotPasswordEmail).error="Please Enter email!"
-                next_button.isEnabled = false
-                next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
+                v.findViewById<TextView>(R.id.forgotPasswordEmail2).error="Please enter a valid email"
+                next_button.isEnabled = true
+                next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
 //            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
@@ -59,29 +66,35 @@ class ForgotPassword1 : Fragment() {
                     call: Call<ResponseBody?>,
                     response: Response<ResponseBody?>
                 ) {
-                    try {
-                        if(response.isSuccessful) {
+//                        val status = response.message().toString()
+//                        Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
+                        if(response.code() == 200) {
                             nextPage = "forgotPassword"
                             progressBar.visibility=View.INVISIBLE
+                            Toast.makeText(activity,"OTP has been sent to your email", Toast.LENGTH_LONG).show()
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
-//                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
-                        else if(response.code()==400)
+                        else if(response.code() == 406){
+                            progressBar.visibility=View.INVISIBLE
+                            Toast.makeText(activity,"Please verify your account first before changing your password",Toast.LENGTH_LONG).show()
+//                            val fragmentManager = activity?.supportFragmentManager
+//                            val fragmentTransaction = fragmentManager?.beginTransaction()
+//                            fragmentTransaction?.replace(R.id.fragment_container, otp_sign_up2())
+//                            fragmentTransaction?.addToBackStack(null)
+//                            fragmentTransaction?.commit()
+                        }
+                        else
                         {
                             progressBar.visibility=View.INVISIBLE
-                            Toast.makeText(activity,"No Such Account Exists",Toast.LENGTH_LONG).show()
-                            next_button.setEnabled(true);
+                            Toast.makeText(activity,"Email is not registered",Toast.LENGTH_LONG).show()
+                            next_button.isEnabled = true
                             next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                         }
-                    }
-                    catch (e:Exception)
-                    {
-                        val e = e.toString()
-                        Toast.makeText(activity,e, Toast.LENGTH_LONG).show()
-                    }
+
                 }
 
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {

@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
-
 import GridSpacingItemDecoration
 import android.app.ActionBar
 import android.app.Activity
@@ -34,10 +33,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 
 
-
-
-class home_page : Fragment() {
-
+class Home_page : Fragment() {
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var responseBody:List<DataClassRestaurantsItem>
     lateinit var recyclerView:RecyclerView
@@ -136,6 +132,42 @@ class home_page : Fragment() {
                 Toast.makeText(activity,"Please Reopen Your App",Toast.LENGTH_LONG).show()
             }
         })
+//        layoutManager = GridLayoutManager(container?.context, 2)
+//        val recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
+//        var spanCount=2
+//        var spacing = 30
+//        var includeEdge=false
+//        recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+//        recyclerView.layoutManager = layoutManager
+//        adapter = RecyclerAdapter()
+
+
+//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+//        //fun that will allow to get last location
+//        fun getLastLocation()
+//        {
+//            //checking permission
+//            if(CheckPermission()){
+//                //now we check if the location is enabled
+//                if(isLocationEnabled())
+//                {
+//                    fusedLocationProviderClient.LastLocation.addOnCompleteListener { task ->
+//                        var location: Location? = task.result
+//                        if (location == null) {
+//
+//                        } else
+//                        {
+//                            val location_text=v.findViewById<TextView>(R.id.LocationText)
+//                            location_text.text=""
+//                        }
+//
+//                    }
+//                }
+//                else
+//                {
+//                    Toast.makeText(this,"Please enable your Location",Toast.LENGTH_SHORT).show()     }
+//            }
+//        }
 
         return v
     }

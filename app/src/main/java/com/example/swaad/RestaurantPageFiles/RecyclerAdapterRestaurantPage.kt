@@ -15,9 +15,10 @@ import com.example.swaad.R
 
 class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<RestaurantDishesItem>):Adapter<RecyclerAdapterRestaurantPage.ViewHolder>(){
     companion object{
-        var totalDishes = 2
-        var dishNameList = mutableListOf<String>("Chole Bhature", "Samosa")
-        var dishCostList = mutableListOf<String>("₹72", "₹106")
+        var dishNameList = mutableListOf<String>()
+        var dishCostList = mutableListOf<String>()
+        var basePriceList = mutableListOf<Int>()
+        var dishCount = mutableListOf<Int>()
     }
 
 //    private var arraydishImage = intArrayOf(R.drawable.home_page_burger,R.drawable.home_page_burger,R.drawable.home_page_burger)
@@ -29,18 +30,15 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-                var Url=dishData[position].photo
-                holder.dishImage.load(Url)
+        var Url=dishData[position].photo
+        holder.dishImage.load(Url)
 
-             holder.dishCost.text=dishData[position].price.toString()
+        holder.dishCost.text=dishData[position].price.toString()
         holder.dishName.text=dishData[position].title
-        holder.addToCart.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                totalDishes++
-                dishNameList.add(holder.dishName.text as String)
-                dishCostList.add(holder.dishCost.text as String)
-            }
-        })
+        holder.addToCart.setOnClickListener {
+            dishNameList.add(holder.dishName.text as String)
+            dishCostList.add(holder.dishCost.text as String)
+        }
 
 
     }

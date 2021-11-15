@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.R
 import com.example.swaad.RecyclerAdapterCart
+import com.example.swaad.RecyclerAdapterCart.Companion.itemRemoved
+import com.example.swaad.RecyclerAdapterCart.Companion.pos
 import com.example.swaad.SearchPage2Files.RecyclerAdapterSearchPage
 
 class MyCart: Fragment() {
@@ -30,6 +32,10 @@ class MyCart: Fragment() {
         adapter = RecyclerAdapterCart()
         recyclerViewCart.adapter = adapter
 
+        if(itemRemoved){
+            RecyclerAdapterCart().notifyItemRemoved(pos)
+            itemRemoved = false
+        }
 //        val itemCount: TextView = v.findViewById(R.id.itemCount)
 //
 //        v.findViewById<ImageView>(R.id.minus).setOnClickListener{
