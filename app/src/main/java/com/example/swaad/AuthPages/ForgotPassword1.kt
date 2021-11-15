@@ -15,6 +15,7 @@ import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.R
 import com.example.swaad.ApiRequests.RetrofitClient
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,14 +41,14 @@ class ForgotPassword1 : Fragment() {
         next_button.setOnClickListener {
             progressBar.visibility=View.VISIBLE
             next_button.isEnabled = false
-            next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
+//            next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
             email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
             if(email.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextView>(R.id.forgotPasswordEmail).error="Please Enter email!"
-                next_button.isEnabled = false
-                next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
+                v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).error="Please Enter email!"
+                next_button.isEnabled = true
+//                next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
                 return@setOnClickListener
             }
 //            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
@@ -66,7 +67,7 @@ class ForgotPassword1 : Fragment() {
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
-//                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
                         else if(response.code()==400)

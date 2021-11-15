@@ -30,7 +30,7 @@ class splash_screen : Fragment() {
                 val fragmentManager = activity?.supportFragmentManager
                 val fragmentTransaction = fragmentManager?.beginTransaction()
                 fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-                fragmentTransaction?.addToBackStack(null)
+//                fragmentTransaction?.addToBackStack(null)
                 fragmentTransaction?.commit()
             },3000)
         return v

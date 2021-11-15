@@ -71,7 +71,7 @@ class FragmentLogIn: Fragment() {
                 val fragmentManager = activity?.supportFragmentManager
                 val fragmentTransaction = fragmentManager?.beginTransaction()
                 fragmentTransaction?.replace(R.id.fragment_container, home_page())
-                fragmentTransaction?.addToBackStack(null)
+                fragmentTransaction?.addToBackStack("fragmentLogin")
                 fragmentTransaction?.commit()
                 val intent = Intent(activity, NavBarActivity::class.java)
                 startActivity(intent)
