@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequests.DataVerifyOtpClass
+import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.ApiRequests.JsonConverterVerifyOtp
 import com.example.swaad.AuthPages.ForgotPassword1.Companion.email
 import com.example.swaad.R
@@ -183,6 +184,30 @@ class ForgotPassword2 : Fragment() {
                     })
 
             }
+        val resend_now=v.findViewById<TextView>(R.id.resendOtp)
+        resend_now.setOnClickListener {
+            progressBar.visibility=View.VISIBLE
+            val jsonConverterOtp= JsonConverter(FragmentLogIn.userEmail)
+            RetrofitClient.init().resendOtpSignUp(jsonConverterOtp).enqueue(object : Callback<ResponseBody?> {
+                override fun onResponse(
+                    call: Call<ResponseBody?>,
+                    response: Response<ResponseBody?>
+                ) {
+                    if(response.isSuccessful) {
+                        progressBar.visibility=View.INVISIBLE
+                        Toast.makeText(
+                            activity,
+                            "Otp has been resent successfully",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+                override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                    progressBar.visibility=View.INVISIBLE
+                    Toast.makeText(activity,"Crashed Api", Toast.LENGTH_LONG).show()
+                }
+            })
+        }
 
         return v
     }
