@@ -15,7 +15,7 @@ interface Api {
     ):Call<DataClass>
 
     @POST("/api/user/register/")
-    fun createUser(@Body jsonconvertersignup:JsonConverterSignUP):Call<DataClassSignUp>
+    fun createUser(@Body jsonconvertersignup:JsonConverterSignUP):Call<ResponseBody>
 
 
     @POST("/api/user/password/reset/")
@@ -42,19 +42,15 @@ interface Api {
         @Body jsonConverterSignUpOtp: JsonConverterSignUpOtp
     ):Call<ResponseBody>
 
-    @FormUrlEncoded
+
     @POST("/api/user/password/reset/verify/")
     fun verifyOtp(
-        @Field("email")email: String,
-        @Field("otp")otp: String
-    ):Call<DataVerifyOtpClass>
+        @Body jsonConverterVerifyOtp: JsonConverterVerifyOtp
+    ):Call<ResponseBody>
 
-
-    @FormUrlEncoded
     @POST("/api/user/profile/")
     fun setNewPassword(
-        @Body jsonConverterConfirmPassword: JsonConverterConfirmPassword
-    ):Call<ResponseBody>
+        @Body jsonConverterConfirmPassword: JsonConverterConfirmPassword):Call<ResponseBody>
     @GET("/api/seller/customer/restaurants/")
     fun getRestaurantDetails():Call<List<DataClassRestaurantsItem>>
 

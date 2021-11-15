@@ -141,7 +141,6 @@ class FragmentLogIn: Fragment() {
             }
             if(userPassword.isEmpty())
             {
-
                 progressBar.visibility=View.INVISIBLE
                 val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
                 v.findViewById<EditText>(R.id.loginPassword2).error="Please enter the password"

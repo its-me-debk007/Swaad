@@ -60,9 +60,7 @@ class ForgotPassword1 : Fragment() {
                     response: Response<ResponseBody?>
                 ) {
                     try {
-                        val status = response.toString()
-                        Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
-                        if(status =="OK") {
+                        if(response.isSuccessful) {
                             nextPage = "forgotPassword"
                             progressBar.visibility=View.INVISIBLE
                             val fragmentManager = activity?.supportFragmentManager
@@ -71,10 +69,10 @@ class ForgotPassword1 : Fragment() {
 //                            fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
-                        else
+                        else if(response.code()==400)
                         {
                             progressBar.visibility=View.INVISIBLE
-                            Toast.makeText(activity,status,Toast.LENGTH_LONG).show()
+                            Toast.makeText(activity,"No Such Account Exists",Toast.LENGTH_LONG).show()
                             next_button.setEnabled(true);
                             next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                         }
