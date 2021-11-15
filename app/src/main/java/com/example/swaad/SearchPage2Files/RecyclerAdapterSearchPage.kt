@@ -14,7 +14,7 @@ import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Compa
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishNameList
 
-class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>()  {
+class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
 
 
     companion object{
@@ -52,19 +52,19 @@ class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.
 
         holder.addBtn.setOnClickListener {
             var flag = 0
-            for(i in 0 until dishNameList.size){
-                if(holder.dishName.text.toString() == dishNameList[i]) {
+            for (i in 0 until dishNameList.size) {
+                if (holder.dishName.text.toString() == dishNameList[i]) {
                     flag = 1
                     break
                 }
             }
-            if(flag == 0){
+            if (flag == 0) {
                 dishNameList.add(holder.dishName.text.toString())
                 dishCostList.add(holder.priceValue.text.toString())
-                dishCount.add(position,1)
-        }
-            else
+                dishCount.add(position, 1)
+            } else
                 dishCount[position]++
+        }
     }
 
     override fun getItemCount(): Int {
