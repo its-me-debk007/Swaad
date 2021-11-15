@@ -19,21 +19,21 @@ class NavBarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nav_bar)
-        val drawerLayout=findViewById<DrawerLayout>(R.id.drawerLayout)
-        val navView=findViewById<NavigationView>(R.id.navView)
-        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
-        drawerLayout.addDrawerListener(toggle)
+//        val drawerLayout=findViewById<DrawerLayout>(R.id.drawerLayout)
+//        val navView=findViewById<NavigationView>(R.id.navView)
+//        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+//        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         val actionBar=supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, SearchPage2())
+        fragmentTransaction.replace(R.id.fragment_container, Home_page())
         fragmentTransaction.commit()
 
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.demoHome -> replaceFragment(SearchPage2())
+                R.id.demoHome -> replaceFragment(Home_page())
                 R.id.cart -> replaceFragment(MyCart())
                 R.id.myProfile -> replaceFragment(MyProfile())
             }
