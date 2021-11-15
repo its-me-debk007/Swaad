@@ -40,7 +40,7 @@ class FragmentLogIn: Fragment() {
         var loggedIn:Boolean=false
         lateinit var loginOtpEmail: String
         private var binding : ActivityMainBinding?=null
-        private lateinit var dataStore: DataStore<Preferences>
+        private  lateinit var dataStore: DataStore<Preferences>
         suspend fun save(key:String,value:Boolean)
         {
             val dataStoreKey= preferencesKey<Boolean>(key)
@@ -54,7 +54,8 @@ class FragmentLogIn: Fragment() {
             val dataStoreKey= preferencesKey<String>(key)
             val preferences = dataStore.data.first()
             return preferences[dataStoreKey]
-        }suspend fun saveInfo(key:String,value:String)
+        }
+        suspend fun saveInfo(key:String,value:String)
         {
             val dataStoreKey= preferencesKey<String>(key)
             dataStore.edit {Settings->
@@ -172,12 +173,12 @@ class FragmentLogIn: Fragment() {
 //                    ).show()
 
                         if (response.code() == 200) {
-//                            NAME = responseBody.name.toString()
+                            NAME = response.body()?.name.toString()
                             loggedIn = true
                             Toast.makeText(
                                 activity,
                                 "You've been logged in",
-                                Toast.LENGTH_LONG
+                                Toast.LENGTH_LONG   
                             ).show()
                             lifecycleScope.launch {
                                 save("loggedIn", loggedIn)

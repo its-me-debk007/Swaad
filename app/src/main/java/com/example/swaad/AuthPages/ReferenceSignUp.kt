@@ -13,11 +13,13 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.swaad.ApiRequests.*
 import com.example.swaad.R
 import com.example.swaad.ProfilePages.TermsAndConditions
 import com.example.swaad.otp_sign_up
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 
 class ReferenceSignUp : Fragment() {
@@ -34,7 +36,6 @@ class ReferenceSignUp : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val v = inflater.inflate(R.layout.fragment_reference_sign_up, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
         val termsConditions: TextView = v.findViewById(R.id.textView5)
@@ -42,7 +43,7 @@ class ReferenceSignUp : Fragment() {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragment_container, TermsAndConditions())
-            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.addToBackStack("tag")
             fragmentTransaction?.commit()
         }
 //        val unsee=v.findViewById<ImageView>(R.id.unsee_password)
@@ -69,7 +70,7 @@ class ReferenceSignUp : Fragment() {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-//            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.addToBackStack("tag")
             fragmentTransaction?.commit()
         }
         val sign_up = v.findViewById<Button>(R.id.sign_up_button)
@@ -85,7 +86,7 @@ class ReferenceSignUp : Fragment() {
             if(name.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<EditText>(R.id.editTextTextPersonName).error="Username can not be empty"
+                v.findViewById<EditText>(R.id.editTextTextPersonName).setError("Username can not be empty")
                 sign_up.isEnabled = true
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
@@ -93,7 +94,7 @@ class ReferenceSignUp : Fragment() {
             if(!isValidEmail(emailSignUp)){
                 progressBar.visibility=View.INVISIBLE
                 val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
-                v.findViewById<EditText>(R.id.signUpEmail).error="Please enter a valid email"
+                v.findViewById<EditText>(R.id.signUpEmail).setError("Please enter a valid email")
                 sign_up.isEnabled = true
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
@@ -106,6 +107,9 @@ class ReferenceSignUp : Fragment() {
 //                sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
 //                return@setOnClickListener
 //            }
+            lifecycleScope.launch {
+
+            }
             var flagLower = false
             var flagUpper = false
             var flagNumber = false
@@ -119,7 +123,7 @@ class ReferenceSignUp : Fragment() {
             }
             if(!(flagLower && flagUpper && flagNumber) || password.length < 5){
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextInputEditText>(R.id.Sign_up_password).error="Minimum length of password should be 5 characters\n\nThere should be atleast one uppercase, lowercase and a numeric digit"
+                v.findViewById<TextInputEditText>(R.id.Sign_up_password).setError("Minimum length of password should be 5 characters\n\nThere should be atleast one uppercase, lowercase and a numeric digit")
                 sign_up.isEnabled = true
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
@@ -139,7 +143,7 @@ class ReferenceSignUp : Fragment() {
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, otp_sign_up())
-//                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.addToBackStack("tag")
                             fragmentTransaction?.commit()
                         }
                         else if(response.code()==406){

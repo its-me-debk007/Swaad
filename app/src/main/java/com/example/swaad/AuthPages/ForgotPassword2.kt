@@ -169,7 +169,7 @@ class ForgotPassword2 : Fragment() {
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword3())
-                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.addToBackStack("tag")
                             fragmentTransaction?.commit()
 
                         } else if(response.code() == 408){

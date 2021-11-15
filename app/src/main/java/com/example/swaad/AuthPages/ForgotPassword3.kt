@@ -43,7 +43,7 @@ class ForgotPassword3 : Fragment() {
             if(newPasswordText.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
-                newPassword.error="This section cannot be empty"
+                newPassword.setError("This section cannot be empty")
                 resetButton.isEnabled = true
                 resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
@@ -61,9 +61,9 @@ class ForgotPassword3 : Fragment() {
             }
             if(!(flagLower && flagUpper && flagNumber) || newPasswordText.length < 5){
                 progressBar.visibility=View.INVISIBLE
-                newPassword.error="Minimum length of password should be 5 characters\n" +
+                newPassword.setError("Minimum length of password should be 5 characters\n" +
                         "\n" +
-                        "There should be atleast one uppercase, lowercase and a numeric digit"
+                        "There should be atleast one uppercase, lowercase and a numeric digit")
                 resetButton.isEnabled = true
                 resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
@@ -71,14 +71,14 @@ class ForgotPassword3 : Fragment() {
             if(newConfirmPasswordText.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
-                newConfirmPassword.error="This section cannot be empty"
+                newConfirmPassword.setError("This section cannot be empty")
                 resetButton.isEnabled = true
                 resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
             if(newPasswordText != newConfirmPasswordText){
                 progressBar.visibility=View.INVISIBLE
-                newConfirmPassword.error="The passwords do not match"
+                newConfirmPassword.setError("The passwords do not match")
                 resetButton.isEnabled = true
                 resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
@@ -102,7 +102,7 @@ class ForgotPassword3 : Fragment() {
                         val fragmentManager = activity?.supportFragmentManager
                         val fragmentTransaction = fragmentManager?.beginTransaction()
                         fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-                        fragmentTransaction?.addToBackStack(null)
+                        fragmentTransaction?.addToBackStack("tag")
                         fragmentTransaction?.commit()
                     } else if(response.code() == 400){
                         progressBar.visibility = View.INVISIBLE
