@@ -6,13 +6,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.swaad.SearchPage2Files.SearchPage2
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.swaad.R
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishNameList
 
-class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>()  {
+class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
+
+
     companion object{
         lateinit var currentItemId: String
     }
@@ -38,7 +42,7 @@ class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerAdapterSearchPage.ViewHolder, position: Int) {
         holder.restaurantName.text = restaurants[position]
         holder.dishName.text = dishes[position]
         holder.categoryName.text = categories[position]
@@ -48,19 +52,19 @@ class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.
 
         holder.addBtn.setOnClickListener {
             var flag = 0
-            for(i in 0 until dishNameList.size){
-                if(holder.dishName.text.toString() == dishNameList[i]) {
+            for (i in 0 until dishNameList.size) {
+                if (holder.dishName.text.toString() == dishNameList[i]) {
                     flag = 1
                     break
                 }
             }
-            if(flag == 0){
+            if (flag == 0) {
                 dishNameList.add(holder.dishName.text.toString())
                 dishCostList.add(holder.priceValue.text.toString())
-                dishCount.add(position,1)
-        }
-            else
+                dishCount.add(position, 1)
+            } else
                 dishCount[position]++
+        }
     }
 
     override fun getItemCount(): Int {
