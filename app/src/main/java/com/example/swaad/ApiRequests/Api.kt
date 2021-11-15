@@ -54,4 +54,5 @@ interface Api {
   @POST("api/user/signup/sendotp/")
   fun resendOtpSignUp(@Body jsonConverterResendOtp:JsonConverter):Call<ResponseBody >
 
+
 }

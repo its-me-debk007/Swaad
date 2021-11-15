@@ -4,16 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.swaad.R
+
 import com.example.swaad.RecyclerAdapterCart
 import com.example.swaad.RecyclerAdapterCart.Companion.itemRemoved
 import com.example.swaad.RecyclerAdapterCart.Companion.pos
 import com.example.swaad.SearchPage2Files.RecyclerAdapterSearchPage
+import org.json.JSONObject
+
+import android.R
+
+import com.razorpay.Checkout
+
+import android.app.Activity
+import android.widget.Toast
+import com.example.swaad.NavBarActivity
+import java.lang.Exception
+
 
 class MyCart: Fragment() {
     private var layoutManager: RecyclerView.LayoutManager?=null
@@ -24,10 +36,13 @@ class MyCart: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val v = inflater.inflate(R.layout.my_cart, container, false)
-
+        val v = inflater.inflate(com.example.swaad.R.layout.my_cart, container, false)
+    val pay_button=v.findViewById<Button>(com.example.swaad.R.id.payButton)
+        pay_button.setOnClickListener(View.OnClickListener {
+            PaymentNow("100")
+        })
         layoutManager = LinearLayoutManager(container?.context)
-        val recyclerViewCart = v.findViewById<RecyclerView>(R.id.recyclerViewCart)
+        val recyclerViewCart = v.findViewById<RecyclerView>(com.example.swaad.R.id.recyclerViewCart)
         recyclerViewCart.layoutManager = layoutManager
         adapter = RecyclerAdapterCart()
         recyclerViewCart.adapter = adapter
@@ -52,5 +67,28 @@ class MyCart: Fragment() {
 //        }
 
         return v
+    }
+
+    private fun PaymentNow(amount: String) {
+        val activity: Activity = NavBarActivity()
+        val checkout = Checkout()
+        checkout.setKeyID("rzp_test_1gvZaZejIcdjGI")
+        checkout.setImage(com.example.swaad.R.drawable.ic_launcher_background)
+        val finalAmount = (amount.toFloat() * 100).toDouble()
+        try {
+            val options = JSONObject()
+            options.put("name", "TRAIDEV")
+            options.put("description", "Reference No. #123456")
+            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
+            // options.put("order_id", "order_DBJOWzybf0sJbb");//from response of step 3.
+            options.put("theme.color", "#3399cc")
+            options.put("currency", "INR")
+            options.put("amount", finalAmount.toString() + "") //300 X 100
+            options.put("prefill.email", "kunalmehrotra2001@gmail.com")
+            options.put("prefill.contact", "")
+            checkout.open(activity, options)
+        } catch (e: Exception) {
+            Toast.makeText(activity,"Error",Toast.LENGTH_LONG).show()
+        }
     }
 }

@@ -95,7 +95,6 @@ class MainActivity : AppCompatActivity() {
 //        var tag:String? =backEntry.getName();
         val fragment = supportFragmentManager.findFragmentByTag("fragmentLogin")
 ////        if(tag!=fragment)
-
         val fragmentsInStack = supportFragmentManager.backStackEntryCount
         if (fragmentsInStack > 1  ) { // If we have more than one fragment, pop back stack
             val fragmentManager = supportFragmentManager
