@@ -8,14 +8,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.R
-import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishNameList
 
-class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
+class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>()  {
+    companion object{
+        lateinit var currentItemId: String
+    }
 
     val restaurants = arrayOf("By Roma cafe n Dinner1","By Roma cafe n Dinner2","By Roma cafe n Dinner3", "By Roma cafe n Dinner4", "By Roma cafe n Dinner5")
-    val dishes = arrayOf("Tandori chicken", "Tandori chicken", "Tandori chicken", "Tandori chicken", "Tandori chicken")
+    val dishes = arrayOf("Tandori chicken1", "Tandori chicken2", "Tandori chicken3", "Tandori chicken4", "Tandori chicken5")
     val categories = arrayOf("In Main Course", "In Main Course", "In Main Course", "In Main Course", "In Main Course")
-    val prices = arrayOf("₹300.00", "₹300.00", "₹300.00", "₹300.00", "₹300.00")
+    val prices = arrayOf("₹301.00", "₹302.00", "₹303.00", "₹304.00", "₹305.00")
     val bestsellers = arrayOf("Bestseller", "Bestseller", "Bestseller", "Bestseller", "Bestseller")
     val dishPics = intArrayOf(
         R.drawable.ic_cart,
@@ -28,12 +33,12 @@ class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ViewHolder {
+    ): RecyclerAdapterSearchPage.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.search_page2_card_view, parent, false)
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.restaurantName.text = restaurants[position]
         holder.dishName.text = dishes[position]
         holder.categoryName.text = categories[position]
@@ -42,9 +47,20 @@ class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.
         holder.dishPic.setImageResource(dishPics[position])
 
         holder.addBtn.setOnClickListener {
-            
+            var flag = 0
+            for(i in 0 until dishNameList.size){
+                if(holder.dishName.text.toString() == dishNameList[i]) {
+                    flag = 1
+                    break
+                }
+            }
+            if(flag == 0){
+                dishNameList.add(holder.dishName.text.toString())
+                dishCostList.add(holder.priceValue.text.toString())
+                dishCount.add(position,1)
         }
-
+            else
+                dishCount[position]++
     }
 
     override fun getItemCount(): Int {

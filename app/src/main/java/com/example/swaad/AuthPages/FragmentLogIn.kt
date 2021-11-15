@@ -189,7 +189,7 @@ class FragmentLogIn: Fragment() {
                             startActivity(intent)
 
                         }
-                        else if (response.code() == 403) {
+                        else if (response.code() == 401) {
                                     Toast.makeText(
                                         activity,
                                         "User not registered",
@@ -205,8 +205,13 @@ class FragmentLogIn: Fragment() {
                                         )
                                     )
                                 }
-                        else if (response.code() == 401) {
+                        else if (response.code() == 403) {
                             loginOtpEmail = userEmail
+                            Toast.makeText(
+                                activity,
+                                "User not validated, please verify your email first",
+                                Toast.LENGTH_LONG
+                            ).show()
                                     val fragmentManager = activity?.supportFragmentManager
                                     val fragmentTransaction = fragmentManager?.beginTransaction()
                                     fragmentTransaction?.replace(

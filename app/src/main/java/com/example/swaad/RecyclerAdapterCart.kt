@@ -10,6 +10,7 @@ import com.example.swaad.AuthPages.FragmentLogIn
 import com.example.swaad.NavBarPages.MyCart
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishNameList
 
 class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>()  {
@@ -36,7 +37,7 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
         holder.dishPrice.text = dishCostList[position]
         holder.plus.setImageResource(pluses[position])
         holder.minus.setImageResource(minuses[position])
-        holder.itemCount.text = "1"
+        holder.itemCount.text = dishCount[position].toString()
 
         holder.plus.setOnClickListener {
             var amount = holder.itemCount.text.toString().toInt()

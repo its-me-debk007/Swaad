@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.R
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.otp_sign_up
 import com.example.swaad.otp_sign_up2
 import com.google.android.material.textfield.TextInputEditText
 import okhttp3.ResponseBody
@@ -80,17 +81,17 @@ class ForgotPassword1 : Fragment() {
                         else if(response.code() == 406){
                             progressBar.visibility=View.INVISIBLE
                             Toast.makeText(activity,"Please verify your account first before changing your password",Toast.LENGTH_LONG).show()
-                            val fragmentManager = activity?.supportFragmentManager
-                            val fragmentTransaction = fragmentManager?.beginTransaction()
-                            fragmentTransaction?.replace(R.id.fragment_container, otp_sign_up2())
-                            fragmentTransaction?.addToBackStack(null)
-                            fragmentTransaction?.commit()
+//                            val fragmentManager = activity?.supportFragmentManager
+//                            val fragmentTransaction = fragmentManager?.beginTransaction()
+//                            fragmentTransaction?.replace(R.id.fragment_container, otp_sign_up2())
+//                            fragmentTransaction?.addToBackStack(null)
+//                            fragmentTransaction?.commit()
                         }
                         else
                         {
                             progressBar.visibility=View.INVISIBLE
                             Toast.makeText(activity,"Email is not registered",Toast.LENGTH_LONG).show()
-                            next_button.isEnabled = true;
+                            next_button.isEnabled = true
                             next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                         }
 

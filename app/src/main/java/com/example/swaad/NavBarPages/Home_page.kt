@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
-
 import GridSpacingItemDecoration
 import android.app.ActionBar
 import android.app.Activity
@@ -31,8 +30,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import androidx.appcompat.app.AppCompatActivity
-
-
 
 
 
