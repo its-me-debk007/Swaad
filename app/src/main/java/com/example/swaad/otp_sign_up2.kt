@@ -13,6 +13,8 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequests.*
 import com.example.swaad.AuthPages.FragmentLogIn
+import com.example.swaad.AuthPages.FragmentLogIn.Companion.loginOtpEmail
+import com.example.swaad.AuthPages.FragmentLogIn.Companion.userEmail
 import com.example.swaad.AuthPages.ReferenceSignUp
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -20,7 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class otp_sign_up : Fragment() {
+class otp_sign_up2 : Fragment() {
 
     lateinit var timerCountDownTimer: CountDownTimer
     var timerOnStatus: Boolean = true
@@ -114,7 +116,7 @@ class otp_sign_up : Fragment() {
             val userOtp = v.findViewById<EditText>(R.id.OtpSignUp1).text.toString()
                 .trim() + v.findViewById<EditText>(R.id.OtpSignUp2).text.toString().trim() + v.findViewById<EditText>(R.id.OtpSignUp3).text.toString()
                 .trim() + v.findViewById<EditText>(R.id.OtpSignUp4).text.toString().trim()
-            val JsonConverterSignUpOtp = JsonConverterSignUpOtp(ReferenceSignUp.emailSignUp,userOtp)
+            val JsonConverterSignUpOtp = JsonConverterSignUpOtp(loginOtpEmail,userOtp)
 //            RetrofitClient.init().getSignUpOtp(JsonConverterSignUpOtp)
 //                .enqueue(object : Callback<ResponseBody?> {
 //                    override fun onResponse(
@@ -176,45 +178,44 @@ class otp_sign_up : Fragment() {
 //                })
         }
         resend_now.setOnClickListener {
-            if (!timerOnStatus) {
-                progressBar.visibility = View.VISIBLE
-                timerOnStatus = true
-                val jsonConverterOtp = JsonConverter(ReferenceSignUp.emailSignUp)
-                RetrofitClient.init().resendOtpSignUp(jsonConverterOtp)
-                    .enqueue(object : Callback<ResponseBody?> {
-                        override fun onResponse(
-                            call: Call<ResponseBody?>,
-                            response: Response<ResponseBody?>
-                        ) {
-                            if (response.isSuccessful) {
-                                progressBar.visibility = View.INVISIBLE
-                                Toast.makeText(
-                                    activity,
-                                    "Otp has been resent successfully",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                startTimer()
-                            } else {
-                                progressBar.visibility = View.INVISIBLE
-                                Toast.makeText(
-                                    activity,
-                                    "Otp has not been resent\n\nKindly try again",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                timerOnStatus = false
-                            }
-                        }
-
-                        override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                            progressBar.visibility = View.INVISIBLE
-                            Toast.makeText(activity, "Crashed Api", Toast.LENGTH_LONG).show()
-                            timerOnStatus = false
-                        }
-                    })
-            }
+            progressBar.visibility=View.VISIBLE
+            timerOnStatus = true
+            val jsonConverterOtp=JsonConverter(userEmail)
+            RetrofitClient.init().resendOtpSignUp(jsonConverterOtp).enqueue(object : Callback<ResponseBody?> {
+                override fun onResponse(
+                    call: Call<ResponseBody?>,
+                    response: Response<ResponseBody?>
+                ) {
+                    if(response.isSuccessful) {
+                        progressBar.visibility=View.INVISIBLE
+                        Toast.makeText(
+                            activity,
+                            "Otp has been resent successfully",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        startTimer()
+                    }
+                    else{
+                        progressBar.visibility=View.INVISIBLE
+                        Toast.makeText(
+                            activity,
+                            "Otp has not been resent\n\nKindly try again",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        timerOnStatus = false
+                    }
+                }
+                override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                    progressBar.visibility=View.INVISIBLE
+                    Toast.makeText(activity,"Crashed Api", Toast.LENGTH_LONG).show()
+                    timerOnStatus = false
+                }
+            })
         }
+
+
         return v
     }
 
-
 }
+

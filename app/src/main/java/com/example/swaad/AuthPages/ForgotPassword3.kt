@@ -11,6 +11,7 @@ import com.example.swaad.ApiRequests.DataSetNewPasswordClass
 import com.example.swaad.AuthPages.ForgotPassword2.Companion.tokenValue
 import com.example.swaad.R
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.AuthPages.ForgotPassword1.Companion.email
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,6 +47,26 @@ class ForgotPassword3 : Fragment() {
                 resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
+            var flagLower = false
+            var flagUpper = false
+            var flagNumber = false
+            for(i in 0..newPasswordText.length - 1){
+                if(newPasswordText[i] in 'a'..'z')
+                    flagLower = true
+                if(newPasswordText[i] in 'A'..'Z')
+                    flagUpper = true
+                if(newPasswordText[i] in '0'..'9')
+                    flagNumber = true
+            }
+            if(!(flagLower && flagUpper && flagNumber) || newPasswordText.length < 5){
+                progressBar.visibility=View.INVISIBLE
+                newPassword.error="Minimum length of password should be 5 characters\n" +
+                        "\n" +
+                        "There should be atleast one uppercase, lowercase and a numeric digit"
+                resetButton.isEnabled = true
+                resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+                return@setOnClickListener
+            }
             if(newConfirmPasswordText.isEmpty())
             {
                 progressBar.visibility=View.INVISIBLE
@@ -62,40 +83,48 @@ class ForgotPassword3 : Fragment() {
                 return@setOnClickListener
             }
 
-            val tokenString = "Token " + tokenValue
+//            val tokenString = "Token " + tokenValue
 
             Toast.makeText(activity,"Setting new Password", Toast.LENGTH_LONG).show()
 
-            RetrofitClient.init().setNewPassword(newConfirmPasswordText, tokenString).enqueue(object :
+            RetrofitClient.init().setNewPassword(newConfirmPasswordText, email).enqueue(object :
                 Callback<DataSetNewPasswordClass?> {
                 override fun onResponse(call: Call<DataSetNewPasswordClass?>, response: Response<DataSetNewPasswordClass?>) {
 
                     val responseBody = response.body()
-                    try {
-                        progressBar.visibility=View.INVISIBLE
-                        responseBody!!.name
-                        Toast.makeText(activity,"New Password has been set", Toast.LENGTH_LONG).show()
+
+                    progressBar.visibility = View.INVISIBLE
+                    if (response.code() == 200) {
+                        Toast.makeText(activity, "New Password has been set", Toast.LENGTH_LONG)
+                            .show()
 
                         val fragmentManager = activity?.supportFragmentManager
                         val fragmentTransaction = fragmentManager?.beginTransaction()
                         fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
                         fragmentTransaction?.addToBackStack(null)
                         fragmentTransaction?.commit()
-                    }
-                    catch(e: Exception){
-                        progressBar.visibility=View.INVISIBLE
-                        Toast.makeText(activity,"New Password has not been set",
-                            Toast.LENGTH_LONG).show()
+                    } else {
+                        progressBar.visibility = View.INVISIBLE
+                        Toast.makeText(
+                            activity, "Ouch!",
+                            Toast.LENGTH_LONG
+                        ).show()
 
                         resetButton.isEnabled = true
-                        resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+                        resetButton.setBackgroundColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.button_background
+                            )
+                        )
                         newPassword.text?.clear()
                         newConfirmPassword.text?.clear()
+
                     }
                 }
                 override fun onFailure(call: Call<DataSetNewPasswordClass?>, t: Throwable) {
                     progressBar.visibility=View.INVISIBLE
-                    Toast.makeText(activity,"New Password has not been set",
+                    Toast.makeText(activity,"API has crashed!\n\nPlease try again",
                         Toast.LENGTH_LONG).show()
 
                     resetButton.isEnabled = true

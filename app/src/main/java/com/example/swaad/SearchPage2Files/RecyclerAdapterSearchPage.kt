@@ -39,6 +39,8 @@ class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.
         holder.priceValue.text = prices[position]
         holder.bestseller.text = bestsellers[position]
         holder.dishPic.setImageResource(dishPics[position])
+
+
     }
 
     override fun getItemCount(): Int {

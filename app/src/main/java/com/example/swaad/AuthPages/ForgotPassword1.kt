@@ -23,10 +23,13 @@ import retrofit2.Response
 
 class ForgotPassword1 : Fragment() {
 
+    private fun isValidEmail(str: String): Boolean{
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches()
+    }
+
     companion object{
         lateinit var email:String
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,10 +47,10 @@ class ForgotPassword1 : Fragment() {
 
             email = v.findViewById<TextInputEditText>(R.id.forgotPasswordEmail2).text.toString().trim()
 
-            if(email.isEmpty())
+            if(!isValidEmail(email))
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextView>(R.id.forgotPasswordEmail).error="Please Enter email!"
+                v.findViewById<TextView>(R.id.forgotPasswordEmail).error="Please enter a valid email"
                 next_button.isEnabled = false
                 next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
                 return@setOnClickListener
@@ -61,12 +64,12 @@ class ForgotPassword1 : Fragment() {
                     call: Call<ResponseBody?>,
                     response: Response<ResponseBody?>
                 ) {
-                    try {
-                        val status = response.message().toString()
-                        Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
-                        if(status =="OK") {
+//                        val status = response.message().toString()
+//                        Toast.makeText(activity,status, Toast.LENGTH_LONG).show()
+                        if(response.code() == 200) {
                             nextPage = "forgotPassword"
                             progressBar.visibility=View.INVISIBLE
+                            Toast.makeText(activity,"OTP has been sent to your email", Toast.LENGTH_LONG).show()
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
@@ -76,21 +79,16 @@ class ForgotPassword1 : Fragment() {
                         else
                         {
                             progressBar.visibility=View.INVISIBLE
-                            Toast.makeText(activity,status,Toast.LENGTH_LONG).show()
-                            next_button.setEnabled(true);
+                            Toast.makeText(activity,"Email is not registered",Toast.LENGTH_LONG).show()
+                            next_button.isEnabled = true;
                             next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                         }
-                    }
-                    catch (e:Exception)
-                    {
-                        val e = e.toString()
-                        Toast.makeText(activity,e, Toast.LENGTH_LONG).show()
-                    }
+
                 }
 
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                     progressBar.visibility=View.INVISIBLE
-                    Toast.makeText(activity,t.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity,"Some error has been occurred\n\nPlease try again", Toast.LENGTH_LONG).show()
                 }
             })
 

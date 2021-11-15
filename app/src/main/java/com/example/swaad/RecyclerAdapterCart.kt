@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.AuthPages.FragmentLogIn
 import com.example.swaad.NavBarPages.MyCart
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishNameList
 
@@ -17,8 +18,8 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
         var itemRemoved: Boolean = false
         var pos: Int = 0
     }
-    val dishesNameList = dishNameList
-    val dishesCostList = dishCostList
+//    val dishesNameList = dishNameList
+//    val dishesCostList = dishCostList
     val pluses = intArrayOf(R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus)
     val minuses = intArrayOf(R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus)
 
@@ -31,45 +32,41 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapterCart.ViewHolder, position: Int) {
-        holder.itemName.text = dishesNameList[position]
-        holder.dishPrice.text = dishesCostList[position]
+        holder.itemName.text = dishNameList[position]
+        holder.dishPrice.text = dishCostList[position]
         holder.plus.setImageResource(pluses[position])
         holder.minus.setImageResource(minuses[position])
         holder.itemCount.text = "1"
 
-        holder.plus.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                var amount = holder.itemCount.text.toString().toInt()
-                amount++
+        holder.plus.setOnClickListener {
+            var amount = holder.itemCount.text.toString().toInt()
+            amount++
+            holder.itemCount.text = amount.toString()
+            holder.dishPrice.text = "₹" + (amount * basePriceList[position]).toString() + ".00"
+        }
+        holder.minus.setOnClickListener {
+            var amount = holder.itemCount.text.toString().toInt()
+            if (amount != 1) {
+                amount--
                 holder.itemCount.text = amount.toString()
-            }
-        })
-        holder.minus.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                var amount = holder.itemCount.text.toString().toInt()
-                if (amount != 1){
-                    amount--
-                holder.itemCount.text = amount.toString()
-            }
-                else{
-                    dishNameList.remove(holder.itemName.text)
-                    dishCostList.remove(holder.dishPrice.text)
-                    itemRemoved = true
+                holder.dishPrice.text = "₹" + (amount * basePriceList[position]).toString() + ".00"
+            } else {
+                dishNameList.remove(holder.itemName.text)
+                dishCostList.remove(holder.dishPrice.text)
+                itemRemoved = true
 
 
-//                    val fragmentManager = activity?.supportFragmentManager
-//                    val fragmentTransaction = fragmentManager?.beginTransaction()
-//                    fragmentTransaction?.replace(R.id.fragment_container, MyCart())
-//                    fragmentTransaction?.addToBackStack(null)
-//                    fragmentTransaction?.commit()
-                }
-
+                //                    val fragmentManager = activity?.supportFragmentManager
+                //                    val fragmentTransaction = fragmentManager?.beginTransaction()
+                //                    fragmentTransaction?.replace(R.id.fragment_container, MyCart())
+                //                    fragmentTransaction?.addToBackStack(null)
+                //                    fragmentTransaction?.commit()
             }
-        })
+        }
     }
 
     override fun getItemCount(): Int {
-        return dishesCostList.size
+        return dishCostList.size
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){

@@ -16,7 +16,8 @@ import com.example.swaad.R
 class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<RestaurantDishesItem>):Adapter<RecyclerAdapterRestaurantPage.ViewHolder>(){
     companion object{
         var dishNameList = mutableListOf<String>("Chole Bhature", "Samosa")
-        var dishCostList = mutableListOf<String>("₹72", "₹106")
+        var dishCostList = mutableListOf<String>("₹30.00", "₹10.00")
+        var basePriceList = mutableListOf<Int>(30, 10)
     }
 
 //    private var arraydishImage = intArrayOf(R.drawable.home_page_burger,R.drawable.home_page_burger,R.drawable.home_page_burger)

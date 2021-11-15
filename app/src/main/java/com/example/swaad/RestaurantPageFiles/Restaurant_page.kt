@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.ApiRequests.RestaurantDishesItem
 import com.example.swaad.ApiRequests.RetrofitClient
-import com.example.swaad.NavBarPages.home_page
+import com.example.swaad.NavBarPages.Home_page
 import com.example.swaad.R
 import com.example.swaad.RecyclerAdapter
 import retrofit2.Call
@@ -41,7 +41,7 @@ class Restaurant_page : Fragment() {
         back.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container, home_page())
+            fragmentTransaction?.replace(R.id.fragment_container, Home_page())
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }

@@ -1,8 +1,9 @@
 package com.example.swaad.ApiRequests
 
 data class DataClass(
-    val token: String,
-    val non_field_errors: String,
-    val status: String,
-    val name: String
+    val access: String? = null,
+    val refresh: String? = null,
+    val name: String? = null,
+    val email: String? = null,
+    val status: String? = null
 )

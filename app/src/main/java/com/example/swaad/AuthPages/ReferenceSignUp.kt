@@ -78,7 +78,7 @@ class ReferenceSignUp : Fragment() {
             sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
 
             val name = v.findViewById<EditText>(R.id.editTextTextPersonName).text.toString().trim()
-           emailSignUp =
+            emailSignUp =
                 v.findViewById<EditText>(R.id.signUpEmail).text.toString().trim()
             val password =v.findViewById<TextInputEditText>(R.id.Sign_up_password).text.toString().trim()
             if(name.isEmpty())
@@ -89,33 +89,53 @@ class ReferenceSignUp : Fragment() {
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
-            if(!isValidEmail(emailSignUpl)){
+            if(!isValidEmail(emailSignUp)){
                 progressBar.visibility=View.INVISIBLE
                 val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
-                v.findViewById<EditText>(R.id.signUpEmail).error="Please enter a valid email "
+                v.findViewById<EditText>(R.id.signUpEmail).error="Please enter a valid email"
                 sign_up.isEnabled = true
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
-            else if(password.length < 5)
-            {
+//            if(password.length < 5)
+//            {
+//                progressBar.visibility=View.INVISIBLE
+//                v.findViewById<TextInputEditText>(R.id.Sign_up_password).error="Minimum length of password should be 5 characters"
+//                sign_up.isEnabled = true
+//                sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+//                return@setOnClickListener
+//            }
+            var flagLower = false
+            var flagUpper = false
+            var flagNumber = false
+            for(i in 0..password.length-1){
+                if(password[i] in 'a'..'z')
+                    flagLower = true
+                if(password[i] in 'A'..'Z')
+                    flagUpper = true
+                if(password[i] in '0'..'9')
+                    flagNumber = true
+            }
+            if(!(flagLower && flagUpper && flagNumber) || password.length < 5){
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextInputEditText>(R.id.Sign_up_password).error="Minimum length of password should be 5 characters"
+                v.findViewById<TextInputEditText>(R.id.Sign_up_password).error="Minimum length of password should be 5 characters\n\nThere should be atleast one uppercase, lowercase and a numeric digit"
                 sign_up.isEnabled = true
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
-    val jsonConverterSignUp=JsonConverterSignUP(emailSignUp,password,name)
-            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
+
+
+    val jsonConverterSignUp=JsonConverterSignUP(emailSignUp, password, name)
+//            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
             RetrofitClient.init().createUser(jsonConverterSignUp).enqueue(object : Callback<DataClassSignUp?>{
                     override fun onResponse(
                         call: Call<DataClassSignUp?>,
                         response: Response<DataClassSignUp?>
                     ) {
                         progressBar.visibility=View.INVISIBLE
-                        val status = response.body()?.status.toString()
-//                        Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
-                        if(status == "User registered successfully and an OTP has been sent to your email.") {
+//                        val status = response.body()?.status.toString()
+//                        Toast.makeText(activity, "Verify the otp", Toast.LENGTH_LONG).show()
+                        if(response.code() == 201) {
 //                            Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -124,7 +144,7 @@ class ReferenceSignUp : Fragment() {
                             fragmentTransaction?.commit()
                         }
                         else{
-                            Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
+                            Toast.makeText(activity, "User already registered", Toast.LENGTH_LONG).show()
                             v.findViewById<TextInputEditText>(R.id.Sign_up_password).text?.clear()
 
                             sign_up.isEnabled = true

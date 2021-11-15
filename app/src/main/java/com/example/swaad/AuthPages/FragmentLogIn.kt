@@ -21,7 +21,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.swaad.*
 import com.example.swaad.ApiRequests.DataClass
 import com.example.swaad.ApiRequests.RetrofitClient
-import com.example.swaad.NavBarPages.home_page
+import com.example.swaad.AuthPages.ReferenceSignUp.Companion.emailSignUp
+import com.example.swaad.NavBarPages.Home_page
 import com.example.swaad.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.flow.first
@@ -37,6 +38,7 @@ class FragmentLogIn: Fragment() {
         lateinit var NAME: String
         lateinit var userEmail: String
         var loggedIn:Boolean=false
+        lateinit var loginOtpEmail: String
         private var binding : ActivityMainBinding?=null
         private lateinit var dataStore: DataStore<Preferences>
         suspend fun save(key:String,value:Boolean)
@@ -73,7 +75,7 @@ class FragmentLogIn: Fragment() {
             {
                 val fragmentManager = activity?.supportFragmentManager
                 val fragmentTransaction = fragmentManager?.beginTransaction()
-                fragmentTransaction?.replace(R.id.fragment_container, home_page())
+                fragmentTransaction?.replace(R.id.fragment_container, Home_page())
                 fragmentTransaction?.addToBackStack(null)
                 fragmentTransaction?.commit()
                 val intent = Intent(activity, NavBarActivity::class.java)
@@ -162,35 +164,75 @@ class FragmentLogIn: Fragment() {
             RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
                 override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
                     progressBar.visibility = View.INVISIBLE
-                    val responseBody = response.body()
-                    NAME = responseBody?.name.toString()
-                    if (responseBody?.token.toString() != "null") {
-                        loggedIn = true
-                        Toast.makeText(
-                            activity,
-                            "You've been logged in",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        lifecycleScope.launch {
-                            save("loggedIn", loggedIn)
-                            saveInfo("email", userEmail)
-                            saveInfo("name", NAME)
-                        }
+//                    val responseBody = response.body()
+//                    Toast.makeText(
+//                        activity,
+//                        responseBody?.status.toString(),
+//                        Toast.LENGTH_LONG
+//                    ).show()
+
+                        if (response.code() == 200) {
+//                            NAME = responseBody.name.toString()
+                            loggedIn = true
+                            Toast.makeText(
+                                activity,
+                                "You've been logged in",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            lifecycleScope.launch {
+                                save("loggedIn", loggedIn)
+                                saveInfo("email", userEmail)
+                                saveInfo("name", NAME)
+                            }
 
                             val intent = Intent(activity, NavBarActivity::class.java)
                             startActivity(intent)
 
-                    } else {
-                        Toast.makeText(
-                            activity,
-                            responseBody?.status,
-                            Toast.LENGTH_LONG
-                        ).show()
-                        v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
-                        v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
-                        signInBtn.isEnabled = true
-                        signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
-                    }
+                        }
+                        else if (response.code() == 403) {
+                                    Toast.makeText(
+                                        activity,
+                                        "User not registered",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+//                            v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
+                                    v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
+                                    signInBtn.isEnabled = true
+                                    signInBtn.setBackgroundColor(
+                                        ContextCompat.getColor(
+                                            requireContext(),
+                                            R.color.button_background
+                                        )
+                                    )
+                                }
+                        else if (response.code() == 401) {
+                            loginOtpEmail = userEmail
+                                    val fragmentManager = activity?.supportFragmentManager
+                                    val fragmentTransaction = fragmentManager?.beginTransaction()
+                                    fragmentTransaction?.replace(
+                                        R.id.fragment_container,
+                                        otp_sign_up2()
+                                    )
+                                    fragmentTransaction?.addToBackStack(null)
+                                    fragmentTransaction?.commit()
+                                }
+
+                        else if(response.code() == 400){
+                            Toast.makeText(
+                                activity,
+                                "Wrong password entered",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
+                            signInBtn.isEnabled = true
+                            signInBtn.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.button_background
+                                )
+                            )
+                        }
+
                 }
 
                 override fun onFailure(call: Call<DataClass?>, t: Throwable) {
