@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.R
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage
 
 class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
 
@@ -40,6 +41,9 @@ class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.
         holder.bestseller.text = bestsellers[position]
         holder.dishPic.setImageResource(dishPics[position])
 
+        holder.addBtn.setOnClickListener {
+            
+        }
 
     }
 

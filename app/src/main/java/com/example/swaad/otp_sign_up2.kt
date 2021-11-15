@@ -59,11 +59,46 @@ class otp_sign_up2 : Fragment() {
 
         startTimer()
 
+
+
         val otp1=v.findViewById<TextView>(R.id.OtpSignUp1)
         val otp2=v.findViewById<TextView>(R.id.OtpSignUp2)
         val otp3=v.findViewById<TextView>(R.id.OtpSignUp3)
         val otp4=v.findViewById<TextView>(R.id.OtpSignUp4)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBarOtpSignup)
+
+        val jsonConverterOtp=JsonConverter(userEmail)
+        RetrofitClient.init().resendOtpSignUp(jsonConverterOtp).enqueue(object : Callback<ResponseBody?> {
+            override fun onResponse(
+                call: Call<ResponseBody?>,
+                response: Response<ResponseBody?>
+            ) {
+                if(response.isSuccessful) {
+//                    progressBar.visibility=View.INVISIBLE
+//                    Toast.makeText(
+//                        activity,
+//                        "Otp has been resent successfully",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                    startTimer()
+                }
+                else{
+//                    progressBar.visibility=View.INVISIBLE
+//                    Toast.makeText(
+//                        activity,
+//                        "Otp has not been resent\n\nKindly try again",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                    timerOnStatus = false
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+//                progressBar.visibility=View.INVISIBLE
+//                Toast.makeText(activity,"Crashed Api", Toast.LENGTH_LONG).show()
+//                timerOnStatus = false
+            }
+        })
+
         otp1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -116,6 +151,8 @@ class otp_sign_up2 : Fragment() {
             val userOtp = v.findViewById<EditText>(R.id.OtpSignUp1).text.toString()
                 .trim() + v.findViewById<EditText>(R.id.OtpSignUp2).text.toString().trim() + v.findViewById<EditText>(R.id.OtpSignUp3).text.toString()
                 .trim() + v.findViewById<EditText>(R.id.OtpSignUp4).text.toString().trim()
+
+
             val JsonConverterSignUpOtp = JsonConverterSignUpOtp(loginOtpEmail,userOtp)
 //            RetrofitClient.init().getSignUpOtp(JsonConverterSignUpOtp)
 //                .enqueue(object : Callback<ResponseBody?> {

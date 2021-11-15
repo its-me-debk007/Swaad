@@ -104,10 +104,10 @@ class ForgotPassword3 : Fragment() {
                         fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
                         fragmentTransaction?.addToBackStack(null)
                         fragmentTransaction?.commit()
-                    } else {
+                    } else if(response.code() == 400){
                         progressBar.visibility = View.INVISIBLE
                         Toast.makeText(
-                            activity, "Ouch!",
+                            activity, "New password cannot be the same as old password.",
                             Toast.LENGTH_LONG
                         ).show()
 
@@ -121,6 +121,23 @@ class ForgotPassword3 : Fragment() {
                         newPassword.text?.clear()
                         newConfirmPassword.text?.clear()
 
+                    }
+                    else{
+                        progressBar.visibility = View.INVISIBLE
+                        Toast.makeText(
+                            activity, "Some error has occured",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        resetButton.isEnabled = true
+                        resetButton.setBackgroundColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.button_background
+                            )
+                        )
+                        newPassword.text?.clear()
+                        newConfirmPassword.text?.clear()
                     }
                 }
                 override fun onFailure(call: Call<DataSetNewPasswordClass?>, t: Throwable) {

@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.R
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.otp_sign_up2
 import com.google.android.material.textfield.TextInputEditText
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -50,9 +51,9 @@ class ForgotPassword1 : Fragment() {
             if(!isValidEmail(email))
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextView>(R.id.forgotPasswordEmail).error="Please enter a valid email"
-                next_button.isEnabled = false
-                next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
+                v.findViewById<TextView>(R.id.forgotPasswordEmail2).error="Please enter a valid email"
+                next_button.isEnabled = true
+                next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
 //            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
@@ -73,7 +74,16 @@ class ForgotPassword1 : Fragment() {
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
-//                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.commit()
+                        }
+                        else if(response.code() == 406){
+                            progressBar.visibility=View.INVISIBLE
+                            Toast.makeText(activity,"Please verify your account first before changing your password",Toast.LENGTH_LONG).show()
+                            val fragmentManager = activity?.supportFragmentManager
+                            val fragmentTransaction = fragmentManager?.beginTransaction()
+                            fragmentTransaction?.replace(R.id.fragment_container, otp_sign_up2())
+                            fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
                         else

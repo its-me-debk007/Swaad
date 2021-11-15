@@ -172,11 +172,31 @@ class ForgotPassword2 : Fragment() {
                             fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
 
-                        } else {
+                        } else if(response.code() == 408){
                             progressBar.visibility = View.INVISIBLE
                             Toast.makeText(
                                 activity,
-                                "OTP incorrect",
+                                "OTP has expired!\n\nPlease tap on 'Resend Now'",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            v.findViewById<EditText>(R.id.Otp1).text.clear()
+                            v.findViewById<EditText>(R.id.Otp2).text.clear()
+                            v.findViewById<EditText>(R.id.Otp3).text.clear()
+                            v.findViewById<EditText>(R.id.Otp4).text.clear()
+
+                            verifyBtn.isEnabled = true
+                            verifyBtn.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.button_background
+                                )
+                            )
+                        }
+                        else if(response.code() == 409){
+                            progressBar.visibility = View.INVISIBLE
+                            Toast.makeText(
+                                activity,
+                                "Incorrect OTP",
                                 Toast.LENGTH_LONG
                             ).show()
                             v.findViewById<EditText>(R.id.Otp1).text.clear()

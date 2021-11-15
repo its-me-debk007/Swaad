@@ -34,12 +34,10 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
 
         holder.dishCost.text=dishData[position].price.toString()
         holder.dishName.text=dishData[position].title
-        holder.addToCart.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                dishNameList.add(holder.dishName.text as String)
-                dishCostList.add(holder.dishCost.text as String)
-            }
-        })
+        holder.addToCart.setOnClickListener {
+            dishNameList.add(holder.dishName.text as String)
+            dishCostList.add(holder.dishCost.text as String)
+        }
 
 
     }
