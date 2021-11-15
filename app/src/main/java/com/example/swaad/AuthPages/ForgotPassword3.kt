@@ -13,6 +13,7 @@ import com.example.swaad.R
 import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.AuthPages.ForgotPassword1.Companion.email
 import com.google.android.material.textfield.TextInputEditText
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,10 +34,10 @@ class ForgotPassword3 : Fragment() {
             resetButton.isEnabled = false
             resetButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
 
-            val newPassword: TextInputEditText = v.findViewById(R.id.editTextTextPersonName7v2)
+            val newPassword: TextInputEditText = v.findViewById(R.id.password1)
             val newPasswordText = newPassword.text.toString().trim()
 
-            val newConfirmPassword: TextInputEditText = v.findViewById(R.id.editTextTextPersonName8v2)
+            val newConfirmPassword: TextInputEditText = v.findViewById(R.id.password2)
             val newConfirmPasswordText =  newConfirmPassword.text.toString().trim()
 
             if(newPasswordText.isEmpty())

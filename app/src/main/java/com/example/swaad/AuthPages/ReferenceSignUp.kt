@@ -18,6 +18,7 @@ import com.example.swaad.R
 import com.example.swaad.ProfilePages.TermsAndConditions
 import com.example.swaad.otp_sign_up
 import com.google.android.material.textfield.TextInputEditText
+import okhttp3.ResponseBody
 
 class ReferenceSignUp : Fragment() {
 
@@ -68,7 +69,7 @@ class ReferenceSignUp : Fragment() {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-            fragmentTransaction?.addToBackStack(null)
+//            fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
         val sign_up = v.findViewById<Button>(R.id.sign_up_button)
@@ -123,36 +124,41 @@ class ReferenceSignUp : Fragment() {
                 sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
             }
-
-
-    val jsonConverterSignUp=JsonConverterSignUP(emailSignUp, password, name)
-//            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
-            RetrofitClient.init().createUser(jsonConverterSignUp).enqueue(object : Callback<DataClassSignUp?>{
+    val jsonConverterSignUp=JsonConverterSignUP(emailSignUp,password,name)
+            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
+            RetrofitClient.init().createUser(jsonConverterSignUp).enqueue(object : Callback<ResponseBody?>{
                     override fun onResponse(
-                        call: Call<DataClassSignUp?>,
-                        response: Response<DataClassSignUp?>
+                        call: Call<ResponseBody?>,
+                        response: Response<ResponseBody?>
                     ) {
-                        progressBar.visibility=View.INVISIBLE
-//                        val status = response.body()?.status.toString()
-//                        Toast.makeText(activity, "Verify the otp", Toast.LENGTH_LONG).show()
-                        if(response.code() == 201) {
+
+//                        Toast.makeText(activity, response.code(), Toast.LENGTH_LONG).show()
+                        if(response.isSuccessful) {
+                            progressBar.visibility=View.INVISIBLE
 //                            Toast.makeText(activity, status, Toast.LENGTH_LONG).show()
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, otp_sign_up())
-                            fragmentTransaction?.addToBackStack(null)
+//                            fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
-                        else{
-                            Toast.makeText(activity, "User already registered", Toast.LENGTH_LONG).show()
+                        else if(response.code()==406){
+                            progressBar.visibility=View.INVISIBLE
+                            Toast.makeText(activity,"Registration was not successful. please enter the details carefully", Toast.LENGTH_LONG).show()
+                            v.findViewById<EditText>(R.id.editTextTextPersonName).text.clear()
                             v.findViewById<TextInputEditText>(R.id.Sign_up_password).text?.clear()
 
                             sign_up.isEnabled = true
                             sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                         }
+                        else if(response.code()==403)
+                        {
+                            progressBar.visibility=View.INVISIBLE
+                            Toast.makeText(activity,"Entered email is already registered", Toast.LENGTH_LONG).show()
+                        }
                     }
 
-                    override fun onFailure(call: Call<DataClassSignUp?>, t: Throwable) {
+                    override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                         progressBar.visibility=View.INVISIBLE
                         Toast.makeText(
                             activity, t.message,

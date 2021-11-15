@@ -73,7 +73,7 @@ class ForgotPassword1 : Fragment() {
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
-                            fragmentTransaction?.addToBackStack(null)
+//                            fragmentTransaction?.addToBackStack(null)
                             fragmentTransaction?.commit()
                         }
                         else
@@ -88,7 +88,7 @@ class ForgotPassword1 : Fragment() {
 
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                     progressBar.visibility=View.INVISIBLE
-                    Toast.makeText(activity,"Some error has been occurred\n\nPlease try again", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity,t.message, Toast.LENGTH_LONG).show()
                 }
             })
 

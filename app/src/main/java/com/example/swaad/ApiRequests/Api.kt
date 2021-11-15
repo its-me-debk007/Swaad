@@ -15,7 +15,7 @@ interface Api {
     ):Call<DataClass>
 
     @POST("/api/user/register/")
-    fun createUser(@Body jsonconvertersignup:JsonConverterSignUP):Call<DataClassSignUp>
+    fun createUser(@Body jsonconvertersignup:JsonConverterSignUP):Call<ResponseBody>
 
 
     @POST("/api/user/password/reset/")

@@ -151,7 +151,7 @@ class FragmentLogIn: Fragment() {
             {
 
                 progressBar.visibility=View.INVISIBLE
-//                val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
+                val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
                 v.findViewById<EditText>(R.id.loginPassword2).error="Please enter the password"
                 signInBtn.isEnabled = true
                 signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))

@@ -12,22 +12,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 
 import GridSpacingItemDecoration
+import android.app.ActionBar
+import android.app.Activity
+import android.content.res.Configuration
+import android.view.MenuItem
 import android.widget.ProgressBar
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.swaad.ApiRequests.DataClassRestaurantsItem
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.AuthPages.help_support
 import com.example.swaad.MainActivity
+import com.example.swaad.R
 import com.example.swaad.RecyclerAdapter
 import com.example.swaad.search_page
+import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.appcompat.app.AppCompatActivity
+
+
+
 
 
 class Home_page : Fragment() {
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    lateinit var responseBody:List<DataClassRestaurantsItem>
+    lateinit var recyclerView:RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
     private var layoutManager:RecyclerView.LayoutManager?=null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
@@ -100,11 +114,11 @@ class Home_page : Fragment() {
                 call: Call<List<DataClassRestaurantsItem>?>,
                 response: Response<List<DataClassRestaurantsItem>?>
             ) {
-                val responseBody=response.body()!!
+                 responseBody=response.body()!!
                 if (container != null) {
                     progressbar.visibility=View.INVISIBLE
                     layoutManager = GridLayoutManager(container?.context, 2)
-                    val recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
+                     recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
                     var spanCount=2
                     var spacing = 30
                     var includeEdge=false
@@ -118,7 +132,7 @@ class Home_page : Fragment() {
 
             override fun onFailure(call: Call<List<DataClassRestaurantsItem>?>, t: Throwable) {
                 progressbar.visibility=View.INVISIBLE
-                Toast.makeText(activity,"RecyclerViewNotLoaded",Toast.LENGTH_LONG).show()
+                Toast.makeText(activity,"Please Reopen Your App",Toast.LENGTH_LONG).show()
             }
         })
 //        layoutManager = GridLayoutManager(container?.context, 2)
@@ -160,9 +174,36 @@ class Home_page : Fragment() {
 
         return v
     }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        if(newConfig.orientation== Configuration.ORIENTATION_LANDSCAPE){
+            layoutManager = GridLayoutManager(context, 3)
+
+            var spanCount=3
+            var spacing = 30
+            var includeEdge=false
+            recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+            recyclerView.layoutManager = layoutManager
+            adapter= context?.let { RecyclerAdapter(it,responseBody) }
+            (adapter as RecyclerAdapter).notifyDataSetChanged()
+            recyclerView.adapter = adapter
+        }
+        else if(newConfig.orientation== Configuration.ORIENTATION_PORTRAIT){
+            layoutManager = GridLayoutManager(context, 2)
+
+            var spanCount=2
+            var spacing = 30
+            var includeEdge=false
+            recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+            recyclerView.layoutManager = layoutManager
+            adapter= context?.let { RecyclerAdapter(it,responseBody) }
+            (adapter as RecyclerAdapter).notifyDataSetChanged()
+            recyclerView.adapter = adapter
+        }
+    }
 }
-
-
 
 //LocationManager class provides the facility to get latitude and longitude
 //    private fun getlocation(): CharSequence? {
