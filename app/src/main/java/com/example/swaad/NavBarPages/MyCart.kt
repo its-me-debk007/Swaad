@@ -19,16 +19,18 @@ import org.json.JSONObject
 
 import android.R
 
-import com.razorpay.Checkout
+//import com.razorpay.Checkout
 
 import android.app.Activity
 import android.widget.Toast
+import com.example.swaad.MainActivity
 import com.example.swaad.NavBarActivity
+import com.razorpay.Checkout
 import java.lang.Exception
 
 
 class MyCart: Fragment() {
-    private var layoutManager: RecyclerView.LayoutManager?=null
+    private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>? = null
 
     override fun onCreateView(
@@ -37,9 +39,10 @@ class MyCart: Fragment() {
     ): View? {
 
         val v = inflater.inflate(com.example.swaad.R.layout.my_cart, container, false)
-    val pay_button=v.findViewById<Button>(com.example.swaad.R.id.payButton)
+        val pay_button = v.findViewById<Button>(com.example.swaad.R.id.payButton)
         pay_button.setOnClickListener(View.OnClickListener {
-            PaymentNow("100")
+//            PaymentNow("100")
+//            Checkout.preload(container?.context)
         })
         layoutManager = LinearLayoutManager(container?.context)
         val recyclerViewCart = v.findViewById<RecyclerView>(com.example.swaad.R.id.recyclerViewCart)
@@ -47,7 +50,7 @@ class MyCart: Fragment() {
         adapter = RecyclerAdapterCart()
         recyclerViewCart.adapter = adapter
 
-        if(itemRemoved){
+        if (itemRemoved) {
             RecyclerAdapterCart().notifyItemRemoved(pos)
             itemRemoved = false
         }
@@ -68,6 +71,7 @@ class MyCart: Fragment() {
 
         return v
     }
+}
 
     private fun PaymentNow(amount: String) {
         val activity: Activity = NavBarActivity()
@@ -86,9 +90,8 @@ class MyCart: Fragment() {
             options.put("amount", finalAmount.toString() + "") //300 X 100
             options.put("prefill.email", "kunalmehrotra2001@gmail.com")
             options.put("prefill.contact", "")
-            checkout.open(activity, options)
+            checkout.open(activity,options)
         } catch (e: Exception) {
-            Toast.makeText(activity,"Error",Toast.LENGTH_LONG).show()
+            Toast.makeText(activity,e.message,Toast.LENGTH_LONG).show()
         }
     }
-}

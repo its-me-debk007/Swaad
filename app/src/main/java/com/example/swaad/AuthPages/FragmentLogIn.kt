@@ -40,7 +40,8 @@ class FragmentLogIn: Fragment() {
         var loggedIn:Boolean=false
         lateinit var loginOtpEmail: String
         private var binding : ActivityMainBinding?=null
-        private  lateinit var dataStore: DataStore<Preferences>
+        lateinit var dataStore: DataStore<Preferences>
+
         suspend fun save(key:String,value:Boolean)
         {
             val dataStoreKey= preferencesKey<Boolean>(key)
@@ -63,6 +64,12 @@ class FragmentLogIn: Fragment() {
             }
 
         }
+         suspend fun read(key:String):Boolean?
+        {
+            val dataStoreKey= preferencesKey<Boolean>(key)
+            val preferences = dataStore.data.first()
+            return preferences[dataStoreKey]
+        }
     }
 
 
@@ -74,11 +81,11 @@ class FragmentLogIn: Fragment() {
             val value:Boolean? = read("loggedIn")
             if(value==true)
             {
-                val fragmentManager = activity?.supportFragmentManager
-                val fragmentTransaction = fragmentManager?.beginTransaction()
-                fragmentTransaction?.replace(R.id.fragment_container, Home_page())
-                fragmentTransaction?.addToBackStack(null)
-                fragmentTransaction?.commit()
+//                val fragmentManager = activity?.supportFragmentManager
+//                val fragmentTransaction = fragmentManager?.beginTransaction()
+//                fragmentTransaction?.replace(R.id.fragment_container, Home_page())
+//                fragmentTransaction?.addToBackStack(null)
+//                fragmentTransaction?.commit()
                 val intent = Intent(activity, NavBarActivity::class.java)
                 startActivity(intent)
             }
@@ -97,13 +104,9 @@ class FragmentLogIn: Fragment() {
 
     }
 
-    private suspend fun read(key:String):Boolean?
-    {
-        val dataStoreKey= preferencesKey<Boolean>(key)
-        val preferences = dataStore.data.first()
-        return preferences[dataStoreKey]
-    }
 
+//binding = ActivityMainBinding.inflate(layoutInflater)
+//dataStore = context?.createDataStore(name = "Settings")!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
