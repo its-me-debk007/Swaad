@@ -19,10 +19,10 @@ class NavBarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nav_bar)
-//        val drawerLayout=findViewById<DrawerLayout>(R.id.drawerLayout)
-//        val navView=findViewById<NavigationView>(R.id.navView)
-//        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
-//        drawerLayout.addDrawerListener(toggle)
+        val drawerLayout=findViewById<DrawerLayout>(R.id.drawerLayout)
+        val navView=findViewById<NavigationView>(R.id.navView)
+        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         val actionBar=supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)

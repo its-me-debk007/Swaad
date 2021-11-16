@@ -52,7 +52,7 @@ class ForgotPassword1 : Fragment() {
             if(!isValidEmail(email))
             {
                 progressBar.visibility=View.INVISIBLE
-                v.findViewById<TextView>(R.id.forgotPasswordEmail2).error="Please enter a valid email"
+                v.findViewById<TextView>(R.id.forgotPasswordEmail2).setError("Please enter a valid email")
                 next_button.isEnabled = true
                 next_button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
@@ -75,7 +75,7 @@ class ForgotPassword1 : Fragment() {
                             val fragmentManager = activity?.supportFragmentManager
                             val fragmentTransaction = fragmentManager?.beginTransaction()
                             fragmentTransaction?.replace(R.id.fragment_container, ForgotPassword2())
-                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.addToBackStack("fragmentLogin")
                             fragmentTransaction?.commit()
                         }
                         else if(response.code() == 406){
