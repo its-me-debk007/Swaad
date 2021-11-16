@@ -31,6 +31,10 @@ class RecyclerAdapterSearchPage: RecyclerView.Adapter<RecyclerAdapterSearchPage.
         R.drawable.ic_cart,
         R.drawable.ic_cart,
         R.drawable.ic_cart,
+        R.drawable.ic_cart,
+        R.drawable.ic_cart,
+        R.drawable.ic_cart,
+        R.drawable.ic_cart,
         R.drawable.ic_cart
     )
 

@@ -60,8 +60,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu"
         android:background="#ffff"
-        app:itemIconTint="#000000"
-        app:itemTextColor="#000000"
+        app:itemIconTint="@color/icon_color"
+        app:itemRippleColor="@color/purple_500"
+
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView
