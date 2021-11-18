@@ -15,6 +15,7 @@ import android.app.ActionBar
 import android.app.Activity
 import android.content.res.Configuration
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
@@ -30,10 +31,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import androidx.appcompat.app.AppCompatActivity
-
+import com.example.swaad.ApiRequests.JsonConverterCategory
+import com.example.swaad.SearchPage2Files.SearchPage2
 
 
 class Home_page : Fragment() {
+    companion object{
+        var status : String=""
+        lateinit var responseData:Response<List<CategoryFoodItem>?>
+    }
+
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var responseBody:List<DataClassRestaurantsItem>
     lateinit var recyclerView:RecyclerView
@@ -48,10 +55,36 @@ class Home_page : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(com.example.swaad.R.layout.fragment_home_page, container, false)
-        val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
+
+        val sweets=v.findViewById<ImageView>(R.id.Sweets)
+        val jsonConverterCategory= JsonConverterCategory("Sweets")
+        sweets.setOnClickListener {
+            RetrofitClient.init().categoryDish(jsonConverterCategory).enqueue(object : Callback<List<CategoryFoodItem>?> {
+                override fun onResponse(
+                    call: Call<List<CategoryFoodItem>?>,
+                    response: Response<List<CategoryFoodItem>?>
+                ) {
+                    status = "Kunal"
+                    responseData=response
+                    val fragmentManager = activity?.supportFragmentManager
+                    val fragmentTransaction = fragmentManager?.beginTransaction()
+                    fragmentTransaction?.replace(R.id.fragment_container, SearchPage2())
+                    fragmentTransaction?.addToBackStack(null)
+                    fragmentTransaction?.commit()
+                }
+
+                override fun onFailure(call: Call<List<CategoryFoodItem>?>, t: Throwable) {
+
+                }
+            })
+
+
+            val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
         val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
         val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
         locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
+
+
 
         searchbox.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
