@@ -41,7 +41,6 @@ class FragmentLogIn: Fragment() {
         lateinit var loginOtpEmail: String
         private var binding : ActivityMainBinding?=null
         lateinit var dataStore: DataStore<Preferences>
-
         suspend fun save(key:String,value:Boolean)
         {
             val dataStoreKey= preferencesKey<Boolean>(key)

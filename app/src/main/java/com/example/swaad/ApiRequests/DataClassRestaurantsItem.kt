@@ -7,5 +7,6 @@ data class DataClassRestaurantsItem(
     val no_of_ratings: Int,
     val phone: String,
     val rest_name: String,
-    val user: Int
+    val user: Int,
+    val image:String
 )

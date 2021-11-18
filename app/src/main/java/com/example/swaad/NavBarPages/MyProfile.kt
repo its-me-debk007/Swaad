@@ -19,15 +19,19 @@ import com.example.swaad.R
 import kotlinx.coroutines.launch
 
 class MyProfile: Fragment()  {
+    companion object
+    {
+         var useremail:String="UserName"
+         var name: String="Name"
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val v = inflater.inflate(R.layout.profile_page, container, false)
         lifecycleScope.launch {
-            val useremail = readInfo("email")
-            val name= readInfo("name")
+             useremail = readInfo("email").toString()
+             name= readInfo("name").toString()
             v.findViewById<TextView>(R.id.textView15).text = "Hi ${name}"
             v.findViewById<TextView>(R.id.textView23).text = useremail
         }

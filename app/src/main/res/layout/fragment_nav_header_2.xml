@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:background="@color/black"
-    tools:context=".nav_header">
+    android:background="@color/black">
 
     <ImageView
         android:id="@+id/imageView17"
@@ -18,7 +17,7 @@
         app:srcCompat="@drawable/ic_profile_icon" />
 
     <TextView
-        android:id="@+id/haburger_name"
+        android:id="@+id/hamburger_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
@@ -37,5 +36,5 @@
         android:text="TextView"
         android:textColor="#E4D7D7"
         app:layout_constraintStart_toEndOf="@+id/imageView17"
-        app:layout_constraintTop_toBottomOf="@+id/haburger_name" />
+        app:layout_constraintTop_toBottomOf="@+id/hamburger_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
