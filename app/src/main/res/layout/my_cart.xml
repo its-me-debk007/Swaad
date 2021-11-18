@@ -161,7 +161,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
     <ImageView
-        android:id="@+id/imageView13"
+        android:id="@+id/Chinese"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
@@ -288,7 +288,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+        app:layout_constraintTop_toBottomOf="@+id/Paneer" />
 
     <TextView
         android:id="@+id/textView42"
@@ -319,7 +319,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/Burger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="118dp"
@@ -348,10 +348,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+        app:layout_constraintTop_toBottomOf="@+id/Burger" />
 
     <ImageView
-        android:id="@+id/imageView15"
+        android:id="@+id/Pizza"
         android:layout_width="23dp"
         android:layout_height="22dp"
         android:layout_marginStart="12dp"
@@ -361,7 +361,7 @@
         app:srcCompat="@drawable/ic_timer" />
 
     <ImageView
-        android:id="@+id/imageView16"
+        android:id="@+id/Paneer"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"

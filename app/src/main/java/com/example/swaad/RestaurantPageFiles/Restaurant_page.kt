@@ -5,16 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.ApiRequests.RestaurantDishesItem
 import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.NavBarPages.Home_page
 import com.example.swaad.R
+import com.example.swaad.Rating_Page
 import com.example.swaad.RecyclerAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,6 +33,15 @@ class Restaurant_page : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_restaurant_page, container, false)
+        val rating = v.findViewById<Button>(R.id.ratingButton)
+        rating.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container, Rating_Page())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+
+        }
          val progressBar=v.findViewById<ProgressBar>(R.id.progressBarRestaurantPage)
         layoutManager = LinearLayoutManager(container?.context)
         val back = v.findViewById<ImageView>(R.id.back)

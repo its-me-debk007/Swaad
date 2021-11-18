@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.swaad.AuthPages.FragmentLogIn
 import com.example.swaad.NavBarPages.Home_page
 import com.example.swaad.NavBarPages.MyCart
 import com.example.swaad.NavBarPages.MyProfile
@@ -52,6 +53,10 @@ class NavBarActivity : AppCompatActivity() {
         setContentView(R.layout.nav_bar)
         val drawerLayout=findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView=findViewById<NavigationView>(R.id.navView)
+        val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
+        val hamburgerEmail=findViewById<TextView>(R.id.hamburger_email)
+//        hamburgerName.setText(MyProfile.name)
+//        hamburgerEmail.setText(MyProfile.useremail)
 //        mapView=findViewById<MapView>(R.id.map2)
 //        var mapViewBundle:Bundle?=null
 //        if(savedInstanceState != null)
@@ -74,6 +79,19 @@ class NavBarActivity : AppCompatActivity() {
         toggle.syncState()
         val actionBar=supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
+        navView.setNavigationItemSelectedListener{
+            when(it.itemId){
+                R.id.myProfile->
+                {
+                    val fragmentManager = supportFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.fragment_container,MyProfile())
+                    fragmentTransaction.commit()
+                }
+                R.id.aboutSwaad->Toast.makeText(this,"Soon Launch",Toast.LENGTH_LONG).show()
+            }
+                true
+        }
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -85,6 +103,7 @@ class NavBarActivity : AppCompatActivity() {
                 R.id.demoHome -> replaceFragment(Home_page())
                 R.id.cart -> replaceFragment(MyCart())
                 R.id.myProfile -> replaceFragment(MyProfile())
+
             }
             true
         }

@@ -23,7 +23,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.example.swaad.AuthPages.FragmentLogIn
-import com.example.swaad.SplashScreen.splash_screen
+//import com.example.swaad.SplashScreen.splash_screen
 import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView

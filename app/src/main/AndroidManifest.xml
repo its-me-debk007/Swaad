@@ -37,14 +37,12 @@
         </activity>
         <activity android:name=".NavBarActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
-        <activity android:name=".PaymentActivity" />
+        <activity android:name=".PaymentActivity"/>
         <activity android:name=".google_maps" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <meta-data android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_pPyQDwFu6wozYU"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA-7kFKSUHQjI3kcjyCPP8VpD5jlf092XM"/>
