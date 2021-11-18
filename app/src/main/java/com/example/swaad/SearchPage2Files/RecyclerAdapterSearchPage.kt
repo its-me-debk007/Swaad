@@ -42,8 +42,7 @@ class RecyclerAdapterSearchPage(val context: Context,val restaurantData: List<Da
         "₹302.00",
         "₹303.00",
         "₹302.00",
-        "₹303.00"
-    )
+        "₹303.00")
 //    private val bestsellers = arrayOf("Bestseller", "Bestseller", "Bestseller", "Bestseller", "Bestseller")
 //    private val dishPics = intArrayOf(
 //        R.drawable.ic_cart,
