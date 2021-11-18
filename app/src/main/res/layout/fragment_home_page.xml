@@ -25,7 +25,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/Location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="56dp"
@@ -41,7 +41,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="37dp"
                 android:text="Location need to be added here"
-                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintStart_toEndOf="@+id/Location"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
