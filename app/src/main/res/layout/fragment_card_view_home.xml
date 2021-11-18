@@ -40,8 +40,8 @@
                 android:id="@+id/restaurantName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="4dp"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"
                 android:fontFamily="@font/poppins_bold"
@@ -50,7 +50,6 @@
                 android:singleLine="true"
                 android:text="Restaurant Name"
                 android:textColor="#000000"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/RestaurantImage" />
 
@@ -96,13 +95,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/timeDuration" />
 
-            <HorizontalScrollView
-                android:id="@+id/RestaurantAdressScrollView"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Prices">
+
 
                 <TextView
                     android:id="@+id/RestaurantAdress"
@@ -114,7 +107,6 @@
                     android:text="Restaurant Adress"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/Prices" />
-            </HorizontalScrollView>
 
             <Button
                 android:id="@+id/Add"
@@ -132,7 +124,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/RestaurantAdressScrollView" />
+                app:layout_constraintTop_toBottomOf="@+id/RestaurantAdress" />
 
             <ImageView
                 android:id="@+id/favourites"

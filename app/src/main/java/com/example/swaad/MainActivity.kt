@@ -16,20 +16,52 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import android.location.Geocoder
+import android.util.Log
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import com.example.swaad.AuthPages.FragmentLogIn
+import com.example.swaad.SplashScreen.splash_screen
+import com.google.android.gms.dynamic.SupportFragmentWrapper
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.navigation.NavigationView
+import java.io.IOException
 import com.example.swaad.SplashScreen.Splash_screen
 import java.util.*
+import java.util.jar.Manifest
 import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() ,OnMapReadyCallback{
+
     companion object {
         var latitude: Double = 2.3434.toDouble()
         var longitude: Double = 0.toDouble()
         lateinit var adress: String
     }
-
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var  mMap:GoogleMap?=null
+    lateinit var mapView:MapView
+    private val MAP_VIEW_BUNDLE_KEY="MapViewBundleKey"
+    override fun onMapReady(googleMap: GoogleMap) {
+            mapView.onResume()
+        mMap=googleMap
+        if(ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED
+                )
+        {
+
+        }
+
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        if (null == savedInstanceState) {
@@ -39,14 +71,15 @@ class MainActivity : AppCompatActivity() {
 //                .commit();
 //        }
         setContentView(R.layout.activity_main)
+        mapView=findViewById<MapView>(R.id.map2)
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(com.example.swaad.R.id.fragment_container, Splash_screen())
+        fragmentTransaction.replace(com.example.swaad.R.id.fragment_container, FragmentLogIn())
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         fetchLocation()
-//        adress = getCompleteAddressString(latitude, longitude).toString()
+//        adress = getAddress(latitude).toString()
     }
 
     fun fetchLocation() {
@@ -66,19 +99,31 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+    fun getAddress(latLng: LatLng): String {
 
+        val geocoder = Geocoder(this)
+        val addresses: List<Address>?
+        val address: Address?
+        var addressText = ""
 
-    private fun getCompleteAddressString(LATITUDE: Double, LONGITUDE: Double): String? {
-        var strAdd = ""
-        val geocoder = Geocoder(this, Locale.getDefault())
-        var adressList=ArrayList<Address>()
-        adressList=geocoder.getFromLocation(LATITUDE,LONGITUDE,1) as ArrayList<Address>
-        if(adressList==null)
-        {
-            return "NOTHING FOUND"
+        try {
+
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+
+            if (null != addresses && !addresses.isEmpty()) {
+                address = addresses[0]
+                for (i in 0 until address.maxAddressLineIndex) {
+                    addressText += if (i == 0) address.getAddressLine(i) else "\n" + address.getAddressLine(i)
+                }
+            }
+
+        } catch (e: IOException) {
+
+            Log.e("GeoCoder", e.localizedMessage)  // ==> throws "Service not Available"
+
         }
-        var realAdress=adressList.get(0).getAddressLine(0)
-        return realAdress
+
+        return addressText
     }
     override fun onBackPressed() {
         val index = supportFragmentManager.getBackStackEntryCount()
@@ -111,6 +156,8 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
+
 
 }
 

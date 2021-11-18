@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import com.example.swaad.ApiRequests.DataClassRestaurantsItem
 import com.example.swaad.RestaurantPageFiles.Restaurant_page
 
-class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRestaurantsItem> ) : Adapter<RecyclerAdapter.ViewHolder> ()
+class RecyclerAdapter(val context: Context,val restaurantData: List     <DataClassRestaurantsItem> ) : Adapter<RecyclerAdapter.ViewHolder> ()
 {
     companion object
     {
@@ -34,7 +35,9 @@ class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRes
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
-        holder.itemImage
+        var Url=restaurantData[position].image
+
+        holder.itemImage.load(Url)
         holder.itemRestaurantName.text=restaurantData[position].rest_name
         holder.Ratings.text= restaurantData[position].avg_rating.toString()
         holder.timeDuration
