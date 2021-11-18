@@ -52,27 +52,7 @@ class Home_page : Fragment() {
         val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
         val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
         locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
-//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(container?.context)
-//        fun fetchLocation()
-//        {
-//            val task: Task<Location> = fusedLocationProviderClient.lastLocation
-//            if (container != null) {
-//                if(ActivityCompat.checkSelfPermission(container.context,android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
-//                    &&ActivityCompat.checkSelfPermission(container.context,android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED)
-//                {
-//                    ActivityCompat.requestPermissions(Activity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),101)
-//                }
-//
-//            }
-//            task.addOnSuccessListener {
-//                if(it!=null)
-//                {
-//                    Toast.makeText(activity,"${it.latitude} ${it.longitude}",Toast.LENGTH_SHORT).show()
-//
-//                }
-//            }
-//        }
-//        fetchLocation()
+
         searchbox.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -132,42 +112,6 @@ class Home_page : Fragment() {
                 Toast.makeText(activity,"Please Reopen Your App",Toast.LENGTH_LONG).show()
             }
         })
-//        layoutManager = GridLayoutManager(container?.context, 2)
-//        val recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
-//        var spanCount=2
-//        var spacing = 30
-//        var includeEdge=false
-//        recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
-//        recyclerView.layoutManager = layoutManager
-//        adapter = RecyclerAdapter()
-
-
-//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-//        //fun that will allow to get last location
-//        fun getLastLocation()
-//        {
-//            //checking permission
-//            if(CheckPermission()){
-//                //now we check if the location is enabled
-//                if(isLocationEnabled())
-//                {
-//                    fusedLocationProviderClient.LastLocation.addOnCompleteListener { task ->
-//                        var location: Location? = task.result
-//                        if (location == null) {
-//
-//                        } else
-//                        {
-//                            val location_text=v.findViewById<TextView>(R.id.LocationText)
-//                            location_text.text=""
-//                        }
-//
-//                    }
-//                }
-//                else
-//                {
-//                    Toast.makeText(this,"Please enable your Location",Toast.LENGTH_SHORT).show()     }
-//            }
-//        }
 
         return v
     }
