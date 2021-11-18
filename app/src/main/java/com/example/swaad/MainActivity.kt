@@ -1,8 +1,6 @@
 package com.example.swaad
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.app.PendingIntent.getActivity
 import android.content.DialogInterface
 import android.widget.Toast
 
@@ -18,14 +16,8 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import android.location.Geocoder
-import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentManager
 import com.example.swaad.AuthPages.FragmentLogIn
-import com.example.swaad.SplashScreen.splash_screen
-import com.google.android.gms.dynamic.SupportFragmentWrapper
-import com.google.android.material.navigation.NavigationView
+import com.example.swaad.SplashScreen.Splash_screen
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -49,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(com.example.swaad.R.id.fragment_container, splash_screen())
+        fragmentTransaction.replace(com.example.swaad.R.id.fragment_container, Splash_screen())
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
@@ -69,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 latitude = it.latitude.toDouble()
                 longitude = it.longitude
             } else {
-                Toast.makeText(applicationContext, "null", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(applicationContext, "null", Toast.LENGTH_SHORT).show()
             }
         }
 

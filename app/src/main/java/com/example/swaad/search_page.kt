@@ -23,16 +23,6 @@ class search_page : Fragment() {
         lateinit var search: String
     }
 
-//    private var param1: String? = null
-//    private var param2: String? = null
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,48 +30,22 @@ class search_page : Fragment() {
     ): View? {
         val v= inflater.inflate(R.layout.fragment_search_page, container, false)
 
-        val searchBtn  = v.findViewById<TextView>(R.id.searchBtn)
+        val searchBtn  = v.findViewById<ImageView>(R.id.searchBtn)
+        val progressBar=v.findViewById<ProgressBar>(R.id.progressBarNew)
         searchBtn.setOnClickListener {
-
-            val searchView = v.findViewById<SearchView>(R.id.searchBtn)
+            progressBar.visibility=View.VISIBLE
+            val searchView = v.findViewById<SearchView>(R.id.searchView2)
             search = searchView.query.toString().trim()
             ordering = "-rest_name"
 
-            RetrofitClient.init().getRestaurantName(ordering, search).enqueue(object :
-                Callback<List<DataGetRestaurantNames>?> {
-                override fun onResponse(
-                    call: Call<List<DataGetRestaurantNames>?>,
-                    response: Response<List<DataGetRestaurantNames>?>
-                ) {
-                    response.body()
-                    val fragmentManager = activity?.supportFragmentManager
-                    val fragmentTransaction = fragmentManager?.beginTransaction()
-                    fragmentTransaction?.replace(R.id.fragment_container, SearchPage2())
-                    fragmentTransaction?.addToBackStack(null)
-                    fragmentTransaction?.commit()
 
-                }
-
-                override fun onFailure(call: Call<List<DataGetRestaurantNames>?>, t: Throwable) {
-//                    progressbar.visibility=View.INVISIBLE
-                    Toast.makeText(activity,"An error has been occurred\n\nPlease try again", Toast.LENGTH_LONG).show()
-                }
-            })
-
-
-
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container, SearchPage2())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+//                    progressBar.visibility=View.INVISIBLE
         }
         return v
     }
-
-//    companion object {
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            search_page().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
 }

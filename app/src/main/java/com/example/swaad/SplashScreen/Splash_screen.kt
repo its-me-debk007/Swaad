@@ -15,7 +15,7 @@ import com.example.swaad.R
 import kotlinx.coroutines.launch
 
 
-class splash_screen : Fragment() {
+class Splash_screen : Fragment() {
 
 //
 //    override fun onCreate(savedInstanceState: Bundle?) {

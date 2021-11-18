@@ -9,20 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.AuthPages.FragmentLogIn
 import com.example.swaad.NavBarPages.MyCart
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.cartList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
-import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishNameList
 
 class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>()  {
 
-    companion object{
-        var itemRemoved: Boolean = false
-        var pos: Int = 0
-    }
-//    val dishesNameList = dishNameList
-//    val dishesCostList = dishCostList
-    val pluses = intArrayOf(R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus)
-    val minuses = intArrayOf(R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus)
+    private val pluses = intArrayOf(R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus, R.drawable.ic_plus)
+    private val minuses = intArrayOf(R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus, R.drawable.ic_minus)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -33,35 +27,27 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapterCart.ViewHolder, position: Int) {
-        holder.itemName.text = dishNameList[position]
-        holder.dishPrice.text = dishCostList[position]
+        holder.itemName.text = cartList[position]
+        holder.dishPrice.text = "₹" + basePriceList[position].toString() + ".00"
         holder.plus.setImageResource(pluses[position])
         holder.minus.setImageResource(minuses[position])
         holder.itemCount.text = dishCount[position].toString()
 
         holder.plus.setOnClickListener {
-            var amount = holder.itemCount.text.toString().toInt()
-            amount++
-            holder.itemCount.text = amount.toString()
-            holder.dishPrice.text = "₹" + (amount * basePriceList[position]).toString() + ".00"
+            dishCount[position]++
+            holder.itemCount.text = dishCount[position].toString()
+//            holder.dishPrice.text = "₹" + (amount * basePriceList[position]).toString() + ".00"
         }
         holder.minus.setOnClickListener {
-            var amount = holder.itemCount.text.toString().toInt()
-            if (amount != 1) {
-                amount--
-                holder.itemCount.text = amount.toString()
-                holder.dishPrice.text = "₹" + (amount * basePriceList[position]).toString() + ".00"
+            dishCount[position]--
+            if (dishCount[position] != 0) {
+                holder.itemCount.text = dishCount[position].toString()
+//                holder.dishPrice.text = "₹" + (amount * basePriceList[position]).toString() + ".00"
             } else {
-                dishNameList.remove(holder.itemName.text)
+                dishCount.removeAt(position)
+                cartList.remove(holder.itemName.text)
                 dishCostList.remove(holder.dishPrice.text)
-                itemRemoved = true
-
-
-                //                    val fragmentManager = activity?.supportFragmentManager
-                //                    val fragmentTransaction = fragmentManager?.beginTransaction()
-                //                    fragmentTransaction?.replace(R.id.fragment_container, MyCart())
-                //                    fragmentTransaction?.addToBackStack(null)
-                //                    fragmentTransaction?.commit()
+//                itemRemoved = true
             }
         }
     }

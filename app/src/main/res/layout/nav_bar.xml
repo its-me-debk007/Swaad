@@ -61,7 +61,7 @@
         app:menu="@menu/menu"
         android:background="#ffff"
         app:itemIconTint="@color/icon_color"
-        app:itemRippleColor="@color/purple_500"
+        app:itemRippleColor="#FFD243"
 
         />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -83,12 +83,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 //    implement 'io.nlopez.smartlocation:library:3.3.3'
 //    implementation 'com.github.prabhat1707:EasyWayLocation:2.2'
-
-
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
-
     implementation 'com.google.android.material:material:1.2.0-alpha04'
 
-    
 }

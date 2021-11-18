@@ -115,7 +115,7 @@ class Home_page : Fragment() {
                 if (container != null) {
                     progressbar.visibility=View.INVISIBLE
                     layoutManager = GridLayoutManager(container?.context, 2)
-                     recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
+                    recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
                     var spanCount=2
                     var spacing = 30
                     var includeEdge=false

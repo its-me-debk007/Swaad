@@ -28,12 +28,12 @@ class NavBarActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, SearchPage2())
+        fragmentTransaction.replace(R.id.fragment_container, Home_page())
         fragmentTransaction.commit()
 
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.demoHome -> replaceFragment(SearchPage2())
+                R.id.demoHome -> replaceFragment(Home_page())
                 R.id.cart -> replaceFragment(MyCart())
                 R.id.myProfile -> replaceFragment(MyProfile())
             }
