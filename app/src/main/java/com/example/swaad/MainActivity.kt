@@ -16,6 +16,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import android.location.Geocoder
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -36,7 +37,7 @@ import java.util.jar.Manifest
 import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity() ,OnMapReadyCallback{
+class MainActivity : AppCompatActivity() {
 
     companion object {
         var latitude: Double = 2.3434.toDouble()
@@ -44,22 +45,22 @@ class MainActivity : AppCompatActivity() ,OnMapReadyCallback{
         lateinit var adress: String
     }
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var  mMap:GoogleMap?=null
-    lateinit var mapView:MapView
-    private val MAP_VIEW_BUNDLE_KEY="MapViewBundleKey"
-    override fun onMapReady(googleMap: GoogleMap) {
-            mapView.onResume()
-        mMap=googleMap
-        if(ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED
-                )
-        {
-
-        }
-
-    }
+//    private var  mMap:GoogleMap?=null
+//    lateinit var mapView:MapView
+//    private val MAP_VIEW_BUNDLE_KEY="MapViewBundleKey"
+//    override fun onMapReady(googleMap: GoogleMap) {
+//            mapView.onResume()
+//        mMap=googleMap
+//        if(ActivityCompat.checkSelfPermission(
+//                this,
+//                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+//                this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED
+//                )
+//        {
+//                return
+//        }
+//        mMap!!.isMyLocationEnabled
+//    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +72,15 @@ class MainActivity : AppCompatActivity() ,OnMapReadyCallback{
 //                .commit();
 //        }
         setContentView(R.layout.activity_main)
-        mapView=findViewById<MapView>(R.id.map2)
+//        mapView=findViewById<MapView>(R.id.map2)
+//        var mapViewBundle:Bundle?=null
+//        if(savedInstanceState != null)
+//        {
+//            mapViewBundle=savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY)
+//
+//        }
+//        mapView.onCreate(mapViewBundle)
+//        mapView.getMapAsync(this)
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(com.example.swaad.R.id.fragment_container, FragmentLogIn())
@@ -157,8 +166,36 @@ class MainActivity : AppCompatActivity() ,OnMapReadyCallback{
         }
     }
 
-
-
+//    public override fun onSaveInstanceState(
+//        outState: Bundle,
+//        outPersistentState: PersistableBundle
+//    ) {
+////        askGalleryPermissionLocation()
+//        var mapViewBundle=outState.getBundle(MAP_VIEW_BUNDLE_KEY)
+//        if(mapViewBundle==null)
+//        {
+//            mapViewBundle= Bundle()
+//            outState.putBundle(MAP_VIEW_BUNDLE_KEY,mapViewBundle)
+//        }
+//        mapView.onSaveInstanceState(mapViewBundle)
+//    }
+//    private fun askGalleryPermissionLocation()
+//    {
+//        askPermission(
+//            android.Manifest.permission.ACCESS_FINE_LOCATION,
+//            android.Manifest.permission.ACCESS_COARSE_LOCATION
+//        ){
+//
+//        }.onDeclined { e ->
+//            if (e.hashDenied())
+//        {
+//
+//        }
+//            e.denied.forEach
+//            {
+//
+//            }}
+//    }
 }
 
 

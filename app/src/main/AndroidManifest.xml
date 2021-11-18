@@ -22,6 +22,7 @@
         android:exported="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:windowSoftInputMode="adjustResize"
         android:theme="@style/Theme.Swaad">
         <activity
             android:name=".MainActivity"
@@ -37,6 +38,7 @@
         <activity android:name=".NavBarActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity android:name=".PaymentActivity" />
+        <activity android:name=".google_maps" />
 
         <meta-data
             android:name="preloaded_fonts"
