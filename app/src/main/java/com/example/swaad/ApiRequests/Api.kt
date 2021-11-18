@@ -1,5 +1,7 @@
 package com.example.swaad.ApiRequests
 
+import com.example.swaad.CategoryFoodItem
+import com.example.swaad.JsonConverterCategory
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -53,6 +55,7 @@ interface Api {
 
   @POST("api/user/signup/sendotp/")
   fun resendOtpSignUp(@Body jsonConverterResendOtp:JsonConverter):Call<ResponseBody >
-
+  @POST("api/seller/customer/restaurants/category/")
+  fun categoryDish(@Body jsonConverterCategory: JsonConverterCategory):Call<List<CategoryFoodItem>>
 
 }

@@ -13,27 +13,30 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import GridSpacingItemDecoration
 import android.app.ActionBar
 import android.app.Activity
+import android.content.Intent
 import android.content.res.Configuration
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.swaad.ApiRequests.DataClassRestaurantsItem
 import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.AuthPages.help_support
-import com.example.swaad.MainActivity
-import com.example.swaad.R
-import com.example.swaad.RecyclerAdapter
-import com.example.swaad.search_page
 import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import androidx.appcompat.app.AppCompatActivity
-
+import com.example.swaad.*
+import com.example.swaad.SearchPage2Files.SearchPage2
 
 
 class Home_page : Fragment() {
+    companion object{
+        var status : String=""
+        lateinit var responseData:Response<List<CategoryFoodItem>?>
+    }
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var responseBody:List<DataClassRestaurantsItem>
     lateinit var recyclerView:RecyclerView
@@ -51,8 +54,39 @@ class Home_page : Fragment() {
         val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
         val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
         val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
-        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
+        val sweets=v.findViewById<TextView>(R.id.Sweets)
+        val jsonConverterCategory=JsonConverterCategory("Sweets")
+        sweets.setOnClickListener {
+            RetrofitClient.init().categoryDish(jsonConverterCategory).enqueue(object : Callback<List<CategoryFoodItem>?> {
+                override fun onResponse(
+                    call: Call<List<CategoryFoodItem>?>,
+                    response: Response<List<CategoryFoodItem>?>
+                ) {
+                        status = "Kunal"
+                        responseData=response
+                    val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+                }
 
+                override fun onFailure(call: Call<List<CategoryFoodItem>?>, t: Throwable) {
+
+                }
+            })
+        }
+        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
+            var location=v.findViewById<ImageView>(R.id.Location)
+        location.setOnClickListener {
+//            val fragmentManager = activity?.supportFragmentManager
+//            val fragmentTransaction = fragmentManager?.beginTransaction()
+//            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container,google_maps())
+//            fragmentTransaction?.addToBackStack(null)
+//            fragmentTransaction?.commit()
+            val intent = Intent(activity,google_maps::class.java)
+            startActivity(intent)
+        }
         searchbox.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -60,32 +94,7 @@ class Home_page : Fragment() {
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
-//        val add = v.findViewById<RecyclerView>(com.example.swaad.R.id.Add)
-//        add.setOnClickListener {
-//            val fragmentManager =activity?.supportFragmentManager
-//            val fragmentTransaction = fragmentManager?.beginTransaction()
-//            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container,Restaurant_page())
-//            fragmentTransaction?.addToBackStack(null)
-//            fragmentTransaction?.commit()
 
-//
-//        }
-        //Runtimepermissions
-//        if (container != null) {
-//            if (ContextCompat.checkSelfPermission(
-//                    container.context,
-//                    android.Manifest.permission.ACCESS_FINE_LOCATION
-//                ) != PackageManager.PERMISSION_GRANTED
-//            ) {
-//                ActivityCompat.requestPermissions(MainActivity(), new String []
-//                {
-//                    android.Manifest.permission.ACCESS_FINE_LOCATION
-//                }, 100
-//                );
-//            }
-//            val location_text = v.findViewById<TextView>(R.id.LocationText)
-//            location_text.text = getlocation()
-//        }
         RetrofitClient.init().getRestaurantDetails().enqueue(object : Callback<List<DataClassRestaurantsItem>?> {
             override fun onResponse(
                 call: Call<List<DataClassRestaurantsItem>?>,
