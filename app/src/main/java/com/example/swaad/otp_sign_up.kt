@@ -57,10 +57,10 @@ class otp_sign_up : Fragment() {
 
         startTimer()
 
-        val otp1=v.findViewById<TextView>(R.id.OtpSignUp1)
-        val otp2=v.findViewById<TextView>(R.id.OtpSignUp2)
-        val otp3=v.findViewById<TextView>(R.id.OtpSignUp3)
-        val otp4=v.findViewById<TextView>(R.id.OtpSignUp4)
+        val otp1=v.findViewById<EditText>(R.id.OtpSignUp1)
+        val otp2=v.findViewById<EditText>(R.id.OtpSignUp2)
+        val otp3=v.findViewById<EditText>(R.id.OtpSignUp3)
+        val otp4=v.findViewById<EditText>(R.id.OtpSignUp4)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBarOtpSignup)
         otp1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -141,11 +141,21 @@ class otp_sign_up : Fragment() {
                         progressBar.visibility=View.INVISIBLE
                         verify.isEnabled = true
                         verify.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+                        otp1.text.clear()
+                        otp2.text.clear()
+                        otp3.text.clear()
+                        otp4.text.clear()
+
                         Toast.makeText(activity, "OTP incorrect", Toast.LENGTH_LONG).show()
                     } else {
                         progressBar.visibility=View.INVISIBLE
                         verify.isEnabled = true
                         verify.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+                        otp1.text.clear()
+                        otp2.text.clear()
+                        otp3.text.clear()
+                        otp4.text.clear()
+
                         Toast.makeText(activity, "OTP expired", Toast.LENGTH_LONG).show()
                     }
 
@@ -154,6 +164,11 @@ class otp_sign_up : Fragment() {
                     progressBar.visibility=View.INVISIBLE
                     verify.isEnabled = true
                     verify.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
+                    otp1.text.clear()
+                    otp2.text.clear()
+                    otp3.text.clear()
+                    otp4.text.clear()
+
                     Toast.makeText(activity, "Crashed  Api", Toast.LENGTH_LONG).show()
                 }
             })

@@ -1,5 +1,6 @@
 package com.example.swaad.ApiRequests
 
+import com.example.swaad.DataGetRestaurantNames
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -22,8 +23,6 @@ interface Api {
     fun getOtp (
         @Body jsonConverter: JsonConverter
     ):Call<ResponseBody>
-
-
 
 
     @POST("api/user/signup/verify/")
@@ -54,5 +53,10 @@ interface Api {
   @POST("api/user/signup/sendotp/")
   fun resendOtpSignUp(@Body jsonConverterResendOtp:JsonConverter):Call<ResponseBody >
 
+  @GET("/api/seller/customer/restaurants/list/")
+  fun getRestaurantName(
+      @Query("ordering")ordering: String,
+      @Query("search")search: String
+  ):Call<List<DataGetRestaurantNames>>
 
 }

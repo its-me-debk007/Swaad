@@ -129,7 +129,7 @@ class ReferenceSignUp : Fragment() {
                 return@setOnClickListener
             }
     val jsonConverterSignUp=JsonConverterSignUP(emailSignUp,password,name)
-            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
+//            Toast.makeText(activity,"Please wait !", Toast.LENGTH_LONG).show()
             RetrofitClient.init().createUser(jsonConverterSignUp).enqueue(object : Callback<ResponseBody?>{
                     override fun onResponse(
                         call: Call<ResponseBody?>,
@@ -149,7 +149,7 @@ class ReferenceSignUp : Fragment() {
                         else if(response.code()==406){
                             progressBar.visibility=View.INVISIBLE
                             Toast.makeText(activity,"Registration was not successful. please enter the details carefully", Toast.LENGTH_LONG).show()
-                            v.findViewById<EditText>(R.id.editTextTextPersonName).text.clear()
+//                            v.findViewById<EditText>(R.id.editTextTextPersonName).text.clear()
                             v.findViewById<TextInputEditText>(R.id.Sign_up_password).text?.clear()
 
                             sign_up.isEnabled = true
@@ -159,6 +159,10 @@ class ReferenceSignUp : Fragment() {
                         {
                             progressBar.visibility=View.INVISIBLE
                             Toast.makeText(activity,"Entered email is already registered", Toast.LENGTH_LONG).show()
+//                            v.findViewById<EditText>(R.id.editTextTextPersonName).text.clear()
+                            v.findViewById<TextInputEditText>(R.id.Sign_up_password).text?.clear()
+                            sign_up.isEnabled = true
+                            sign_up.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                         }
                     }
 

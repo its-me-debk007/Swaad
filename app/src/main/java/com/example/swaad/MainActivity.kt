@@ -1,8 +1,6 @@
 package com.example.swaad
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.app.PendingIntent.getActivity
 import android.content.DialogInterface
 import android.widget.Toast
 
@@ -32,6 +30,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.navigation.NavigationView
 import java.io.IOException
+import com.example.swaad.SplashScreen.Splash_screen
 import java.util.*
 import java.util.jar.Manifest
 import kotlin.collections.ArrayList
@@ -95,7 +94,7 @@ class MainActivity : AppCompatActivity() ,OnMapReadyCallback{
                 latitude = it.latitude.toDouble()
                 longitude = it.longitude
             } else {
-                Toast.makeText(applicationContext, "null", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(applicationContext, "null", Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -5,38 +5,47 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import com.example.swaad.ApiRequests.DataClassRestaurantsItem
+import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.AuthPages.ForgotPassword2
+import com.example.swaad.SearchPage2Files.SearchPage2
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+//private const val ARG_PARAM1 = "param1"
+//private const val ARG_PARAM2 = "param2"
 
 class search_page : Fragment() {
-
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    companion object{
+        lateinit var ordering: String
+        lateinit var search: String
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_search_page, container, false)
-    }
+        val v= inflater.inflate(R.layout.fragment_search_page, container, false)
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            search_page().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val searchBtn  = v.findViewById<ImageView>(R.id.searchBtn)
+        val progressBar=v.findViewById<ProgressBar>(R.id.progressBarNew)
+        searchBtn.setOnClickListener {
+            progressBar.visibility=View.VISIBLE
+            val searchView = v.findViewById<SearchView>(R.id.searchView2)
+            search = searchView.query.toString().trim()
+            ordering = "-rest_name"
+
+
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container, SearchPage2())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+//                    progressBar.visibility=View.INVISIBLE
+        }
+        return v
     }
 }

@@ -14,15 +14,26 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/new_border"
         android:fontFamily="@font/poppins"
+        android:hint="Search here for food"
         android:paddingLeft="45dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:text="Tandori Chicken"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBarSearchPage"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/innerConstraintLayout"
@@ -77,6 +88,8 @@
             app:layout_constraintStart_toEndOf="@+id/nonVegSection"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

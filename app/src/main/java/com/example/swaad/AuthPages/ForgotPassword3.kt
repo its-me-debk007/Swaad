@@ -86,7 +86,7 @@ class ForgotPassword3 : Fragment() {
 
 //            val tokenString = "Token " + tokenValue
 
-            Toast.makeText(activity,"Setting new Password", Toast.LENGTH_LONG).show()
+//            Toast.makeText(activity,"Setting new Password", Toast.LENGTH_LONG).show()
 
             RetrofitClient.init().setNewPassword(newConfirmPasswordText, email).enqueue(object :
                 Callback<DataSetNewPasswordClass?> {
