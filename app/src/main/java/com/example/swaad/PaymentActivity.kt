@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.AuthPages.ForgotPassword2
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import com.razorpay.PaymentResultWithDataListener
@@ -54,15 +56,15 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
 
 
         override fun onPaymentSuccess(p0: String?) {
-            try {
                 Toast.makeText(this, "Suceess in payment", Toast.LENGTH_LONG).show()
-            }
-            catch (e:Exception)
-            {
-                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
-                Log.d("mytag", "onPaymentError hhhhh: "+e.localizedMessage)
-                e.printStackTrace()
-            }
+//                for (i in 0 until dishIdList.size)
+//                val jsonConverterOrderDetails=
+//                RetrofitClient.init().orderUpdate()
+                val fragmentManager = NavBarActivity().supportFragmentManager
+                val fragmentTransaction = fragmentManager?.beginTransaction()
+                fragmentTransaction?.replace(R.id.fragment_container,Rating_Page())
+                fragmentTransaction?.addToBackStack(null)
+                fragmentTransaction?.commit()
         }
 
         override fun onPaymentError(p0: Int, p1: String?) {

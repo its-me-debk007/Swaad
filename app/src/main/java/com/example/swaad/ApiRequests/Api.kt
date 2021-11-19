@@ -65,4 +65,11 @@ interface Api {
   @POST("api/seller/customer/restaurants/category/")
   fun categoryDish(@Body jsonConverterCategory: JsonConverterCategory):Call<List<CategoryFoodItem>>
 
+  @POST("api/seller/ customer/rating/{dish_id}")
+  fun dishRating(@Path("dish_id") dish_id:Int,@Body jsonConverterRating: JsonConverterRating):Call<ResponseBody>
+//  @POST("api/cart/delivery/")
+//  fun yourOrders(@Body jsonConverterOrders: JsonConverterOrders):Call<>
+//  @POST
+  @POST("api/cart/order/latest")
+  fun orderUpdate(@Body jsonConverterOrderDetails: JsonConverterOrderDetails):Call<ResponseBody>
 }
