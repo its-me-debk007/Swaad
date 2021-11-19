@@ -23,16 +23,16 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
         try {
             val co = Checkout()
             Checkout.preload(this)
-            co.setKeyID("rzp_test_88mKGL260K9Vf3")
+            co.setKeyID("rzp_test_pPyQDwFu6wozYU")
             val options = JSONObject()
-            options.put("name", "Razorpay Corp")
-            options.put("description", "Demoing Charges")
+            options.put("name", "Swaad")
+            options.put("description", "Food Charges")
             //You can omit the image option to fetch the image from dashboard
 //            options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
             options.put("theme.color", "#3399cc");
             options.put("currency", "INR");
         //    options.put("order_id", "order_DBJOWzybf0sJbb");
-            options.put("amount", "50000")//pass amount in currency subunits
+            options.put("amount", "500000")//pass amount in currency subunits
 
             val retryObj = JSONObject();
             retryObj.put("enabled", true);

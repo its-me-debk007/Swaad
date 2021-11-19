@@ -11,16 +11,25 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import GridSpacingItemDecoration
+import android.app.ActionBar
+import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.swaad.ApiRequests.DataClassRestaurantsItem
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.AuthPages.help_support
+import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.*
+import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.SearchPage2Files.SearchPage2
 
 
@@ -49,8 +58,80 @@ class Home_page : Fragment() {
         val sweets=v.findViewById<ImageView>(R.id.Sweets)
         val jsonConverterCategory=JsonConverterCategory("Sweets")
 
+        val sweets=v.findViewById<ImageView>(R.id.Sweets)
+        val pizza=v.findViewById<ImageView>(R.id.Pizza)
+        val chinese=v.findViewById<ImageView>(R.id.Chinese)
+        val burger=v.findViewById<ImageView>(R.id.Burger)
+
+        val jsonConverterCategorySweets=JsonConverterCategory("Sweets")
+        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
+        val jsonConverterCategoryChinese=JsonConverterCategory("Chinese")
+        val jsonConverterCategoryBurger=JsonConverterCategory("Burger")
+//        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
+
+        pizza.setOnClickListener {
+            RetrofitClient.init().categoryDish(jsonConverterCategoryPizza).enqueue(object : Callback<List<CategoryFoodItem>?> {
+                override fun onResponse(
+                    call: Call<List<CategoryFoodItem>?>,
+                    response: Response<List<CategoryFoodItem>?>
+                ) {
+                    status = "Kunal"
+                    responseData=response
+                    val fragmentManager = activity?.supportFragmentManager
+                    val fragmentTransaction = fragmentManager?.beginTransaction()
+                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+                    fragmentTransaction?.addToBackStack(null)
+                    fragmentTransaction?.commit()
+                }
+
+                override fun onFailure(call: Call<List<CategoryFoodItem>?>, t: Throwable) {
+
+                }
+            })
+        }
+        burger.setOnClickListener {
+            RetrofitClient.init().categoryDish(jsonConverterCategoryBurger).enqueue(object : Callback<List<CategoryFoodItem>?> {
+                override fun onResponse(
+                    call: Call<List<CategoryFoodItem>?>,
+                    response: Response<List<CategoryFoodItem>?>
+                ) {
+                    status = "Kunal"
+                    responseData=response
+                    val fragmentManager = activity?.supportFragmentManager
+                    val fragmentTransaction = fragmentManager?.beginTransaction()
+                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+                    fragmentTransaction?.addToBackStack(null)
+                    fragmentTransaction?.commit()
+                }
+
+                override fun onFailure(call: Call<List<CategoryFoodItem>?>, t: Throwable) {
+
+                }
+            })
+        }
         sweets.setOnClickListener {
             RetrofitClient.init().categoryDish(jsonConverterCategory).enqueue(object : Callback<List<DataGetDishesList>?> {
+            RetrofitClient.init().categoryDish(jsonConverterCategorySweets).enqueue(object : Callback<List<CategoryFoodItem>?> {
+                override fun onResponse(
+                    call: Call<List<CategoryFoodItem>?>,
+                    response: Response<List<CategoryFoodItem>?>
+                ) {
+                    status = "Kunal"
+                    responseData=response
+                    val fragmentManager = activity?.supportFragmentManager
+                    val fragmentTransaction = fragmentManager?.beginTransaction()
+                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+                    fragmentTransaction?.addToBackStack(null)
+                    fragmentTransaction?.commit()
+                }
+
+                override fun onFailure(call: Call<List<CategoryFoodItem>?>, t: Throwable) {
+
+                }
+            })
+        }
+        chinese.setOnClickListener {
+            RetrofitClient.init().categoryDish(jsonConverterCategoryChinese).enqueue(object : Callback<List<CategoryFoodItem>?> {
                 override fun onResponse(
                     call: Call<List<DataGetDishesList>?>,
                     response: Response<List<DataGetDishesList>?>

@@ -139,7 +139,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/Chinese" />
 
                     <ImageView
-                        android:id="@+id/imageView14"
+                        android:id="@+id/Burger"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
@@ -156,16 +156,16 @@
                         android:layout_marginTop="5dp"
                         android:text="Burger"
                         app:layout_constraintStart_toEndOf="@+id/helpAndSupport"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+                        app:layout_constraintTop_toBottomOf="@+id/Burger" />
 
                     <ImageView
-                        android:id="@+id/imageView15"
+                        android:id="@+id/Pizza"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
                         android:layout_marginTop="28dp"
                         android:src="@drawable/home_page_pizza"
-                        app:layout_constraintStart_toEndOf="@+id/imageView14"
+                        app:layout_constraintStart_toEndOf="@+id/Burger"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -176,10 +176,10 @@
                         android:layout_marginTop="5dp"
                         android:text="Pizza"
                         app:layout_constraintStart_toEndOf="@+id/textView19"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+                        app:layout_constraintTop_toBottomOf="@+id/Pizza" />
 
                     <ImageView
-                        android:id="@+id/imageView16"
+                        android:id="@+id/Paneer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -196,7 +196,7 @@
                         android:layout_marginTop="5dp"
                         android:text="Paneer"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+                        app:layout_constraintTop_toBottomOf="@+id/Paneer" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </HorizontalScrollView>

@@ -17,6 +17,7 @@ import com.example.swaad.MainActivity
 import com.example.swaad.ProfilePages.TermsAndConditions
 import com.example.swaad.R
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 
 class MyProfile: Fragment()  {
     companion object

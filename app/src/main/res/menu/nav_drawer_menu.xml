@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
-    android:id="@+id/mItem1"
-    android:title="Item1"
+    android:id="@+id/myProfile"
+    android:title="My Profile"
         />
     <item
-        android:id="@+id/mItem2"
-        android:title="Item2"
+        android:id="@+id/aboutSwaad"
+        android:title="About Swaad"
         />
     <item
-        android:id="@+id/mItem3"
-        android:title="Item3"
+        android:id="@+id/LogoutHamburger"
+        android:title="Logout"
         />
 </menu>

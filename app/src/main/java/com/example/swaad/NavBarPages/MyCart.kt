@@ -96,8 +96,8 @@ class MyCart: Fragment(),PaymentResultListener {
 
         try {
             val options = JSONObject()
-            options.put("name","Razorpay Corp")
-            options.put("description","Demoing Charges")
+            options.put("name","Swaad")
+            options.put("description","Food Charges")
             //You can omit the image option to fetch the image from dashboard
             options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
             options.put("theme.color", "#3399cc");
