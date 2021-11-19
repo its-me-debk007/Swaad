@@ -32,6 +32,9 @@ import java.lang.Exception
 
 
 class MyCart: Fragment(),PaymentResultListener {
+    companion object{
+        var grantTotal: Int = 0
+    }
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>? = null
 
@@ -57,8 +60,10 @@ class MyCart: Fragment(),PaymentResultListener {
         recyclerViewCart.adapter = adapter
 
         v.findViewById<TextView>(com.example.swaad.R.id.totalPrice).text = "₹" + dishCostList.sum().toString() + ".00"
-        v.findViewById<TextView>(com.example.swaad.R.id.deliveryCharges).text = "₹" + (0.8*dishCostList.sum()).toInt().toString() + ".00"
-        v.findViewById<TextView>(com.example.swaad.R.id.GrantTotalPrice).text = "₹" + ((0.8*dishCostList.sum()).toInt() + dishCostList.sum()).toString() + ".00"
+        v.findViewById<TextView>(com.example.swaad.R.id.deliveryCharges).text = "₹" + (0.05*dishCostList.sum()).toInt().toString() + ".00"
+        v.findViewById<TextView>(com.example.swaad.R.id.GrantTotalPrice).text = "₹" + ((0.05*dishCostList.sum()).toInt() + dishCostList.sum()).toString() + ".00"
+
+        grantTotal = (0.05*dishCostList.sum()).toInt() + dishCostList.sum()
 //        if (itemRemoved) {
 //            RecyclerAdapterCart().notifyItemRemoved(pos)
 //            itemRemoved = false
