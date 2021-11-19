@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.AuthPages.ForgotPassword2
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import com.razorpay.PaymentResultWithDataListener
@@ -57,14 +58,24 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
 
         override fun onPaymentSuccess(p0: String?) {
                 Toast.makeText(this, "Suceess in payment", Toast.LENGTH_LONG).show()
-//                for (i in 0 until dishIdList.size)
-//                val jsonConverterOrderDetails=
+                for (i in 0 until dishIdList.size)
+                {
+                    for(j in 0 until restId.size )
+                    {
+
+                    }
+                    val order = List<OrderDetail>
+                    order.add(dish_id,capacity)
+                    val orderDetail=OrderDetails(order, restaurant_id  )
+
+                }
+                val jsonConverterOrderDetails=
 //                RetrofitClient.init().orderUpdate()
-                val fragmentManager = NavBarActivity().supportFragmentManager
-                val fragmentTransaction = fragmentManager?.beginTransaction()
-                fragmentTransaction?.replace(R.id.fragment_container,Rating_Page())
-                fragmentTransaction?.addToBackStack(null)
-                fragmentTransaction?.commit()
+//                val fragmentManager = NavBarActivity().supportFragmentManager
+//                val fragmentTransaction = fragmentManager?.beginTransaction()
+//                fragmentTransaction?.replace(R.id.fragment_container,Rating_Page())
+//                fragmentTransaction?.addToBackStack(null)
+//                fragmentTransaction?.commit()
         }
 
         override fun onPaymentError(p0: Int, p1: String?) {
