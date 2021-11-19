@@ -35,6 +35,7 @@ class FragmentLogIn: Fragment() {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches()
     }
     companion object{
+        lateinit var token:String
         lateinit var NAME: String
         lateinit var userEmail: String
         var loggedIn:Boolean=false
@@ -173,7 +174,7 @@ class FragmentLogIn: Fragment() {
 //                        responseBody?.status.toString(),
 //                        Toast.LENGTH_LONG
 //                    ).show()
-
+                    token= response.body()?.token.toString()
                         if (response.code() == 200) {
                             NAME = response.body()?.name.toString()
                             loggedIn = true

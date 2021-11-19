@@ -95,8 +95,6 @@ class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRes
             RestaurantAdress=itemView.findViewById(R.id.RestaurantAdress)
             Add=itemView.findViewById(R.id.Add)
             favourites=itemView.findViewById(R.id.favourites)
-            itemRestaurantName.setSelected(true)
-            itemRestaurantName.setEllipsize(TextUtils.TruncateAt.MARQUEE)
             }
         }
 

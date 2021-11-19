@@ -33,15 +33,15 @@ class Restaurant_page : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_restaurant_page, container, false)
-        val rating = v.findViewById<Button>(R.id.ratingButton)
-        rating.setOnClickListener {
-            val fragmentManager = activity?.supportFragmentManager
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container, Rating_Page())
-            fragmentTransaction?.addToBackStack(null)
-            fragmentTransaction?.commit()
-
-        }
+//        val rating = v.findViewById<Button>(R.id.ratingButton)
+//        rating.setOnClickListener {
+//            val fragmentManager = activity?.supportFragmentManager
+//            val fragmentTransaction = fragmentManager?.beginTransaction()
+//            fragmentTransaction?.replace(R.id.fragment_container, Rating_Page())
+//            fragmentTransaction?.addToBackStack(null)
+//            fragmentTransaction?.commit()
+//
+//        }
          val progressBar=v.findViewById<ProgressBar>(R.id.progressBarRestaurantPage)
         layoutManager = LinearLayoutManager(container?.context)
         val back = v.findViewById<ImageView>(R.id.back)

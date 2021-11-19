@@ -172,14 +172,14 @@ class Home_page : Fragment() {
                 call: Call<List<DataClassRestaurantsItem>?>,
                 response: Response<List<DataClassRestaurantsItem>?>
             ) {
-                 responseBody=response.body()!!
+                         responseBody=response.body()!!
                 if (container != null) {
                     progressbar.visibility=View.INVISIBLE
                     layoutManager = GridLayoutManager(container?.context, 2)
                     recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
                     var spanCount=2
                     var spacing = 30
-                    var includeEdge=false
+                    var includeEdge=true
                     recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
                     recyclerView.layoutManager = layoutManager
                     adapter= RecyclerAdapter(container.context,responseBody)
@@ -190,7 +190,34 @@ class Home_page : Fragment() {
 
             override fun onFailure(call: Call<List<DataClassRestaurantsItem>?>, t: Throwable) {
                 progressbar.visibility=View.INVISIBLE
-                Toast.makeText(activity,"Please Reopen Your App",Toast.LENGTH_LONG).show()
+                Toast.makeText(activity,"PleaseCheckYourInterntConnection",Toast.LENGTH_LONG).show()
+                RetrofitClient.init().getRestaurantDetails().enqueue(object : Callback<List<DataClassRestaurantsItem>?> {
+                    override fun onResponse(
+                        call: Call<List<DataClassRestaurantsItem>?>,
+                        response: Response<List<DataClassRestaurantsItem>?>
+                    ) {
+                        responseBody=response.body()!!
+                        if (container != null) {
+                            progressbar.visibility=View.INVISIBLE
+                            layoutManager = GridLayoutManager(container?.context, 2)
+                            recyclerView = v.findViewById<RecyclerView>(com.example.swaad.R.id.RecyclerView)
+                            var spanCount=2
+                            var spacing = 30
+                            var includeEdge=false
+                            recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+                            recyclerView.layoutManager = layoutManager
+                            adapter= RecyclerAdapter(container.context,responseBody)
+                            (adapter as RecyclerAdapter).notifyDataSetChanged()
+                            recyclerView.adapter = adapter
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<DataClassRestaurantsItem>?>, t: Throwable) {
+                        progressbar.visibility=View.INVISIBLE
+                        Toast.makeText(activity,"Please Check Your Internet Connection",Toast.LENGTH_LONG).show()
+
+                    }
+                })
             }
         })
 
