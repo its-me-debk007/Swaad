@@ -46,7 +46,7 @@ class MyCart: Fragment(),PaymentResultListener {
         val v = inflater.inflate(com.example.swaad.R.layout.my_cart, container, false)
         val pay_button = v.findViewById<Button>(com.example.swaad.R.id.payButton)
         val location=v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart)
-        location.text=Home_page.adress
+        location.text="hi"
         pay_button.setOnClickListener{
             val intent = Intent(activity, PaymentActivity::class.java)
             startActivity(intent)

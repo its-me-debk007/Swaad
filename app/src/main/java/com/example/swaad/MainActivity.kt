@@ -32,6 +32,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.navigation.NavigationView
 import java.io.IOException
 import com.example.swaad.SplashScreen.Splash_screen
+import java.lang.Exception
+import java.lang.StringBuilder
 import java.util.*
 import java.util.jar.Manifest
 import kotlin.collections.ArrayList
@@ -40,7 +42,7 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity(){
 
     companion object {
-        var latitude: Double = 2.3434.toDouble()
+        var latitude: Double = 0.toDouble()
         var longitude: Double = 0.toDouble()
         lateinit var adress: String
     }
@@ -72,15 +74,6 @@ class MainActivity : AppCompatActivity(){
 //                .commit();
 //        }
         setContentView(R.layout.activity_main)
-//        mapView=findViewById<MapView>(R.id.map2)
-//        var mapViewBundle:Bundle?=null
-//        if(savedInstanceState != null)
-//        {
-//            mapViewBundle=savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY)
-//
-//        }
-//        mapView.onCreate(mapViewBundle)
-//        mapView.getMapAsync(this)
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(com.example.swaad.R.id.fragment_container, FragmentLogIn())
@@ -88,25 +81,26 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.commit()
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         fetchLocation()
-//        adress = getAddress(latitude).toString()
+        adress = getCompleteAddressString(latitude, longitude).toString()
     }
 
     fun fetchLocation() {
         val task: Task<Location> = fusedLocationProviderClient.lastLocation
-
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
             && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
         }
         task.addOnSuccessListener {
-            if (it != null) {
-                latitude = it.latitude.toDouble()
+            if (it != null)
+            {
+                latitude = it.latitude
                 longitude = it.longitude
-            } else {
-//                Toast.makeText(applicationContext, "null", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                Toast.makeText(applicationContext, "Location Not Added Please try aGAin", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
     fun getAddress(latLng: LatLng): String {
 
@@ -164,6 +158,29 @@ class MainActivity : AppCompatActivity(){
         else {
             super.onBackPressed()
         }
+    }
+    private fun getCompleteAddressString(LATITUDE: Double, LONGITUDE: Double): String? {
+        var strAdd = ""
+        val geocoder = Geocoder(this,Locale.getDefault())
+        try {
+            val addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
+            if (addresses != null) {
+                val returnedAddress = addresses[0]
+                val strReturnedAddress = StringBuilder("")
+                for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                strAdd = strReturnedAddress.toString()
+//                Log.w("My Current loction address", strReturnedAddress.toString())
+            } else {
+//                Log.w("My Current loction address", "No Address returned!")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+//            Log.w("My Current loction address", "Canont get Address!")
+        }
+//        Toast.makeText(context,strAdd,Toast.LENGTH_LONG).show()
+        return strAdd
     }
 }
 

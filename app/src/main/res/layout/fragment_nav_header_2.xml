@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:background="#FFD243"
+    android:background="#FFF3AD"
     tools:context=".NavBarActivity"
     >
 
@@ -24,8 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
         android:layout_marginTop="46dp"
-        android:text="TextView"
-        android:textColor="#EDE7E7"
+        android:fontFamily="@font/poppins"
+        android:text="Hi There"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageView17"
         app:layout_constraintTop_toTopOf="parent" />
 
