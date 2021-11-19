@@ -80,7 +80,7 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
 //        holder.dishPic.setImageResource(dishPics[position])
 
         holder.addBtn.setOnClickListener {
-            if (cartList.size < 5) {
+//            if (cartList.size < 5) {
                 var flag = 0
                 for (i in 0 until dishIdList.size) {
                     if (dishIdList[i] == restaurantData[position].id) {
@@ -96,14 +96,16 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
                     dishCount.add(1)
                     dishIdList.add(restaurantData[position].id)
                     restIdList.add(restaurantData[position].restaurant_id)
+                    holder.addBtn.text = "ADDED: 1"
                 } else {
-
                     dishCount[pos]++
                     dishCostList[pos] = dishCount[pos] * basePriceList[pos]
+                    holder.addBtn.text = "ADDED: ${dishCount[pos]}"
                 }
-            } else {
-                Toast.makeText(context,"You have added the maximum number of elements in the cart", Toast.LENGTH_LONG).show()
-            }
+
+//            } else {
+//                Toast.makeText(context,"You have already added the maximum variety of dishes in the cart", Toast.LENGTH_LONG).show()
+//            }
         }
     }
 

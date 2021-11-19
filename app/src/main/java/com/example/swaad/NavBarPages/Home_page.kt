@@ -35,6 +35,7 @@ import com.example.swaad.SearchPage2Files.SearchPage2
 import android.location.Geocoder
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import com.example.swaad.ApiRequests.DataClass
 import com.example.swaad.AuthPages.FragmentLogIn
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -67,98 +68,98 @@ class Home_page : Fragment() {
         val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
 
         val sweets=v.findViewById<ImageView>(R.id.Sweets)
-        val pizza=v.findViewById<ImageView>(R.id.Pizza)
+        val pizza=v.findViewById<ImageView>(R.id.PizzaSection)
         val chinese=v.findViewById<ImageView>(R.id.Chinese)
         val burger=v.findViewById<ImageView>(R.id.Burger)
 
         val jsonConverterCategorySweets=JsonConverterCategory("Sweets")
-        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
+//        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
         val jsonConverterCategoryChinese=JsonConverterCategory("Chinese")
         val jsonConverterCategoryBurger=JsonConverterCategory("Burger")
-//        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
 
-        pizza.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategoryPizza).enqueue(object : Callback<List<DataGetDishesList>?> {
-                override fun onResponse(
-                    call: Call<List<DataGetDishesList>?>,
-                    response: Response<List<DataGetDishesList>?>
-                ) {
-                    status = "Kunal"
-                    responseDataKunal=response.body()!!
-                    val fragmentManager = activity?.supportFragmentManager
-                    val fragmentTransaction = fragmentManager?.beginTransaction()
-                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-                    fragmentTransaction?.addToBackStack(null)
-                    fragmentTransaction?.commit()
-                }
-
-                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-
-                }
-            })
-
-        }
-        burger.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategoryBurger).enqueue(object : Callback<List<DataGetDishesList>?> {
-                override fun onResponse(
-                    call: Call<List<DataGetDishesList>?>,
-                    response: Response<List<DataGetDishesList>?>
-                ) {
-                    status = "Kunal"
-                    responseDataKunal=response.body()!!
-                    val fragmentManager = activity?.supportFragmentManager
-                    val fragmentTransaction = fragmentManager?.beginTransaction()
-                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-                    fragmentTransaction?.addToBackStack(null)
-                    fragmentTransaction?.commit()
-                }
-
-                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-
-                }
-            })
-        }
-        sweets.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategorySweets).enqueue(object : Callback<List<DataGetDishesList>?> {
-                override fun onResponse(
-                    call: Call<List<DataGetDishesList>?>,
-                    response: Response<List<DataGetDishesList>?>
-                ) {
-                    status = "Kunal"
-                    responseDataKunal=response.body()!!
-                    val fragmentManager = activity?.supportFragmentManager
-                    val fragmentTransaction = fragmentManager?.beginTransaction()
-                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-                    fragmentTransaction?.addToBackStack(null)
-                    fragmentTransaction?.commit()
-                }
-
-                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-
-                }
-            })
-        }
-        chinese.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategoryChinese).enqueue(object : Callback<List<DataGetDishesList>?> {
-                override fun onResponse(
-                    call: Call<List<DataGetDishesList>?>,
-                    response: Response<List<DataGetDishesList>?>
-                ) {
-                        status = "Kunal"
-                     Toast.makeText(container?.context,response.message(),Toast.LENGTH_LONG).show()
-                        responseDataKunal=response.body()!!
-                    val fragmentManager = activity?.supportFragmentManager
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-            fragmentTransaction?.addToBackStack(null)
-            fragmentTransaction?.commit()
-                }
-
-                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-                    Toast.makeText(container?.context,t.message.toString(),Toast.LENGTH_LONG).show()
-                }
-            })
-        }
+//        pizza.setOnClickListener {
+////            RetrofitClient.init().categoryDish(jsonConverterCategoryPizza).enqueue(object : Callback<List<DataGetDishesList>?> {
+//            RetrofitClient.init().getCategoryDishes("pizza").enqueue(object : Callback<List<DataGetDishesList>?> {
+//                override fun onResponse(
+//                    call: Call<List<DataGetDishesList>?>,
+//                    response: Response<List<DataGetDishesList>?>
+//                ) {
+//                    status = "Kunal"
+//                    responseDataKunal=response.body()!!
+//                    val fragmentManager = activity?.supportFragmentManager
+//                    val fragmentTransaction = fragmentManager?.beginTransaction()
+//                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+//                    fragmentTransaction?.addToBackStack(null)
+//                    fragmentTransaction?.commit()
+//                }
+//
+//                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+//
+//                }
+//            })
+//
+//        }
+//        burger.setOnClickListener {
+//            RetrofitClient.init().categoryDish(jsonConverterCategoryBurger).enqueue(object : Callback<List<DataGetDishesList>?> {
+//                override fun onResponse(
+//                    call: Call<List<DataGetDishesList>?>,
+//                    response: Response<List<DataGetDishesList>?>
+//                ) {
+//                    status = "Kunal"
+//                    responseDataKunal=response.body()!!
+//                    val fragmentManager = activity?.supportFragmentManager
+//                    val fragmentTransaction = fragmentManager?.beginTransaction()
+//                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+//                    fragmentTransaction?.addToBackStack(null)
+//                    fragmentTransaction?.commit()
+//                }
+//
+//                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+//
+//                }
+//            })
+//        }
+//        sweets.setOnClickListener {
+//            RetrofitClient.init().categoryDish(jsonConverterCategorySweets).enqueue(object : Callback<List<DataGetDishesList>?> {
+//                override fun onResponse(
+//                    call: Call<List<DataGetDishesList>?>,
+//                    response: Response<List<DataGetDishesList>?>
+//                ) {
+//                    status = "Kunal"
+//                    responseDataKunal=response.body()!!
+//                    val fragmentManager = activity?.supportFragmentManager
+//                    val fragmentTransaction = fragmentManager?.beginTransaction()
+//                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+//                    fragmentTransaction?.addToBackStack(null)
+//                    fragmentTransaction?.commit()
+//                }
+//
+//                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+//
+//                }
+//            })
+//        }
+//        chinese.setOnClickListener {
+//            RetrofitClient.init().categoryDish(jsonConverterCategoryChinese).enqueue(object : Callback<List<DataGetDishesList>?> {
+//                override fun onResponse(
+//                    call: Call<List<DataGetDishesList>?>,
+//                    response: Response<List<DataGetDishesList>?>
+//                ) {
+//                        status = "Kunal"
+//                     Toast.makeText(container?.context,response.message(),Toast.LENGTH_LONG).show()
+//                        responseDataKunal=response.body()!!
+//                    val fragmentManager = activity?.supportFragmentManager
+//            val fragmentTransaction = fragmentManager?.beginTransaction()
+//            fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+//            fragmentTransaction?.addToBackStack(null)
+//            fragmentTransaction?.commit()
+//                }
+//
+//                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+//                    Toast.makeText(container?.context,t.message.toString(),Toast.LENGTH_LONG).show()
+//                }
+//            })
+//        }
         val adresslocation=getCompleteAddressString(MainActivity.latitude,MainActivity.longitude).toString()
         lifecycleScope.launch {
             FragmentLogIn.saveInfo("adress",adresslocation)
@@ -182,7 +183,7 @@ class Home_page : Fragment() {
         searchbox.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container, search_page())
+            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container, SearchPage2())
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }

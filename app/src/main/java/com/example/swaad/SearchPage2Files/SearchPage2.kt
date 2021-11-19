@@ -1,6 +1,8 @@
 package com.example.swaad.SearchPage2Files
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,24 +38,78 @@ class SearchPage2: Fragment() {
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBarSearchPage)
 
         if(status == "Kunal"){
-            if (container != null) {
-                layoutManager = LinearLayoutManager(container?.context)
-                val recyclerViewSearchPage2 =
-                    v.findViewById<RecyclerView>(R.id.recyclerViewSearchPage2)
-                recyclerViewSearchPage2.layoutManager = layoutManager
-                adapter = RecyclerAdapterSearchPage(container.context, responseDataKunal)
-                recyclerViewSearchPage2.adapter = adapter
+            try {
+                if (container != null) {
+                    layoutManager = LinearLayoutManager(container?.context)
+                    val recyclerViewSearchPage2 =
+                        v.findViewById<RecyclerView>(R.id.recyclerViewSearchPage2)
+                    recyclerViewSearchPage2.layoutManager = layoutManager
+                    adapter = RecyclerAdapterSearchPage(container.context, responseDataKunal)
+                    recyclerViewSearchPage2.adapter = adapter
+                }
+            }
+            catch (e: Exception){
+                Toast.makeText(activity, "Oops! The search result cannot be loaded", Toast.LENGTH_LONG).show()
             }
         }
         status = "Debashish"
+        val searchText = v.findViewById<EditText>(R.id.searchBar)
+
+//        searchText.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                if(s.toString().isNotEmpty()){
+//                    RetrofitClient.init().getRestaurantName("-dish_name", s.toString()).enqueue(object :
+//                        Callback<List<DataGetDishesList>?> {
+//                        override fun onResponse(
+//                            call: Call<List<DataGetDishesList>?>,
+//                            response: Response<List<DataGetDishesList>?>
+//                        ) {
+//                            try {
+//                                responseDataDebashish = response.body()!!
+//                                if (container != null) {
+//                                    progressBar.visibility = View.INVISIBLE
+//                                    layoutManager = LinearLayoutManager(container?.context)
+//                                    val recyclerViewSearchPage2 =
+//                                        v.findViewById<RecyclerView>(R.id.recyclerViewSearchPage2)
+//                                    recyclerViewSearchPage2.layoutManager = layoutManager
+//
+//                                    adapter = RecyclerAdapterSearchPage(container.context, responseDataDebashish)
+//                                    recyclerViewSearchPage2.adapter = adapter
+//                                }
+//                            } catch (e: Exception) {
+//                                progressBar.visibility = View.INVISIBLE
+//                                Toast.makeText(activity, "Oops! The search result cannot be loaded", Toast.LENGTH_LONG).show()
+//                            }
+//
+//                        }
+//
+//                        override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+//                            Toast.makeText(
+//                                activity,
+//                                "An error has been occurred\n\nPlease try again",
+//                                Toast.LENGTH_LONG
+//                            ).show()
+//                        }
+//                    })
+//                }
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+
         val searchBtn  = v.findViewById<ImageView>(R.id.searchBtn)
         searchBtn.setOnClickListener {
             progressBar.visibility=View.VISIBLE
-            val searchText = v.findViewById<EditText>(R.id.searchBar)
-            var search = searchText.text.toString().trim()
-            var ordering = "-dish_name"
 
-            RetrofitClient.init().getRestaurantName(ordering, search).enqueue(object :
+            var search = searchText.text.toString().trim()
+
+            RetrofitClient.init().getRestaurantName("-dish_name", search).enqueue(object :
                 Callback<List<DataGetDishesList>?> {
                 override fun onResponse(
                     call: Call<List<DataGetDishesList>?>,

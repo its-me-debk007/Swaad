@@ -1,5 +1,6 @@
 package com.example.swaad.ApiRequests
 
+import androidx.transition.Slide
 import com.example.swaad.CategoryFoodItem
 import com.example.swaad.DataGetDishesList
 import com.example.swaad.JsonConverterCategory
@@ -64,7 +65,7 @@ interface Api {
       @Query("search")search: String
   ):Call<List<DataGetDishesList>>
 
-  @POST("api/seller/customer/restaurants/category/")
+  @GET("api/seller/customer/restaurants/category/")
   fun categoryDish(@Body jsonConverterCategory: JsonConverterCategory):Call<List<DataGetDishesList>>
 
   @POST("api/seller/ customer/rating/{dish_id}")
@@ -74,4 +75,10 @@ interface Api {
 //  @POST
   @POST("api/cart/order/latest")
   fun orderUpdate(@Body jsonConverterOrderDetails: JsonConverterOrderDetails):Call<ResponseBody>
+
+  @GET("/api/seller/customer/restaurants/category/")
+  fun getCategoryDishes(
+      @Field("category")category: String
+  ):Call<List<DataGetDishesList>>
+
 }

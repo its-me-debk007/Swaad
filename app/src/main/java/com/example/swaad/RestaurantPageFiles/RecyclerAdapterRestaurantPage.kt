@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import coil.load
@@ -35,27 +36,32 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var Url=dishData[position].photo
         holder.dishImage.load(Url)
-        holder.dishCost.text=dishData[position].price.toString()
+        holder.dishCost.text= "₹" + dishData[position].price.toString() + ".00"
         holder.dishName.text=dishData[position].title
         holder.addToCart.setOnClickListener {
-            var flag = 0
-            for (i in 0 until dishIdList.size) {
-                if (dishIdList[i] == dishData[position].id) {
-                    flag = 1
-                    pos = i
-                    break
+            if (cartList.size < 5) {
+                var flag = 0
+                for (i in 0 until dishIdList.size) {
+                    if (dishIdList[i] == dishData[position].id) {
+                        flag = 1
+                        pos = i
+                        break
+                    }
                 }
-            }
-            if (flag == 0) {
-                cartList.add(holder.dishName.text.toString())
-                dishCostList.add(dishData[position].price)
-                basePriceList.add(dishData[position].price)
-                dishCount.add(1)
-                dishIdList.add(dishData[position].id)
-                restIdList.add(dishData[position].restaurant_id)
+                if (flag == 0) {
+                    cartList.add(holder.dishName.text.toString())
+                    dishCostList.add(dishData[position].price)
+                    basePriceList.add(dishData[position].price)
+                    dishCount.add(1)
+                    dishIdList.add(dishData[position].id)
+                    restIdList.add(dishData[position].restaurant_id)
+                } else {
+                    dishCount[pos]++
+                    dishCostList[pos] = dishCount[pos] * basePriceList[pos]
+                }
+                holder.addToCart.text = "ADDED: ${dishCount[pos]}"
             } else {
-                dishCount[pos]++
-                dishCostList[pos] = dishCount[pos] * basePriceList[pos]
+                Toast.makeText(context,"You have already added the maximum variety of dishes in the cart", Toast.LENGTH_LONG).show()
             }
         }
 

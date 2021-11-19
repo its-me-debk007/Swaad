@@ -160,7 +160,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/Burger" />
 
                     <ImageView
-                        android:id="@+id/Pizza"
+                        android:id="@+id/PizzaSection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
@@ -177,7 +177,7 @@
                         android:layout_marginTop="5dp"
                         android:text="Pizza"
                         app:layout_constraintStart_toEndOf="@+id/textView19"
-                        app:layout_constraintTop_toBottomOf="@+id/Pizza" />
+                        app:layout_constraintTop_toBottomOf="@+id/PizzaSection" />
 
                     <ImageView
                         android:id="@+id/Paneer"
