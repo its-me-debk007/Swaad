@@ -168,7 +168,7 @@ class Home_page : Fragment() {
             locationtext.text=adress
         }
 //        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
-        locationtext.text=adress.toString()
+        locationtext.text=adress
             var location=v.findViewById<ImageView>(R.id.Location)
 //        location.setOnClickListener {
 ////            val fragmentManager = activity?.supportFragmentManager
@@ -320,6 +320,47 @@ class Home_page : Fragment() {
 //        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient()
 
 
+//        fun to check the user permission
+//    fun CheckPermission():Boolean
+//    {
+//        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED ||
+//            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED)
+//        {
+//            return true
+//        }
+//        return false
+//    }
+//    //        Now we need to take create a function that will allow us to get user permission
+//    fun RequestPermission()
+//    {
+//        ActivityCompat.requestPermissions(
+//            this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),permission_id
+//        )
+//    }
+//    //      a function that check if the location service of the device  is enabled
+//    fun isLocationEnabled():Boolean
+//    {
+//        var locationManager:LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+//    }
+//
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        // it is a bulit in function that checks the permission result
+//        // you will use it just for debugging the code
+//        if(requestCode==permission_id)
+//        {
+//            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+//            {
+//              error("You have the permission")
+//            }
+//        }
+//    }
+//
+//}
 //        fun to check the user permission
 //    fun CheckPermission():Boolean
 //    {

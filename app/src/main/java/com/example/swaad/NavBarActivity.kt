@@ -56,7 +56,7 @@ class NavBarActivity : AppCompatActivity() {
         val drawerLayout=findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView=findViewById<NavigationView>(R.id.navView)
         val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
-        val hamburgerEmail=findViewById<TextView>(R.id.hamburger_email)
+//        val hamburgerEmail=findViewById<TextView>(R.id.hamburger_email)
 //        hamburgerName.setText(MyProfile.name)
 //        hamburgerEmail.setText(MyProfile.useremail)
 //        mapView=findViewById<MapView>(R.id.map2)

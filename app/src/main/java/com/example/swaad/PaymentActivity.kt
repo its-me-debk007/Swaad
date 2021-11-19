@@ -1,14 +1,18 @@
 package com.example.swaad
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.ApiRequests.JsonConverterOrderDetails
 import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.AuthPages.ForgotPassword2
+import com.example.swaad.NavBarPages.MyCart
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
@@ -20,17 +24,33 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
 class PaymentActivity:AppCompatActivity(),PaymentResultListener
+
 {
+    var GrandTotal=MyCart.grantTotal
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Checkout.preload(applicationContext)
 //        setContentView(R.layout.redirectingpayment)
         makePayment()
-        val intent = Intent(this, NavBarActivity()::class.java)
-        startActivity(intent)
+        Timer("SettingUp", false).schedule(500) {
+            val dialodView =
+                LayoutInflater.from(applicationContext).inflate(R.layout.fragment_confirm_order_dialog, null)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(applicationContext)
+            val mBuilder = AlertDialog.Builder(applicationContext)
+                .setView(dialodView)
+                .setTitle("Order Confirmation")
+            mBuilder.show()
+        }
+                val intent = Intent(this, NavBarActivity()::class.java)
+                startActivity(intent)
+
+
     }
     fun makePayment() {
         try {
@@ -45,8 +65,7 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
             options.put("theme.color", "#3399cc");
             options.put("currency", "INR");
         //    options.put("order_id", "order_DBJOWzybf0sJbb");
-            options.put("amount", "500000")//pass amount in currency subunits
-
+            options.put("amount", GrandTotal*100)//pass amount in currency subunits
             val retryObj = JSONObject();
             retryObj.put("enabled", true);
             retryObj.put("max_count", 4);
@@ -58,30 +77,7 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
 
             options.put("prefill", prefill)
             co.open(this, options)
-            for (i in  dishIdList) {
-                var restaurant_id = restIdList[i].toInt()
-                var orderDetail = ArrayList<OrderDetail>()
-                orderDetail.add(OrderDetail(dishIdList[i],dishCount[i]))
-                for (j in 0 until i) {
-                    if (restIdList[j] == restaurant_id) {
-//                            var orderDetailsItem = OrderDetails(orderDetail, restaurant_id)
-                        orderDetail.add(OrderDetail(dishIdList[i], dishCount[i]))
-                    }
-                }
-                var jsonConverterOrderDetails=JsonConverterOrderDetails(restaurant_id,orderDetail)
-                RetrofitClient.init().orderUpdate(jsonConverterOrderDetails).enqueue(object : Callback<ResponseBody?> {
-                    override fun onResponse(
-                        call: Call<ResponseBody?>,
-                        response: Response<ResponseBody?>
-                    ) {
-                        Toast.makeText(PaymentActivity(), response.message().toString(), Toast.LENGTH_LONG).show()
-                    }
 
-                    override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                        Toast.makeText(PaymentActivity(),"Not",Toast.LENGTH_LONG).show()
-                    }
-                })
-            }
         } catch (e: Exception) {
             Toast.makeText(this, "Error in payment: " + e.message, Toast.LENGTH_LONG)
                 .show()
