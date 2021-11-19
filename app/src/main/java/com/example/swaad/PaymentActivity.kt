@@ -5,13 +5,20 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.swaad.ApiRequests.JsonConverterOrderDetails
 import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.AuthPages.ForgotPassword2
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import com.razorpay.PaymentResultWithDataListener
+import okhttp3.ResponseBody
 import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PaymentActivity:AppCompatActivity(),PaymentResultListener
 {
@@ -58,18 +65,32 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
 
         override fun onPaymentSuccess(p0: String?) {
                 Toast.makeText(this, "Suceess in payment", Toast.LENGTH_LONG).show()
-                for (i in 0 until dishIdList.size)
-                {
-                    for(j in 0 until restId.size )
-                    {
-
+                for (i in  dishIdList) {
+                    var restaurant_id = restIdList[i].toInt()
+                    var orderDetail = ArrayList<OrderDetail>()
+                    orderDetail.add(OrderDetail(dishIdList[i],dishCount[i]))
+                    for (j in 0 until i) {
+                        if (restIdList[j] == restaurant_id) {
+//                            var orderDetailsItem = OrderDetails(orderDetail, restaurant_id)
+                            orderDetail.add(OrderDetail(dishIdList[i], dishCount[i]))
+                        }
                     }
-                    val order = List<OrderDetail>
-                    order.add(dish_id,capacity)
-                    val orderDetail=OrderDetails(order, restaurant_id  )
+                    var jsonConverterOrderDetails=JsonConverterOrderDetails(restaurant_id,orderDetail)
+                    RetrofitClient.init().orderUpdate(jsonConverterOrderDetails).enqueue(object : Callback<ResponseBody?> {
+                        override fun onResponse(
+                            call: Call<ResponseBody?>,
+                            response: Response<ResponseBody?>
+                        ) {
+                                Toast.makeText(PaymentActivity(), response.message().toString(), Toast.LENGTH_LONG).show()
+                        }
 
+                        override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                            TODO("Not yet implemented")
+                        }
+                    })
                 }
-                val jsonConverterOrderDetails=
+
+//                val jsonConverterOrderDetails=
 //                RetrofitClient.init().orderUpdate()
 //                val fragmentManager = NavBarActivity().supportFragmentManager
 //                val fragmentTransaction = fragmentManager?.beginTransaction()

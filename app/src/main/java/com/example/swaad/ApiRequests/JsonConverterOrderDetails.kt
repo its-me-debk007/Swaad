@@ -1,8 +1,10 @@
 package com.example.swaad.ApiRequests
 
-class JsonConverterOrderDetails(restaurant_id:String,orderDetails:List<String>) {
-    val restaurant_id : String
-    val orderDetails:List<String>
+import com.example.swaad.OrderDetail
+
+class JsonConverterOrderDetails(restaurant_id:Int,orderDetails:List<OrderDetail>) {
+    val restaurant_id : Int
+    val orderDetails:List<OrderDetail>
     init {
         this.restaurant_id=restaurant_id
         this.orderDetails=orderDetails
