@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.*
 import com.example.swaad.NavBarPages.Home_page.Companion.responseDataKunal
@@ -23,7 +24,7 @@ import com.google.android.material.button.MaterialButton
 class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<DataGetDishesList>): RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
 
     companion object{
-        var dataSize: Int = 0
+        var toastMaker: Boolean = false
         var pos: Int = 0
     }
 
@@ -79,7 +80,8 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
 //        holder.dishPic.setImageResource(dishPics[position])
 
         holder.addBtn.setOnClickListener {
-            var flag = 0
+            if (cartList.size < 5) {
+                var flag = 0
                 for (i in 0 until dishIdList.size) {
                     if (dishIdList[i] == restaurantData[position].id) {
                         flag = 1
@@ -99,7 +101,10 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
                     dishCount[pos]++
                     dishCostList[pos] = dishCount[pos] * basePriceList[pos]
                 }
+            } else {
+                Toast.makeText(context,"You have added the maximum number of elements in the cart", Toast.LENGTH_LONG).show()
             }
+        }
     }
 
     override fun getItemCount(): Int {
