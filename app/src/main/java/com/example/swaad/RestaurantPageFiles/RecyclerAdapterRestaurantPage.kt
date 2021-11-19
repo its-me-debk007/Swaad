@@ -21,6 +21,7 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
         var basePriceList = mutableListOf<Int>()
         var dishCount = mutableListOf<Int>()
         var dishIdList = mutableListOf<Int>()
+        var restIdList = mutableListOf<Int>()
     }
     var pos:Int = 0
 //    private var arraydishImage = intArrayOf(R.drawable.home_page_burger,R.drawable.home_page_burger,R.drawable.home_page_burger)
@@ -51,6 +52,7 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
                 basePriceList.add(dishData[position].price)
                 dishCount.add(1)
                 dishIdList.add(dishData[position].id)
+                restIdList.add(dishData[position].restaurant_id)
             } else {
                 dishCount[pos]++
                 dishCostList[pos] = dishCount[pos] * basePriceList[pos]

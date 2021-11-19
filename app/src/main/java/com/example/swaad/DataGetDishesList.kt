@@ -7,5 +7,6 @@ data class DataGetDishesList(
     val veg: String,
     val category: String,
     val image: String,
-    val restaurant_name: String
+    val restaurant_name: String,
+    val restaurant_id: Int
 )

@@ -16,6 +16,7 @@ import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Compa
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
 import com.example.swaad.SearchPage2Files.SearchPage2.Companion.responseDataDebashish
 import com.google.android.material.button.MaterialButton
 
@@ -92,6 +93,7 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
                     basePriceList.add(restaurantData[position].price)
                     dishCount.add(1)
                     dishIdList.add(restaurantData[position].id)
+                    restIdList.add(restaurantData[position].restaurant_id)
                 } else {
 
                     dishCount[pos]++
