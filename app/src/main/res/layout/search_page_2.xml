@@ -24,6 +24,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/searchBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="35dp"
+        android:src="@drawable/ic_home_page_search"
+        app:layout_constraintEnd_toEndOf="@+id/searchBar"
+        app:layout_constraintTop_toTopOf="@+id/searchBar" />
+
     <ProgressBar
         android:id="@+id/progressBarSearchPage"
         style="?android:attr/progressBarStyle"

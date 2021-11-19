@@ -11,23 +11,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import GridSpacingItemDecoration
-import android.app.ActionBar
-import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
-import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.drawerlayout.widget.DrawerLayout
 import com.example.swaad.ApiRequests.DataClassRestaurantsItem
 import com.example.swaad.ApiRequests.RetrofitClient
-import com.example.swaad.AuthPages.help_support
-import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.*
 import com.example.swaad.SearchPage2Files.SearchPage2
 
@@ -35,7 +27,7 @@ import com.example.swaad.SearchPage2Files.SearchPage2
 class Home_page : Fragment() {
     companion object{
         var status : String=""
-        lateinit var responseData:Response<List<CategoryFoodItem>?>
+        lateinit var responseDataKunal: List<DataGetDishesList>
     }
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var responseBody:List<DataClassRestaurantsItem>
@@ -49,21 +41,22 @@ class Home_page : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val v= inflater.inflate(com.example.swaad.R.layout.fragment_home_page, container, false)
         val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
         val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
         val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
-        val sweets=v.findViewById<TextView>(R.id.Sweets)
+        val sweets=v.findViewById<ImageView>(R.id.Sweets)
         val jsonConverterCategory=JsonConverterCategory("Sweets")
+
         sweets.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategory).enqueue(object : Callback<List<CategoryFoodItem>?> {
+            RetrofitClient.init().categoryDish(jsonConverterCategory).enqueue(object : Callback<List<DataGetDishesList>?> {
                 override fun onResponse(
-                    call: Call<List<CategoryFoodItem>?>,
-                    response: Response<List<CategoryFoodItem>?>
+                    call: Call<List<DataGetDishesList>?>,
+                    response: Response<List<DataGetDishesList>?>
                 ) {
                         status = "Kunal"
-                        responseData=response
+                        responseDataKunal=response.body()!!
                     val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
@@ -71,7 +64,7 @@ class Home_page : Fragment() {
             fragmentTransaction?.commit()
                 }
 
-                override fun onFailure(call: Call<List<CategoryFoodItem>?>, t: Throwable) {
+                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
 
                 }
             })

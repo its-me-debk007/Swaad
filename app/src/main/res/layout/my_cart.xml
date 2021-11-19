@@ -161,7 +161,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
     <ImageView
-        android:id="@+id/imageView13"
+        android:id="@+id/timerIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
@@ -198,7 +198,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <ImageView
-        android:id="@+id/Sweets"
+        android:id="@+id/timerIcon2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"

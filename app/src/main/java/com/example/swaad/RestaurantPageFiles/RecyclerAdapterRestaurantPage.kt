@@ -16,7 +16,7 @@ import com.example.swaad.R
 class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<RestaurantDishesItem>):Adapter<RecyclerAdapterRestaurantPage.ViewHolder>(){
     companion object{
         var cartList = mutableListOf<String>()
-        var dishCostList = mutableListOf<String>()
+        var dishCostList = mutableListOf<Int>()
         var basePriceList = mutableListOf<Int>()
         var dishCount = mutableListOf<Int>()
     }

@@ -28,7 +28,7 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
 
     override fun onBindViewHolder(holder: RecyclerAdapterCart.ViewHolder, position: Int) {
         holder.itemName.text = cartList[position]
-        holder.dishPrice.text = "₹" + basePriceList[position].toString() + ".00"
+        holder.dishPrice.text = "₹" + dishCostList[position] + ".00"
         holder.plus.setImageResource(pluses[position])
         holder.minus.setImageResource(minuses[position])
         holder.itemCount.text = dishCount[position].toString()
@@ -36,18 +36,18 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
         holder.plus.setOnClickListener {
             dishCount[position]++
             holder.itemCount.text = dishCount[position].toString()
-//            holder.dishPrice.text = "₹" + (amount * basePriceList[position]).toString() + ".00"
+            holder.dishPrice.text = "₹" + (basePriceList[position] * dishCount[position]).toString() + ".00"
         }
         holder.minus.setOnClickListener {
             dishCount[position]--
             if (dishCount[position] != 0) {
                 holder.itemCount.text = dishCount[position].toString()
-//                holder.dishPrice.text = "₹" + (amount * basePriceList[position]).toString() + ".00"
+                holder.dishPrice.text = "₹" + (basePriceList[position] * dishCount[position]).toString() + ".00"
             } else {
                 dishCount.removeAt(position)
-                cartList.remove(holder.itemName.text)
-                dishCostList.remove(holder.dishPrice.text)
-//                itemRemoved = true
+                cartList.removeAt(position)
+                dishCostList.removeAt(position)
+                basePriceList.removeAt(position)
             }
         }
     }

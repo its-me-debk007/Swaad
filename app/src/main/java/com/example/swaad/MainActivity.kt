@@ -23,7 +23,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.example.swaad.AuthPages.FragmentLogIn
-import com.example.swaad.SplashScreen.splash_screen
+//import com.example.swaad.SplashScreen.splash_screen
 import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -37,7 +37,7 @@ import java.util.jar.Manifest
 import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity() ,OnMapReadyCallback{
+class MainActivity : AppCompatActivity(){
 
     companion object {
         var latitude: Double = 2.3434.toDouble()

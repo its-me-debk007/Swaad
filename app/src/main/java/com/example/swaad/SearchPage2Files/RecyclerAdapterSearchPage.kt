@@ -8,53 +8,24 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.swaad.CategoryFoodItem
+import com.example.swaad.DataGetDishesList
 import com.example.swaad.DataGetRestaurantNames
+import com.example.swaad.NavBarPages.Home_page.Companion.responseDataKunal
+import com.example.swaad.NavBarPages.Home_page.Companion.status
 import com.example.swaad.R
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.cartList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
+import com.example.swaad.SearchPage2Files.SearchPage2.Companion.responseDataDebashish
+import com.google.android.material.button.MaterialButton
 
-class RecyclerAdapterSearchPage(val context: Context,val restaurantData: List<DataGetRestaurantNames>): RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
+class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<DataGetDishesList>): RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
 
-//    private val restaurants = arrayOf("By Roma cafe n Dinner1","By Roma cafe n Dinner2","By Roma cafe n Dinner3", "By Roma cafe n Dinner4", "By Roma cafe n Dinner5")
-//    private val dishes = arrayOf("Tandori chicken1", "Tandori chicken2", "Tandori chicken3", "Tandori chicken4", "Tandori chicken5")
-//    private val categories = arrayOf("In Main Course", "In Main Course", "In Main Course", "In Main Course", "In Main Course")
-    private val prices = arrayOf(
-        "₹301.00",
-        "₹302.00",
-        "₹303.00",
-        "₹304.00",
-        "₹305.00",
-        "₹302.00",
-        "₹303.00",
-        "₹302.00",
-        "₹303.00",
-        "₹302.00",
-        "₹303.00",
-        "₹302.00",
-        "₹303.00",
-        "₹302.00",
-        "₹303.00",
-        "₹302.00",
-        "₹303.00",
-        "₹302.00",
-        "₹303.00",
-        "₹302.00",
-        "₹303.00",
-        "₹302.00",
-        "₹303.00")
-//    private val bestsellers = arrayOf("Bestseller", "Bestseller", "Bestseller", "Bestseller", "Bestseller")
-//    private val dishPics = intArrayOf(
-//        R.drawable.ic_cart,
-//        R.drawable.ic_cart,
-//        R.drawable.ic_cart,
-//        R.drawable.ic_cart,
-//        R.drawable.ic_cart,
-//        R.drawable.ic_cart,
-//        R.drawable.ic_cart,
-//        R.drawable.ic_cart,
-//        R.drawable.ic_cart
-//    )
+    companion object{
+        var dataSize: Int = 0
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -62,33 +33,69 @@ class RecyclerAdapterSearchPage(val context: Context,val restaurantData: List<Da
     ): RecyclerAdapterSearchPage.ViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.search_page2_card_view, parent, false)
+
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapterSearchPage.ViewHolder, position: Int) {
 //        holder.restaurantName.text = restaurants[position]
 //        holder.dishName.text = restNames[position].rest_name
-        holder.dishName.text = restaurantData[position].rest_name
-//        holder.categoryName.text = categories[position]
-        holder.priceValue.text = prices[position]
+//        if (status == "Kunal") {
+//            val restaurantData: List<CategoryFoodItem> = responseDataKunal
+//            dataSize = restaurantData.size
+//
+//            holder.dishName.text = restaurantData[position].title
+////        holder.categoryName.text = categories[position]
+//            holder.priceValue.text = prices[position]
+////        holder.bestseller.text = bestsellers[position]
+////        holder.dishPic.setImageResource(dishPics[position])
+//
+//            holder.addBtn.setOnClickListener {
+//                var flag = 0
+//                for (dish in cartList) {
+//                    if (dish == holder.dishName.text.toString()) {
+//                        flag = 1
+//                        break
+//                    }
+//                }
+//                if (flag == 0) {
+//                    cartList.add(holder.dishName.text.toString())
+//                    dishCostList.add(holder.priceValue.text.toString())
+//                    dishCount.add(position, 1)
+//                } else
+//                    dishCount[position]++
+//            }
+//
+//        } else {
+//            val restaurantData: List<DataGetRestaurantNames> = responseDataDebashish
+//            dataSize = restaurantData.size
+            holder.restaurantName.text = "By " + restaurantData[position].restaurant_name
+            holder.dishName.text = restaurantData[position].title
+            holder.categoryName.text = "In " + restaurantData[position].category
+            holder.priceValue.text = "₹" + restaurantData[position].price.toString() +"0"
 //        holder.bestseller.text = bestsellers[position]
 //        holder.dishPic.setImageResource(dishPics[position])
 
         holder.addBtn.setOnClickListener {
             var flag = 0
-            for (dish in cartList) {
-                if (dish == holder.dishName.text.toString()) {
-                    flag = 1
-                    break
+            if (cartList.size!=0) {
+                for (dish in cartList) {
+                    if (dish == restaurantData[position].title) {
+                        flag = 1
+                        break
+                    }
                 }
             }
-            if (flag == 0) {
-                cartList.add(holder.dishName.text.toString())
-                dishCostList.add(holder.priceValue.text.toString())
-                dishCount.add(position, 1)
-            } else
-                dishCount[position]++
-        }
+                if (flag == 0) {
+                    cartList.add(holder.dishName.text.toString())
+                    dishCostList.add(restaurantData[position].price)
+                    basePriceList.add(restaurantData[position].price)
+                    dishCount.add(1)
+                } else {
+                    dishCount[position]++
+                    dishCostList[position] = dishCount[position] * basePriceList[position]
+                }
+            }
     }
 
     override fun getItemCount(): Int {
@@ -102,7 +109,7 @@ class RecyclerAdapterSearchPage(val context: Context,val restaurantData: List<Da
         val priceValue: TextView
         val bestseller: TextView
         val dishPic: ImageView
-        val addBtn: Button
+        val addBtn: MaterialButton
 
         init {
             restaurantName = itemView.findViewById(R.id.restaurantKaName)
@@ -111,7 +118,7 @@ class RecyclerAdapterSearchPage(val context: Context,val restaurantData: List<Da
             priceValue = itemView.findViewById(R.id.priceKiValue)
             bestseller = itemView.findViewById(R.id.Bestseller)
             dishPic = itemView.findViewById(R.id.dishKaPic)
-            addBtn = itemView.findViewById(R.id.addBtn)
+            addBtn = itemView.findViewById(R.id.addToCartBtn)
         }
     }
 }
