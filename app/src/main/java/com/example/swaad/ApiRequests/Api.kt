@@ -1,6 +1,7 @@
 package com.example.swaad.ApiRequests
 
 import com.example.swaad.CategoryFoodItem
+import com.example.swaad.DataGetDishesList
 import com.example.swaad.JsonConverterCategory
 import com.example.swaad.DataGetRestaurantNames
 import okhttp3.ResponseBody
@@ -57,12 +58,13 @@ interface Api {
   @POST("api/user/signup/sendotp/")
   fun resendOtpSignUp(@Body jsonConverterResendOtp:JsonConverter):Call<ResponseBody >
 
-  @GET("/api/seller/customer/restaurants/list/")
+  @GET("/api/seller/customer/restaurants/listdish/")
   fun getRestaurantName(
       @Query("ordering")ordering: String,
       @Query("search")search: String
-  ):Call<List<DataGetRestaurantNames>>
+  ):Call<List<DataGetDishesList>>
+
   @POST("api/seller/customer/restaurants/category/")
-  fun categoryDish(@Body jsonConverterCategory: JsonConverterCategory):Call<List<CategoryFoodItem>>
+  fun categoryDish(@Body jsonConverterCategory: JsonConverterCategory):Call<List<DataGetDishesList>>
 
 }

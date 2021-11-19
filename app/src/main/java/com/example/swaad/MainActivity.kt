@@ -37,13 +37,14 @@ import java.util.jar.Manifest
 import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     companion object {
         var latitude: Double = 2.3434.toDouble()
         var longitude: Double = 0.toDouble()
         lateinit var adress: String
     }
+
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 //    private var  mMap:GoogleMap?=null
 //    lateinit var mapView:MapView
@@ -166,36 +167,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    public override fun onSaveInstanceState(
-//        outState: Bundle,
-//        outPersistentState: PersistableBundle
-//    ) {
-////        askGalleryPermissionLocation()
-//        var mapViewBundle=outState.getBundle(MAP_VIEW_BUNDLE_KEY)
-//        if(mapViewBundle==null)
-//        {
-//            mapViewBundle= Bundle()
-//            outState.putBundle(MAP_VIEW_BUNDLE_KEY,mapViewBundle)
-//        }
-//        mapView.onSaveInstanceState(mapViewBundle)
-//    }
-//    private fun askGalleryPermissionLocation()
-//    {
-//        askPermission(
-//            android.Manifest.permission.ACCESS_FINE_LOCATION,
-//            android.Manifest.permission.ACCESS_COARSE_LOCATION
-//        ){
-//
-//        }.onDeclined { e ->
-//            if (e.hashDenied())
-//        {
-//
-//        }
-//            e.denied.forEach
-//            {
-//
-//            }}
-//    }
+
+
 }
 
 

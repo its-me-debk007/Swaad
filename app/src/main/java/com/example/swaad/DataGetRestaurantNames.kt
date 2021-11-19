@@ -7,5 +7,6 @@ data class DataGetRestaurantNames(
     val no_of_ratings: String,
     val address: String,
     val phone: String,
-    val rest_name: String
+    val rest_name: String,
+    val image: String
 )

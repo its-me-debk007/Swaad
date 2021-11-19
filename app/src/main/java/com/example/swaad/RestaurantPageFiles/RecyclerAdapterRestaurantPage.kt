@@ -12,15 +12,17 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import coil.load
 import com.example.swaad.ApiRequests.RestaurantDishesItem
 import com.example.swaad.R
+import com.example.swaad.SearchPage2Files.RecyclerAdapterSearchPage
 
 class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<RestaurantDishesItem>):Adapter<RecyclerAdapterRestaurantPage.ViewHolder>(){
     companion object{
         var cartList = mutableListOf<String>()
-        var dishCostList = mutableListOf<String>()
+        var dishCostList = mutableListOf<Int>()
         var basePriceList = mutableListOf<Int>()
         var dishCount = mutableListOf<Int>()
+        var dishIdList = mutableListOf<Int>()
     }
-
+    var pos:Int = 0
 //    private var arraydishImage = intArrayOf(R.drawable.home_page_burger,R.drawable.home_page_burger,R.drawable.home_page_burger)
 //    private var  arraydishName= arrayOf("Tandoori Chicken","Tandoori Chicken","Tandoori Chicken","Tandoori Chicken")
 //    private var arraydishCost= arrayOf("$100","$100","$100","$100")
@@ -34,10 +36,26 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
         holder.dishImage.load(Url)
         holder.dishCost.text=dishData[position].price.toString()
         holder.dishName.text=dishData[position].title
-//        holder.addToCart.setOnClickListener {
-//            cartList.add(holder.dishName.text as String)
-//            dishCostList.add(holder.dishCost.text as String)
-//        }
+        holder.addToCart.setOnClickListener {
+            var flag = 0
+            for (i in 0 until dishIdList.size) {
+                if (dishIdList[i] == dishData[position].id) {
+                    flag = 1
+                    pos = i
+                    break
+                }
+            }
+            if (flag == 0) {
+                cartList.add(holder.dishName.text.toString())
+                dishCostList.add(dishData[position].price)
+                basePriceList.add(dishData[position].price)
+                dishCount.add(1)
+                dishIdList.add(dishData[position].id)
+            } else {
+                dishCount[pos]++
+                dishCostList[pos] = dishCount[pos] * basePriceList[pos]
+            }
+        }
 
     }
 
@@ -54,7 +72,7 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
             dishName = itemView.findViewById(R.id.DIshName)
             dishImage = itemView.findViewById(R.id.DishPhoto)
             dishCost = itemView.findViewById(R.id.Money)
-            addToCart = itemView.findViewById(R.id.button)
+            addToCart = itemView.findViewById(R.id.addForCart)
         }
     }
 }

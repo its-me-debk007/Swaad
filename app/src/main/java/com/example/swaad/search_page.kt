@@ -18,10 +18,6 @@ import retrofit2.Response
 //private const val ARG_PARAM2 = "param2"
 
 class search_page : Fragment() {
-    companion object{
-        lateinit var ordering: String
-        lateinit var search: String
-    }
 
 
     override fun onCreateView(
@@ -30,14 +26,7 @@ class search_page : Fragment() {
     ): View? {
         val v= inflater.inflate(R.layout.fragment_search_page, container, false)
 
-        val searchBtn  = v.findViewById<ImageView>(R.id.searchBtn)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBarNew)
-        searchBtn.setOnClickListener {
-            progressBar.visibility=View.VISIBLE
-            val searchView = v.findViewById<SearchView>(R.id.searchView2)
-            search = searchView.query.toString().trim()
-            ordering = "-rest_name"
-
 
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -45,7 +34,6 @@ class search_page : Fragment() {
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
 //                    progressBar.visibility=View.INVISIBLE
-        }
         return v
     }
 }
