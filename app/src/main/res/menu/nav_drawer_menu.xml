@@ -8,5 +8,4 @@
         android:id="@+id/aboutSwaad"
         android:title="About Swaad"
         />
-
 </menu>

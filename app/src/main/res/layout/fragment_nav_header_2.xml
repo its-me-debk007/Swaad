@@ -24,9 +24,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
         android:layout_marginTop="46dp"
-        android:text="HI THERE!"
+        android:fontFamily="@font/poppins"
+        android:text="Hi There"
         android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageView17"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/hamburger_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="4dp"
+        android:text="Renamed "
+        android:textColor="#E4D7D7"
+        app:layout_constraintStart_toEndOf="@+id/imageView17"
+        app:layout_constraintTop_toBottomOf="@+id/hamburger_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

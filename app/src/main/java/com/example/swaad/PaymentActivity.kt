@@ -29,8 +29,19 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
         Checkout.preload(applicationContext)
 //        setContentView(R.layout.redirectingpayment)
         makePayment()
-        val intent = Intent(this, NavBarActivity()::class.java)
-        startActivity(intent)
+//        Timer("SettingUp", false).schedule(500) {
+//            val dialodView =
+//                LayoutInflater.from(applicationContext).inflate(R.layout.fragment_confirm_order_dialog, null)
+//            val builder: AlertDialog.Builder = AlertDialog.Builder(applicationContext)
+//            val mBuilder = AlertDialog.Builder(applicationContext)
+//                .setView(dialodView)
+//                .setTitle("Order Confirmation")
+//            mBuilder.show()
+//        }
+                val intent = Intent(this, NavBarActivity()::class.java)
+                startActivity(intent)
+
+
     }
     fun makePayment() {
         try {

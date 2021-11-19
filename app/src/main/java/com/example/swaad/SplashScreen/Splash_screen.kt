@@ -41,15 +41,14 @@ class Splash_screen : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_splash_screen, container, false)
-
-        Handler().postDelayed(
-            {
-                val fragmentManager = activity?.supportFragmentManager
-                val fragmentTransaction = fragmentManager?.beginTransaction()
-                fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-                fragmentTransaction?.addToBackStack(null)
-                fragmentTransaction?.commit()
-            },3000)
+//        Handler().postDelayed(
+//            {
+//                val fragmentManager = activity?.supportFragmentManager
+//                val fragmentTransaction = fragmentManager?.beginTransaction()
+//                fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
+//                fragmentTransaction?.addToBackStack(null)
+//                fragmentTransaction?.commit()
+//            },3000)
         return v
     }
 

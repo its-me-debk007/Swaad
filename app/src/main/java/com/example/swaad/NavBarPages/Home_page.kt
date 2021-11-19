@@ -14,7 +14,6 @@ import GridSpacingItemDecoration
 import android.app.ActionBar
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.location.Address
 import android.view.MenuItem
@@ -34,12 +33,9 @@ import com.example.swaad.*
 import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.SearchPage2Files.SearchPage2
 import android.location.Geocoder
-import android.location.Location
 import android.util.Log
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.swaad.AuthPages.FragmentLogIn
-import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.lang.StringBuilder
@@ -52,11 +48,10 @@ class Home_page : Fragment() {
         lateinit var responseDataKunal: List<DataGetDishesList>
         lateinit var adress:String
     }
-//    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var responseBody:List<DataClassRestaurantsItem>
     lateinit var recyclerView:RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
     }
     private var layoutManager:RecyclerView.LayoutManager?=null
@@ -69,7 +64,8 @@ class Home_page : Fragment() {
         val v= inflater.inflate(com.example.swaad.R.layout.fragment_home_page, container, false)
         val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
         val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
-        val locationtext=v.findViewById<TextView>(R.id.LocationText)
+        val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
+
         val sweets=v.findViewById<ImageView>(R.id.Sweets)
         val pizza=v.findViewById<ImageView>(R.id.Pizza)
         val chinese=v.findViewById<ImageView>(R.id.Chinese)
@@ -87,7 +83,6 @@ class Home_page : Fragment() {
                     call: Call<List<DataGetDishesList>?>,
                     response: Response<List<DataGetDishesList>?>
                 ) {
-                    Toast.makeText(container?.context,response.message(),Toast.LENGTH_LONG).show()
                     status = "Kunal"
                     responseDataKunal=response.body()!!
                     val fragmentManager = activity?.supportFragmentManager
@@ -98,7 +93,7 @@ class Home_page : Fragment() {
                 }
 
                 override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-                    Toast.makeText(container?.context,t.message,Toast.LENGTH_LONG).show()
+
                 }
             })
 
@@ -130,7 +125,7 @@ class Home_page : Fragment() {
                     response: Response<List<DataGetDishesList>?>
                 ) {
                     status = "Kunal"
-                    responseDataKunal= response.body()!!
+                    responseDataKunal=response.body()!!
                     val fragmentManager = activity?.supportFragmentManager
                     val fragmentTransaction = fragmentManager?.beginTransaction()
                     fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
@@ -164,10 +159,6 @@ class Home_page : Fragment() {
                 }
             })
         }
-//        =getCompleteAddressString(MainActivity.latitude,MainActivity.longitude)
-//        Toast.makeText(container?.context, "${MainActivity.latitude} Longitude = ${MainActivity.longitude}",Toast.LENGTH_LONG).show()
-//        locationtext.text=adress.toString()
-//        Toast.makeText(container?.context, "${MainActivity.latitude} Longitude = ${MainActivity.longitude}",Toast.LENGTH_LONG).show()
         val adresslocation=getCompleteAddressString(MainActivity.latitude,MainActivity.longitude).toString()
         lifecycleScope.launch {
             FragmentLogIn.saveInfo("adress",adresslocation)
@@ -177,7 +168,8 @@ class Home_page : Fragment() {
             locationtext.text=adress
         }
 //        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
-//            var location=v.findViewById<ImageView>(R.id.Location)
+        locationtext.text=adress.toString()
+            var location=v.findViewById<ImageView>(R.id.Location)
 //        location.setOnClickListener {
 ////            val fragmentManager = activity?.supportFragmentManager
 ////            val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -282,13 +274,13 @@ class Home_page : Fragment() {
     }
     private fun getCompleteAddressString(LATITUDE: Double, LONGITUDE: Double): String? {
         var strAdd = ""
-        val geocoder = Geocoder(context,Locale.getDefault())
+        val geocoder = Geocoder(context, Locale.getDefault())
         try {
-            val addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
+            val addresses: List<Address>? = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
             if (addresses != null) {
-                val returnedAddress = addresses[0]
+                val returnedAddress: Address = addresses[0]
                 val strReturnedAddress = StringBuilder("")
-                for (i in 0..returnedAddress.maxAddressLineIndex) {
+                for (i in 0..returnedAddress.getMaxAddressLineIndex()) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
                 }
                 strAdd = strReturnedAddress.toString()
@@ -300,10 +292,8 @@ class Home_page : Fragment() {
             e.printStackTrace()
 //            Log.w("My Current loction address", "Canont get Address!")
         }
-//        Toast.makeText(context,strAdd,Toast.LENGTH_LONG).show()
         return strAdd
     }
-
 }
 
 //LocationManager class provides the facility to get latitude and longitude
@@ -330,3 +320,44 @@ class Home_page : Fragment() {
 //        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient()
 
 
+//        fun to check the user permission
+//    fun CheckPermission():Boolean
+//    {
+//        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED ||
+//            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED)
+//        {
+//            return true
+//        }
+//        return false
+//    }
+//    //        Now we need to take create a function that will allow us to get user permission
+//    fun RequestPermission()
+//    {
+//        ActivityCompat.requestPermissions(
+//            this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),permission_id
+//        )
+//    }
+//    //      a function that check if the location service of the device  is enabled
+//    fun isLocationEnabled():Boolean
+//    {
+//        var locationManager:LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+//    }
+//
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        // it is a bulit in function that checks the permission result
+//        // you will use it just for debugging the code
+//        if(requestCode==permission_id)
+//        {
+//            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+//            {
+//              error("You have the permission")
+//            }
+//        }
+//    }
+//
+//}
