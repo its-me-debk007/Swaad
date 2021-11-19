@@ -25,6 +25,7 @@ import android.widget.Toast
 import com.example.swaad.MainActivity
 import com.example.swaad.NavBarActivity
 import com.example.swaad.PaymentActivity
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import java.lang.Exception
@@ -53,6 +54,9 @@ class MyCart: Fragment(),PaymentResultListener {
         adapter = RecyclerAdapterCart()
         recyclerViewCart.adapter = adapter
 
+        v.findViewById<TextView>(com.example.swaad.R.id.totalPrice).text = "₹" + dishCostList.sum().toString() + ".00"
+        v.findViewById<TextView>(com.example.swaad.R.id.deliveryCharges).text = "₹" + (0.8*dishCostList.sum()).toInt().toString() + ".00"
+        v.findViewById<TextView>(com.example.swaad.R.id.GrantTotalPrice).text = "₹" + ((0.8*dishCostList.sum()).toInt() + dishCostList.sum()).toString() + ".00"
 //        if (itemRemoved) {
 //            RecyclerAdapterCart().notifyItemRemoved(pos)
 //            itemRemoved = false
