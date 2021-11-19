@@ -235,7 +235,7 @@
         tools:layout_editor_absoluteX="62dp" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/totalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -262,7 +262,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/textView40"
+        android:id="@+id/deliveryCharges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -291,7 +291,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView16" />
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/GrantTotalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

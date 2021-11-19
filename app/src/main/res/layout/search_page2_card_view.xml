@@ -12,7 +12,9 @@
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/searchPage2CardView">
+    android:id="@+id/searchPage2CardView"
+    app:cardElevation="4dp"
+    android:paddingBottom="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@id/constraintLayout"

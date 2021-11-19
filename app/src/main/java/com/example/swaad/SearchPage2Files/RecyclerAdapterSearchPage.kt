@@ -8,16 +8,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.swaad.CategoryFoodItem
-import com.example.swaad.DataGetDishesList
-import com.example.swaad.DataGetRestaurantNames
+import com.example.swaad.*
 import com.example.swaad.NavBarPages.Home_page.Companion.responseDataKunal
 import com.example.swaad.NavBarPages.Home_page.Companion.status
-import com.example.swaad.R
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.cartList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
 import com.example.swaad.SearchPage2Files.SearchPage2.Companion.responseDataDebashish
 import com.google.android.material.button.MaterialButton
 
@@ -25,7 +23,10 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
 
     companion object{
         var dataSize: Int = 0
+        var pos: Int = 0
     }
+
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -78,22 +79,23 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
 
         holder.addBtn.setOnClickListener {
             var flag = 0
-            if (cartList.size!=0) {
-                for (dish in cartList) {
-                    if (dish == restaurantData[position].title) {
+                for (i in 0 until dishIdList.size) {
+                    if (dishIdList[i] == restaurantData[position].id) {
                         flag = 1
+                        pos = i
                         break
                     }
                 }
-            }
                 if (flag == 0) {
                     cartList.add(holder.dishName.text.toString())
                     dishCostList.add(restaurantData[position].price)
                     basePriceList.add(restaurantData[position].price)
                     dishCount.add(1)
+                    dishIdList.add(restaurantData[position].id)
                 } else {
-                    dishCount[position]++
-                    dishCostList[position] = dishCount[position] * basePriceList[position]
+
+                    dishCount[pos]++
+                    dishCostList[pos] = dishCount[pos] * basePriceList[pos]
                 }
             }
     }

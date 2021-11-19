@@ -12,6 +12,7 @@ import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Compa
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.cartList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
+import com.example.swaad.SearchPage2Files.RecyclerAdapterSearchPage.Companion.pos
 
 class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>()  {
 
@@ -27,33 +28,36 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapterCart.ViewHolder, position: Int) {
-        holder.itemName.text = cartList[position]
-        holder.dishPrice.text = "₹" + dishCostList[position] + ".00"
-        holder.plus.setImageResource(pluses[position])
-        holder.minus.setImageResource(minuses[position])
-        holder.itemCount.text = dishCount[position].toString()
+        holder.itemName.text = cartList[pos]
+        holder.dishPrice.text = "₹" + dishCostList[pos] + ".00"
+        holder.plus.setImageResource(pluses[pos])
+        holder.minus.setImageResource(minuses[pos])
+        holder.itemCount.text = dishCount[pos].toString()
 
         holder.plus.setOnClickListener {
-            dishCount[position]++
-            holder.itemCount.text = dishCount[position].toString()
-            holder.dishPrice.text = "₹" + (basePriceList[position] * dishCount[position]).toString() + ".00"
+            dishCount[pos]++
+            holder.itemCount.text = dishCount[pos].toString()
+            holder.dishPrice.text = "₹" + (basePriceList[pos] * dishCount[pos]).toString() + ".00"
+            RecyclerAdapterCart().notifyDataSetChanged()
+
         }
         holder.minus.setOnClickListener {
-            dishCount[position]--
-            if (dishCount[position] != 0) {
-                holder.itemCount.text = dishCount[position].toString()
-                holder.dishPrice.text = "₹" + (basePriceList[position] * dishCount[position]).toString() + ".00"
+            dishCount[pos]--
+            if (dishCount[pos] != 0) {
+                holder.itemCount.text = dishCount[pos].toString()
+                holder.dishPrice.text = "₹" + (basePriceList[pos] * dishCount[pos]).toString() + ".00"
             } else {
-                dishCount.removeAt(position)
-                cartList.removeAt(position)
-                dishCostList.removeAt(position)
-                basePriceList.removeAt(position)
+                dishCount.removeAt(pos)
+                cartList.removeAt(pos)
+                dishCostList.removeAt(pos)
+                basePriceList.removeAt(pos)
+//                RecyclerAdapterCart().notifyDataSetChanged()
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return dishCostList.size
+        return cartList.size
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){

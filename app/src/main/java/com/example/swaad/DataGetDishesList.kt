@@ -1,7 +1,7 @@
 package com.example.swaad
 
 data class DataGetDishesList(
-    val id: String,
+    val id: Int,
     val title: String,
     val price: Int,
     val veg: String,
