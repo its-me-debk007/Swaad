@@ -56,7 +56,7 @@ class NavBarActivity : AppCompatActivity() {
         val drawerLayout=findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView=findViewById<NavigationView>(R.id.navView)
         val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
-        val hamburgerEmail=findViewById<TextView>(R.id.hamburger_email)
+//        val hamburgerEmail=findViewById<TextView>(R.id.hamburger_email)
 //        hamburgerName.setText(MyProfile.name)
 //        hamburgerEmail.setText(MyProfile.useremail)
 //        mapView=findViewById<MapView>(R.id.map2)
@@ -115,6 +115,7 @@ class NavBarActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -147,7 +148,7 @@ class NavBarActivity : AppCompatActivity() {
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
             builder.setTitle("Confirm Exit")
             builder.setMessage("Are you sure you want to exit ?")
-            builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->finish()  })
+            builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->finishAffinity()})
             builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->dialog.cancel()  })
             builder.show()// Finish activity, if only one fragment left, to prevent leaving empty screen
         }

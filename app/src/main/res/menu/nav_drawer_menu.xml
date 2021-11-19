@@ -8,8 +8,5 @@
         android:id="@+id/aboutSwaad"
         android:title="About Swaad"
         />
-    <item
-        android:id="@+id/LogoutHamburger"
-        android:title="Logout"
-        />
+
 </menu>

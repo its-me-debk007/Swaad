@@ -111,7 +111,6 @@ class FragmentLogIn: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val v = inflater.inflate(R.layout.user_login, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBar)
         val signUp : TextView = v.findViewById(R.id.loginSignUpText)
