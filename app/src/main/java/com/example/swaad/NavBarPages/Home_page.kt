@@ -15,6 +15,7 @@ import android.app.ActionBar
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
+import android.location.Address
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -31,12 +32,21 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.*
 import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.SearchPage2Files.SearchPage2
+import android.location.Geocoder
+import android.util.Log
+import androidx.lifecycle.lifecycleScope
+import com.example.swaad.AuthPages.FragmentLogIn
+import kotlinx.coroutines.launch
+import java.lang.Exception
+import java.lang.StringBuilder
+import java.util.*
 
 
 class Home_page : Fragment() {
     companion object{
         var status : String=""
         lateinit var responseDataKunal: List<DataGetDishesList>
+        lateinit var adress:String
     }
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var responseBody:List<DataClassRestaurantsItem>
@@ -135,6 +145,7 @@ class Home_page : Fragment() {
                     response: Response<List<DataGetDishesList>?>
                 ) {
                         status = "Kunal"
+                     Toast.makeText(container?.context,response.message(),Toast.LENGTH_LONG).show()
                         responseDataKunal=response.body()!!
                     val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -144,21 +155,30 @@ class Home_page : Fragment() {
                 }
 
                 override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-
+                    Toast.makeText(container?.context,t.message.toString(),Toast.LENGTH_LONG).show()
                 }
             })
         }
-        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
-            var location=v.findViewById<ImageView>(R.id.Location)
-        location.setOnClickListener {
-//            val fragmentManager = activity?.supportFragmentManager
-//            val fragmentTransaction = fragmentManager?.beginTransaction()
-//            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container,google_maps())
-//            fragmentTransaction?.addToBackStack(null)
-//            fragmentTransaction?.commit()
-            val intent = Intent(activity,google_maps::class.java)
-            startActivity(intent)
+        val adresslocation=getCompleteAddressString(MainActivity.latitude,MainActivity.longitude).toString()
+        lifecycleScope.launch {
+            FragmentLogIn.saveInfo("adress",adresslocation)
         }
+        lifecycleScope.launch {
+            adress= FragmentLogIn.readInfo("adress").toString()
+            locationtext.text=adress
+        }
+//        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
+        locationtext.text=adress.toString()
+            var location=v.findViewById<ImageView>(R.id.Location)
+//        location.setOnClickListener {
+////            val fragmentManager = activity?.supportFragmentManager
+////            val fragmentTransaction = fragmentManager?.beginTransaction()
+////            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container,google_maps())
+////            fragmentTransaction?.addToBackStack(null)
+////            fragmentTransaction?.commit()
+//            val intent = Intent(activity,google_maps::class.java)
+//            startActivity(intent)
+//        }
         searchbox.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -251,6 +271,28 @@ class Home_page : Fragment() {
             (adapter as RecyclerAdapter).notifyDataSetChanged()
             recyclerView.adapter = adapter
         }
+    }
+    private fun getCompleteAddressString(LATITUDE: Double, LONGITUDE: Double): String? {
+        var strAdd = ""
+        val geocoder = Geocoder(context, Locale.getDefault())
+        try {
+            val addresses: List<Address>? = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
+            if (addresses != null) {
+                val returnedAddress: Address = addresses[0]
+                val strReturnedAddress = StringBuilder("")
+                for (i in 0..returnedAddress.getMaxAddressLineIndex()) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                strAdd = strReturnedAddress.toString()
+//                Log.w("My Current loction address", strReturnedAddress.toString())
+            } else {
+//                Log.w("My Current loction address", "No Address returned!")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+//            Log.w("My Current loction address", "Canont get Address!")
+        }
+        return strAdd
     }
 }
 

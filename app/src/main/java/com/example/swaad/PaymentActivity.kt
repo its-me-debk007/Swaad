@@ -1,6 +1,7 @@
 package com.example.swaad
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -28,6 +29,8 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
         Checkout.preload(applicationContext)
 //        setContentView(R.layout.redirectingpayment)
         makePayment()
+        val intent = Intent(this, NavBarActivity()::class.java)
+        startActivity(intent)
     }
     fun makePayment() {
         try {
@@ -50,21 +53,44 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
             options.put("retry", retryObj);
 
             val prefill = JSONObject()
-            prefill.put("email", "gaurav.kumar@example.com")
-            prefill.put("contact", "9876543210")
+            prefill.put("email", "kunalmehrotra2001@gmail.com")
+            prefill.put("contact", "9119082208")
 
             options.put("prefill", prefill)
             co.open(this, options)
+            for (i in  dishIdList) {
+                var restaurant_id = restIdList[i].toInt()
+                var orderDetail = ArrayList<OrderDetail>()
+                orderDetail.add(OrderDetail(dishIdList[i],dishCount[i]))
+                for (j in 0 until i) {
+                    if (restIdList[j] == restaurant_id) {
+//                            var orderDetailsItem = OrderDetails(orderDetail, restaurant_id)
+                        orderDetail.add(OrderDetail(dishIdList[i], dishCount[i]))
+                    }
+                }
+                var jsonConverterOrderDetails=JsonConverterOrderDetails(restaurant_id,orderDetail)
+                RetrofitClient.init().orderUpdate(jsonConverterOrderDetails).enqueue(object : Callback<ResponseBody?> {
+                    override fun onResponse(
+                        call: Call<ResponseBody?>,
+                        response: Response<ResponseBody?>
+                    ) {
+                        Toast.makeText(PaymentActivity(), response.message().toString(), Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                        Toast.makeText(PaymentActivity(),"Not",Toast.LENGTH_LONG).show()
+                    }
+                })
+            }
         } catch (e: Exception) {
             Toast.makeText(this, "Error in payment: " + e.message, Toast.LENGTH_LONG)
                 .show()
             e.printStackTrace()
         }
     }
-
-
         override fun onPaymentSuccess(p0: String?) {
-                Toast.makeText(this, "Suceess in payment", Toast.LENGTH_LONG).show()
+//            Log.d("mytag", "onPaymentError: "+p0.toString())
+//                Toast.makeText(this, "Suceess in payment", Toast.LENGTH_LONG).show()
                 for (i in  dishIdList) {
                     var restaurant_id = restIdList[i].toInt()
                     var orderDetail = ArrayList<OrderDetail>()
@@ -85,7 +111,7 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
                         }
 
                         override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                            TODO("Not yet implemented")
+                           Toast.makeText(PaymentActivity(),"Not",Toast.LENGTH_LONG).show()
                         }
                     })
                 }

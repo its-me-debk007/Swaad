@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity(){
 //        mMap!!.isMyLocationEnabled
 //    }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        if (null == savedInstanceState) {
@@ -166,9 +165,6 @@ class MainActivity : AppCompatActivity(){
             super.onBackPressed()
         }
     }
-
-
-
 }
 
 

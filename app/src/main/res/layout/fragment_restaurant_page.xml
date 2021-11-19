@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".RestaurantPageFiles.Restaurant_page">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -61,7 +62,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/locationTextCart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -79,7 +80,7 @@
                     android:layout_marginTop="11dp"
                     android:src="@drawable/ic_restaurant_page_delievery"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView25" />
+                    app:layout_constraintTop_toBottomOf="@+id/locationTextCart" />
 
                 <TextView
                     android:id="@+id/textView27"
@@ -112,7 +113,7 @@
                     android:layout_marginTop="13dp"
                     android:src="@drawable/ic_restaurant_page_timer"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView25" />
+                    app:layout_constraintTop_toBottomOf="@+id/locationTextCart" />
 
                 <TextView
                     android:id="@+id/textView31"
@@ -149,5 +150,5 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>
