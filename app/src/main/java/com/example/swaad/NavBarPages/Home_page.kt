@@ -55,8 +55,6 @@ class Home_page : Fragment() {
         val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
         val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
         val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
-        val sweets=v.findViewById<ImageView>(R.id.Sweets)
-        val jsonConverterCategory=JsonConverterCategory("Sweets")
 
         val sweets=v.findViewById<ImageView>(R.id.Sweets)
         val pizza=v.findViewById<ImageView>(R.id.Pizza)
@@ -70,13 +68,13 @@ class Home_page : Fragment() {
 //        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
 
         pizza.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategoryPizza).enqueue(object : Callback<List<CategoryFoodItem>?> {
+            RetrofitClient.init().categoryDish(jsonConverterCategoryPizza).enqueue(object : Callback<List<DataGetDishesList>?> {
                 override fun onResponse(
-                    call: Call<List<CategoryFoodItem>?>,
-                    response: Response<List<CategoryFoodItem>?>
+                    call: Call<List<DataGetDishesList>?>,
+                    response: Response<List<DataGetDishesList>?>
                 ) {
                     status = "Kunal"
-                    responseData=response
+                    responseDataKunal=response.body()!!
                     val fragmentManager = activity?.supportFragmentManager
                     val fragmentTransaction = fragmentManager?.beginTransaction()
                     fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
@@ -84,19 +82,20 @@ class Home_page : Fragment() {
                     fragmentTransaction?.commit()
                 }
 
-                override fun onFailure(call: Call<List<CategoryFoodItem>?>, t: Throwable) {
+                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
 
                 }
             })
+
         }
         burger.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategoryBurger).enqueue(object : Callback<List<CategoryFoodItem>?> {
+            RetrofitClient.init().categoryDish(jsonConverterCategoryBurger).enqueue(object : Callback<List<DataGetDishesList>?> {
                 override fun onResponse(
-                    call: Call<List<CategoryFoodItem>?>,
-                    response: Response<List<CategoryFoodItem>?>
+                    call: Call<List<DataGetDishesList>?>,
+                    response: Response<List<DataGetDishesList>?>
                 ) {
                     status = "Kunal"
-                    responseData=response
+                    responseDataKunal=response.body()!!
                     val fragmentManager = activity?.supportFragmentManager
                     val fragmentTransaction = fragmentManager?.beginTransaction()
                     fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
@@ -104,20 +103,19 @@ class Home_page : Fragment() {
                     fragmentTransaction?.commit()
                 }
 
-                override fun onFailure(call: Call<List<CategoryFoodItem>?>, t: Throwable) {
+                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
 
                 }
             })
         }
         sweets.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategory).enqueue(object : Callback<List<DataGetDishesList>?> {
-            RetrofitClient.init().categoryDish(jsonConverterCategorySweets).enqueue(object : Callback<List<CategoryFoodItem>?> {
+            RetrofitClient.init().categoryDish(jsonConverterCategorySweets).enqueue(object : Callback<List<DataGetDishesList>?> {
                 override fun onResponse(
-                    call: Call<List<CategoryFoodItem>?>,
-                    response: Response<List<CategoryFoodItem>?>
+                    call: Call<List<DataGetDishesList>?>,
+                    response: Response<List<DataGetDishesList>?>
                 ) {
                     status = "Kunal"
-                    responseData=response
+                    responseDataKunal=response.body()!!
                     val fragmentManager = activity?.supportFragmentManager
                     val fragmentTransaction = fragmentManager?.beginTransaction()
                     fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
@@ -125,13 +123,13 @@ class Home_page : Fragment() {
                     fragmentTransaction?.commit()
                 }
 
-                override fun onFailure(call: Call<List<CategoryFoodItem>?>, t: Throwable) {
+                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
 
                 }
             })
         }
         chinese.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategoryChinese).enqueue(object : Callback<List<CategoryFoodItem>?> {
+            RetrofitClient.init().categoryDish(jsonConverterCategoryChinese).enqueue(object : Callback<List<DataGetDishesList>?> {
                 override fun onResponse(
                     call: Call<List<DataGetDishesList>?>,
                     response: Response<List<DataGetDishesList>?>
