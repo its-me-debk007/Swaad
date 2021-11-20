@@ -28,10 +28,6 @@ class Splash_screen : Fragment(){
     //
     companion object{
 
-//        lateinit var token:String
-//        lateinit var NAME: String
-//        lateinit var userEmail: String
-//        lateinit var loginOtpEmail: String
         var loggedIn:Boolean?=true
         private var binding : ActivityMainBinding?=null
         var dataStore: DataStore<Preferences>? = null
@@ -99,14 +95,11 @@ class Splash_screen : Fragment(){
 //            },3000)
 //        Handler().postDelayed(
 //            {
-        lifecycleScope.launch {
-            var loggedIn = read("loggedIn")
-            Toast.makeText(activity, loggedIn.toString(), Toast.LENGTH_LONG)
-                .show()
-        }
-        lifecycleScope.launch {
-         var loggedIn =read("loggedIn")
-            Toast.makeText(activity, loggedIn.toString(),Toast.LENGTH_LONG).show()
+        Handler().postDelayed(
+            {
+                lifecycleScope.launch {
+                    var loggedIn = read("loggedIn")
+                    Toast.makeText(activity, loggedIn.toString(), Toast.LENGTH_LONG).show()
 //            if(loggedIn==true || loggedIn==null)
 //            {
 //                val fragmentManager = activity?.supportFragmentManager
@@ -115,23 +108,22 @@ class Splash_screen : Fragment(){
 //                fragmentTransaction?.addToBackStack(null)
 //                fragmentTransaction?.commit()
 //            }
-             if (loggedIn == true) {
+                    if (loggedIn == true) {
 //                val fragmentManager = activity?.supportFragmentManager
 //                val fragmentTransaction = fragmentManager?.beginTransaction()
 //                fragmentTransaction?.replace(R.id.fragment_container, Home_page())
 //                fragmentTransaction?.addToBackStack(null)
 //                fragmentTransaction?.commit()
-                val intent = Intent(activity, NavBarActivity::class.java)
-                startActivity(intent)
-            }
-            else
-             {
-                 val fragmentTransaction = fragmentManager?.beginTransaction()
-                fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-                fragmentTransaction?.addToBackStack(null)
-                fragmentTransaction?.commit()
-             }
-        }
+                        val intent = Intent(activity, NavBarActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        val fragmentTransaction = fragmentManager?.beginTransaction()
+                        fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
+                        fragmentTransaction?.addToBackStack(null)
+                        fragmentTransaction?.commit()
+                    }
+                }
+            },3000)
 //        },3000)
 //        lifecycleScope.launch{
 //            val value:Boolean? = FragmentLogIn.read("loggedIn")
