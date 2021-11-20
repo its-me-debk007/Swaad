@@ -15,6 +15,7 @@ import com.example.swaad.AuthPages.FragmentLogIn
 //import com.example.swaad.AuthPages.FragmentLogIn.Companion.readInfo
 import com.example.swaad.AuthPages.help_support
 import com.example.swaad.MainActivity
+import com.example.swaad.NavBarActivity
 import com.example.swaad.ProfilePages.TermsAndConditions
 import com.example.swaad.R
 import com.example.swaad.SplashScreen.Splash_screen
@@ -76,11 +77,8 @@ class MyProfile: Fragment()  {
             lifecycleScope.launch {
                 Splash_screen.save("loggedIn", loggedIn!!)
             }
-            val fragmentManager = activity?.supportFragmentManager
-                val fragmentTransaction = fragmentManager?.beginTransaction()
-                fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-                fragmentTransaction?.addToBackStack(null)
-                fragmentTransaction?.commit()
+            val intent = Intent(NavBarActivity(), MainActivity::class.java)
+            startActivity(intent)
             Toast.makeText(
                 activity,
                 "You've been logged out successfully",

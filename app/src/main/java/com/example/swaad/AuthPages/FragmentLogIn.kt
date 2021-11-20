@@ -266,7 +266,6 @@ class FragmentLogIn: Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
                     v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
-
                     signInBtn.isEnabled = true
                     signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
             }
