@@ -36,6 +36,7 @@ import android.location.Geocoder
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.example.swaad.AuthPages.FragmentLogIn
+import com.example.swaad.SplashScreen.Splash_screen
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.lang.StringBuilder
@@ -161,10 +162,10 @@ class Home_page : Fragment() {
         }
         val adresslocation=getCompleteAddressString(MainActivity.latitude,MainActivity.longitude).toString()
         lifecycleScope.launch {
-            FragmentLogIn.saveInfo("adress",adresslocation)
+            Splash_screen.saveInfo("adress",adresslocation)
         }
         lifecycleScope.launch {
-            adress= FragmentLogIn.readInfo("adress").toString()
+            adress= Splash_screen.readInfo("adress").toString()
             locationtext.text=adress
         }
 //        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"

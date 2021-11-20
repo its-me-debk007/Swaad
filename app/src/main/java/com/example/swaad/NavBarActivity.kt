@@ -56,6 +56,10 @@ class NavBarActivity : AppCompatActivity() {
         val drawerLayout=findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView=findViewById<NavigationView>(R.id.navView)
         val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container, Home_page())
+        fragmentTransaction.commit()
 //        val hamburgerEmail=findViewById<TextView>(R.id.hamburger_email)
 //        hamburgerName.setText(MyProfile.name)
 //        hamburgerEmail.setText(MyProfile.useremail)
@@ -95,10 +99,7 @@ class NavBarActivity : AppCompatActivity() {
                 true
         }
 
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, Home_page())
-        fragmentTransaction.commit()
+
 
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener {
             when(it.itemId){

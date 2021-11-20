@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(){
 //        mapView.getMapAsync(this)
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(com.example.swaad.R.id.fragment_container, FragmentLogIn())
+        fragmentTransaction.replace(com.example.swaad.R.id.fragment_container,Splash_screen())
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)

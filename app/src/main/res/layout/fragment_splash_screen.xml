@@ -9,7 +9,8 @@
 <!--    android:layout_width="match_parent"-->
 <!--    android:layout_height="match_parent">-->
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-        android:layout_height="match_parent" android:padding="40dp">
+        android:layout_height="match_parent"
+        android:background="#FFD243">
 
         <ImageView
             android:id="@+id/imageView11"
@@ -19,7 +20,7 @@
             android:layout_marginTop="220dp"
             android:layout_marginEnd="77dp"
             android:layout_marginBottom="349dp"
-            android:src="@drawable/ic_logo"
+            android:src="@drawable/ic_swaad_logo__2_"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
