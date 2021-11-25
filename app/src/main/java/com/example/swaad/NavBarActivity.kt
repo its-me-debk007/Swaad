@@ -2,8 +2,14 @@ package com.example.swaad
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.MenuItem
@@ -16,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.swaad.ApiRequests.CheckNetworkConnection
 import com.example.swaad.AuthPages.FragmentLogIn
 import com.example.swaad.NavBarPages.Home_page
 import com.example.swaad.NavBarPages.MyCart
@@ -53,13 +60,28 @@ class NavBarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nav_bar)
-        val drawerLayout=findViewById<DrawerLayout>(R.id.drawerLayout)
-        val navView=findViewById<NavigationView>(R.id.navView)
-        val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, Home_page())
-        fragmentTransaction.commit()
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val navView = findViewById<NavigationView>(R.id.navView)
+
+        callNetworkConnection()
+//        val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
+
+//        val connectionManager: ConnectivityManager =
+//            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+//        val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo
+//        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+//
+//        if (!isConnected) {
+//            val fragmentManager = supportFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.fragment_container, Offline_Screen())
+//            fragmentTransaction.commit()
+//        }
+//        else {
+//            val fragmentManager = supportFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.fragment_container, Home_page())
+//            fragmentTransaction.commit()
 //        val hamburgerEmail=findViewById<TextView>(R.id.hamburger_email)
 //        hamburgerName.setText(MyProfile.name)
 //        hamburgerEmail.setText(MyProfile.useremail)
@@ -80,42 +102,44 @@ class NavBarActivity : AppCompatActivity() {
 //            PaymentNow("100")
 //            Checkout.preload(container?.context)
 //        }
-        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-        val actionBar=supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        navView.setNavigationItemSelectedListener{
-            when(it.itemId){
-                R.id.myProfile->
-                {
-                    val fragmentManager = supportFragmentManager
-                    val fragmentTransaction = fragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.fragment_container,MyProfile())
-                    fragmentTransaction.commit()
+            toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+            drawerLayout.addDrawerListener(toggle)
+            toggle.syncState()
+            val actionBar = supportActionBar
+            actionBar?.setDisplayHomeAsUpEnabled(true)
+            navView.setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.myProfile -> {
+                        val fragmentManager = supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(R.id.fragment_container, MyProfile())
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+                        drawerLayout.closeDrawers()
+                    }
+                    R.id.aboutSwaad -> Toast.makeText(this, "Soon Launch", Toast.LENGTH_LONG).show()
+
                 }
-                R.id.aboutSwaad->Toast.makeText(this,"Soon Launch",Toast.LENGTH_LONG).show()
-            }
                 true
-        }
-
-
-
-        findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.demoHome -> replaceFragment(Home_page())
-                R.id.cart -> replaceFragment(MyCart())
-                R.id.myProfile -> replaceFragment(MyProfile())
-
             }
-            true
+
+            findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.demoHome -> replaceFragment(Home_page())
+                    R.id.cart -> replaceFragment(MyCart())
+                    R.id.myProfile -> replaceFragment(MyProfile())
+
+                }
+                true
+            }
+
         }
 
-    }
     private fun replaceFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -148,13 +172,35 @@ class NavBarActivity : AppCompatActivity() {
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
             builder.setTitle("Confirm Exit")
             builder.setMessage("Are you sure you want to exit ?")
-            builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->finish()  })
+            builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->finishAffinity()  })
             builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->dialog.cancel()  })
             builder.show()// Finish activity, if only one fragment left, to prevent leaving empty screen
         }
         else {
             super.onBackPressed()
         }
+
+
+    }
+    private fun callNetworkConnection() {
+       var  checkNetworkConnection = CheckNetworkConnection(application)
+        checkNetworkConnection.observe(this , { isConnected ->
+            if (!isConnected) {
+                val fragmentManager = supportFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_container, Offline_Screen())
+                fragmentTransaction.commit()
+            }
+            else
+            {
+                val fragmentManager = supportFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_container, Home_page())
+                fragmentTransaction.commit()
+
+            }
+        })
+
     }
 //    public override fun onSaveInstanceState(
 //        outState: Bundle,
