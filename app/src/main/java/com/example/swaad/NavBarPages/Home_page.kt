@@ -21,8 +21,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.swaad.ApiRequests.DataClassRestaurantsItem
-import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.AuthPages.help_support
 import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
@@ -30,13 +28,16 @@ import retrofit2.Callback
 import retrofit2.Response
 import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.*
-import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.SearchPage2Files.SearchPage2
 import android.location.Geocoder
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import com.example.swaad.ApiRequests.*
 import com.example.swaad.AuthPages.FragmentLogIn
+import com.example.swaad.JsonConverterCategory
+import com.example.swaad.SplashScreen.Splash_screen
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import java.lang.Exception
 import java.lang.StringBuilder
 import java.util.*
@@ -46,7 +47,7 @@ class Home_page : Fragment() {
     companion object{
         var status : String=""
         lateinit var responseDataKunal: List<DataGetDishesList>
-        lateinit var adress:String
+         var adresslocation:String? =null
     }
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var responseBody:List<DataClassRestaurantsItem>
@@ -159,17 +160,34 @@ class Home_page : Fragment() {
                 }
             })
         }
-        val adresslocation=getCompleteAddressString(MainActivity.latitude,MainActivity.longitude).toString()
-        lifecycleScope.launch {
-            FragmentLogIn.saveInfo("adress",adresslocation)
-        }
-        lifecycleScope.launch {
-            adress= FragmentLogIn.readInfo("adress").toString()
-            locationtext.text=adress
-        }
-//        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
-        locationtext.text=adress.toString()
-            var location=v.findViewById<ImageView>(R.id.Location)
+
+        var jsonConverterAdress=JsonConverterAdress(MainActivity.latitude,MainActivity.longitude)
+       RetrofitClient.init().getAdress(jsonConverterAdress).enqueue(object : Callback<DataClassAdress?> {
+           override fun onResponse(call: Call<DataClassAdress?>, response: Response<DataClassAdress?>) {
+               if(response.isSuccessful())
+               {
+                   adresslocation=response.body()?.address.toString()
+                   Toast.makeText(activity,"Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}",Toast.LENGTH_LONG).show()
+                   locationtext.text=adresslocation
+//                   lifecycleScope.launch {
+//                       Splash_screen.saveInfo("adress",adresslocation)
+//                   }
+               }
+           }
+           override fun onFailure(call: Call<DataClassAdress?>, t: Throwable) {
+              Toast.makeText(activity,"Unable to fetch Location",Toast.LENGTH_LONG).show()
+           }
+       })
+//        lifecycleScope.launch {
+//            adress= Splash_screen.readInfo("adress").toString()
+//            locationtext.text=adress
+//        }
+//        var Adress=getCompleteAddressString(MainActivity.latitude,MainActivity.longitude)
+//        Toast.makeText(activity,Adress,Toast.LENGTH_LONG).show()
+//        locationtext.text= Adress
+    //        locationtext.text="Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}"
+
+//            var location=v.findViewById<ImageView>(R.id.Location)
 //        location.setOnClickListener {
 ////            val fragmentManager = activity?.supportFragmentManager
 ////            val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -276,21 +294,21 @@ class Home_page : Fragment() {
         var strAdd = ""
         val geocoder = Geocoder(context, Locale.getDefault())
         try {
-            val addresses: List<Address>? = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
+            val addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
             if (addresses != null) {
-                val returnedAddress: Address = addresses[0]
+                val returnedAddress = addresses[0]
                 val strReturnedAddress = StringBuilder("")
                 for (i in 0..returnedAddress.getMaxAddressLineIndex()) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
                 }
                 strAdd = strReturnedAddress.toString()
-//                Log.w("My Current loction address", strReturnedAddress.toString())
+                Log.d("MyCurrentloctionaddres", strReturnedAddress.toString())
             } else {
-//                Log.w("My Current loction address", "No Address returned!")
+                Log.d("MyCurrentloctionaddres", "No Address returned!")
             }
         } catch (e: Exception) {
             e.printStackTrace()
-//            Log.w("My Current loction address", "Canont get Address!")
+            Log.w("MyCurrentloctionaddres", "Canont get Address!")
         }
         return strAdd
     }
@@ -320,6 +338,47 @@ class Home_page : Fragment() {
 //        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient()
 
 
+//        fun to check the user permission
+//    fun CheckPermission():Boolean
+//    {
+//        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED ||
+//            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED)
+//        {
+//            return true
+//        }
+//        return false
+//    }
+//    //        Now we need to take create a function that will allow us to get user permission
+//    fun RequestPermission()
+//    {
+//        ActivityCompat.requestPermissions(
+//            this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),permission_id
+//        )
+//    }
+//    //      a function that check if the location service of the device  is enabled
+//    fun isLocationEnabled():Boolean
+//    {
+//        var locationManager:LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+//    }
+//
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        // it is a bulit in function that checks the permission result
+//        // you will use it just for debugging the code
+//        if(requestCode==permission_id)
+//        {
+//            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+//            {
+//              error("You have the permission")
+//            }
+//        }
+//    }
+//
+//}
 //        fun to check the user permission
 //    fun CheckPermission():Boolean
 //    {

@@ -74,4 +74,7 @@ interface Api {
 //  @POST
   @POST("api/cart/order/latest")
   fun orderUpdate(@Body jsonConverterOrderDetails: JsonConverterOrderDetails):Call<ResponseBody>
+
+  @POST("api/seller/customer/address/")
+  fun getAdress(@Body jsonConverterAdress:JsonConverterAdress):Call<DataClassAdress>
 }
