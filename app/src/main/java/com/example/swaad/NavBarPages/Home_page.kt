@@ -11,32 +11,20 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import GridSpacingItemDecoration
-import android.app.ActionBar
-import android.app.Activity
-import android.content.Intent
 import android.content.res.Configuration
 import android.location.Address
-import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.drawerlayout.widget.DrawerLayout
-import com.example.swaad.ApiRequests.DataClassRestaurantsItem
-import com.example.swaad.ApiRequests.RetrofitClient
-import com.example.swaad.AuthPages.help_support
-import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.*
-import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.SearchPage2Files.SearchPage2
 import android.location.Geocoder
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
-import com.example.swaad.ApiRequests.DataClass
+import com.example.swaad.ApiRequests.*
 import com.example.swaad.AuthPages.FragmentLogIn
+import com.example.swaad.JsonConverterCategory
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.lang.StringBuilder
@@ -48,7 +36,9 @@ class Home_page : Fragment() {
         var status : String=""
         lateinit var responseDataKunal: List<DataGetDishesList>
         lateinit var adress:String
+        lateinit var AccessToken: String
     }
+
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var responseBody:List<DataClassRestaurantsItem>
     lateinit var recyclerView:RecyclerView
@@ -66,6 +56,10 @@ class Home_page : Fragment() {
         val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
         val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
         val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
+
+        lifecycleScope.launch{
+            AccessToken = FragmentLogIn.readInfo("accessToken").toString()
+        }
 
         val sweets=v.findViewById<ImageView>(R.id.Sweets)
         val pizza=v.findViewById<ImageView>(R.id.PizzaSection)
@@ -193,7 +187,7 @@ class Home_page : Fragment() {
                 call: Call<List<DataClassRestaurantsItem>?>,
                 response: Response<List<DataClassRestaurantsItem>?>
             ) {
-                         responseBody=response.body()!!
+                         responseBody= response.body()!!
                 if (container != null) {
                     progressbar.visibility=View.INVISIBLE
                     layoutManager = GridLayoutManager(container?.context, 2)
