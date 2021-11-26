@@ -31,14 +31,11 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
         super.onCreate(savedInstanceState)
 
         Checkout.preload(applicationContext)
-        if(MyCart.grantTotal==0)
-        {
-            Toast.makeText(this,"Please add something in the cart !",Toast.LENGTH_LONG).show()
-        }
-        else {
+
+
 //        setContentView(R.layout.redirectingpayment)
             makePayment()
-        }
+
 //        val dialodView =
 //            LayoutInflater.from(this).inflate(R.layout.fragment_confirm_order_dialog, null)
 //        val builder: AlertDialog.Builder = AlertDialog.Builder(this)

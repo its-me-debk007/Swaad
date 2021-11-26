@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_home.xml" value="0.2703125" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_left_arrow.xml" value="0.2703125" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_lock.xml" value="0.2703125" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_login_image.xml" value="0.2703125" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/drawable/ic_logo.xml" value="0.2703125" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/cart.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/cart_card_view.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_about_swaad.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_adding_adress.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_card_view__my_orders.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/layout/fragment_card_view_home.xml" value="0.536" />

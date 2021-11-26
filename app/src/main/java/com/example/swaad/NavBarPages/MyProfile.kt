@@ -16,6 +16,7 @@ import com.example.swaad.AuthPages.FragmentLogIn
 //import com.example.swaad.AuthPages.FragmentLogIn.Companion.readInfo
 import com.example.swaad.AuthPages.help_support
 import com.example.swaad.ProfilePages.TermsAndConditions
+import com.example.swaad.SearchPage2Files.SearchPage2
 import com.example.swaad.SplashScreen.Splash_screen
 import com.example.swaad.SplashScreen.Splash_screen.Companion.loggedIn
 import com.example.swaad.SplashScreen.Splash_screen.Companion.readInfo
@@ -35,6 +36,14 @@ class MyProfile: Fragment()  {
              var name= readInfo("name").toString()
             v.findViewById<TextView>(R.id.textView15).text = "Hi ${name}"
             v.findViewById<TextView>(R.id.textView23).text = useremail
+        }
+        val aboutSwaad=v.findViewById<TextView>(R.id.aboutSwaadMyProfile)
+        aboutSwaad.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,AboutSwaad())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
         }
         val termsConditions: TextView = v.findViewById(R.id.textView21)
         termsConditions.setOnClickListener{
@@ -63,6 +72,7 @@ class MyProfile: Fragment()  {
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
+
         logOut.setOnClickListener{
 //            val fragmentManager = activity?.supportFragmentManager
 //            val fragmentTransaction = fragmentManager?.beginTransaction()

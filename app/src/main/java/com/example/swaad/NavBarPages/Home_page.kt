@@ -167,7 +167,7 @@ class Home_page : Fragment() {
                if(response.isSuccessful())
                {
                    adresslocation=response.body()?.address.toString()
-                   Toast.makeText(activity,"Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}",Toast.LENGTH_LONG).show()
+//                   Toast.makeText(activity,"Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}",Toast.LENGTH_LONG).show()
                    locationtext.text=adresslocation
 //                   lifecycleScope.launch {
 //                       Splash_screen.saveInfo("adress",adresslocation)

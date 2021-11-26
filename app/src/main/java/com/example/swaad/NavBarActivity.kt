@@ -23,12 +23,14 @@ import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.swaad.ApiRequests.CheckNetworkConnection
 import com.example.swaad.AuthPages.FragmentLogIn
 import com.example.swaad.NavBarPages.Home_page
 import com.example.swaad.NavBarPages.MyCart
 import com.example.swaad.NavBarPages.MyProfile
 import com.example.swaad.SearchPage2Files.SearchPage2
+import com.example.swaad.SplashScreen.Splash_screen
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -37,6 +39,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class NavBarActivity : AppCompatActivity() {
@@ -63,10 +66,20 @@ class NavBarActivity : AppCompatActivity() {
         setContentView(R.layout.nav_bar)
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView = findViewById<NavigationView>(R.id.navView)
-        val navdrawer=findViewById<NavigationView>(R.id.navView)
+//        val navdrawer=findViewById<NavigationView>(R.id.navView)
+        val headerView=navView.getHeaderView(0)
+        val name = headerView.findViewById<TextView>(R.id.hamburger_name)
+        val email=headerView.findViewById<TextView>(R.id.hamburger_email)
+        name.text
         callNetworkConnection()
-//        val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
-
+        val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
+        lifecycleScope.launch {
+            var  useremail = Splash_screen.readInfo("email").toString()
+            var username= Splash_screen.readInfo("name").toString()
+            name.text = "${username}"
+            email.text=useremail
+//            findViewById<TextView>(R.id.hamburger_email).text = useremail
+        }
 //        val connectionManager: ConnectivityManager =
 //            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 //        val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo

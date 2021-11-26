@@ -29,12 +29,10 @@
          android:layout_marginStart="25dp"
          android:layout_marginTop="16dp"
          android:layout_marginEnd="25dp"
-         android:layout_marginBottom="169dp"
          android:fontFamily="@font/poppins"
          android:text="Something's not right .Please try checking both wifi / 4G or Try Again Later"
          android:textAlignment="center"
          android:textColor="#000000"
-         app:layout_constraintBottom_toBottomOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toBottomOf="@+id/textView48" />

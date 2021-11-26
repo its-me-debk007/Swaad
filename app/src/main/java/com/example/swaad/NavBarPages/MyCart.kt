@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import com.example.swaad.RecyclerAdapterCart
 import com.example.swaad.SearchPage2Files.RecyclerAdapterSearchPage
 import org.json.JSONObject
 
@@ -22,9 +21,8 @@ import android.R
 import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
-import com.example.swaad.MainActivity
-import com.example.swaad.NavBarActivity
-import com.example.swaad.PaymentActivity
+import com.example.swaad.*
+import com.example.swaad.ApiRequests.RecyclerAdapterManageAddress
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
@@ -34,7 +32,7 @@ import java.lang.Exception
 class MyCart: Fragment() {
     companion object{
         var grantTotal: Int = 0
-        var location:TextView?=null
+//        var location:TextView?=null
     }
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>? = null
@@ -46,14 +44,27 @@ class MyCart: Fragment() {
 
         val v = inflater.inflate(com.example.swaad.R.layout.my_cart, container, false)
         val pay_button = v.findViewById<Button>(com.example.swaad.R.id.payButton)
-        location=v.findViewById(com.example.swaad.R.id.locationTextCart)
-//        v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart).text=Home_page.adresslocation
-        pay_button.setOnClickListener{
-            val intent = Intent(activity, PaymentActivity::class.java)
-            startActivity(intent)
-//            PaymentNow("100")
-//            Checkout.preload(container?.context)
+        var location=v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart)
+        if(RecyclerAdapterManageAddress.flag==1)
+        {
+          v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart).text=RecyclerAdapterManageAddress.Adress
         }
+        if(RecyclerAdapterManageAddress.flag==0)
+        {
+            v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart).text=Home_page.adresslocation
+        }
+        location.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(
+                com.example.swaad.R.id.fragment_container,
+                Manage_Adress()
+            )
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
+//        v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart).text=Home_page.adresslocation
+
         layoutManager = LinearLayoutManager(container?.context)
         val recyclerViewCart = v.findViewById<RecyclerView>(com.example.swaad.R.id.recyclerViewCart)
         recyclerViewCart.layoutManager = layoutManager
@@ -83,7 +94,17 @@ class MyCart: Fragment() {
 //            amount++
 //            itemCount.text = amount.toString()
 //        }
-
+        pay_button.setOnClickListener{
+            if(grantTotal==0)
+            {
+                Toast.makeText(container?.context,"Please add something in the cart !",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            val intent = Intent(activity, PaymentActivity::class.java)
+            startActivity(intent)
+//            PaymentNow("100")
+//            Checkout.preload(container?.context)
+        }
         return v
     }
 
