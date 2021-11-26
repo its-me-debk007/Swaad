@@ -1,8 +1,6 @@
 package com.example.swaad.SearchPage2Files
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.*
-import com.example.swaad.ApiRequests.DataClassRestaurantsItem
+import com.example.swaad.ApiRequests.DataGetDishesList
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.NavBarPages.Home_page
 import com.example.swaad.NavBarPages.Home_page.Companion.responseDataKunal
 import com.example.swaad.NavBarPages.Home_page.Companion.status
-import com.example.swaad.SearchPage2Files.RecyclerAdapterSearchPage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,8 +51,9 @@ class SearchPage2: Fragment() {
             }
         }
         status = "Debashish"
-        val searchText = v.findViewById<EditText>(R.id.searchBar)
+        val searchText = v.findViewById<EditText>(R.id.searchBar2)
 
+        searchText.requestFocus()
 //        searchText.addTextChangedListener(object : TextWatcher {
 //            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 //                TODO("Not yet implemented")
@@ -145,9 +144,18 @@ class SearchPage2: Fragment() {
         }
 
 
-        val clear = v.findViewById<ImageView>(R.id.clear)
-        clear.setOnClickListener {
-            v.findViewById<EditText>(R.id.searchBar).text.clear()
+//        val clear = v.findViewById<ImageView>(R.id.clear)
+//        clear.setOnClickListener {
+//            v.findViewById<EditText>(R.id.searchBar).text.clear()
+//        }
+
+        val backBtn = v.findViewById<ImageView>(R.id.backwardBtn)
+        backBtn.setOnClickListener{
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container, Home_page())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
         }
 
         return v

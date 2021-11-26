@@ -70,8 +70,6 @@ class ForgotPassword2 : Fragment() {
         val otp3 = v.findViewById<EditText>(R.id.Otp3)
         val otp4 = v.findViewById<EditText>(R.id.Otp4)
 
-//        Toast.makeText(activity, nextPage, Toast.LENGTH_LONG).show()
-
         otp1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -183,6 +181,7 @@ class ForgotPassword2 : Fragment() {
                             v.findViewById<EditText>(R.id.Otp2).text.clear()
                             v.findViewById<EditText>(R.id.Otp3).text.clear()
                             v.findViewById<EditText>(R.id.Otp4).text.clear()
+                            otp1.requestFocus()
 
                             verifyBtn.isEnabled = true
                             verifyBtn.setBackgroundColor(
@@ -203,6 +202,7 @@ class ForgotPassword2 : Fragment() {
                             v.findViewById<EditText>(R.id.Otp2).text.clear()
                             v.findViewById<EditText>(R.id.Otp3).text.clear()
                             v.findViewById<EditText>(R.id.Otp4).text.clear()
+                            otp1.requestFocus()
 
                             verifyBtn.isEnabled = true
                             verifyBtn.setBackgroundColor(
@@ -225,6 +225,7 @@ class ForgotPassword2 : Fragment() {
                         v.findViewById<EditText>(R.id.Otp2).text.clear()
                         v.findViewById<EditText>(R.id.Otp3).text.clear()
                         v.findViewById<EditText>(R.id.Otp4).text.clear()
+                        otp1.requestFocus()
 
                         verifyBtn.isEnabled = true
                         verifyBtn.setBackgroundColor(

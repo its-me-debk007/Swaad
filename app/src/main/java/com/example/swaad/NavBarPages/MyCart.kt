@@ -5,24 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import com.example.swaad.RecyclerAdapterCart
-import com.example.swaad.SearchPage2Files.RecyclerAdapterSearchPage
+import com.example.swaad.ApiRequests.RecyclerAdapterCart
 import org.json.JSONObject
-
-import android.R
 
 //import com.razorpay.Checkout
 
-import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
-import com.example.swaad.MainActivity
 import com.example.swaad.NavBarActivity
 import com.example.swaad.PaymentActivity
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
@@ -46,12 +40,10 @@ class MyCart: Fragment(),PaymentResultListener {
         val v = inflater.inflate(com.example.swaad.R.layout.my_cart, container, false)
         val pay_button = v.findViewById<Button>(com.example.swaad.R.id.payButton)
         val location=v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart)
-        location.text="hi"
+        location.text="Your Location"
         pay_button.setOnClickListener{
             val intent = Intent(activity, PaymentActivity::class.java)
             startActivity(intent)
-//            PaymentNow("100")
-//            Checkout.preload(container?.context)
         }
         layoutManager = LinearLayoutManager(container?.context)
         val recyclerViewCart = v.findViewById<RecyclerView>(com.example.swaad.R.id.recyclerViewCart)
@@ -59,29 +51,14 @@ class MyCart: Fragment(),PaymentResultListener {
         adapter = RecyclerAdapterCart()
         recyclerViewCart.adapter = adapter
 
-        v.findViewById<TextView>(com.example.swaad.R.id.totalPrice).text = "₹" + dishCostList.sum().toString() + ".00"
-        v.findViewById<TextView>(com.example.swaad.R.id.deliveryCharges).text = "₹" + (0.05*dishCostList.sum()).toInt().toString() + ".00"
-        v.findViewById<TextView>(com.example.swaad.R.id.GrantTotalPrice).text = "₹" + ((0.05*dishCostList.sum()).toInt() + dishCostList.sum()).toString() + ".00"
+            v.findViewById<TextView>(com.example.swaad.R.id.totalPrice).text =
+                "₹" + dishCostList.sum().toString() + ".00"
+            v.findViewById<TextView>(com.example.swaad.R.id.deliveryCharges).text =
+                "₹" + (0.05 * dishCostList.sum()).toInt().toString() + ".00"
+            v.findViewById<TextView>(com.example.swaad.R.id.GrantTotalPrice).text =
+                "₹" + ((0.05 * dishCostList.sum()).toInt() + dishCostList.sum()).toString() + ".00"
 
-        grantTotal = (0.05*dishCostList.sum()).toInt() + dishCostList.sum()
-//        if (itemRemoved) {
-//            RecyclerAdapterCart().notifyItemRemoved(pos)
-//            itemRemoved = false
-//        }
-//        val itemCount: TextView = v.findViewById(R.id.itemCount)
-//
-//        v.findViewById<ImageView>(R.id.minus).setOnClickListener{
-//            if(itemCount.text.toString() != "0"){
-//                var amount = itemCount.text.toString().toInt()
-//                amount--
-//                itemCount.text = amount.toString()
-//            }
-//        }
-//        v.findViewById<ImageView>(R.id.plus).setOnClickListener{
-//            var amount = itemCount.text.toString().toInt()
-//            amount++
-//            itemCount.text = amount.toString()
-//        }
+            grantTotal = (0.05 * dishCostList.sum()).toInt() + dishCostList.sum()
 
         return v
     }

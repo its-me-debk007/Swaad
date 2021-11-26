@@ -1,13 +1,11 @@
-package com.example.swaad
+package com.example.swaad.NavBarPages
 
 import android.os.Bundle
-import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import com.example.swaad.R
 
 class card_view_home : Fragment() {
 //    override fun onCreate(savedInstanceState: Bundle?) {

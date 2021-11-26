@@ -1,4 +1,4 @@
-package com.example.swaad
+package com.example.swaad.ApiRequests
 
 data class DataGetRestaurantNames(
     val id: String,

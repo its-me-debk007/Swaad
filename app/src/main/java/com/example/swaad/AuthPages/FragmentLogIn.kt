@@ -40,6 +40,7 @@ class FragmentLogIn: Fragment() {
         lateinit var userEmail: String
         var loggedIn:Boolean=false
         lateinit var loginOtpEmail: String
+        lateinit var accessToken: String
         private var binding : ActivityMainBinding?=null
         lateinit var dataStore: DataStore<Preferences>
         suspend fun save(key:String,value:Boolean)
@@ -143,7 +144,6 @@ class FragmentLogIn: Fragment() {
 
             if(!isValidEmail(userEmail)){
                 progressBar.visibility=View.INVISIBLE
-//                val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
                 v.findViewById<EditText>(R.id.loginEmail2).error="Please enter a valid email "
                 signInBtn.isEnabled = true
                 signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
@@ -152,27 +152,17 @@ class FragmentLogIn: Fragment() {
             }
             if(userPassword.isEmpty())
             {
-
                 progressBar.visibility=View.INVISIBLE
                 val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
                 v.findViewById<EditText>(R.id.loginPassword2).error="Please enter the password"
                 signInBtn.isEnabled = true
                 signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
-
             }
-
-//            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
 
             RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
                 override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
                     progressBar.visibility = View.INVISIBLE
-//                    val responseBody = response.body()
-//                    Toast.makeText(
-//                        activity,
-//                        responseBody?.status.toString(),
-//                        Toast.LENGTH_LONG
-//                    ).show()
                     token= response.body()?.token.toString()
                         if (response.code() == 200) {
                             NAME = response.body()?.name.toString()
@@ -182,10 +172,12 @@ class FragmentLogIn: Fragment() {
                                 "You've been logged in",
                                 Toast.LENGTH_LONG   
                             ).show()
+                            accessToken = response.body()?.access.toString()
                             lifecycleScope.launch {
                                 save("loggedIn", loggedIn)
                                 saveInfo("email", userEmail)
                                 saveInfo("name", NAME)
+                                saveInfo("accessToken", accessToken)
                             }
 
                             val intent = Intent(activity, NavBarActivity::class.java)
@@ -198,7 +190,6 @@ class FragmentLogIn: Fragment() {
                                         "User not registered",
                                         Toast.LENGTH_LONG
                                     ).show()
-//                            v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
                                     v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
                                     signInBtn.isEnabled = true
                                     signInBtn.setBackgroundColor(
