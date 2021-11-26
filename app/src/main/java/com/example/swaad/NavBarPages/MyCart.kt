@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.example.swaad.ApiRequests.RecyclerAdapterCart
 import org.json.JSONObject
+
+import android.R
 
 //import com.razorpay.Checkout
 
@@ -40,7 +43,7 @@ class MyCart: Fragment(),PaymentResultListener {
         val v = inflater.inflate(com.example.swaad.R.layout.my_cart, container, false)
         val pay_button = v.findViewById<Button>(com.example.swaad.R.id.payButton)
         val location=v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart)
-        location.text="Your Location"
+        location.text=Home_page.adresslocation
         pay_button.setOnClickListener{
             val intent = Intent(activity, PaymentActivity::class.java)
             startActivity(intent)

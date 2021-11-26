@@ -1,7 +1,9 @@
 package com.example.swaad.ApiRequests
 
-import com.example.swaad.AuthPages.FragmentLogIn.Companion.accessToken
+import com.example.swaad.CategoryFoodItem
+import com.example.swaad.DataGetDishesList
 import com.example.swaad.JsonConverterCategory
+import com.example.swaad.DataGetRestaurantNames
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -28,7 +30,7 @@ interface Api {
 
 
 
-    @POST("/api/user/signup/verify/")
+    @POST("api/user/signup/verify/")
     fun getSignUpOtp(
         @Body jsonConverterSignUpOtp: JsonConverterSignUpOtp
     ):Call<ResponseBody>
@@ -52,10 +54,10 @@ interface Api {
     @GET("/api/seller/customer/restaurants/")
     fun getRestaurantDetails():Call<List<DataClassRestaurantsItem>>
 
-    @GET("/api/seller/customer/dish/{input}/")
+    @GET("/api/seller/customer/dish/{input}")
     fun getRestaurantDishes(@Path("input")  input : Int): Call<List<RestaurantDishesItem>>
 
-  @POST("/api/user/signup/sendotp/")
+  @POST("api/user/signup/sendotp/")
   fun resendOtpSignUp(@Body jsonConverterResendOtp:JsonConverter):Call<ResponseBody >
 
   @GET("/api/seller/customer/restaurants/listdish/")
@@ -64,15 +66,15 @@ interface Api {
       @Query("search")search: String
   ):Call<List<DataGetDishesList>>
 
-  @GET("/api/seller/customer/restaurants/category/")
+  @POST("api/seller/customer/restaurants/category/")
   fun categoryDish(@Body jsonConverterCategory: JsonConverterCategory):Call<List<DataGetDishesList>>
 
-  @POST("/api/seller/ customer/rating/{dish_id}/")
+  @POST("api/seller/ customer/rating/{dish_id}")
   fun dishRating(@Path("dish_id") dish_id:Int,@Body jsonConverterRating: JsonConverterRating):Call<ResponseBody>
 //  @POST("api/cart/delivery/")
 //  fun yourOrders(@Body jsonConverterOrders: JsonConverterOrders):Call<>
-
-  @POST("/api/cart/order/latest/")
+//  @POST
+  @POST("api/cart/order/latest")
   fun orderUpdate(@Body jsonConverterOrderDetails: JsonConverterOrderDetails):Call<ResponseBody>
 
   @GET("/api/seller/customer/restaurants/category/")
@@ -91,4 +93,7 @@ interface Api {
     fun removeFromCart(
         @Field("dish_id")dish_id: Int
     ):Call<DataClassAddedToCart>
+
+  @POST("api/seller/customer/address/")
+  fun getAdress(@Body jsonConverterAdress:JsonConverterAdress):Call<DataClassAdress>
 }

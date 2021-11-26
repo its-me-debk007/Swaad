@@ -11,6 +11,7 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -21,13 +22,22 @@ import androidx.lifecycle.lifecycleScope
 import com.example.swaad.*
 import com.example.swaad.ApiRequests.DataClass
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.AuthPages.FragmentLogIn.Companion.userEmail
 import com.example.swaad.AuthPages.ReferenceSignUp.Companion.emailSignUp
 import com.example.swaad.NavBarPages.Home_page
+import com.example.swaad.SplashScreen.Splash_screen
+import com.example.swaad.SplashScreen.Splash_screen.Companion.save
+import com.example.swaad.SplashScreen.Splash_screen.Companion.saveInfo
+//import com.example.swaad.SplashScreen.Splash_screen.Companion.loggedIn
 import com.example.swaad.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Exception
+import kotlin.coroutines.coroutineContext
 
 class FragmentLogIn: Fragment() {
 
@@ -38,58 +48,64 @@ class FragmentLogIn: Fragment() {
         lateinit var token:String
         lateinit var NAME: String
         lateinit var userEmail: String
-        var loggedIn:Boolean=false
         lateinit var loginOtpEmail: String
-        lateinit var accessToken: String
-        private var binding : ActivityMainBinding?=null
-        lateinit var dataStore: DataStore<Preferences>
-        suspend fun save(key:String,value:Boolean)
-        {
-            val dataStoreKey= preferencesKey<Boolean>(key)
-            dataStore.edit {Settings->
-                Settings[dataStoreKey]=value
-            }
-
-        }
-       suspend fun readInfo(key:String):String?
-        {
-            val dataStoreKey= preferencesKey<String>(key)
-            val preferences = dataStore.data.first()
-            return preferences[dataStoreKey]
-        }
-        suspend fun saveInfo(key:String,value:String)
-        {
-            val dataStoreKey= preferencesKey<String>(key)
-            dataStore.edit {Settings->
-                Settings[dataStoreKey]=value
-            }
-
-        }
-         suspend fun read(key:String):Boolean?
-        {
-            val dataStoreKey= preferencesKey<Boolean>(key)
-            val preferences = dataStore.data.first()
-            return preferences[dataStoreKey]
-        }
     }
+//    companion object{
+//
+//        lateinit var token:String
+//        lateinit var NAME: String
+//        lateinit var userEmail: String
+//        lateinit var loginOtpEmail: String
+//         var loggedIn:Boolean?=true
+//        private var binding : ActivityMainBinding?=null
+//         var dataStore: DataStore<Preferences> ? = null
+//        suspend fun save(key:String,value:Boolean)
+//        {
+//            val dataStoreKey= preferencesKey<Boolean>(key)
+//            dataStore?.edit {Settings->
+//                Settings[dataStoreKey]=value
+//            }
+//
+//        }
+//       suspend fun readInfo(key:String):String?
+//        {
+//            val dataStoreKey= preferencesKey<String>(key)
+//            val preferences = dataStore?.data?.first()
+//            return preferences?.get(dataStoreKey)
+//        }
+//        suspend fun saveInfo(key:String,value:String)
+//        {
+//            val dataStoreKey= preferencesKey<String>(key)
+//            dataStore?.edit { Settings->
+//                Settings[dataStoreKey]=value
+//            }
+//
+//        }
+//         suspend fun read(key:String):Boolean?
+//        {
+//            val dataStoreKey= preferencesKey<Boolean>(key)
+//            val preferences = dataStore?.data?.first()
+//            return preferences?.get(dataStoreKey)
+//        }
+//    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        dataStore = context?.createDataStore(name = "Settings")!!
-        lifecycleScope.launch{
-            val value:Boolean? = read("loggedIn")
-            if(value==true)
-            {
-//                val fragmentManager = activity?.supportFragmentManager
-//                val fragmentTransaction = fragmentManager?.beginTransaction()
-//                fragmentTransaction?.replace(R.id.fragment_container, Home_page())
-//                fragmentTransaction?.addToBackStack(null)
-//                fragmentTransaction?.commit()
-                val intent = Intent(activity, NavBarActivity::class.java)
-                startActivity(intent)
-            }
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        dataStore = context?.createDataStore(name = "Settings")!!
+//        lifecycleScope.launch{
+//            val value:Boolean? = read("loggedIn")
+//            if(value==true)
+//            {
+////                val fragmentManager = activity?.supportFragmentManager
+////                val fragmentTransaction = fragmentManager?.beginTransaction()
+////                fragmentTransaction?.replace(R.id.fragment_container, Home_page())
+////                fragmentTransaction?.addToBackStack(null)
+////                fragmentTransaction?.commit()
+//                val intent = Intent(activity, NavBarActivity::class.java)
+//                startActivity(intent)
+//            }
 //            else
 //            {
 //                val intent = Intent(activity, NavBarActivity::class.java)
@@ -103,7 +119,7 @@ class FragmentLogIn: Fragment() {
 //            }
         }
 
-    }
+
 
 
 //binding = ActivityMainBinding.inflate(layoutInflater)
@@ -122,7 +138,6 @@ class FragmentLogIn: Fragment() {
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
-
         val forgotPassword : TextView = v.findViewById(R.id.loginForgotPasswordText)
         forgotPassword.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
@@ -137,13 +152,13 @@ class FragmentLogIn: Fragment() {
             progressBar.visibility=View.VISIBLE
             signInBtn.isEnabled = false
             signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background2))
-
             userEmail = v.findViewById<TextInputEditText>(R.id.loginEmail2).text.toString().trim()
 
             val userPassword = v.findViewById<TextInputEditText>(R.id.loginPassword2).text.toString().trim()
 
             if(!isValidEmail(userEmail)){
                 progressBar.visibility=View.INVISIBLE
+//                val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
                 v.findViewById<EditText>(R.id.loginEmail2).error="Please enter a valid email "
                 signInBtn.isEnabled = true
                 signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
@@ -152,34 +167,41 @@ class FragmentLogIn: Fragment() {
             }
             if(userPassword.isEmpty())
             {
+
                 progressBar.visibility=View.INVISIBLE
                 val progressBar=v.findViewById<ProgressBar>(R.id.progressBar2)
                 v.findViewById<EditText>(R.id.loginPassword2).error="Please enter the password"
                 signInBtn.isEnabled = true
                 signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
                 return@setOnClickListener
+
             }
+
+//            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
 
             RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
                 override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
                     progressBar.visibility = View.INVISIBLE
+//                    val responseBody = response.body()
+//                    Toast.makeText(
+//                        activity,
+//                        responseBody?.status.toString(),
+//                        Toast.LENGTH_LONG
+//                    ).show()
                     token= response.body()?.token.toString()
                         if (response.code() == 200) {
                             NAME = response.body()?.name.toString()
-                            loggedIn = true
+                            Splash_screen.loggedIn= true
                             Toast.makeText(
                                 activity,
                                 "You've been logged in",
                                 Toast.LENGTH_LONG   
                             ).show()
-                            accessToken = response.body()?.access.toString()
                             lifecycleScope.launch {
-                                save("loggedIn", loggedIn)
+                                save("loggedIn", true)
                                 saveInfo("email", userEmail)
                                 saveInfo("name", NAME)
-                                saveInfo("accessToken", accessToken)
                             }
-
                             val intent = Intent(activity, NavBarActivity::class.java)
                             startActivity(intent)
 
@@ -190,6 +212,7 @@ class FragmentLogIn: Fragment() {
                                         "User not registered",
                                         Toast.LENGTH_LONG
                                     ).show()
+//                            v.findViewById<TextInputEditText>(R.id.loginEmail2).text?.clear()
                                     v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
                                     signInBtn.isEnabled = true
                                     signInBtn.setBackgroundColor(
@@ -242,7 +265,6 @@ class FragmentLogIn: Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
                     v.findViewById<TextInputEditText>(R.id.loginPassword2).text?.clear()
-
                     signInBtn.isEnabled = true
                     signInBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_background))
             }

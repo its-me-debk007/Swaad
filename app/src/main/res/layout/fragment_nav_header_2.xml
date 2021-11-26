@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:background="#FFF3AD"
-    tools:context=".NavBarActivity"
-    >
+    tools:context="nav_header_2">
 
     <ImageView
         android:id="@+id/imageView17"

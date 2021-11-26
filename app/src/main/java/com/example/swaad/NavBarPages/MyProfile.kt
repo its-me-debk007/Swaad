@@ -10,12 +10,19 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.swaad.AuthPages.FragmentLogIn
-import com.example.swaad.AuthPages.FragmentLogIn.Companion.loggedIn
-import com.example.swaad.AuthPages.FragmentLogIn.Companion.readInfo
+//import com.example.swaad.AuthPages.FragmentLogIn.Companion.loggedIn
+//import com.example.swaad.AuthPages.FragmentLogIn.Companion.loggedIn
+//import com.example.swaad.AuthPages.FragmentLogIn.Companion.readInfo
 import com.example.swaad.AuthPages.help_support
 import com.example.swaad.MainActivity
+import com.example.swaad.NavBarActivity
 import com.example.swaad.ProfilePages.TermsAndConditions
 import com.example.swaad.R
+import com.example.swaad.SplashScreen.Splash_screen
+import com.example.swaad.SplashScreen.Splash_screen.Companion.loggedIn
+import com.example.swaad.SplashScreen.Splash_screen.Companion.readInfo
+import com.example.swaad.search_page
+//import com.example.swaad.SplashScreen.Splash_screen.Companion.loggedIn
 import kotlinx.coroutines.launch
 import org.w3c.dom.Text
 
@@ -27,12 +34,11 @@ class MyProfile: Fragment()  {
     ): View? {
         val v = inflater.inflate(R.layout.profile_page, container, false)
         lifecycleScope.launch {
-             val useremail = readInfo("email").toString()
-             val name= readInfo("name").toString()
+            var  useremail = readInfo("email").toString()
+            var name= readInfo("name").toString()
             v.findViewById<TextView>(R.id.textView15).text = "Hi ${name}"
             v.findViewById<TextView>(R.id.textView23).text = useremail
         }
-
         val termsConditions: TextView = v.findViewById(R.id.textView21)
         termsConditions.setOnClickListener{
             val fragmentManager = activity?.supportFragmentManager
@@ -58,11 +64,11 @@ class MyProfile: Fragment()  {
 //            fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
 //            fragmentTransaction?.addToBackStack(null)
 //            fragmentTransaction?.commit()
-            loggedIn=false
+            Splash_screen.loggedIn=false
             lifecycleScope.launch {
-                FragmentLogIn.save("loggedIn", loggedIn)
+                Splash_screen.save("loggedIn", loggedIn!!)
             }
-            val intent = Intent(activity, MainActivity::class.java)
+            val intent = Intent(NavBarActivity(), MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(
                 activity,
