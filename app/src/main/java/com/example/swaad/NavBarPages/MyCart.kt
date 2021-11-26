@@ -31,9 +31,10 @@ import com.razorpay.PaymentResultListener
 import java.lang.Exception
 
 
-class MyCart: Fragment(),PaymentResultListener {
+class MyCart: Fragment() {
     companion object{
         var grantTotal: Int = 0
+        var location:TextView?=null
     }
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>? = null
@@ -45,8 +46,8 @@ class MyCart: Fragment(),PaymentResultListener {
 
         val v = inflater.inflate(com.example.swaad.R.layout.my_cart, container, false)
         val pay_button = v.findViewById<Button>(com.example.swaad.R.id.payButton)
-        val location=v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart)
-        location.text=Home_page.adresslocation
+        location=v.findViewById(com.example.swaad.R.id.locationTextCart)
+//        v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart).text=Home_page.adresslocation
         pay_button.setOnClickListener{
             val intent = Intent(activity, PaymentActivity::class.java)
             startActivity(intent)
@@ -86,48 +87,48 @@ class MyCart: Fragment(),PaymentResultListener {
         return v
     }
 
-    override fun onPaymentSuccess(p0: String?) {
-//        Toast.makeText(this,"Succeess in payment: ",Toast.LENGTH_LONG).show()
-    }
-
-    override fun onPaymentError(p0: Int, p1: String?) {
-//        Toast.makeText(this,"Error in payment: ",Toast.LENGTH_LONG).show()
-    }
-    fun makePayment()
-    {
-        /*
-            *  You need to pass current activity in order to let Razorpay create CheckoutActivity
-            * */
-//        val activity: Activity =
-        val co = Checkout()
-
-        try {
-            val options = JSONObject()
-            options.put("name","Swaad")
-            options.put("description","Food Charges")
-            //You can omit the image option to fetch the image from dashboard
-            options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
-            options.put("theme.color", "#3399cc");
-            options.put("currency","INR");
-            options.put("order_id", "order_DBJOWzybf0sJbb");
-            options.put("amount","50000")//pass amount in currency subunits
-
-            val retryObj = JSONObject();
-            retryObj.put("enabled", true);
-            retryObj.put("max_count", 4);
-            options.put("retry", retryObj);
-
-            val prefill = JSONObject()
-            prefill.put("email","gaurav.kumar@example.com")
-            prefill.put("contact","9876543210")
-
-            options.put("prefill",prefill)
-            co.open(activity,options)
-        }catch (e: Exception){
-            Toast.makeText(NavBarActivity(),"Error in payment please try again",Toast.LENGTH_LONG).show()
-            e.printStackTrace()
-        }
-    }
+//    override fun onPaymentSuccess(p0: String?) {
+////        Toast.makeText(this,"Succeess in payment: ",Toast.LENGTH_LONG).show()
+//    }
+//
+//    override fun onPaymentError(p0: Int, p1: String?) {
+////        Toast.makeText(this,"Error in payment: ",Toast.LENGTH_LONG).show()
+//    }
+//    fun makePayment()
+//    {
+//        /*
+//            *  You need to pass current activity in order to let Razorpay create CheckoutActivity
+//            * */
+////        val activity: Activity =
+//        val co = Checkout()
+//
+//        try {
+//            val options = JSONObject()
+//            options.put("name","Swaad")
+//            options.put("description","Food Charges")
+//            //You can omit the image option to fetch the image from dashboard
+//            options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
+//            options.put("theme.color", "#3399cc");
+//            options.put("currency","INR");
+//            options.put("order_id", "order_DBJOWzybf0sJbb");
+//            options.put("amount","50000")//pass amount in currency subunits
+//
+//            val retryObj = JSONObject();
+//            retryObj.put("enabled", true);
+//            retryObj.put("max_count", 4);
+//            options.put("retry", retryObj);
+//
+//            val prefill = JSONObject()
+//            prefill.put("email","gaurav.kumar@example.com")
+//            prefill.put("contact","9876543210")
+//
+//            options.put("prefill",prefill)
+//            co.open(activity,options)
+//        }catch (e: Exception){
+//            Toast.makeText(NavBarActivity(),"Error in payment please try again",Toast.LENGTH_LONG).show()
+//            e.printStackTrace()
+//        }
+//    }
 }
 
 //    private fun PaymentNow(amount: String) {

@@ -85,7 +85,7 @@ class Home_page : Fragment() {
                     response: Response<List<DataGetDishesList>?>
                 ) {
                     status = "Kunal"
-                    responseDataKunal=response.body()!!
+                    responseDataKunal= response.body()!!
                     val fragmentManager = activity?.supportFragmentManager
                     val fragmentTransaction = fragmentManager?.beginTransaction()
                     fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())

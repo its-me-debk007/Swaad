@@ -31,7 +31,6 @@
             tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -45,7 +44,7 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA-7kFKSUHQjI3kcjyCPP8VpD5jlf092XM"/>
+            android:value="AIzaSyCyPd8gmZzuQ45qBpgQs1WME2JfoYYWy50"/>
     </application>
 
 </manifest>

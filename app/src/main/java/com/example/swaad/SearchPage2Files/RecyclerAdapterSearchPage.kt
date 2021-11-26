@@ -21,14 +21,12 @@ import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Compa
 import com.example.swaad.SearchPage2Files.SearchPage2.Companion.responseDataDebashish
 import com.google.android.material.button.MaterialButton
 
-class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<DataGetDishesList>): RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
+    class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<DataGetDishesList>): RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
 
     companion object{
         var toastMaker: Boolean = false
         var pos: Int = 0
     }
-
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

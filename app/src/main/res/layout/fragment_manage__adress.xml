@@ -5,90 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Manage_Adress">
-
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewManageAdress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView51" />
 
         <TextView
             android:id="@+id/textView46"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Add Your Adress"
-            android:textColor="#FFD243"
-            android:textSize="24sp"
+            android:text="Manage Addresses"
+            android:textColor="#000000"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/userAdress"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/textView51"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:background="@null"
-            android:ems="10"
-            android:fontFamily="@font/poppins"
-            android:hint="Add Your Adress"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="17dp"
+            android:text="SAVED ADRESSES"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
-        <TextView
-            android:id="@+id/textView47"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Your Adress"
-            android:textColor="#FFD243"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addAdress" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="409dp"
-            android:layout_height="597dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView47" />
-
-        <EditText
-            android:id="@+id/userPhoneNumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="16dp"
-            android:background="@null"
-            android:ems="10"
-            android:fontFamily="@font/poppins"
-            android:hint="Enter Your Phone No."
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userAdress" />
-
         <Button
             android:id="@+id/addAdress"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="130dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="133dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="22dp"
             android:fontFamily="@font/poppins"
-            android:text="Add Adress"
+            android:text="Add new Adress"
+            app:cornerRadius="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userPhoneNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewManageAdress" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 </FrameLayout>

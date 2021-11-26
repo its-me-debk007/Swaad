@@ -19,6 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -62,7 +63,7 @@ class NavBarActivity : AppCompatActivity() {
         setContentView(R.layout.nav_bar)
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView = findViewById<NavigationView>(R.id.navView)
-
+        val navdrawer=findViewById<NavigationView>(R.id.navView)
         callNetworkConnection()
 //        val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
 

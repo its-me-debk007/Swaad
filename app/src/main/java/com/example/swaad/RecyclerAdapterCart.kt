@@ -66,7 +66,7 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
         val itemCount: TextView
         val plus: ImageView
         val minus: ImageView
-
+        
         init {
             itemName = itemView.findViewById(R.id.itemName)
             dishPrice = itemView.findViewById(R.id.dishPrice)

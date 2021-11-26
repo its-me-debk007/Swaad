@@ -28,8 +28,6 @@ interface Api {
     ):Call<ResponseBody>
 
 
-
-
     @POST("api/user/signup/verify/")
     fun getSignUpOtp(
         @Body jsonConverterSignUpOtp: JsonConverterSignUpOtp
@@ -77,4 +75,8 @@ interface Api {
 
   @POST("api/seller/customer/address/")
   fun getAdress(@Body jsonConverterAdress:JsonConverterAdress):Call<DataClassAdress>
+  @GET("api/cart/delivery/")
+  fun getManageAddress(@Header ("Authorization") token:String):Call<List<DataClassGetManageAdressItem>>
+  @POST("api/cart/delivery/")
+  fun addAddress(@Body jsonConverterAddAdress: JsonConverterAddAdress, @Header ("Authorization") token:String):Call<ResponseBody>
 }

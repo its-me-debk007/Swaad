@@ -9,19 +9,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.swaad.*
 import com.example.swaad.AuthPages.FragmentLogIn
 //import com.example.swaad.AuthPages.FragmentLogIn.Companion.loggedIn
 //import com.example.swaad.AuthPages.FragmentLogIn.Companion.loggedIn
 //import com.example.swaad.AuthPages.FragmentLogIn.Companion.readInfo
 import com.example.swaad.AuthPages.help_support
-import com.example.swaad.MainActivity
-import com.example.swaad.NavBarActivity
 import com.example.swaad.ProfilePages.TermsAndConditions
-import com.example.swaad.R
 import com.example.swaad.SplashScreen.Splash_screen
 import com.example.swaad.SplashScreen.Splash_screen.Companion.loggedIn
 import com.example.swaad.SplashScreen.Splash_screen.Companion.readInfo
-import com.example.swaad.search_page
 //import com.example.swaad.SplashScreen.Splash_screen.Companion.loggedIn
 import kotlinx.coroutines.launch
 import org.w3c.dom.Text
@@ -58,6 +55,14 @@ class MyProfile: Fragment()  {
             fragmentTransaction?.commit()
 
         }
+        val manageAdress=v.findViewById<TextView>(R.id.ManageAddress)
+        manageAdress.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,Manage_Adress())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
         logOut.setOnClickListener{
 //            val fragmentManager = activity?.supportFragmentManager
 //            val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -68,7 +73,7 @@ class MyProfile: Fragment()  {
             lifecycleScope.launch {
                 Splash_screen.save("loggedIn", loggedIn!!)
             }
-            val intent = Intent(NavBarActivity(), MainActivity::class.java)
+            val intent = Intent(activity, MainActivity()::class.java)
             startActivity(intent)
             Toast.makeText(
                 activity,
