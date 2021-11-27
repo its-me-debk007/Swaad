@@ -46,10 +46,10 @@ import java.util.*
 
 class Home_page : Fragment() {
     companion object{
-        var status : String=""
         lateinit var responseDataKunal: List<DataGetDishesList>
          var adresslocation:String? =null
         lateinit var AccessToken: String
+        lateinit var food: String
     }
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -76,96 +76,50 @@ class Home_page : Fragment() {
 
         val sweets=v.findViewById<ImageView>(R.id.Sweets)
         val pizza=v.findViewById<ImageView>(R.id.Pizza)
-        val chinese=v.findViewById<ImageView>(R.id.Chinese)
+        val chaat=v.findViewById<ImageView>(R.id.Chinese)
         val burger=v.findViewById<ImageView>(R.id.Burger)
+        val paneer=v.findViewById<ImageView>(R.id.Paneer)
 
-        val jsonConverterCategorySweets=JsonConverterCategory("Sweets")
-        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
-        val jsonConverterCategoryChinese=JsonConverterCategory("Chinese")
-        val jsonConverterCategoryBurger=JsonConverterCategory("Burger")
-//        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
 
         pizza.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategoryPizza).enqueue(object : Callback<List<DataGetDishesList>?> {
-                override fun onResponse(
-                    call: Call<List<DataGetDishesList>?>,
-                    response: Response<List<DataGetDishesList>?>
-                ) {
-                    status = "Kunal"
-                    responseDataKunal=response.body()!!
-                    val fragmentManager = activity?.supportFragmentManager
-                    val fragmentTransaction = fragmentManager?.beginTransaction()
-                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-                    fragmentTransaction?.addToBackStack(null)
-                    fragmentTransaction?.commit()
-                }
-
-                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-
-                }
-            })
-
-        }
-        burger.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategoryBurger).enqueue(object : Callback<List<DataGetDishesList>?> {
-                override fun onResponse(
-                    call: Call<List<DataGetDishesList>?>,
-                    response: Response<List<DataGetDishesList>?>
-                ) {
-                    status = "Kunal"
-                    responseDataKunal=response.body()!!
-                    val fragmentManager = activity?.supportFragmentManager
-                    val fragmentTransaction = fragmentManager?.beginTransaction()
-                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-                    fragmentTransaction?.addToBackStack(null)
-                    fragmentTransaction?.commit()
-                }
-
-                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-
-                }
-            })
-        }
-        sweets.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategorySweets).enqueue(object : Callback<List<DataGetDishesList>?> {
-                override fun onResponse(
-                    call: Call<List<DataGetDishesList>?>,
-                    response: Response<List<DataGetDishesList>?>
-                ) {
-                    status = "Kunal"
-                    responseDataKunal=response.body()!!
-                    val fragmentManager = activity?.supportFragmentManager
-                    val fragmentTransaction = fragmentManager?.beginTransaction()
-                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-                    fragmentTransaction?.addToBackStack(null)
-                    fragmentTransaction?.commit()
-                }
-
-                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-
-                }
-            })
-        }
-        chinese.setOnClickListener {
-            RetrofitClient.init().categoryDish(jsonConverterCategoryChinese).enqueue(object : Callback<List<DataGetDishesList>?> {
-                override fun onResponse(
-                    call: Call<List<DataGetDishesList>?>,
-                    response: Response<List<DataGetDishesList>?>
-                ) {
-                        status = "Kunal"
-                     Toast.makeText(container?.context,response.message(),Toast.LENGTH_LONG).show()
-                        responseDataKunal=response.body()!!
-                    val fragmentManager = activity?.supportFragmentManager
+            food = "pizza"
+            val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
-                }
-
-                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-                    Toast.makeText(container?.context,t.message.toString(),Toast.LENGTH_LONG).show()
-                }
-            })
+        }
+        burger.setOnClickListener {
+            food = "burger"
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
+        sweets.setOnClickListener {
+            food = "sweets"
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
+        chaat.setOnClickListener {
+            food = "chaat"
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
+        paneer.setOnClickListener {
+            food = "paneer"
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
         }
 
         var jsonConverterAdress=JsonConverterAdress(MainActivity.latitude,MainActivity.longitude)

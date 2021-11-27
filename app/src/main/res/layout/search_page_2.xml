@@ -29,8 +29,8 @@
             android:fontFamily="@font/poppins"
             android:hint="You're just a search away"
             android:paddingTop="13dp"
-            android:paddingBottom="9dp"
 
+            android:paddingBottom="9dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,11 +107,10 @@
         android:id="@+id/backwardBtn"
         android:layout_width="16dp"
         android:layout_height="15dp"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchBar"
-        app:srcCompat="@drawable/ic_left_arrow" />
+        app:srcCompat="@drawable/ic_left_arrow"
+        tools:layout_editor_absoluteX="10dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSearchPage2"
