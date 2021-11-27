@@ -75,98 +75,98 @@ class Home_page : Fragment() {
         }
 
         val sweets=v.findViewById<ImageView>(R.id.Sweets)
-        val pizza=v.findViewById<ImageView>(R.id.PizzaSection)
+        val pizza=v.findViewById<ImageView>(R.id.Pizza)
         val chinese=v.findViewById<ImageView>(R.id.Chinese)
         val burger=v.findViewById<ImageView>(R.id.Burger)
 
         val jsonConverterCategorySweets=JsonConverterCategory("Sweets")
-//        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
+        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
         val jsonConverterCategoryChinese=JsonConverterCategory("Chinese")
         val jsonConverterCategoryBurger=JsonConverterCategory("Burger")
 //        val jsonConverterCategoryPizza=JsonConverterCategory("Pizza")
 
-//        pizza.setOnClickListener {
-//            RetrofitClient.init().categoryDish(jsonConverterCategoryPizza).enqueue(object : Callback<List<DataGetDishesList>?> {
-//                override fun onResponse(
-//                    call: Call<List<DataGetDishesList>?>,
-//                    response: Response<List<DataGetDishesList>?>
-//                ) {
-//                    status = "Kunal"
-//                    responseDataKunal=response.body()!!
-//                    val fragmentManager = activity?.supportFragmentManager
-//                    val fragmentTransaction = fragmentManager?.beginTransaction()
-//                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-//                    fragmentTransaction?.addToBackStack(null)
-//                    fragmentTransaction?.commit()
-//                }
-//
-//                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-//
-//                }
-//            })
-//
-//        }
-//        burger.setOnClickListener {
-//            RetrofitClient.init().categoryDish(jsonConverterCategoryBurger).enqueue(object : Callback<List<DataGetDishesList>?> {
-//                override fun onResponse(
-//                    call: Call<List<DataGetDishesList>?>,
-//                    response: Response<List<DataGetDishesList>?>
-//                ) {
-//                    status = "Kunal"
-//                    responseDataKunal=response.body()!!
-//                    val fragmentManager = activity?.supportFragmentManager
-//                    val fragmentTransaction = fragmentManager?.beginTransaction()
-//                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-//                    fragmentTransaction?.addToBackStack(null)
-//                    fragmentTransaction?.commit()
-//                }
-//
-//                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-//
-//                }
-//            })
-//        }
-//        sweets.setOnClickListener {
-//            RetrofitClient.init().categoryDish(jsonConverterCategorySweets).enqueue(object : Callback<List<DataGetDishesList>?> {
-//                override fun onResponse(
-//                    call: Call<List<DataGetDishesList>?>,
-//                    response: Response<List<DataGetDishesList>?>
-//                ) {
-//                    status = "Kunal"
-//                    responseDataKunal=response.body()!!
-//                    val fragmentManager = activity?.supportFragmentManager
-//                    val fragmentTransaction = fragmentManager?.beginTransaction()
-//                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-//                    fragmentTransaction?.addToBackStack(null)
-//                    fragmentTransaction?.commit()
-//                }
-//
-//                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-//
-//                }
-//            })
-//        }
-//        chinese.setOnClickListener {
-//            RetrofitClient.init().categoryDish(jsonConverterCategoryChinese).enqueue(object : Callback<List<DataGetDishesList>?> {
-//                override fun onResponse(
-//                    call: Call<List<DataGetDishesList>?>,
-//                    response: Response<List<DataGetDishesList>?>
-//                ) {
-//                        status = "Kunal"
-//                     Toast.makeText(container?.context,response.message(),Toast.LENGTH_LONG).show()
-//                        responseDataKunal=response.body()!!
-//                    val fragmentManager = activity?.supportFragmentManager
-//            val fragmentTransaction = fragmentManager?.beginTransaction()
-//            fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
-//            fragmentTransaction?.addToBackStack(null)
-//            fragmentTransaction?.commit()
-//                }
-//
-//                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
-//                    Toast.makeText(container?.context,t.message.toString(),Toast.LENGTH_LONG).show()
-//                }
-//            })
-//        }
+        pizza.setOnClickListener {
+            RetrofitClient.init().categoryDish(jsonConverterCategoryPizza).enqueue(object : Callback<List<DataGetDishesList>?> {
+                override fun onResponse(
+                    call: Call<List<DataGetDishesList>?>,
+                    response: Response<List<DataGetDishesList>?>
+                ) {
+                    status = "Kunal"
+                    responseDataKunal=response.body()!!
+                    val fragmentManager = activity?.supportFragmentManager
+                    val fragmentTransaction = fragmentManager?.beginTransaction()
+                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+                    fragmentTransaction?.addToBackStack(null)
+                    fragmentTransaction?.commit()
+                }
+
+                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+
+                }
+            })
+
+        }
+        burger.setOnClickListener {
+            RetrofitClient.init().categoryDish(jsonConverterCategoryBurger).enqueue(object : Callback<List<DataGetDishesList>?> {
+                override fun onResponse(
+                    call: Call<List<DataGetDishesList>?>,
+                    response: Response<List<DataGetDishesList>?>
+                ) {
+                    status = "Kunal"
+                    responseDataKunal=response.body()!!
+                    val fragmentManager = activity?.supportFragmentManager
+                    val fragmentTransaction = fragmentManager?.beginTransaction()
+                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+                    fragmentTransaction?.addToBackStack(null)
+                    fragmentTransaction?.commit()
+                }
+
+                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+
+                }
+            })
+        }
+        sweets.setOnClickListener {
+            RetrofitClient.init().categoryDish(jsonConverterCategorySweets).enqueue(object : Callback<List<DataGetDishesList>?> {
+                override fun onResponse(
+                    call: Call<List<DataGetDishesList>?>,
+                    response: Response<List<DataGetDishesList>?>
+                ) {
+                    status = "Kunal"
+                    responseDataKunal=response.body()!!
+                    val fragmentManager = activity?.supportFragmentManager
+                    val fragmentTransaction = fragmentManager?.beginTransaction()
+                    fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+                    fragmentTransaction?.addToBackStack(null)
+                    fragmentTransaction?.commit()
+                }
+
+                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+
+                }
+            })
+        }
+        chinese.setOnClickListener {
+            RetrofitClient.init().categoryDish(jsonConverterCategoryChinese).enqueue(object : Callback<List<DataGetDishesList>?> {
+                override fun onResponse(
+                    call: Call<List<DataGetDishesList>?>,
+                    response: Response<List<DataGetDishesList>?>
+                ) {
+                        status = "Kunal"
+                     Toast.makeText(container?.context,response.message(),Toast.LENGTH_LONG).show()
+                        responseDataKunal=response.body()!!
+                    val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+                }
+
+                override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+                    Toast.makeText(container?.context,t.message.toString(),Toast.LENGTH_LONG).show()
+                }
+            })
+        }
 
         var jsonConverterAdress=JsonConverterAdress(MainActivity.latitude,MainActivity.longitude)
        RetrofitClient.init().getAdress(jsonConverterAdress).enqueue(object : Callback<DataClassAdress?> {
@@ -174,7 +174,7 @@ class Home_page : Fragment() {
                if(response.isSuccessful())
                {
                    adresslocation=response.body()?.address.toString()
-                   Toast.makeText(activity,"Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}",Toast.LENGTH_LONG).show()
+//                   Toast.makeText(activity,"Latitude = ${MainActivity.latitude} Longitude = ${MainActivity.longitude}",Toast.LENGTH_LONG).show()
                    locationtext.text=adresslocation
 //                   lifecycleScope.launch {
 //                       Splash_screen.saveInfo("adress",adresslocation)
@@ -345,6 +345,47 @@ class Home_page : Fragment() {
 //        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient()
 
 
+//        fun to check the user permission
+//    fun CheckPermission():Boolean
+//    {
+//        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED ||
+//            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED)
+//        {
+//            return true
+//        }
+//        return false
+//    }
+//    //        Now we need to take create a function that will allow us to get user permission
+//    fun RequestPermission()
+//    {
+//        ActivityCompat.requestPermissions(
+//            this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),permission_id
+//        )
+//    }
+//    //      a function that check if the location service of the device  is enabled
+//    fun isLocationEnabled():Boolean
+//    {
+//        var locationManager:LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+//    }
+//
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        // it is a bulit in function that checks the permission result
+//        // you will use it just for debugging the code
+//        if(requestCode==permission_id)
+//        {
+//            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+//            {
+//              error("You have the permission")
+//            }
+//        }
+//    }
+//
+//}
 //        fun to check the user permission
 //    fun CheckPermission():Boolean
 //    {

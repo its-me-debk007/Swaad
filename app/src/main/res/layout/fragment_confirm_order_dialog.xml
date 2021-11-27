@@ -58,7 +58,11 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="36dp"
-        android:text="Your meal order is placed successfully we are "
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/poppins"
+        android:text="Your meal order is placed successfully we are currently processing it now"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView38" />

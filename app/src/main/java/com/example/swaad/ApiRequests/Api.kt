@@ -1,7 +1,9 @@
 package com.example.swaad.ApiRequests
 
 import com.example.swaad.CategoryFoodItem
+import com.example.swaad.DataGetDishesList
 import com.example.swaad.JsonConverterCategory
+import com.example.swaad.DataGetRestaurantNames
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -17,6 +19,7 @@ interface Api {
 
     @POST("/api/user/register/")
     fun createUser(@Body jsonconvertersignup:JsonConverterSignUP):Call<ResponseBody>
+
 
     @POST("/api/user/password/reset/")
     fun getOtp (
@@ -34,6 +37,7 @@ interface Api {
         @Field("email")email: String,
         @Field("otp")otp: String
     ):Call<DataVerifyOtpClass>
+
 
     @FormUrlEncoded
     @PATCH("/api/user/profile/")
@@ -93,4 +97,8 @@ interface Api {
         @Header("Authorization") authorization: String
     ):Call<DataClassCartInfo>
 
+  @GET("api/cart/delivery/")
+  fun getManageAddress(@Header ("Authorization") token:String):Call<List<DataClassGetManageAdressItem>>
+  @POST("api/cart/delivery/")
+  fun addAddress(@Body jsonConverterAddAdress: JsonConverterAddAdress, @Header ("Authorization") token:String):Call<ResponseBody>
 }

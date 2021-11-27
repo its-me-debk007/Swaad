@@ -45,7 +45,7 @@ class FragmentLogIn: Fragment() {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches()
     }
     companion object{
-        lateinit var token:String
+        var token:String?=null
         lateinit var NAME: String
         lateinit var userEmail: String
         lateinit var loginOtpEmail: String
@@ -188,7 +188,8 @@ class FragmentLogIn: Fragment() {
 //                        responseBody?.status.toString(),
 //                        Toast.LENGTH_LONG
 //                    ).show()
-                    token= response.body()?.token.toString()
+
+                    Toast.makeText(activity,token,Toast.LENGTH_LONG).show()
                         if (response.code() == 200) {
                             NAME = response.body()?.name.toString()
                             Splash_screen.loggedIn= true

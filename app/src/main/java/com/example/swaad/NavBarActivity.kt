@@ -19,15 +19,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.swaad.ApiRequests.CheckNetworkConnection
 import com.example.swaad.AuthPages.FragmentLogIn
 import com.example.swaad.NavBarPages.Home_page
 import com.example.swaad.NavBarPages.MyCart
 import com.example.swaad.NavBarPages.MyProfile
 import com.example.swaad.SearchPage2Files.SearchPage2
+import com.example.swaad.SplashScreen.Splash_screen
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -36,6 +39,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class NavBarActivity : AppCompatActivity() {
@@ -62,10 +66,20 @@ class NavBarActivity : AppCompatActivity() {
         setContentView(R.layout.nav_bar)
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView = findViewById<NavigationView>(R.id.navView)
-
+//        val navdrawer=findViewById<NavigationView>(R.id.navView)
+        val headerView=navView.getHeaderView(0)
+        val name = headerView.findViewById<TextView>(R.id.hamburger_name)
+        val email=headerView.findViewById<TextView>(R.id.hamburger_email)
+        name.text
         callNetworkConnection()
-//        val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
-
+        val hamburgerName=findViewById<TextView>(R.id.hamburger_name)
+        lifecycleScope.launch {
+            var  useremail = Splash_screen.readInfo("email").toString()
+            var username= Splash_screen.readInfo("name").toString()
+            name.text = "${username}"
+            email.text=useremail
+//            findViewById<TextView>(R.id.hamburger_email).text = useremail
+        }
 //        val connectionManager: ConnectivityManager =
 //            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 //        val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo
@@ -117,7 +131,15 @@ class NavBarActivity : AppCompatActivity() {
                         fragmentTransaction.commit()
                         drawerLayout.closeDrawers()
                     }
-                    R.id.aboutSwaad -> Toast.makeText(this, "Soon Launch", Toast.LENGTH_LONG).show()
+                    R.id.aboutSwaad ->
+                        {
+                            val fragmentManager = supportFragmentManager
+                            val fragmentTransaction = fragmentManager?.beginTransaction()
+                            fragmentTransaction?.replace(R.id.fragment_container,AboutSwaad())
+                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.commit()
+                            drawerLayout.closeDrawers()
+                        }
 
                 }
                 true
@@ -154,18 +176,20 @@ class NavBarActivity : AppCompatActivity() {
 //        val fragment = supportFragmentManager.popBackStack()
 //        val backEntry = supportFragmentManager.getBackStackEntryAt(index);
 //        var tag:String? =backEntry.getName();
-        val fragment = supportFragmentManager.findFragmentByTag("fragmentLogin")
+//        val fragment = supportFragmentManager.findFragmentByTag("fragmentLogin")
 ////        if(tag!=fragment)
         val fragmentsInStack = supportFragmentManager.backStackEntryCount
-        if (fragmentsInStack > 1  ) { // If we have more than one fragment, pop back stack
+        if (fragmentsInStack > 1  ) {
+            for (i in 0 until index) {
+                supportFragmentManager.popBackStack()
+            }// If we have more than one fragment, pop back stack
             val fragmentManager = supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(com.example.swaad.R.id.fragment_container, Home_page())
+            fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 //            supportFragmentManager.popBackStack("fragmentLogin",FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            for (i in 0 until index) {
-                supportFragmentManager.popBackStack()
-            }
+
 //            Toast.makeText(this,"fiest is called",Toast.LENGTH_LONG).show()
         }
         else if (fragmentsInStack<1) {

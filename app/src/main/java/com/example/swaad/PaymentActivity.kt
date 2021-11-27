@@ -31,49 +31,65 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
         super.onCreate(savedInstanceState)
 
         Checkout.preload(applicationContext)
-//        setContentView(R.layout.redirectingpayment)
-        makePayment()
-        for (i in  dishIdList) {
-            var flag = 0
-            var array = ArrayList<Int>()
-            var restaurant_id = restIdList[i].toInt()
-            array.add(restaurant_id)
-            for (k in array) {
-                if (restaurant_id == k) {
-                    flag = 1
-                    break
-                }
-            }
-            if (flag == 0) {
-                var orderDetail = ArrayList<OrderDetail>()
-//                        orderDetail.add(OrderDetail(dishIdList[i], dishCount[i]))
-                for (j in dishIdList) {
-                    if (restIdList[j] == restaurant_id) {
-//                            var orderDetailsItem = OrderDetails(orderDetail, restaurant_id)
-                        orderDetail.add(OrderDetail(dishIdList[i], dishCount[i]))
-                    }
-                }
-                var jsonConverterOrderDetails = JsonConverterOrderDetails(restaurant_id, orderDetail)
-                RetrofitClient.init().orderUpdate(jsonConverterOrderDetails)
-                    .enqueue(object : Callback<ResponseBody?> {
-                        override fun onResponse(
-                            call: Call<ResponseBody?>,
-                            response: Response<ResponseBody?>
-                        ) {
-                            Toast.makeText(
-                                PaymentActivity(),
-                                response.code(),
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
 
-                        override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                            Toast.makeText(PaymentActivity(), "Not", Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    })
-            }
-        }
+
+//        setContentView(R.layout.redirectingpayment)
+            makePayment()
+
+//        val dialodView =
+//            LayoutInflater.from(this).inflate(R.layout.fragment_confirm_order_dialog, null)
+//        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+//        val mBuilder = AlertDialog.Builder(this)
+//            .setView(dialodView)
+//            .setTitle("Order Confirmation")
+//        mBuilder.show()
+//        Handler().postDelayed(
+//            {
+//                val intent = Intent(this, NavBarActivity()::class.java)
+//                startActivity(intent)
+//            },3000
+//        )
+//        for (i in  dishIdList) {
+//            var flag = 0
+//            var array = ArrayList<Int>()
+//            var restaurant_id = restIdList[i].toInt()
+//            array.add(restaurant_id)
+//            for (k in array) {
+//                if (restaurant_id == k) {
+//                    flag = 1
+//                    break
+//                }
+//            }
+//            if (flag == 0) {
+//                var orderDetail = ArrayList<OrderDetail>()
+////                        orderDetail.add(OrderDetail(dishIdList[i], dishCount[i]))
+//                for (j in dishIdList) {
+//                    if (restIdList[j] == restaurant_id) {
+////                            var orderDetailsItem = OrderDetails(orderDetail, restaurant_id)
+//                        orderDetail.add(OrderDetail(dishIdList[i], dishCount[i]))
+//                    }
+//                }
+//                var jsonConverterOrderDetails = JsonConverterOrderDetails(restaurant_id, orderDetail)
+//                RetrofitClient.init().orderUpdate(jsonConverterOrderDetails)
+//                    .enqueue(object : Callback<ResponseBody?> {
+//                        override fun onResponse(
+//                            call: Call<ResponseBody?>,
+//                            response: Response<ResponseBody?>
+//                        ) {
+//                            Toast.makeText(
+//                                PaymentActivity(),
+//                                response.code(),
+//                                Toast.LENGTH_LONG
+//                            ).show()
+//                        }
+//
+//                        override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+//                            Toast.makeText(PaymentActivity(), "Not", Toast.LENGTH_LONG)
+//                                .show()
+//                        }
+//                    })
+//            }
+//        }
 //        Timer("SettingUp", false).schedule(500) {
 //            val dialodView =
 //                LayoutInflater.from(applicationContext).inflate(R.layout.fragment_confirm_order_dialog, null)
@@ -135,9 +151,9 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
 //                    }
 //                })
 //            }
-        } catch (e: Exception) {
-            Toast.makeText(this, "Error in payment: " + e.message, Toast.LENGTH_LONG)
-                .show()
+        }
+        catch (e: Exception) {
+            Toast.makeText(this, "Error in payment: " + e.message, Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
     }
@@ -156,17 +172,16 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
                     startActivity(intent)
                 },3000
             )
-                val fragmentManager = NavBarActivity().supportFragmentManager
-                val fragmentTransaction = fragmentManager?.beginTransaction()
-                fragmentTransaction?.replace(R.id.fragment_container,Rating_Page())
-                fragmentTransaction?.addToBackStack(null)
-                fragmentTransaction?.commit()
+//                val fragmentManager = NavBarActivity().supportFragmentManager
+//                val fragmentTransaction = fragmentManager?.beginTransaction()
+//                fragmentTransaction?.replace(R.id.fragment_container,Rating_Page())
+//                fragmentTransaction?.addToBackStack(null)
+//                fragmentTransaction?.commit()
         }
 
         override fun onPaymentError(p0: Int, p1: String?) {
             Log.d("mytag", "onPaymentError: "+p1.toString())
                 Toast.makeText(NavBarActivity(),"Error in payment "+p1.toString(), Toast.LENGTH_LONG).show()
-
         }
 
 }
