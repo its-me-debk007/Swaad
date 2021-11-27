@@ -120,7 +120,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/Chinese"
+                        android:id="@+id/Chaat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
@@ -135,9 +135,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="78dp"
                         android:layout_marginTop="5dp"
-                        android:text="Chinese"
+                        android:text="Chaat"
                         app:layout_constraintStart_toEndOf="@+id/ManageAddress"
-                        app:layout_constraintTop_toBottomOf="@+id/Chinese" />
+                        app:layout_constraintTop_toBottomOf="@+id/Chaat" />
 
                     <ImageView
                         android:id="@+id/Burger"
@@ -146,7 +146,7 @@
                         android:layout_marginStart="25dp"
                         android:layout_marginTop="28dp"
                         android:src="@drawable/home_page_burger"
-                        app:layout_constraintStart_toEndOf="@+id/Chinese"
+                        app:layout_constraintStart_toEndOf="@+id/Chaat"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
