@@ -32,11 +32,12 @@ class RecyclerAdapterManageAddress(val context: Context, val addressData: List<D
         holder.AddingAdress.setOnClickListener {
             flag = 1
             Adress=addressData[position].address
-            val fragmentManager = NavBarActivity()?.supportFragmentManager
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container, MyCart()  )
-            fragmentTransaction?.addToBackStack("fragmentLogin")
-            fragmentTransaction?.commit()
+            Toast.makeText(context,"Delivery Adress Changed",Toast.LENGTH_LONG ).show()
+//            val fragmentManager = NavBarActivity()?.supportFragmentManager
+//            val fragmentTransaction = fragmentManager?.beginTransaction()
+//            fragmentTransaction?.replace(R.id.fragment_container, MyCart())
+//            fragmentTransaction?.addToBackStack("fragmentLogin")
+//            fragmentTransaction?.commit()
 //            MyCart.location?.text= Adress
         }
 

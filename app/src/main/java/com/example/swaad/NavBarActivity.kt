@@ -131,7 +131,15 @@ class NavBarActivity : AppCompatActivity() {
                         fragmentTransaction.commit()
                         drawerLayout.closeDrawers()
                     }
-                    R.id.aboutSwaad -> Toast.makeText(this, "Soon Launch", Toast.LENGTH_LONG).show()
+                    R.id.aboutSwaad ->
+                        {
+                            val fragmentManager = supportFragmentManager
+                            val fragmentTransaction = fragmentManager?.beginTransaction()
+                            fragmentTransaction?.replace(R.id.fragment_container,AboutSwaad())
+                            fragmentTransaction?.addToBackStack(null)
+                            fragmentTransaction?.commit()
+                            drawerLayout.closeDrawers()
+                        }
 
                 }
                 true
@@ -168,18 +176,20 @@ class NavBarActivity : AppCompatActivity() {
 //        val fragment = supportFragmentManager.popBackStack()
 //        val backEntry = supportFragmentManager.getBackStackEntryAt(index);
 //        var tag:String? =backEntry.getName();
-        val fragment = supportFragmentManager.findFragmentByTag("fragmentLogin")
+//        val fragment = supportFragmentManager.findFragmentByTag("fragmentLogin")
 ////        if(tag!=fragment)
         val fragmentsInStack = supportFragmentManager.backStackEntryCount
-        if (fragmentsInStack > 1  ) { // If we have more than one fragment, pop back stack
+        if (fragmentsInStack > 1  ) {
+            for (i in 0 until index) {
+                supportFragmentManager.popBackStack()
+            }// If we have more than one fragment, pop back stack
             val fragmentManager = supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(com.example.swaad.R.id.fragment_container, Home_page())
+            fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 //            supportFragmentManager.popBackStack("fragmentLogin",FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            for (i in 0 until index) {
-                supportFragmentManager.popBackStack()
-            }
+
 //            Toast.makeText(this,"fiest is called",Toast.LENGTH_LONG).show()
         }
         else if (fragmentsInStack<1) {
