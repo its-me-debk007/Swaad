@@ -12,8 +12,9 @@ import com.example.swaad.*
 import com.example.swaad.ApiRequests.DataGetDishesList
 import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.NavBarPages.Home_page
+import com.example.swaad.NavBarPages.Home_page.Companion.food
 import com.example.swaad.NavBarPages.Home_page.Companion.responseDataKunal
-import com.example.swaad.NavBarPages.Home_page.Companion.status
+import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,24 +36,41 @@ class SearchPage2: Fragment() {
         val v= inflater.inflate(R.layout.search_page_2, container, false)
         val progressBar=v.findViewById<ProgressBar>(R.id.progressBarSearchPage)
 
-        if(status == "Kunal"){
-            try {
-                if (container != null) {
-                    layoutManager = LinearLayoutManager(container?.context)
-                    val recyclerViewSearchPage2 =
-                        v.findViewById<RecyclerView>(R.id.recyclerViewSearchPage2)
-                    recyclerViewSearchPage2.layoutManager = layoutManager
-                    adapter = RecyclerAdapterSearchPage(container.context, responseDataKunal)
-                    recyclerViewSearchPage2.adapter = adapter
-                }
-            }
-            catch (e: Exception){
-                Toast.makeText(activity, "Oops! The search result cannot be loaded", Toast.LENGTH_LONG).show()
-            }
-        }
-        status = "Debashish"
-        val searchText = v.findViewById<EditText>(R.id.searchBar2)
+        RetrofitClient.init().categoryDishSweet(food).enqueue(object :
+            Callback<List<DataGetDishesList>?> {
+            override fun onResponse(
+                call: Call<List<DataGetDishesList>?>,
+                response: Response<List<DataGetDishesList>?>
+            ) {
+                try {
+                    responseDataDebashish = response.body()!!
+                    if (container != null) {
+                        progressBar.visibility = View.INVISIBLE
+                        layoutManager = LinearLayoutManager(container?.context)
+                        val recyclerViewSearchPage2 =
+                            v.findViewById<RecyclerView>(R.id.recyclerViewSearchPage2)
+                        recyclerViewSearchPage2.layoutManager = layoutManager
 
+                        adapter = RecyclerAdapterSearchPage(container.context, responseDataDebashish)
+                        recyclerViewSearchPage2.adapter = adapter
+                    }
+                } catch (e: Exception) {
+                    progressBar.visibility = View.INVISIBLE
+                    Toast.makeText(activity, "Oops! The result cannot be loaded", Toast.LENGTH_LONG).show()
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<DataGetDishesList>?>, t: Throwable) {
+                Toast.makeText(
+                    activity,
+                    "An error has been occurred\n\nPlease try again",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
+
+        val searchText = v.findViewById<TextInputEditText>(R.id.searchBar2)
         searchText.requestFocus()
 //        searchText.addTextChangedListener(object : TextWatcher {
 //            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
