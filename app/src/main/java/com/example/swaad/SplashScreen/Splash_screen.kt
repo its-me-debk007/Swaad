@@ -99,7 +99,7 @@ class Splash_screen : Fragment(){
             {
                 lifecycleScope.launch {
                     var loggedIn = read("loggedIn")
-                    Toast.makeText(activity, loggedIn.toString(), Toast.LENGTH_LONG).show()
+//                    Toast.makeText(activity, loggedIn.toString(), Toast.LENGTH_LONG).show()
 //            if(loggedIn==true || loggedIn==null)
 //            {
 //                val fragmentManager = activity?.supportFragmentManager

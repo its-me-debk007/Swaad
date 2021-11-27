@@ -260,11 +260,7 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
                             holder.dishPrice.text =
                                 "₹" + (basePriceList[position] * dishCount[position]).toString() + ".00"
                             holder.minus.isEnabled = true
-                        } else if (response.code() == 200) {
-                            holder.minus.isEnabled = true
-                        }
-                        else{
-                            holder.itemCount.text = response.code().toString()
+                        }else{
                             holder.minus.isEnabled = true
                         }
                     }
@@ -293,7 +289,7 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
                             notifyDataSetChanged()
                             holder.minus.isEnabled = true
                         }
-                        else if (response.code() == 200){
+                        else{
                             holder.minus.isEnabled = true
                         }
                     }

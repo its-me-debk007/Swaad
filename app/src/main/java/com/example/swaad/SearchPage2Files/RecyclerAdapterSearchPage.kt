@@ -155,8 +155,9 @@ import retrofit2.Response
                             holder.addBtn.text = "ADDED: ${dishCount[pos]}"
                             holder.addBtn.isEnabled = true
                         } else if (response.code() == 400) {
-                            holder.addBtn.text = "Dish from another restaurant cannot be added."
+//                            holder.addBtn.text = "Dish from another restaurant cannot be added."
                             holder.addBtn.isEnabled = true
+                            Toast.makeText(context, "Dish from another restaurant cannot be added.", Toast.LENGTH_LONG).show()
                         }
                     }
 
