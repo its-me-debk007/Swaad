@@ -6,7 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import com.example.swaad.AuthPages.FragmentLogIn
 import com.example.swaad.NavBarPages.Home_page.Companion.AccessToken
 
 object RetrofitClient {

@@ -1,9 +1,7 @@
 package com.example.swaad.ApiRequests
 
 import com.example.swaad.CategoryFoodItem
-import com.example.swaad.DataGetDishesList
 import com.example.swaad.JsonConverterCategory
-import com.example.swaad.DataGetRestaurantNames
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
