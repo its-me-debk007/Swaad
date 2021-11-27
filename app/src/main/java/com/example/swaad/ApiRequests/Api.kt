@@ -104,4 +104,6 @@ interface Api {
   fun getManageAddress(@Header ("Authorization") token:String):Call<List<DataClassGetManageAdressItem>>
   @POST("api/cart/delivery/")
   fun addAddress(@Body jsonConverterAddAdress: JsonConverterAddAdress, @Header ("Authorization") token:String):Call<ResponseBody>
+  @POST("api/cart/checkout/")
+  fun checkout(@Body jsonConverterCheckout: jsonConverterCheckout,@Header ("Authorization") token:String):Call<ResponseBody>
 }

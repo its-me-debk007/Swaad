@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.ApiRequests.JsonConverterOrderDetails
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.ApiRequests.jsonConverterCheckout
 import com.example.swaad.AuthPages.ForgotPassword2
 import com.example.swaad.NavBarPages.MyCart
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
@@ -172,6 +173,8 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
                     startActivity(intent)
                 },3000
             )
+//            var jsonConverterCheckout=jsonConverterCheckout()
+//            RetrofitClient.init().checkout()
 //                val fragmentManager = NavBarActivity().supportFragmentManager
 //                val fragmentTransaction = fragmentManager?.beginTransaction()
 //                fragmentTransaction?.replace(R.id.fragment_container,Rating_Page())
