@@ -81,7 +81,6 @@ import retrofit2.Response
         holder.priceValue.text = "₹" + restaurantData[position].price.toString() + "0"
 
         holder.addBtn.setOnClickListener {
-//                var flag = 0
 //                for (i in 0 until dishIdList.size) {
 //                    if (dishIdList[i] == restaurantData[position].id) {
 //                        flag = 1

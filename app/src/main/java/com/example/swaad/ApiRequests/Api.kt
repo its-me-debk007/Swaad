@@ -59,8 +59,13 @@ interface Api {
           @Query("search")search: String
       ):Call<List<DataGetDishesList>>
 
-    @POST("api/seller/customer/restaurants/category/")
+    @GET("/api/seller/customer/restaurants/category/")
     fun categoryDish(@Body jsonConverterCategory: JsonConverterCategory):Call<List<DataGetDishesList>>
+
+    @GET("/api/seller/customer/restaurants/category/{food}")
+    fun categoryDishSweet(
+        @Path("food")food: String
+    ):Call<List<DataGetDishesList>>
 
     @POST("api/seller/ customer/rating/{dish_id}")
     fun dishRating(@Path("dish_id") dish_id:Int,@Body jsonConverterRating: JsonConverterRating):Call<ResponseBody>
