@@ -64,11 +64,11 @@ class MyProfile: Fragment()  {
 //            fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
 //            fragmentTransaction?.addToBackStack(null)
 //            fragmentTransaction?.commit()
-            Splash_screen.loggedIn=false
+            loggedIn=false
             lifecycleScope.launch {
                 Splash_screen.save("loggedIn", loggedIn!!)
             }
-            val intent = Intent(NavBarActivity(), MainActivity::class.java)
+            val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(
                 activity,

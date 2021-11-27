@@ -197,10 +197,12 @@ class FragmentLogIn: Fragment() {
                                 "You've been logged in",
                                 Toast.LENGTH_LONG   
                             ).show()
+
                             lifecycleScope.launch {
                                 save("loggedIn", true)
                                 saveInfo("email", userEmail)
                                 saveInfo("name", NAME)
+                                saveInfo("accessToken", response.body()?.access.toString())
                             }
                             val intent = Intent(activity, NavBarActivity::class.java)
                             startActivity(intent)

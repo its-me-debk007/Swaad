@@ -71,7 +71,7 @@ class Home_page : Fragment() {
         val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
 
         lifecycleScope.launch{
-            AccessToken = FragmentLogIn.readInfo("accessToken").toString()
+            AccessToken = Splash_screen.readInfo("accessToken").toString()
         }
 
         val sweets=v.findViewById<ImageView>(R.id.Sweets)

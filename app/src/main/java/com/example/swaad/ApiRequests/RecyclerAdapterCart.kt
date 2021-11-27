@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.swaad.NavBarPages.Home_page.Companion.AccessToken
 import com.example.swaad.R
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.cartList
@@ -209,84 +210,96 @@ class RecyclerAdapterCart: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemName.text = cartList[holder.getAdapterPosition()]
-        holder.dishPrice.text = "₹" + dishCostList[holder.getAdapterPosition()].toString() + ".00"
-        holder.plus.setImageResource(pluses[holder.getAdapterPosition()])
-        holder.minus.setImageResource(minuses[holder.getAdapterPosition()])
-        holder.itemCount.text = dishCount[holder.getAdapterPosition()].toString()
+        holder.itemName.text = cartList[position]
+        holder.dishPrice.text = "₹" + dishCostList[position].toString() + ".00"
+        holder.plus.setImageResource(pluses[position])
+        holder.minus.setImageResource(minuses[position])
+        holder.itemCount.text = dishCount[position].toString()
+//        notifyDataSetChanged()
 
         holder.plus.setOnClickListener {
-
-
-            RetrofitClient.init().addToCart(dishIdList[holder.getAdapterPosition()]).enqueue(object :
+            holder.plus.isEnabled = false
+            RetrofitClient.init().addToCart("Bearer ${AccessToken}", dishIdList[position]).enqueue(object :
                 Callback<DataClassAddedToCart?> {
                 override fun onResponse(
                     call: Call<DataClassAddedToCart?>,
                     response: Response<DataClassAddedToCart?>
                 ) {
                     if (response.code() == 200) {
-                        dishCount[holder.getAdapterPosition()]++
-                        holder.itemCount.text = dishCount[holder.getAdapterPosition()].toString()
-                        holder.dishPrice.text = "₹" + (basePriceList[holder.getAdapterPosition()] * dishCount[holder.getAdapterPosition()]).toString() + ".00"
+                        dishCount[position]++
+                        holder.itemCount.text = dishCount[position].toString()
+                        holder.dishPrice.text = "₹" + (basePriceList[position] * dishCount[holder.getAdapterPosition()]).toString() + ".00"
+                        holder.plus.isEnabled = true
                     }
                     else if(response.code() == 400){
                         Log.d("Error", "Another restaurant dish added!")
+                        holder.plus.isEnabled = true
                     }
                 }
                 override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
                     Log.d("Error", "Retrofit is OnFailure")
+                    holder.plus.isEnabled = true
                 }
             })
         }
         holder.minus.setOnClickListener {
 
-            if (dishCount[holder.getAdapterPosition()] > 0) {
+            holder.minus.isEnabled = false
+            if (dishCount[position] > 1) {
 
-                RetrofitClient.init().removeFromCart(dishIdList[holder.absoluteAdapterPosition]).enqueue(object :
+                RetrofitClient.init().removeFromCart("Bearer ${AccessToken}", dishIdList[position]).enqueue(object :
                     Callback<DataClassAddedToCart?> {
                     override fun onResponse(
                         call: Call<DataClassAddedToCart?>,
                         response: Response<DataClassAddedToCart?>
                     ) {
                         if (response.code() == 200) {
-                            dishCount[holder.getAdapterPosition()]--
+                            dishCount[position]--
                             holder.itemCount.text =
-                                dishCount[holder.getAdapterPosition()].toString()
+                                dishCount[position].toString()
                             holder.dishPrice.text =
-                                "₹" + (basePriceList[holder.getAdapterPosition()] * dishCount[holder.getAdapterPosition()]).toString() + ".00"
+                                "₹" + (basePriceList[position] * dishCount[position]).toString() + ".00"
+                            holder.minus.isEnabled = true
                         } else if (response.code() == 200) {
-
+                            holder.minus.isEnabled = true
+                        }
+                        else{
+                            holder.itemCount.text = response.code().toString()
+                            holder.minus.isEnabled = true
                         }
                     }
 
-                        override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
+                    override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
                             Log.d("Error", "Retrofit is OnFailure")
+                            holder.minus.isEnabled = true
                         }
                 })
 
 
             } else {
 
-                RetrofitClient.init().removeFromCart(dishIdList[holder.absoluteAdapterPosition]).enqueue(object :
+                RetrofitClient.init().removeFromCart("Bearer ${AccessToken}", dishIdList[position]).enqueue(object :
                     Callback<DataClassAddedToCart?> {
                     override fun onResponse(
                         call: Call<DataClassAddedToCart?>,
                         response: Response<DataClassAddedToCart?>
                     ) {
                         if (response.code() == 200) {
-                            dishCount.removeAt(holder.absoluteAdapterPosition)
-                            cartList.removeAt(holder.absoluteAdapterPosition)
-                            dishCostList.removeAt(holder.absoluteAdapterPosition)
-                            basePriceList.removeAt(holder.absoluteAdapterPosition)
-                            dishIdList.removeAt(holder.absoluteAdapterPosition)
+                            dishCount.removeAt(position)
+                            cartList.removeAt(position)
+                            dishCostList.removeAt(position)
+                            basePriceList.removeAt(position)
+                            dishIdList.removeAt(position)
                             notifyDataSetChanged()
+                            holder.minus.isEnabled = true
                         }
                         else if (response.code() == 200){
-
+                            holder.minus.isEnabled = true
                         }
                     }
                     override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
                         Log.d("Error", "Retrofit is OnFailure")
+                        holder.minus.isEnabled = true
                     }
                 })
 

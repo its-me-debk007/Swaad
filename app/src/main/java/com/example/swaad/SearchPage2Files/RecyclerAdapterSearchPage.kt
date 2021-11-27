@@ -13,6 +13,7 @@ import com.example.swaad.*
 import com.example.swaad.ApiRequests.DataClassAddedToCart
 import com.example.swaad.ApiRequests.DataGetDishesList
 import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.NavBarPages.Home_page.Companion.AccessToken
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.cartList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
@@ -102,6 +103,7 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
 //                    holder.addBtn.text = "ADDED: ${dishCount[pos]}"
 //                }
 //        }
+            holder.addBtn.isEnabled = false
             var flag = 0
             for (i in 0 until dishIdList.size) {
                 if (dishIdList[i] == restaurantData[position].id) {
@@ -111,13 +113,13 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
                 }
             }
             if (flag == 0) {
-                RetrofitClient.init().addToCart(restaurantData[position].id).enqueue(object :
+                RetrofitClient.init().addToCart("Bearer ${AccessToken}", restaurantData[position].id).enqueue(object :
                     Callback<DataClassAddedToCart?> {
                     override fun onResponse(
                         call: Call<DataClassAddedToCart?>,
                         response: Response<DataClassAddedToCart?>
                     ) {
-                        if (response.code() == 200) {
+                        if (response.code() == 201) {
                             cartList.add(holder.dishName.text.toString())
                             dishCostList.add(restaurantData[position].price)
                             basePriceList.add(restaurantData[position].price)
@@ -125,19 +127,22 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
                             dishIdList.add(restaurantData[position].id)
                             restIdList.add(restaurantData[position].restaurant_id)
                             holder.addBtn.text = "ADDED: 1"
+                            holder.addBtn.isEnabled = true
                         } else if (response.code() == 400) {
                             holder.addBtn.text = "Dish from another restaurant cannot be added."
+                            holder.addBtn.isEnabled = true
                         }
                     }
 
                     override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
                         Log.d("Error", "Retrofit is OnFailure")
+                        holder.addBtn.isEnabled = true
                     }
                 })
 
             } else {
 
-                RetrofitClient.init().addToCart(restaurantData[position].id).enqueue(object :
+                RetrofitClient.init().addToCart("Bearer ${AccessToken}", restaurantData[position].id).enqueue(object :
                     Callback<DataClassAddedToCart?> {
                     override fun onResponse(
                         call: Call<DataClassAddedToCart?>,
@@ -147,13 +152,16 @@ class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<D
                             dishCount[pos]++
                             dishCostList[pos] = dishCount[pos] * basePriceList[pos]
                             holder.addBtn.text = "ADDED: ${dishCount[pos]}"
+                            holder.addBtn.isEnabled = true
                         } else if (response.code() == 400) {
                             holder.addBtn.text = "Dish from another restaurant cannot be added."
+                            holder.addBtn.isEnabled = true
                         }
                     }
 
                     override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
                         Log.d("Error", "Retrofit is OnFailure")
+                        holder.addBtn.isEnabled = true
                     }
                 })
             }

@@ -19,18 +19,35 @@ import android.R
 //import com.razorpay.Checkout
 
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
+import com.example.swaad.ApiRequests.DataClassAddedToCart
+import com.example.swaad.ApiRequests.DataClassCartInfo
+import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.NavBarActivity
+import com.example.swaad.NavBarPages.Home_page.Companion.AccessToken
 import com.example.swaad.PaymentActivity
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.cartList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
+import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.lang.Exception
+import android.os.Build
+import com.example.swaad.AuthPages.ForgotPassword2
 
 
 class MyCart: Fragment(),PaymentResultListener {
     companion object{
         var grantTotal: Int = 0
+        var totalPrice: Int = 0
+//        var refreshCart: Boolean = false
     }
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>? = null
@@ -39,7 +56,6 @@ class MyCart: Fragment(),PaymentResultListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val v = inflater.inflate(com.example.swaad.R.layout.my_cart, container, false)
         val pay_button = v.findViewById<Button>(com.example.swaad.R.id.payButton)
         val location=v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart)
@@ -48,6 +64,68 @@ class MyCart: Fragment(),PaymentResultListener {
             val intent = Intent(activity, PaymentActivity::class.java)
             startActivity(intent)
         }
+
+        if(dishIdList.size == 0){
+            RetrofitClient.init().getCartInfo("Bearer ${AccessToken}").enqueue(object :
+                Callback<DataClassCartInfo?> {
+                override fun onResponse(
+                    call: Call<DataClassCartInfo?>,
+                    response: Response<DataClassCartInfo?>
+                ) {
+                        if (response.code() == 200) {
+                            val order_details = response.body()?.order_details
+                            if (order_details != null) {
+                                for (i in 0 until order_details.size) {
+                                    dishIdList.add(order_details[i].dish.id)
+                                    cartList.add(order_details[i].dish_name)
+                                    dishCount.add(order_details[i].quantity)
+                                    dishCostList.add(order_details[i].sub_total)
+                                    basePriceList.add(order_details[i].dish.price.toInt())
+//                                    restIdList.add(response.body()!!.restaurant_id)
+                                    totalPrice = response.body()!!.order_total
+//                                    refreshCart = true
+                                }
+                            }
+                        }else if(response.code() == 401){
+                            Toast.makeText(
+                                activity,
+                                "Sorry, but token has expired!",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }else if(response.code() != 400){
+                            Toast.makeText(
+                                activity,
+                                "Sorry! Cart cannot be loaded\n\nresponse code is ${response.code()}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                }
+
+                    override fun onFailure(call: Call<DataClassCartInfo?>, t: Throwable) {
+                        Toast.makeText(
+                            activity,
+                            "Sorry! Some error has occurred! Please try again",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+        })
+        }
+//        val fragmentManager = activity?.supportFragmentManager
+//        val fragmentTransaction = fragmentManager?.beginTransaction()
+//        if (Build.VERSION.SDK_INT >= 26) {
+//            fragmentTransaction?.setReorderingAllowed(false)
+//        }
+////        fragmentTransaction?.detach(this)?.attach(this)?.commit()
+
+//        if(refreshCart) {
+//            val fragmentManager = activity?.supportFragmentManager
+//            val fragmentTransaction = fragmentManager?.beginTransaction()
+//            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container, MyCart())
+////              fragmentTransaction?.addToBackStack("fragmentLogin")
+//            fragmentTransaction?.commit()
+//        }
+
         layoutManager = LinearLayoutManager(container?.context)
         val recyclerViewCart = v.findViewById<RecyclerView>(com.example.swaad.R.id.recyclerViewCart)
         recyclerViewCart.layoutManager = layoutManager
@@ -57,17 +135,17 @@ class MyCart: Fragment(),PaymentResultListener {
             v.findViewById<TextView>(com.example.swaad.R.id.totalPrice).text =
                 "₹" + dishCostList.sum().toString() + ".00"
             v.findViewById<TextView>(com.example.swaad.R.id.deliveryCharges).text =
-                "₹" + (0.05 * dishCostList.sum()).toInt().toString() + ".00"
+                "₹" + (0.02 * dishCostList.sum()).toInt().toString() + ".00"
             v.findViewById<TextView>(com.example.swaad.R.id.GrantTotalPrice).text =
                 "₹" + ((0.05 * dishCostList.sum()).toInt() + dishCostList.sum()).toString() + ".00"
 
-            grantTotal = (0.05 * dishCostList.sum()).toInt() + dishCostList.sum()
+//            grantTotal = (0.05 * dishCostList.sum()).toInt() + dishCostList.sum()
 
         return v
     }
 
     override fun onPaymentSuccess(p0: String?) {
-//        Toast.makeText(this,"Succeess in payment: ",Toast.LENGTH_LONG).show()
+//        Toast.makeText(this,"Success in payment: ",Toast.LENGTH_LONG).show()
     }
 
     override fun onPaymentError(p0: Int, p1: String?) {
