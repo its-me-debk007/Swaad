@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.swaad.*
@@ -128,8 +129,9 @@ import retrofit2.Response
                             holder.addBtn.text = "ADDED: 1"
                             holder.addBtn.isEnabled = true
                         } else if (response.code() == 400) {
-                            holder.addBtn.text = "Dish from another restaurant cannot be added."
+//                            holder.addBtn.text = "Dish from another restaurant cannot be added."
                             holder.addBtn.isEnabled = true
+                            Toast.makeText(context, "Dish from another restaurant cannot be added.", Toast.LENGTH_LONG).show()
                         }
                     }
 

@@ -76,7 +76,7 @@ class Home_page : Fragment() {
 
         val sweets=v.findViewById<ImageView>(R.id.Sweets)
         val pizza=v.findViewById<ImageView>(R.id.Pizza)
-        val chaat=v.findViewById<ImageView>(R.id.Chinese)
+        val chaat=v.findViewById<ImageView>(R.id.Chaat)
         val burger=v.findViewById<ImageView>(R.id.Burger)
         val paneer=v.findViewById<ImageView>(R.id.Paneer)
 
