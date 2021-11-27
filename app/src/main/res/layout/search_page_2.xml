@@ -5,44 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/new_border"
-        android:fontFamily="@font/poppins"
-        android:hint="Search here for food"
-        android:paddingLeft="45dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:textSize="15sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:endIconMode="clear_text"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchBar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_for_search_page"
+            android:fontFamily="@font/poppins"
+            android:hint="You're just a search away"
+            android:paddingTop="13dp"
+            android:paddingBottom="9dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/searchBtn"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="35dp"
         android:src="@drawable/ic_home_page_search"
         app:layout_constraintEnd_toEndOf="@+id/searchBar"
         app:layout_constraintTop_toTopOf="@+id/searchBar" />
 
-    <ProgressBar
-        android:id="@+id/progressBarSearchPage"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/innerConstraintLayout"
@@ -89,37 +93,23 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="68dp"
             android:layout_marginBottom="10dp"
             android:text="Fast Delivery"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/nonVegSection"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/clear"
-        android:layout_width="16dp"
-        android:layout_height="15dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="11dp"
-        app:layout_constraintEnd_toEndOf="@+id/searchBar"
-        app:layout_constraintTop_toTopOf="@+id/searchBar"
-        app:srcCompat="@drawable/ic_vector__1_" />
 
     <ImageView
-        android:id="@+id/imageView20"
+        android:id="@+id/backwardBtn"
         android:layout_width="16dp"
         android:layout_height="15dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="6dp"
-        app:layout_constraintStart_toStartOf="@+id/searchBar"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchBar"
         app:srcCompat="@drawable/ic_left_arrow" />
 
@@ -133,21 +123,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/innerConstraintLayout" />
 
+    <ProgressBar
+        android:id="@+id/progressBarSearchPage"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--<com.google.android.material.textfield.TextInputLayout-->
-<!--style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"-->
-<!--android:layout_width="257dp"-->
-<!--android:layout_height="wrap_content"-->
-<!--tools:layout_editor_absoluteX="1dp"-->
-<!--tools:layout_editor_absoluteY="486dp">-->
-
-<!--<AutoCompleteTextView-->
-<!--    android:id="@+id/autoCompleteTextView2"-->
-<!--    android:layout_width="wrap_content"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:layout_weight="1"-->
-<!--    android:text="AutoCompleteTextView" />-->
-
-<!--</com.google.android.material.textfield.TextInputLayout>-->

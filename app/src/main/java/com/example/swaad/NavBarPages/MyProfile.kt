@@ -20,6 +20,7 @@ import com.example.swaad.SearchPage2Files.SearchPage2
 import com.example.swaad.SplashScreen.Splash_screen
 import com.example.swaad.SplashScreen.Splash_screen.Companion.loggedIn
 import com.example.swaad.SplashScreen.Splash_screen.Companion.readInfo
+import com.example.swaad.search_page
 //import com.example.swaad.SplashScreen.Splash_screen.Companion.loggedIn
 import kotlinx.coroutines.launch
 import org.w3c.dom.Text
@@ -33,7 +34,7 @@ class MyProfile: Fragment()  {
         val v = inflater.inflate(R.layout.profile_page, container, false)
         lifecycleScope.launch {
             var  useremail = readInfo("email").toString()
-             var name= readInfo("name").toString()
+            var name= readInfo("name").toString()
             v.findViewById<TextView>(R.id.textView15).text = "Hi ${name}"
             v.findViewById<TextView>(R.id.textView23).text = useremail
         }
@@ -83,7 +84,7 @@ class MyProfile: Fragment()  {
             lifecycleScope.launch {
                 Splash_screen.save("loggedIn", loggedIn!!)
             }
-            val intent = Intent(activity, MainActivity()::class.java)
+            val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(
                 activity,

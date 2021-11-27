@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".card_view_home">
+    tools:context=".NavBarPages.card_view_home">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"

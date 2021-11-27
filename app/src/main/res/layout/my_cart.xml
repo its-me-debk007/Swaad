@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NavBarActivity"
     >
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,7 +45,7 @@
             android:layout_marginTop="4dp"
             android:background="#F9F9F9"
             android:fontFamily="@font/poppins_bold"
-            android:text="Ajay kumar garg engineering college,Ghaziabad"
+            android:text=""
             android:textColor="#000000"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/restaurant_name"
@@ -116,11 +115,12 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView28">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCart"
@@ -136,11 +136,11 @@
         android:id="@+id/textView32"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:background="#FFFDF4"
+        android:layout_marginTop="16dp"
+        android:background="#FFFFFF"
         android:fontFamily="@font/poppins_bold"
         android:paddingLeft="16dp"
-        android:text="Offers"
+        android:text="Discounts"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -150,10 +150,11 @@
         android:id="@+id/textView33"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
         android:background="#FFFDF4"
         android:fontFamily="@font/poppins"
-        android:paddingLeft="40dp"
-        android:paddingTop="4dp"
+        android:paddingLeft="42dp"
+        android:paddingTop="20dp"
         android:text="No offer is applied!"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +166,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="35dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView32"
         app:srcCompat="@drawable/ic_timer" />
@@ -174,7 +175,7 @@
         android:id="@+id/textView34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="21dp"
         android:background="#FFFDF4"
         android:fontFamily="@font/poppins"
@@ -189,8 +190,9 @@
         android:layout_height="wrap_content"
         android:background="#FFFDF4"
         android:fontFamily="@font/poppins"
-        android:paddingLeft="40dp"
+        android:paddingLeft="42dp"
         android:paddingTop="11dp"
+        android:paddingBottom="21dp"
         android:text="Select a promocode"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -397,84 +399,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_left_arrow" />
 
+    <ImageView
+        android:id="@+id/discountImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:src="@drawable/ic_discount_img"
+        app:layout_constraintStart_toStartOf="@+id/textView32"
+        app:layout_constraintTop_toTopOf="@+id/textView32" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
 
-<!--<TextView-->
-<!--android:id="@+id/itemName"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginTop="27dp"-->
-<!--android:background="#FFFDF4"-->
-<!--android:fontFamily="@font/poppins"-->
-<!--android:paddingLeft="16dp"-->
-<!--android:paddingTop="15dp"-->
-<!--android:text="Pizza"-->
-<!--android:textColor="#000000"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintStart_toStartOf="parent"-->
-<!--app:layout_constraintTop_toBottomOf="@+id/textView28"-->
-<!--android:paddingBottom="41dp" />-->
-
-<!--<TextView-->
-<!--android:id="@+id/itemCount"-->
-<!--android:layout_width="98dp"-->
-<!--android:layout_height="0dp"-->
-<!--android:layout_marginTop="12dp"-->
-<!--android:layout_marginEnd="32dp"-->
-<!--android:background="@drawable/border2"-->
-<!--android:paddingLeft="23dp"-->
-<!--android:paddingTop="3dp"-->
-<!--android:paddingRight="20dp"-->
-<!--android:paddingBottom="3dp"-->
-<!--android:text="1"-->
-<!--android:textAlignment="center"-->
-<!--android:textColor="#000000"-->
-<!--android:textSize="16sp"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintTop_toTopOf="@+id/itemName" />-->
-
-<!--<ImageView-->
-<!--android:id="@+id/plus"-->
-<!--android:layout_width="12dp"-->
-<!--android:layout_height="12dp"-->
-<!--android:layout_marginTop="20dp"-->
-<!--android:layout_marginEnd="110dp"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintTop_toTopOf="@+id/itemName"-->
-<!--app:srcCompat="@drawable/ic_plus" />-->
-
-<!--<ImageView-->
-<!--android:id="@+id/minus"-->
-<!--android:layout_width="12dp"-->
-<!--android:layout_height="12dp"-->
-<!--android:layout_marginTop="20dp"-->
-<!--android:layout_marginEnd="40dp"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintTop_toTopOf="@+id/itemName"-->
-<!--app:srcCompat="@drawable/ic_minus" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView30"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="8dp"-->
-    <!--        android:layout_marginEnd="36dp"-->
-    <!--        android:background="#FFFDF4"-->
-    <!--        android:fontFamily="@font/poppins"-->
-    <!--        android:text="₹169.00"-->
-    <!--        android:textColor="#000000"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/itemCount" />-->
-
-
-<!--<androidx.recyclerview.widget.RecyclerView-->
-<!--android:id="@+id/recyclerViewCart"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginTop="27dp"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintStart_toStartOf="parent"-->
-<!--app:layout_constraintTop_toBottomOf="@+id/textView28" />-->

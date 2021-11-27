@@ -28,6 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import androidx.appcompat.app.AppCompatActivity
 import com.example.swaad.*
+import com.example.swaad.ApiRequests.JsonConverter
 import com.example.swaad.SearchPage2Files.SearchPage2
 import android.location.Geocoder
 import android.util.Log
@@ -48,7 +49,9 @@ class Home_page : Fragment() {
         var status : String=""
         lateinit var responseDataKunal: List<DataGetDishesList>
          var adresslocation:String? =null
+        lateinit var AccessToken: String
     }
+
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var responseBody:List<DataClassRestaurantsItem>
     lateinit var recyclerView:RecyclerView
@@ -66,6 +69,10 @@ class Home_page : Fragment() {
         val searchbox = v.findViewById<TextView>(com.example.swaad.R.id.searchView)
         val progressbar=v.findViewById<ProgressBar>(com.example.swaad.R.id.progressBarHomePage)
         val locationtext=v.findViewById<TextView>(com.example.swaad.R.id.LocationText)
+
+        lifecycleScope.launch{
+            AccessToken = Splash_screen.readInfo("accessToken").toString()
+        }
 
         val sweets=v.findViewById<ImageView>(R.id.Sweets)
         val pizza=v.findViewById<ImageView>(R.id.Pizza)
@@ -85,7 +92,7 @@ class Home_page : Fragment() {
                     response: Response<List<DataGetDishesList>?>
                 ) {
                     status = "Kunal"
-                    responseDataKunal= response.body()!!
+                    responseDataKunal=response.body()!!
                     val fragmentManager = activity?.supportFragmentManager
                     val fragmentTransaction = fragmentManager?.beginTransaction()
                     fragmentTransaction?.replace(R.id.fragment_container,SearchPage2())
@@ -200,7 +207,7 @@ class Home_page : Fragment() {
         searchbox.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container, search_page())
+            fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container, SearchPage2())
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
@@ -210,7 +217,7 @@ class Home_page : Fragment() {
                 call: Call<List<DataClassRestaurantsItem>?>,
                 response: Response<List<DataClassRestaurantsItem>?>
             ) {
-                         responseBody=response.body()!!
+                         responseBody= response.body()!!
                 if (container != null) {
                     progressbar.visibility=View.INVISIBLE
                     layoutManager = GridLayoutManager(container?.context, 2)
@@ -294,9 +301,9 @@ class Home_page : Fragment() {
         var strAdd = ""
         val geocoder = Geocoder(context, Locale.getDefault())
         try {
-            val addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
+            val addresses: List<Address>? = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
             if (addresses != null) {
-                val returnedAddress = addresses[0]
+                val returnedAddress: Address = addresses[0]
                 val strReturnedAddress = StringBuilder("")
                 for (i in 0..returnedAddress.getMaxAddressLineIndex()) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")

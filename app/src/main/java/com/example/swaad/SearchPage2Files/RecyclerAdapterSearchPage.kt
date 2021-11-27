@@ -1,30 +1,33 @@
 package com.example.swaad.SearchPage2Files
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.swaad.*
-import com.example.swaad.NavBarPages.Home_page.Companion.responseDataKunal
-import com.example.swaad.NavBarPages.Home_page.Companion.status
+import com.example.swaad.ApiRequests.DataClassAddedToCart
+import com.example.swaad.ApiRequests.DataGetDishesList
+import com.example.swaad.ApiRequests.RetrofitClient
+import com.example.swaad.NavBarPages.Home_page.Companion.AccessToken
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.cartList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
-import com.example.swaad.SearchPage2Files.SearchPage2.Companion.responseDataDebashish
 import com.google.android.material.button.MaterialButton
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
     class RecyclerAdapterSearchPage(val context: Context, val restaurantData: List<DataGetDishesList>): RecyclerView.Adapter<RecyclerAdapterSearchPage.ViewHolder>() {
 
     companion object{
-        var toastMaker: Boolean = false
         var pos: Int = 0
     }
 
@@ -70,37 +73,97 @@ import com.google.android.material.button.MaterialButton
 //        } else {
 //            val restaurantData: List<DataGetRestaurantNames> = responseDataDebashish
 //            dataSize = restaurantData.size
-            holder.restaurantName.text = "By " + restaurantData[position].restaurant_name
-            holder.dishName.text = restaurantData[position].title
-            holder.categoryName.text = "In " + restaurantData[position].category
-            holder.priceValue.text = "₹" + restaurantData[position].price.toString() +"0"
-//        holder.bestseller.text = bestsellers[position]
-//        holder.dishPic.setImageResource(dishPics[position])
+        var imgUrl = restaurantData[position].image
+        holder.dishPic.load(imgUrl)
+        holder.restaurantName.text = "By " + restaurantData[position].restaurant_name
+        holder.dishName.text = restaurantData[position].title
+        holder.categoryName.text = "In " + restaurantData[position].category
+        holder.priceValue.text = "₹" + restaurantData[position].price.toString() + "0"
 
         holder.addBtn.setOnClickListener {
-            if (cartList.size < 5) {
-                var flag = 0
-                for (i in 0 until dishIdList.size) {
-                    if (dishIdList[i] == restaurantData[position].id) {
-                        flag = 1
-                        pos = i
-                        break
+//                var flag = 0
+//                for (i in 0 until dishIdList.size) {
+//                    if (dishIdList[i] == restaurantData[position].id) {
+//                        flag = 1
+//                        pos = i
+//                        break
+//                    }
+//                }
+//                if (flag == 0) {
+//                    cartList.add(holder.dishName.text.toString())
+//                    dishCostList.add(restaurantData[holder.absoluteAdapterPosition].price)
+//                    basePriceList.add(restaurantData[holder.absoluteAdapterPosition].price)
+//                    dishCount.add(1)
+//                    dishIdList.add(restaurantData[holder.absoluteAdapterPosition].id)
+//                    restIdList.add(restaurantData[holder.absoluteAdapterPosition].restaurant_id)
+//                    holder.addBtn.text = "ADDED: 1"
+//                } else {
+//                    dishCount[pos]++
+//                    dishCostList[pos] = dishCount[pos] * basePriceList[pos]
+//                    holder.addBtn.text = "ADDED: ${dishCount[pos]}"
+//                }
+//        }
+            holder.addBtn.isEnabled = false
+            var flag = 0
+            for (i in 0 until dishIdList.size) {
+                if (dishIdList[i] == restaurantData[position].id) {
+                    flag = 1
+                    pos = i
+                    break
+                }
+            }
+            if (flag == 0) {
+                RetrofitClient.init().addToCart("Bearer ${AccessToken}", restaurantData[position].id).enqueue(object :
+                    Callback<DataClassAddedToCart?> {
+                    override fun onResponse(
+                        call: Call<DataClassAddedToCart?>,
+                        response: Response<DataClassAddedToCart?>
+                    ) {
+                        if (response.code() == 201) {
+                            cartList.add(holder.dishName.text.toString())
+                            dishCostList.add(restaurantData[position].price)
+                            basePriceList.add(restaurantData[position].price)
+                            dishCount.add(1)
+                            dishIdList.add(restaurantData[position].id)
+                            restIdList.add(restaurantData[position].restaurant_id)
+                            holder.addBtn.text = "ADDED: 1"
+                            holder.addBtn.isEnabled = true
+                        } else if (response.code() == 400) {
+                            holder.addBtn.text = "Dish from another restaurant cannot be added."
+                            holder.addBtn.isEnabled = true
+                        }
                     }
-                }
-                if (flag == 0) {
-                    cartList.add(holder.dishName.text.toString())
-                    dishCostList.add(restaurantData[position].price)
-                    basePriceList.add(restaurantData[position].price)
-                    dishCount.add(1)
-                    dishIdList.add(restaurantData[position].id)
-                    restIdList.add(restaurantData[position].restaurant_id)
-                } else {
 
-                    dishCount[pos]++
-                    dishCostList[pos] = dishCount[pos] * basePriceList[pos]
-                }
+                    override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
+                        Log.d("Error", "Retrofit is OnFailure")
+                        holder.addBtn.isEnabled = true
+                    }
+                })
+
             } else {
-                Toast.makeText(context,"You have added the maximum number of elements in the cart", Toast.LENGTH_LONG).show()
+
+                RetrofitClient.init().addToCart("Bearer ${AccessToken}", restaurantData[position].id).enqueue(object :
+                    Callback<DataClassAddedToCart?> {
+                    override fun onResponse(
+                        call: Call<DataClassAddedToCart?>,
+                        response: Response<DataClassAddedToCart?>
+                    ) {
+                        if (response.code() == 200) {
+                            dishCount[pos]++
+                            dishCostList[pos] = dishCount[pos] * basePriceList[pos]
+                            holder.addBtn.text = "ADDED: ${dishCount[pos]}"
+                            holder.addBtn.isEnabled = true
+                        } else if (response.code() == 400) {
+                            holder.addBtn.text = "Dish from another restaurant cannot be added."
+                            holder.addBtn.isEnabled = true
+                        }
+                    }
+
+                    override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
+                        Log.d("Error", "Retrofit is OnFailure")
+                        holder.addBtn.isEnabled = true
+                    }
+                })
             }
         }
     }

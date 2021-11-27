@@ -66,6 +66,7 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/Swaad/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2703125" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/border.xml" value="0.24635416666666668" />
+        <entry key="..\:/zomato clone/app/src/main/res/drawable/border_for_search_page.xml" value="0.20964912280701756" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/box_shadow.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_bi_eye_fill.xml" value="0.24157303370786518" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_forgot_password2.xml" value="0.24635416666666668" />
@@ -80,16 +81,22 @@
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_undraw_mobile_login_re_9ntv_1.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/drawable/ic_user.xml" value="0.24635416666666668" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/activity_main.xml" value="0.22604166666666667" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/cart_card_view.xml" value="0.4" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_card_view_home.xml" value="0.1925438596491228" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_card_view_restaurant_page.xml" value="0.41756548536209553" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_1.xml" value="0.22604166666666667" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_2.xml" value="0.264" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_forgot_password_3.xml" value="0.22604166666666667" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_home_page.xml" value="0.2" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_login.xml" value="0.3339787028073572" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_reference_sign_up.xml" value="0.4" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/my_cart.xml" value="0.264" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/fragment_restaurant_page.xml" value="0.4" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/my_cart.xml" value="0.39161462979482603" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/nav_bar.xml" value="0.14649122807017545" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/search_page2_card_view.xml" value="0.2" />
-        <entry key="..\:/zomato clone/app/src/main/res/layout/search_page_2.xml" value="0.14649122807017545" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/search_page2_card_view.xml" value="0.4" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/search_page_2.xml" value="0.38657407407407407" />
         <entry key="..\:/zomato clone/app/src/main/res/layout/terms_and_conditions.xml" value="0.4" />
+        <entry key="..\:/zomato clone/app/src/main/res/layout/user_login.xml" value="0.1925438596491228" />
       </map>
     </option>
   </component>
