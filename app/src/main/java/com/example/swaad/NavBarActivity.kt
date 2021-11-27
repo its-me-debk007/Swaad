@@ -76,7 +76,7 @@ class NavBarActivity : AppCompatActivity() {
         lifecycleScope.launch {
             var  useremail = Splash_screen.readInfo("email").toString()
             var username= Splash_screen.readInfo("name").toString()
-            name.text = "${username}"
+            name.text =username
             email.text=useremail
 //            findViewById<TextView>(R.id.hamburger_email).text = useremail
         }
@@ -196,7 +196,7 @@ class NavBarActivity : AppCompatActivity() {
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
             builder.setTitle("Confirm Exit")
             builder.setMessage("Are you sure you want to exit ?")
-            builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->finish()  })
+            builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->finishAffinity()})
             builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->dialog.cancel()  })
             builder.show()// Finish activity, if only one fragment left, to prevent leaving empty screen
         }

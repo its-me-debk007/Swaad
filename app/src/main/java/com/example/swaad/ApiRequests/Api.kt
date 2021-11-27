@@ -101,4 +101,7 @@ interface Api {
   fun addAddress(@Body jsonConverterAddAdress: JsonConverterAddAdress, @Header ("Authorization") token:String):Call<ResponseBody>
   @POST("api/cart/checkout/")
   fun checkout(@Body jsonConverterCheckout: jsonConverterCheckout,@Header ("Authorization") token:String):Call<ResponseBody>
+
+  @GET("api/cart/order/all")
+  fun MyOrders():Call<ResponseBody>
 }

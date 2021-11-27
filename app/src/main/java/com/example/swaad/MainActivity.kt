@@ -22,7 +22,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
+import com.example.swaad.ApiRequests.CheckNetworkConnection
 import com.example.swaad.AuthPages.FragmentLogIn
+import com.example.swaad.NavBarPages.Home_page
 //import com.example.swaad.SplashScreen.splash_screen
 import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.gms.maps.GoogleMap
@@ -48,23 +50,6 @@ class MainActivity : AppCompatActivity(){
     }
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-//    private var  mMap:GoogleMap?=null
-//    lateinit var mapView:MapView
-//    private val MAP_VIEW_BUNDLE_KEY="MapViewBundleKey"
-//    override fun onMapReady(googleMap: GoogleMap) {
-//            mapView.onResume()
-//        mMap=googleMap
-//        if(ActivityCompat.checkSelfPermission(
-//                this,
-//                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-//                this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED
-//                )
-//        {
-//                return
-//        }
-//        mMap!!.isMyLocationEnabled
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        if (null == savedInstanceState) {
@@ -74,6 +59,7 @@ class MainActivity : AppCompatActivity(){
 //                .commit();
 //        }
         setContentView(R.layout.activity_main)
+        callNetworkConnection()
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(com.example.swaad.R.id.fragment_container,Splash_screen())
@@ -81,7 +67,6 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.commit()
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         fetchLocation()
-        adress = getCompleteAddressString(latitude, longitude).toString()
     }
 
     fun fetchLocation() {
@@ -102,32 +87,7 @@ class MainActivity : AppCompatActivity(){
             }
         }
     }
-    fun getAddress(latLng: LatLng): String {
 
-        val geocoder = Geocoder(this)
-        val addresses: List<Address>?
-        val address: Address?
-        var addressText = ""
-
-        try {
-
-            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-
-            if (null != addresses && !addresses.isEmpty()) {
-                address = addresses[0]
-                for (i in 0 until address.maxAddressLineIndex) {
-                    addressText += if (i == 0) address.getAddressLine(i) else "\n" + address.getAddressLine(i)
-                }
-            }
-
-        } catch (e: IOException) {
-
-            Log.e("GeoCoder", e.localizedMessage)  // ==> throws "Service not Available"
-
-        }
-
-        return addressText
-    }
     override fun onBackPressed() {
         val index = supportFragmentManager.getBackStackEntryCount()
 //        val fragment = supportFragmentManager.popBackStack()
@@ -181,6 +141,26 @@ class MainActivity : AppCompatActivity(){
         }
 //        Toast.makeText(context,strAdd,Toast.LENGTH_LONG).show()
         return strAdd
+    }
+    private fun callNetworkConnection() {
+        var  checkNetworkConnection = CheckNetworkConnection(application)
+        checkNetworkConnection.observe(this , { isConnected ->
+            if (!isConnected) {
+                val fragmentManager = supportFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_container, Offline_Screen())
+                fragmentTransaction.commit()
+            }
+            else
+            {
+                val fragmentManager = supportFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_container,Splash_screen())
+                fragmentTransaction.commit()
+
+            }
+        })
+
     }
 }
 

@@ -18,6 +18,7 @@ class RecyclerAdapterManageAddress(val context: Context, val addressData: List<D
     {
         lateinit var Adress:String
         var flag =0
+        var id =0
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapterManageAddress.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_view_manage_adress,parent,false)
@@ -33,6 +34,7 @@ class RecyclerAdapterManageAddress(val context: Context, val addressData: List<D
             flag = 1
             Adress=addressData[position].address
             Toast.makeText(context,"Delivery Adress Changed",Toast.LENGTH_LONG ).show()
+            id = addressData[position].id
 //            val fragmentManager = NavBarActivity()?.supportFragmentManager
 //            val fragmentTransaction = fragmentManager?.beginTransaction()
 //            fragmentTransaction?.replace(R.id.fragment_container, MyCart())

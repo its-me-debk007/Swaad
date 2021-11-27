@@ -52,6 +52,7 @@ class MyCart: Fragment() {
         var grantTotal: Int = 0
 //        var location:TextView?=null
         var totalPrice: Int = 0
+        var adressFlag =0
 //        var refreshCart: Boolean = false
     }
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -70,7 +71,7 @@ class MyCart: Fragment() {
         }
         if(RecyclerAdapterManageAddress.flag==0)
         {
-            v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart).text=Home_page.adresslocation
+            v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart).text="Please Select Your Location"
         }
 
         if(dishIdList.size == 0){
@@ -135,6 +136,7 @@ class MyCart: Fragment() {
 //        }
 
         location.setOnClickListener {
+            adressFlag=1
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(
@@ -160,28 +162,16 @@ class MyCart: Fragment() {
                 "₹" + ((0.05 * dishCostList.sum()).toInt() + dishCostList.sum()).toString() + ".00"
 
         grantTotal = (0.05*dishCostList.sum()).toInt() + dishCostList.sum()
-//        if (itemRemoved) {
-//            RecyclerAdapterCart().notifyItemRemoved(pos)
-//            itemRemoved = false
-//        }
-//        val itemCount: TextView = v.findViewById(R.id.itemCount)
-//
-//        v.findViewById<ImageView>(R.id.minus).setOnClickListener{
-//            if(itemCount.text.toString() != "0"){
-//                var amount = itemCount.text.toString().toInt()
-//                amount--
-//                itemCount.text = amount.toString()
-//            }
-//        }
-//        v.findViewById<ImageView>(R.id.plus).setOnClickListener{
-//            var amount = itemCount.text.toString().toInt()
-//            amount++
-//            itemCount.text = amount.toString()
-//        }
+
         pay_button.setOnClickListener{
             if(grantTotal==0)
             {
                 Toast.makeText(container?.context,"Please add something in the cart !",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if(adressFlag==0)
+            {
+                Toast.makeText(container?.context,"Please Select Your Location",Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
             val intent = Intent(activity, PaymentActivity::class.java)

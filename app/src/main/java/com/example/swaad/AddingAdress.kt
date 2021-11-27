@@ -105,6 +105,11 @@ class AddingAdress : Fragment() {
                     if(response.isSuccessful())
                     {
                         Toast.makeText(container?.context,"Address Saved Successfully",Toast.LENGTH_LONG).show()
+                        val fragmentManager = activity?.supportFragmentManager
+                        val fragmentTransaction = fragmentManager?.beginTransaction()
+                        fragmentTransaction?.replace(com.example.swaad.R.id.fragment_container,Manage_Adress())
+                        fragmentTransaction?.addToBackStack(null)
+                        fragmentTransaction?.commit()
                     }
                    else
                    {

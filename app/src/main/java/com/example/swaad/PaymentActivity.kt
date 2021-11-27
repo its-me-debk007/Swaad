@@ -9,7 +9,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.swaad.ApiRequests.JsonConverterOrderDetails
+import com.example.swaad.ApiRequests.RecyclerAdapterManageAddress
 import com.example.swaad.ApiRequests.RetrofitClient
 import com.example.swaad.ApiRequests.jsonConverterCheckout
 import com.example.swaad.AuthPages.ForgotPassword2
@@ -17,9 +19,11 @@ import com.example.swaad.NavBarPages.MyCart
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
+import com.example.swaad.SplashScreen.Splash_screen
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import com.razorpay.PaymentResultWithDataListener
+import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -36,70 +40,6 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
 
 //        setContentView(R.layout.redirectingpayment)
             makePayment()
-
-//        val dialodView =
-//            LayoutInflater.from(this).inflate(R.layout.fragment_confirm_order_dialog, null)
-//        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-//        val mBuilder = AlertDialog.Builder(this)
-//            .setView(dialodView)
-//            .setTitle("Order Confirmation")
-//        mBuilder.show()
-//        Handler().postDelayed(
-//            {
-//                val intent = Intent(this, NavBarActivity()::class.java)
-//                startActivity(intent)
-//            },3000
-//        )
-//        for (i in  dishIdList) {
-//            var flag = 0
-//            var array = ArrayList<Int>()
-//            var restaurant_id = restIdList[i].toInt()
-//            array.add(restaurant_id)
-//            for (k in array) {
-//                if (restaurant_id == k) {
-//                    flag = 1
-//                    break
-//                }
-//            }
-//            if (flag == 0) {
-//                var orderDetail = ArrayList<OrderDetail>()
-////                        orderDetail.add(OrderDetail(dishIdList[i], dishCount[i]))
-//                for (j in dishIdList) {
-//                    if (restIdList[j] == restaurant_id) {
-////                            var orderDetailsItem = OrderDetails(orderDetail, restaurant_id)
-//                        orderDetail.add(OrderDetail(dishIdList[i], dishCount[i]))
-//                    }
-//                }
-//                var jsonConverterOrderDetails = JsonConverterOrderDetails(restaurant_id, orderDetail)
-//                RetrofitClient.init().orderUpdate(jsonConverterOrderDetails)
-//                    .enqueue(object : Callback<ResponseBody?> {
-//                        override fun onResponse(
-//                            call: Call<ResponseBody?>,
-//                            response: Response<ResponseBody?>
-//                        ) {
-//                            Toast.makeText(
-//                                PaymentActivity(),
-//                                response.code(),
-//                                Toast.LENGTH_LONG
-//                            ).show()
-//                        }
-//
-//                        override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-//                            Toast.makeText(PaymentActivity(), "Not", Toast.LENGTH_LONG)
-//                                .show()
-//                        }
-//                    })
-//            }
-//        }
-//        Timer("SettingUp", false).schedule(500) {
-//            val dialodView =
-//                LayoutInflater.from(applicationContext).inflate(R.layout.fragment_confirm_order_dialog, null)
-//            val builder: AlertDialog.Builder = AlertDialog.Builder(applicationContext)
-//            val mBuilder = AlertDialog.Builder(applicationContext)
-//                .setView(dialodView)
-//                .setTitle("Order Confirmation")
-//            mBuilder.show()
-//        }
 
     }
     fun makePayment() {
@@ -173,8 +113,36 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
                     startActivity(intent)
                 },3000
             )
-//            var jsonConverterCheckout=jsonConverterCheckout()
-//            RetrofitClient.init().checkout()
+            var deleivery_id=RecyclerAdapterManageAddress.id
+            var jsonConverterCheckout=jsonConverterCheckout(deleivery_id)
+            var Token:String="asdasdas"
+            lifecycleScope.launch{
+                var AccessToken = Splash_screen.readInfo("accessToken").toString()
+                Token =AccessToken
+            }
+            RetrofitClient.init().checkout(jsonConverterCheckout,token="Bearer $Token").enqueue(
+                object : Callback<ResponseBody?> {
+                    override fun onResponse(
+                        call: Call<ResponseBody?>,
+                        response: Response<ResponseBody?>
+                    ) {
+                       if(response.isSuccessful())
+                       {
+                           Toast.makeText(applicationContext,"Checked Out",Toast.LENGTH_LONG).show()
+                       }
+                        else
+                       {
+                           Toast.makeText(applicationContext,"Not Checked Out",Toast.LENGTH_LONG).show()
+                       }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                        val intent = Intent(applicationContext, NavBarActivity()::class.java)
+                        startActivity(intent)
+                        Toast.makeText(applicationContext,"Payment was not successfull",Toast.LENGTH_LONG).show()
+                    }
+                }
+            )
 //                val fragmentManager = NavBarActivity().supportFragmentManager
 //                val fragmentTransaction = fragmentManager?.beginTransaction()
 //                fragmentTransaction?.replace(R.id.fragment_container,Rating_Page())
@@ -184,7 +152,9 @@ class PaymentActivity:AppCompatActivity(),PaymentResultListener
 
         override fun onPaymentError(p0: Int, p1: String?) {
             Log.d("mytag", "onPaymentError: "+p1.toString())
-                Toast.makeText(NavBarActivity(),"Error in payment "+p1.toString(), Toast.LENGTH_LONG).show()
+            val intent = Intent(this, NavBarActivity()::class.java)
+            startActivity(intent)
+                Toast.makeText(NavBarActivity(),"Payment was not successfull ", Toast.LENGTH_LONG).show()
         }
 
 }

@@ -36,12 +36,11 @@ class RecyclerAdapter(val context: Context,val restaurantData: List<DataClassRes
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
         var Url=restaurantData[position].image
-
         holder.itemImage.load(Url)
         holder.itemRestaurantName.text=restaurantData[position].rest_name
         holder.Ratings.text= restaurantData[position].avg_rating.toString()
         holder.timeDuration
-        holder.Prices
+        holder.Prices.text=restaurantData[position].expense_rating
 
         holder.RestaurantAdress.text=restaurantData[position].address
         holder.Add.setOnClickListener(object : View.OnClickListener {

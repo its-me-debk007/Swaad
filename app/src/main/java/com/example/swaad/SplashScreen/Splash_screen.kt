@@ -64,19 +64,6 @@ class Splash_screen : Fragment(){
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         dataStore = context?.createDataStore(name = "Settings")!!
-//        lifecycleScope.launch{
-//            val value:Boolean? = FragmentLogIn.read("loggedIn")
-//            if(value==true)
-//            {
-////                val fragmentManager = activity?.supportFragmentManager
-////                val fragmentTransaction = fragmentManager?.beginTransaction()
-////                fragmentTransaction?.replace(R.id.fragment_container, Home_page())
-////                fragmentTransaction?.addToBackStack(null)
-////                fragmentTransaction?.commit()
-//                val intent = Intent(activity, NavBarActivity::class.java)
-//                startActivity(intent)
-//            }
-//        }
     }
 
     override fun onCreateView(
@@ -85,38 +72,16 @@ class Splash_screen : Fragment(){
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_splash_screen, container, false)
-//        Handler().postDelayed(
-//            {
-//                val fragmentManager = activity?.supportFragmentManager
-//                val fragmentTransaction = fragmentManager?.beginTransaction()
-//                fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-//                fragmentTransaction?.addToBackStack(null)
-//                fragmentTransaction?.commit()
-//            },3000)
-//        Handler().postDelayed(
-//            {
         Handler().postDelayed(
             {
                 lifecycleScope.launch {
                     var loggedIn = read("loggedIn")
-                    Toast.makeText(activity, loggedIn.toString(), Toast.LENGTH_LONG).show()
-//            if(loggedIn==true || loggedIn==null)
-//            {
-//                val fragmentManager = activity?.supportFragmentManager
-//                val fragmentTransaction = fragmentManager?.beginTransaction()
-//                fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
-//                fragmentTransaction?.addToBackStack(null)
-//                fragmentTransaction?.commit()
 //            }
                     if (loggedIn == true) {
-//                val fragmentManager = activity?.supportFragmentManager
-//                val fragmentTransaction = fragmentManager?.beginTransaction()
-//                fragmentTransaction?.replace(R.id.fragment_container, Home_page())
-//                fragmentTransaction?.addToBackStack(null)
-//                fragmentTransaction?.commit()
                         val intent = Intent(activity, NavBarActivity::class.java)
                         startActivity(intent)
-                    } else {
+                    }
+                    else {
                         val fragmentTransaction = fragmentManager?.beginTransaction()
                         fragmentTransaction?.replace(R.id.fragment_container, FragmentLogIn())
                         fragmentTransaction?.addToBackStack(null)

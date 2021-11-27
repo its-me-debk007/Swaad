@@ -26,16 +26,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/ic_home_page_burger"/>
 
-            <!--            <HorizontalScrollView-->
-            <!--                android:id="@+id/restaurantNameScrollView"-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="24dp"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:scrollbarThumbHorizontal="@null"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/RestaurantImage">-->
-
             <TextView
                 android:id="@+id/restaurantName"
                 android:layout_width="wrap_content"

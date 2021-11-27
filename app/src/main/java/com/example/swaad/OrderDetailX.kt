@@ -1,6 +1,6 @@
-package com.example.swaad.ApiRequests
+package com.example.swaad
 
-data class OrderDetail(
+data class OrderDetailX(
     val dish: Dish,
     val dish_name: String,
     val id: Int,
