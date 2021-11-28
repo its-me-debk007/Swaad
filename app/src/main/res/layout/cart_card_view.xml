@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:paddingBottom="0dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cartCardView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/itemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFDF4"
+                android:fontFamily="@font/poppins"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="40dp"
+                android:text="Pizza"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/itemCount"
+                android:layout_width="98dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/border_cart"
+                android:fontFamily="@font/poppins_bold"
+                android:paddingLeft="23dp"
+                android:paddingTop="3dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="3dp"
+                android:text="1"
+                android:textAlignment="center"
+                android:textColor="#D89C00"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/itemName" />
+
+            <ImageView
+                android:id="@+id/plus"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="43dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/itemName"
+                app:srcCompat="@drawable/ic_golden_plus" />
+
+            <ImageView
+                android:id="@+id/minus"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="105dp"
+                app:layout_constraintEnd_toEndOf="@+id/itemName"
+                app:layout_constraintTop_toTopOf="@+id/itemName"
+                app:srcCompat="@drawable/ic_golden_minus" />
+
+            <TextView
+                android:id="@+id/dishPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="36dp"
+                android:background="#FFFDF4"
+                android:fontFamily="@font/poppins"
+                android:text="₹169.00"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemCount" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

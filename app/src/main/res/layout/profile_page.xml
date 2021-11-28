@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:drawablePadding="30.69dp"
+        android:fontFamily="@font/poppins_bold"
+        android:paddingStart="34.83dp"
+        android:text=""
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/ic_profile_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:background="#F7F7F7"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="16dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:text="My Orders"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/ManageAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7F7F7"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="16dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:text="Manage Addresses"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/helpAndSupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7F7F7"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="16dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:text="Help &amp; Support"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ManageAddress" />
+
+    <TextView
+        android:id="@+id/aboutSwaadMyProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7F7F7"
+        android:fontFamily="@font/poppins"
+        android:paddingStart="16dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:text="About Swaad"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helpAndSupport" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:background="#F7F7F7"
+        android:paddingLeft="16dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="FAQs"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutSwaadMyProfile" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7F7F7"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="16dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:text="Terms &amp; Conditions"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7F7F7"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="16dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:text="Logout"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="32dp"
+        android:text=""
+        android:textColor="#000000"
+        android:fontFamily="@font/poppins"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

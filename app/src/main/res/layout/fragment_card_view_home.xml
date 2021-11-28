@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".NavBarPages.card_view_home">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/RestaurantImage"
+                android:layout_width="185dp"
+                android:layout_height="136dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/ic_home_page_burger"/>
+
+            <!--            <HorizontalScrollView-->
+            <!--                android:id="@+id/restaurantNameScrollView"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="24dp"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:scrollbarThumbHorizontal="@null"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/RestaurantImage">-->
+
+            <TextView
+                android:id="@+id/restaurantName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_bold"
+                android:singleLine="true"
+                android:text="Restaurant Name"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/RestaurantImage" />
+
+            <!--            </HorizontalScrollView>-->
+            <TextView
+                android:id="@+id/Ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border"
+                android:backgroundTint="#FFD243"
+                android:drawableStart="@drawable/ic_star_3"
+                android:drawablePadding="8dp"
+                android:paddingLeft="8dp"
+                android:paddingTop="4dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="4dp"
+                android:text=" Ratings"
+                android:textColor="#FFFFFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/restaurantName" />
+
+            <TextView
+                android:id="@+id/timeDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/poppins"
+                android:text="TIme-duration"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Ratings" />
+
+            <TextView
+                android:id="@+id/Prices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/poppins"
+                android:text="$$$"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeDuration" />
+
+
+            <TextView
+                android:id="@+id/RestaurantAdress"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="1dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins"
+                android:text="Restaurant Adress"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Prices" />
+
+            <Button
+                android:id="@+id/Add"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#FFD243"
+                android:fontFamily="@font/poppins_bold"
+                android:text="EXPLORE"
+                android:textSize="18sp"
+                app:cornerRadius="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/RestaurantAdress" />
+
+            <ImageView
+                android:id="@+id/favourites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-40dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:src="@drawable/ic_favourates_home"
+                app:layout_constraintStart_toEndOf="@+id/RestaurantImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
