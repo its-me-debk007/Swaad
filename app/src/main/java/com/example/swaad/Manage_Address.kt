@@ -20,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Manage_Adress : Fragment() {
+class Manage_Address : Fragment() {
     private var layoutManager: RecyclerView.LayoutManager?=null
     private var adapter: RecyclerView.Adapter<RecyclerAdapterManageAddress.ViewHolder>? = null
 
@@ -44,7 +44,7 @@ class Manage_Adress : Fragment() {
                 response: Response<List<DataClassGetManageAdressItem>?>
             ) {
                 progressBar.visibility  = View.VISIBLE
-                var responseBody=response?.body()
+                var responseBody= response.body()
                 if(response.isSuccessful) {
                     progressBar.visibility=View.INVISIBLE
                     layoutManager = LinearLayoutManager(container?.context)

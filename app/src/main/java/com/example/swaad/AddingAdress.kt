@@ -35,17 +35,17 @@ class AddingAdress : Fragment() {
         var work=v.findViewById<TextView>(R.id.addAdressWork)
         var other=v.findViewById<TextView>(R.id.addAdressOther)
         home.setOnClickListener {
-            Toast.makeText(container?.context,"Home",Toast.LENGTH_LONG).show()
+            Toast.makeText(container?.context,"The address will saved as Home",Toast.LENGTH_LONG).show()
             flag =1
             adressType="Home"
         }
         work.setOnClickListener {
-            Toast.makeText(container?.context,"Work",Toast.LENGTH_LONG).show()
+            Toast.makeText(container?.context,"The address will saved as Work",Toast.LENGTH_LONG).show()
             flag =1
             adressType="Work"
         }
         other.setOnClickListener {
-            Toast.makeText(container?.context,"OTher",Toast.LENGTH_LONG).show()
+            Toast.makeText(container?.context,"The address will saved as Other",Toast.LENGTH_LONG).show()
             flag =1
             adressType="Other"
         }

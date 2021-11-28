@@ -5,40 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swaad.ApiRequests.RecyclerAdapterCart
-import com.example.swaad.SearchPage2Files.RecyclerAdapterSearchPage
-import org.json.JSONObject
-import android.R
-import android.app.Activity
 import android.content.Intent
-import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
-import com.example.swaad.ApiRequests.DataClassAddedToCart
 import com.example.swaad.ApiRequests.DataClassCartInfo
 import com.example.swaad.ApiRequests.RetrofitClient
-import com.example.swaad.NavBarActivity
 import com.example.swaad.NavBarPages.Home_page.Companion.AccessToken
 import com.example.swaad.PaymentActivity
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.basePriceList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.cartList
 import com.example.swaad.*
 import com.example.swaad.ApiRequests.RecyclerAdapterManageAddress
+import com.example.swaad.AuthPages.ReferenceSignUp
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
-import com.razorpay.Checkout
-import com.razorpay.PaymentResultListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
-import android.os.Build
-import com.example.swaad.AuthPages.ForgotPassword2
 
 
 class MyCart: Fragment() {
@@ -63,6 +52,14 @@ class MyCart: Fragment() {
         if(RecyclerAdapterManageAddress.flag==0)
         {
             v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart).text=Home_page.adresslocation
+        }
+
+        v.findViewById<ImageView>(com.example.swaad.R.id.backBtn).setOnClickListener{
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container, Home_page())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
         }
 
         if(dishIdList.size == 0){
@@ -129,7 +126,7 @@ class MyCart: Fragment() {
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(
                 com.example.swaad.R.id.fragment_container,
-                Manage_Adress()
+                Manage_Address()
             )
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
