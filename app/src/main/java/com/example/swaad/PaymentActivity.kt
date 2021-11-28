@@ -16,7 +16,6 @@ import com.example.swaad.AuthPages.ForgotPassword2
 import com.example.swaad.NavBarPages.MyCart
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
-import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import com.razorpay.PaymentResultWithDataListener

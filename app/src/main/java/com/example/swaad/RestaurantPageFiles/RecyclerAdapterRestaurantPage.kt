@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -32,7 +33,6 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
         var basePriceList = mutableListOf<Int>()
         var dishCount = mutableListOf<Int>()
         var dishIdList = mutableListOf<Int>()
-        var restIdList = mutableListOf<Int>()
     }
     var pos:Int = 0
 
@@ -47,22 +47,8 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
         holder.dishCost.text= "₹" + dishData[position].price.toString() + ".00"
         holder.dishName.text=dishData[position].title
 
-//        var flag = 0
-//        var pos1: Int = 0
-//        for (i in 0 until dishIdList.size) {
-//            if (dishIdList[i] == dishData[holder.getAdapterPosition()].id) {
-//                flag = 1
-//                pos1 = i
-//                break
-//            }
-//        }
-//        if (flag == 0) {
-//            holder.addToCart.text = "ADD"
-//        }
-//        else{
-//            holder.addToCart.text = "ADDED: ${dishCount[pos1]}"
-//        }
         holder.addToCart.setOnClickListener {
+            holder.addToCart.isEnabled = false
                 var flag = 0
                 for (i in 0 until dishIdList.size) {
                     if (dishIdList[i] == dishData[position].id) {
@@ -80,22 +66,21 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
                             response: Response<DataClassAddedToCart?>
                         ) {
                             if (response.code() == 201) {
+                                holder.addToCart.isEnabled = true
                                 cartList.add(holder.dishName.text.toString())
                                 dishCostList.add(dishData[position].price)
                                 basePriceList.add(dishData[position].price)
                                 dishCount.add(1)
                                 dishIdList.add(dishData[position].id)
-                                restIdList.add(dishData[position].restaurant_id)
                                 holder.addToCart.text = "ADDED: 1"
                             }
                             else if(response.code() == 400){
-                                holder.addToCart.text = "Dish from another restaurant cannot be added."
-                            }
-                            else{
-                                holder.addToCart.text = response.code().toString()
+                                holder.addToCart.isEnabled = true
+                                Toast.makeText(context, "Dish from another restaurant cannot be added.", Toast.LENGTH_LONG).show()
                             }
                         }
                         override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
+                            holder.addToCart.isEnabled = true
                             Log.d("Error", "Retrofit is OnFailure")
                         }
                     })
@@ -109,15 +94,18 @@ class RecyclerAdapterRestaurantPage(val context:Context, val dishData : List<Res
                             response: Response<DataClassAddedToCart?>
                         ) {
                             if (response.code() == 200) {
+                                holder.addToCart.isEnabled = true
                                 dishCount[pos]++
                                 dishCostList[pos] = dishCount[pos] * basePriceList[pos]
                                 holder.addToCart.text = "ADDED: ${dishCount[pos]}"
-                            }
-                            else if(response.code() == 400){
-                                holder.addToCart.text = "Dish from another restaurant cannot be added."
+                            } else if (response.code() == 400) {
+//                            holder.addBtn.text = "Dish from another restaurant cannot be added."
+                                holder.addToCart.isEnabled = true
+                                Toast.makeText(context, "Dish from another restaurant cannot be added.", Toast.LENGTH_LONG).show()
                             }
                         }
                         override fun onFailure(call: Call<DataClassAddedToCart?>, t: Throwable) {
+                            holder.addToCart.isEnabled = true
                             Log.d("Error", "Retrofit is OnFailure")
                         }
                     })
