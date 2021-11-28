@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:background="#F9F9F9"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,20 +34,28 @@
             android:fontFamily="@font/poppins"
             android:text="Delivery at"
             android:textColor="#000000"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/locationTextCart"
-            android:layout_width="250dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
             android:background="#F9F9F9"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
             android:fontFamily="@font/poppins_bold"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:text=""
             android:textColor="#000000"
             android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/restaurant_name"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,35 +64,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
+            android:layout_marginTop="19dp"
             android:layout_marginBottom="16dp"
             android:background="#F9F9F9"
             android:fontFamily="@font/poppins"
             android:text="Delivery in"
             android:textColor="#000000"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restaurant_name" />
 
         <TextView
             android:id="@+id/textView27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="125dp"
+            android:layout_marginStart="113dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="14dp"
             android:fontFamily="@font/poppins_bold"
             android:text="25 Mins"
             android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationTextCart" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="29dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout2"
         app:srcCompat="@drawable/ic_location_icon" />
@@ -360,10 +373,10 @@
 
     <ImageView
         android:id="@+id/imageView15"
-        android:layout_width="23dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="21dp"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
         app:layout_constraintTop_toBottomOf="@+id/imageView8"
         app:srcCompat="@drawable/ic_timer" />
