@@ -106,6 +106,7 @@ class MyCart: Fragment() {
 
         })
         }
+
 //        val fragmentManager = activity?.supportFragmentManager
 //        val fragmentTransaction = fragmentManager?.beginTransaction()
 //        if (Build.VERSION.SDK_INT >= 26) {
