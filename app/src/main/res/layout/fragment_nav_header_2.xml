@@ -38,6 +38,7 @@
         android:fontFamily="@font/poppins"
         android:text="Email"
         android:textColor="#000000"
+        android:textSize="8sp"
         app:layout_constraintStart_toEndOf="@+id/imageView17"
         app:layout_constraintTop_toBottomOf="@+id/hamburger_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
