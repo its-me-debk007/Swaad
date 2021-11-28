@@ -70,7 +70,7 @@ class SearchPage2: Fragment() {
             }
         })
 
-        val searchText = v.findViewById<TextInputEditText>(R.id.searchBar2)
+        val searchText = v.findViewById<EditText>(R.id.searchBar)
         searchText.requestFocus()
 //        searchText.addTextChangedListener(object : TextWatcher {
 //            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

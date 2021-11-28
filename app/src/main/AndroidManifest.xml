@@ -36,8 +36,10 @@
         </activity>
         <activity android:name=".NavBarActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
-        <activity android:name=".PaymentActivity"/>
-        <activity android:name=".google_maps" />
+        <activity android:name=".PaymentActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".google_maps"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -10,15 +10,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.swaad.ApiRequests.RecyclerAdapterCart
 import com.example.swaad.SearchPage2Files.RecyclerAdapterSearchPage
 import org.json.JSONObject
-
 import android.R
-
-//import com.razorpay.Checkout
-
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
@@ -36,7 +31,6 @@ import com.example.swaad.ApiRequests.RecyclerAdapterManageAddress
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
-import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import retrofit2.Call
@@ -50,9 +44,7 @@ import com.example.swaad.AuthPages.ForgotPassword2
 class MyCart: Fragment() {
     companion object{
         var grantTotal: Int = 0
-//        var location:TextView?=null
         var totalPrice: Int = 0
-//        var refreshCart: Boolean = false
     }
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapterCart.ViewHolder>? = null
@@ -84,14 +76,12 @@ class MyCart: Fragment() {
                             val order_details = response.body()?.order_details
                             if (order_details != null) {
                                 for (i in 0 until order_details.size) {
-                                    dishIdList.add(order_details[i].dish.id)
+                                    dishIdList.add(order_details[i].dish_id)
                                     cartList.add(order_details[i].dish_name)
                                     dishCount.add(order_details[i].quantity)
                                     dishCostList.add(order_details[i].sub_total)
-                                    basePriceList.add(order_details[i].dish.price.toInt())
-//                                    restIdList.add(response.body()!!.restaurant_id)
+                                    basePriceList.add(order_details[i].dish_price.toInt())
                                     totalPrice = response.body()!!.order_total
-//                                    refreshCart = true
                                 }
                             }
                         }else if(response.code() == 401){
@@ -100,10 +90,10 @@ class MyCart: Fragment() {
                                 "Sorry, but token has expired!",
                                 Toast.LENGTH_LONG
                             ).show()
-                        }else if(response.code() != 400){
+                        }else if(response.code() == 400){
                             Toast.makeText(
                                 activity,
-                                "Sorry! Cart cannot be loaded\n\nresponse code is ${response.code()}",
+                                "Your cart is empty!",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -144,7 +134,6 @@ class MyCart: Fragment() {
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
-//        v.findViewById<TextView>(com.example.swaad.R.id.locationTextCart).text=Home_page.adresslocation
 
         layoutManager = LinearLayoutManager(container?.context)
         val recyclerViewCart = v.findViewById<RecyclerView>(com.example.swaad.R.id.recyclerViewCart)
@@ -152,32 +141,22 @@ class MyCart: Fragment() {
         adapter = RecyclerAdapterCart()
         recyclerViewCart.adapter = adapter
 
-            v.findViewById<TextView>(com.example.swaad.R.id.totalPrice).text =
-                "₹" + dishCostList.sum().toString() + ".00"
-            v.findViewById<TextView>(com.example.swaad.R.id.deliveryCharges).text =
-                "₹" + (0.02 * dishCostList.sum()).toInt().toString() + ".00"
-            v.findViewById<TextView>(com.example.swaad.R.id.GrantTotalPrice).text =
-                "₹" + ((0.05 * dishCostList.sum()).toInt() + dishCostList.sum()).toString() + ".00"
+        var discountedValue = (0.4*dishCostList.sum()).toInt()
+        v.findViewById<TextView>(com.example.swaad.R.id.discountValue).text = "-₹" + discountedValue.toString() + ".00"
 
-        grantTotal = (0.05*dishCostList.sum()).toInt() + dishCostList.sum()
-//        if (itemRemoved) {
-//            RecyclerAdapterCart().notifyItemRemoved(pos)
-//            itemRemoved = false
-//        }
-//        val itemCount: TextView = v.findViewById(R.id.itemCount)
-//
-//        v.findViewById<ImageView>(R.id.minus).setOnClickListener{
-//            if(itemCount.text.toString() != "0"){
-//                var amount = itemCount.text.toString().toInt()
-//                amount--
-//                itemCount.text = amount.toString()
-//            }
-//        }
-//        v.findViewById<ImageView>(R.id.plus).setOnClickListener{
-//            var amount = itemCount.text.toString().toInt()
-//            amount++
-//            itemCount.text = amount.toString()
-//        }
+        var totalPrice = dishCostList.sum() - discountedValue
+        v.findViewById<TextView>(com.example.swaad.R.id.totalPrice).text =
+            "₹" + totalPrice.toString() + ".00"
+
+        var deliveryCharges = (0.02 * totalPrice).toInt()
+        v.findViewById<TextView>(com.example.swaad.R.id.deliveryCharges).text =
+            "₹" + deliveryCharges.toString() + ".00"
+
+        grantTotal = totalPrice + deliveryCharges
+        v.findViewById<TextView>(com.example.swaad.R.id.GrantTotalPrice).text =
+            "₹" + grantTotal.toString() + ".00"
+
+
         pay_button.setOnClickListener{
             if(grantTotal==0)
             {
@@ -186,8 +165,6 @@ class MyCart: Fragment() {
             }
             val intent = Intent(activity, PaymentActivity::class.java)
             startActivity(intent)
-//            PaymentNow("100")
-//            Checkout.preload(container?.context)
         }
         return v
     }
