@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:paddingRight="16dp"
     android:paddingLeft="16dp"
-    android:paddingBottom="25dp">
+    android:paddingBottom="0dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -26,10 +26,11 @@
                 android:background="#FFFDF4"
                 android:fontFamily="@font/poppins"
                 android:paddingLeft="16dp"
-                android:paddingTop="15dp"
-                android:paddingBottom="41dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="40dp"
                 android:text="Pizza"
                 android:textColor="#000000"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,15 +41,16 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/border2"
+                android:background="@drawable/border_cart"
+                android:fontFamily="@font/poppins_bold"
                 android:paddingLeft="23dp"
                 android:paddingTop="3dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="3dp"
                 android:text="1"
                 android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="16sp"
+                android:textColor="#D89C00"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/itemName" />
 
@@ -57,46 +59,34 @@
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginEnd="40dp"
-                app:layout_constraintEnd_toEndOf="@+id/itemName"
+                android:layout_marginEnd="43dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/itemName"
-                app:srcCompat="@drawable/ic_plus" />
+                app:srcCompat="@drawable/ic_golden_plus" />
 
             <ImageView
                 android:id="@+id/minus"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginEnd="106dp"
+                android:layout_marginEnd="105dp"
                 app:layout_constraintEnd_toEndOf="@+id/itemName"
                 app:layout_constraintTop_toTopOf="@+id/itemName"
-                app:srcCompat="@drawable/ic_minus" />
-
-                <TextView
-                    android:id="@+id/dishPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="36dp"
-                    android:background="#FFFDF4"
-                    android:fontFamily="@font/poppins"
-                    android:text="₹169.00"
-                    android:textColor="#000000"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemCount" />
+                app:srcCompat="@drawable/ic_golden_minus" />
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/dishPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="43dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="36dp"
+                android:background="#FFFDF4"
                 android:fontFamily="@font/poppins"
-                android:text="By Roma"
+                android:text="₹169.00"
                 android:textColor="#000000"
-                android:textSize="11sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/itemName" />
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemCount" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

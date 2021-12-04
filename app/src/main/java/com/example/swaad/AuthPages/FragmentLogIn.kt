@@ -177,19 +177,12 @@ class FragmentLogIn: Fragment() {
 
             }
 
-//            Toast.makeText(activity,"Logging In",Toast.LENGTH_LONG).show()
+
 
             RetrofitClient.init().logInUser(userEmail, userPassword).enqueue(object : Callback<DataClass?> {
                 override fun onResponse(call: Call<DataClass?>, response: Response<DataClass?>) {
                     progressBar.visibility = View.INVISIBLE
-//                    val responseBody = response.body()
-//                    Toast.makeText(
-//                        activity,
-//                        responseBody?.status.toString(),
-//                        Toast.LENGTH_LONG
-//                    ).show()
 
-                    Toast.makeText(activity,token,Toast.LENGTH_LONG).show()
                         if (response.code() == 200) {
                             NAME = response.body()?.name.toString()
                             Splash_screen.loggedIn= true
