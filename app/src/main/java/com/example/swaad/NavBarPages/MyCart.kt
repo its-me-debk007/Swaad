@@ -36,7 +36,7 @@ import com.example.swaad.ApiRequests.RecyclerAdapterManageAddress
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCostList
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishCount
 import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.dishIdList
-import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
+//import com.example.swaad.RestaurantPageFiles.RecyclerAdapterRestaurantPage.Companion.restIdList
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import retrofit2.Call
@@ -141,7 +141,7 @@ class MyCart: Fragment() {
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(
                 com.example.swaad.R.id.fragment_container,
-                Manage_Adress()
+               Manage_Address()
             )
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
